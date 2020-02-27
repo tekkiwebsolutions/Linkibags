@@ -1,0 +1,48 @@
+Time : 16:45:56
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: undefined
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY cid DESC LIMIT 0, undefined
+
+Time : 16:44:11
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10,10' at line 1
+Raw SQL : SELECT ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.* FROM `user_urls` ur, users u, user_shared_urls us WHERE us.uid=u.uid and ur.url_id=us.url_id and us.shared_to=:id and us.url_cat=:cid ORDER BY us.shared_url_id DESC LIMIT -10,10
+
+Time : 09:37:37
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY friend_id DESC' at line 4
+Raw SQL : SELECT ur.*, fr.request_email, fr.request_to, p.first_name, p.last_name, u.email_id, u.created FROM user_friends ur 
+		JOIN friends_request fr ON ur.request_id=fr.request_id
+		LEFT JOIN profile p ON ur.fid=p.uid 
+		LEFT JOIN users u ON ur.fid=u.uid WHERE ur.friend_id>'0' AND ((ur.uid=:id and (fr.request_to=:id2 or fr.request_by=:id4) OR (ur.uid=:id3 and ur.status>'0' and ur.status<'2')) and ur.status=:status ORDER BY friend_id DESC
+
+Time : 09:37:34
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY friend_id DESC' at line 4
+Raw SQL : SELECT ur.*, fr.request_email, fr.request_to, p.first_name, p.last_name, u.email_id, u.created FROM user_friends ur 
+		JOIN friends_request fr ON ur.request_id=fr.request_id
+		LEFT JOIN profile p ON ur.fid=p.uid 
+		LEFT JOIN users u ON ur.fid=u.uid WHERE ur.friend_id>'0' AND ((ur.uid=:id and (fr.request_to=:id2 or fr.request_by=:id4) OR (ur.uid=:id3 and ur.status>'0' and ur.status<'2')) and ur.status=:status ORDER BY friend_id DESC
+
+Time : 09:35:58
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY friend_id DESC' at line 4
+Raw SQL : SELECT ur.*, fr.request_email, fr.request_to, p.first_name, p.last_name, u.email_id, u.created FROM user_friends ur 
+		JOIN friends_request fr ON ur.request_id=fr.request_id
+		LEFT JOIN profile p ON ur.fid=p.uid 
+		LEFT JOIN users u ON ur.fid=u.uid WHERE ur.friend_id>'0' AND ((ur.uid=:id and (fr.request_to=:id2 or fr.request_by=:id4) and ur.status=:status ORDER BY friend_id DESC
+
+Time : 09:35:52
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY friend_id DESC' at line 4
+Raw SQL : SELECT ur.*, fr.request_email, fr.request_to, p.first_name, p.last_name, u.email_id, u.created FROM user_friends ur 
+		JOIN friends_request fr ON ur.request_id=fr.request_id
+		LEFT JOIN profile p ON ur.fid=p.uid 
+		LEFT JOIN users u ON ur.fid=u.uid WHERE ur.friend_id>'0' AND ((ur.uid=:id and (fr.request_to=:id2 or fr.request_by=:id4) and ur.status=:status ORDER BY friend_id DESC
+
+Time : 09:34:03
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT ur.*, fr.request_email, fr.request_to, p.first_name, p.last_name, u.email_id, u.created FROM user_friends ur 
+		JOIN friends_request fr ON ur.request_id=fr.request_id
+		LEFT JOIN profile p ON ur.fid=p.uid 
+		LEFT JOIN users u ON ur.fid=u.uid WHERE ur.friend_id>'0' AND ((ur.uid=:id and fr.request_to=:id2 and ur.status<'1') OR (ur.uid=:id3 and ur.status>'0' and ur.status<'2')) ORDER BY friend_id DESC
+
+Time : 08:10:52
+SQLSTATE[HY000] [2006] MySQL server has gone away
+
+Time : 07:17:43
+SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty

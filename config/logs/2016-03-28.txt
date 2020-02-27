@@ -1,0 +1,39 @@
+Time : 13:12:52
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'linkibag.email_alert' doesn't exist
+Raw SQL : INSERT INTO `email_alert`(uid,from_email,subject,matter,created) VALUES(:uid,:from_email,:subject,:matter,:created)
+
+Time : 13:12:11
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'linkibag.email_alert' doesn't exist
+Raw SQL : INSERT INTO `email_alert`(uid,from_email,subject,matter,created) VALUES(:uid,:from_email,:subject,:matter,:created)
+
+Time : 13:00:17
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'linkibag.email_alert' doesn't exist
+Raw SQL : INSERT INTO `email_alert`(uid,from_email,subject,matter,created) VALUES(:uid,:from_email,:subject,:matter,:created)
+
+Time : 09:20:44
+SQLSTATE[42S02]: Base table or view not found: 1051 Unknown table 'ur'
+Raw SQL : SELECT ur.*,p.first_name FROM user_urls, profile WHERE ur.uid=p.uid AND ur.url_id=:id
+
+Time : 07:29:40
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * FROM `user_urls` WHERE `url_cat`=:id AND `uid`=:uid
+
+Time : 07:29:39
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * FROM `user_urls` WHERE `url_cat`=:id AND `uid`=:uid
+
+Time : 07:29:39
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * FROM `user_urls` WHERE `url_cat`=:id AND `uid`=:uid
+
+Time : 07:29:38
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * FROM `user_urls` WHERE `url_cat`=:id AND `uid`=:uid
+
+Time : 07:28:59
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * FROM `user_urls` WHERE `url_cat`=:id AND `uid`=:uid
+
+Time : 07:28:58
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * FROM `user_urls` WHERE `url_cat`=:id AND `uid`=:uid

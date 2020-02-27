@@ -1,0 +1,23 @@
+Time : 11:59:02
+SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+
+
+Time : 11:58:45
+SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+
+
+Time : 05:31:32
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'linkibag.email_alert' doesn't exist
+Raw SQL : INSERT INTO `email_alert`(uid,from_email,subject,matter,created) VALUES(:uid,:from_email,:subject,:matter,:created)
+
+Time : 05:29:46
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'linkibag.email_alert' doesn't exist
+Raw SQL : INSERT INTO `email_alert`(uid,from_email,subject,matter,created) VALUES(:uid,:from_email,:subject,:matter,:created)
+
+Time : 05:29:36
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'linkibag.email_alert' doesn't exist
+Raw SQL : INSERT INTO `email_alert`(uid,from_email,subject,matter,created) VALUES(:uid,:from_email,:subject,:matter,:created)
+
+Time : 05:17:02
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'linkibag.email_alert' doesn't exist
+Raw SQL : INSERT INTO `email_alert`(uid,from_email,subject,matter,created) VALUES(:uid,:from_email,:subject,:matter,:created)

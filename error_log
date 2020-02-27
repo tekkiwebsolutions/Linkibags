@@ -1,0 +1,30 @@
+[14-Oct-2019 13:08:20 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php:251
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[HY093]...', 'SELECT ur.share...')
+#1 /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php(165): DB->Init('SELECT ur.share...', Array)
+#2 /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php(259): DB->query('SELECT ur.share...', Array)
+#3 /home/link25test1/public_html/PTest25x/linkibag/classes/common.class.php(1452): DB->fetch_all_array('SELECT ur.share...', Array)
+#4 /home/link25test1/public_html/PTest25x/linkibag/theme/dashboard.php(37): commonClass->get_all_urlposts(34, 10, 'p=dashboard', -2, '0')
+#5 /home/link25test1/public_html/PTest25x/linkibag/index.php(61): page_content()
+#6 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php on line 251
+[14-Oct-2019 13:28:34 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php:251
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[HY093]...', 'SELECT ur.share...')
+#1 /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php(165): DB->Init('SELECT ur.share...', Array)
+#2 /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php(259): DB->query('SELECT ur.share...', Array)
+#3 /home/link25test1/public_html/PTest25x/linkibag/classes/common.class.php(1452): DB->fetch_all_array('SELECT ur.share...', Array)
+#4 /home/link25test1/public_html/PTest25x/linkibag/theme/dashboard.php(37): commonClass->get_all_urlposts(34, 10, 'p=dashboard', -2, '0')
+#5 /home/link25test1/public_html/PTest25x/linkibag/index.php(61): page_content()
+#6 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php on line 251
+[14-Oct-2019 13:29:14 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php:251
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[HY093]...', 'SELECT ur.share...')
+#1 /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php(165): DB->Init('SELECT ur.share...', Array)
+#2 /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php(259): DB->query('SELECT ur.share...', Array)
+#3 /home/link25test1/public_html/PTest25x/linkibag/classes/common.class.php(1452): DB->fetch_all_array('SELECT ur.share...', Array)
+#4 /home/link25test1/public_html/PTest25x/linkibag/theme/dashboard.php(37): commonClass->get_all_urlposts(34, 10, 'p=dashboard', -2, '0')
+#5 /home/link25test1/public_html/PTest25x/linkibag/index.php(61): page_content()
+#6 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php on line 251

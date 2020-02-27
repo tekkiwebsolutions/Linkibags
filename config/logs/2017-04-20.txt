@@ -1,0 +1,19 @@
+Time : 08:07:25
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT COUNT(shared_url_id) as total_shared_urls FROM `user_shared_urls` WHERE shared_to=:id and num_of_visits>'0'
+
+Time : 08:07:24
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT COUNT(shared_url_id) as total_shared_urls FROM `user_shared_urls` WHERE shared_to=:id and num_of_visits>'0'
+
+Time : 08:06:57
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT COUNT(shared_url_id) as total_shared_urls FROM `user_shared_urls` WHERE shared_to=:id and num_of_visits > 0
+
+Time : 08:06:55
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT COUNT(shared_url_id) as total_shared_urls FROM `user_shared_urls` WHERE shared_to=:id and num_of_visits > 0
+
+Time : 08:06:53
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT COUNT(shared_url_id) as total_shared_urls FROM `user_shared_urls` WHERE shared_to=:id and num_of_visits > 0

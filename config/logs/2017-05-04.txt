@@ -1,0 +1,3 @@
+Time : 07:54:57
+SQLSTATE[23000]: Integrity constraint violation: 1052 Column 'status' in where clause is ambiguous
+Raw SQL : select fr.request_id,u.email_id from friends_request fr, users u where fr.request_to=u.uid and fr.request_id=:id and fr.request_code=:code and status='0'

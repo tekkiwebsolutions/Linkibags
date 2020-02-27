@@ -1,0 +1,47 @@
+Time : 12:55:46
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: undefined
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY cid DESC LIMIT 0, undefined
+
+Time : 11:31:50
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10,10' at line 1
+Raw SQL : SELECT ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.* FROM `user_urls` ur, users u, user_shared_urls us WHERE us.uid=u.uid and ur.url_id=us.url_id and us.shared_to=:id and us.url_cat !='0' ORDER BY us.shared_url_id DESC LIMIT -10,10
+
+Time : 11:29:37
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10,10' at line 1
+Raw SQL : SELECT ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.* FROM `user_urls` ur, users u, user_shared_urls us WHERE us.uid=u.uid and ur.url_id=us.url_id and us.shared_to=:id and us.url_cat !='0' ORDER BY us.shared_url_id DESC LIMIT -10,10
+
+Time : 11:29:30
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10,10' at line 1
+Raw SQL : SELECT ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.* FROM `user_urls` ur, users u, user_shared_urls us WHERE us.uid=u.uid and ur.url_id=us.url_id and us.shared_to=:id and us.url_cat !='0' ORDER BY us.shared_url_id DESC LIMIT -10,10
+
+Time : 11:24:20
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10,10' at line 1
+Raw SQL : SELECT ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.* FROM `user_urls` ur, users u, user_shared_urls us WHERE us.uid=u.uid and ur.url_id=us.url_id and us.shared_to=:id and us.url_cat !='0' ORDER BY us.shared_url_id DESC LIMIT -10,10
+
+Time : 11:23:56
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '-10,10' at line 1
+Raw SQL : SELECT ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.* FROM `user_urls` ur, users u, user_shared_urls us WHERE us.uid=u.uid and ur.url_id=us.url_id and us.shared_to=:id and us.url_cat !='0' ORDER BY us.shared_url_id DESC LIMIT -10,10
+
+Time : 10:25:45
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: undefined
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY cid DESC LIMIT 0, undefined
+
+Time : 10:25:23
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: undefined
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY cid DESC LIMIT 0, undefined
+
+Time : 10:23:49
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: undefined
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY cid DESC LIMIT 0, undefined
+
+Time : 08:56:02
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: undefined
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY cid DESC LIMIT 0, undefined
+
+Time : 08:55:41
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: undefined
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY cid DESC LIMIT 0, undefined
+
+Time : 08:28:24
+SQLSTATE[42000]: Syntax error or access violation: 1327 Undeclared variable: undefined
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY cid DESC LIMIT 0, undefined

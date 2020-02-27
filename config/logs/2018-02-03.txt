@@ -1,0 +1,7 @@
+Time : 11:57:11
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT g.group_name FROM `groups` g, `groups_friends` gf WHERE (g.uid=:uid OR g.uid='0') and g.group_id=gf.groups and (gf.uid=g.uid OR g.uid='0') and gf.email_id=:email
+
+Time : 11:56:03
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT g.group_name FROM `groups` g, `groups_friends` gf WHERE (g.uid=:uid OR g.uid='0') and g.group_id=gf.groups and (gf.uid=g.uid OR g.uid='0') and gf.email_id=:email

@@ -1,0 +1,11 @@
+Time : 09:22:08
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'page_id' in 'where clause'
+Raw SQL : SELECT * FROM admin_ads WHERE page_id=:id 
+
+Time : 09:21:55
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'page_id' in 'where clause'
+Raw SQL : SELECT * FROM admin_ads WHERE page_id=:id 
+
+Time : 09:21:49
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'page_id' in 'where clause'
+Raw SQL : SELECT * FROM admin_ads WHERE page_id=:id 

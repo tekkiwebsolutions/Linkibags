@@ -1,0 +1,67 @@
+Time : 03:58:41
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:54:07
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:54:05
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:53:09
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:53:07
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:53:04
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:53:03
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:47:25
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and us.url_cat=? ORDER BY us.shared_url_id DESC' at line 1
+Raw SQL : and us.url_cat=:cid ORDER BY us.shared_url_id DESC
+
+Time : 03:45:35
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:45:27
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:42:16
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:40:40
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:40:36
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:35:10
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:35:08
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:34:12
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC
+
+Time : 03:32:44
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where id>'1' from countries ORDER BY country_name ASC' at line 1
+Raw SQL : select id,country_name where id>'1' from countries ORDER BY country_name ASC

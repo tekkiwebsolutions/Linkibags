@@ -1,0 +1,20 @@
+Time : 14:02:10
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bag55_linkibagnet.public_categories' doesn't exist
+Raw SQL : SELECT c.cname,c.cid,ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.* FROM `user_urls` ur LEFT JOIN user_public_category c ON ur.public_cat=c.cid
+			LEFT JOIN users u ON ur.uid=u.uid
+			LEFT JOIN user_shared_urls us ON us.url_id=ur.url_id
+			LEFT JOIN public_categories pc ON pc.id=ur.public_cat WHERE ur.status='1' and ur.search_page_status='1' and ur.add_to_search_page='1' and c.cid=-1 and us.url_cat !='0' ORDER BY us.shared_url_id DESC
+
+Time : 13:48:21
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bag55_linkibagnet.public_categories' doesn't exist
+Raw SQL : SELECT c.cname,c.cid,ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.* FROM `user_urls` ur LEFT JOIN user_public_category c ON ur.public_cat=c.cid
+			LEFT JOIN users u ON ur.uid=u.uid
+			LEFT JOIN user_shared_urls us ON us.url_id=ur.url_id
+			LEFT JOIN public_categories pc ON pc.id=ur.public_cat WHERE ur.status='1' and ur.search_page_status='1' and ur.add_to_search_page='1' and c.cid=-1 and us.url_cat !='0' ORDER BY us.shared_url_id DESC
+
+Time : 13:48:12
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bag55_linkibagnet.public_categories' doesn't exist
+Raw SQL : SELECT c.cname,c.cid,ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.* FROM `user_urls` ur LEFT JOIN user_public_category c ON ur.public_cat=c.cid
+			LEFT JOIN users u ON ur.uid=u.uid
+			LEFT JOIN user_shared_urls us ON us.url_id=ur.url_id
+			LEFT JOIN public_categories pc ON pc.id=ur.public_cat WHERE ur.status='1' and ur.search_page_status='1' and ur.add_to_search_page='1' and c.cid=-1 and us.url_cat !='0' ORDER BY us.shared_url_id DESC

@@ -1,0 +1,11 @@
+Time : 13:16:57
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'request_by' in 'where clause'
+Raw SQL : SELECT * FROM user_friends ur, profile p WHERE (request_by=:id or request_to=:id2) and status='1' and ((ur.request_to=:id3 and p.uid=ur.request_by) OR (ur.request_by=:id4 and p.uid=ur.request_to))
+
+Time : 13:16:52
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'request_by' in 'where clause'
+Raw SQL : SELECT * FROM user_friends ur, profile p WHERE (request_by=:id or request_to=:id2) and status='1' and ((ur.request_to=:id3 and p.uid=ur.request_by) OR (ur.request_by=:id4 and p.uid=ur.request_to))
+
+Time : 13:16:27
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'request_by' in 'where clause'
+Raw SQL : SELECT * FROM user_friends ur, profile p WHERE (request_by=:id or request_to=:id2) and status='1' and ((ur.request_to=:id3 and p.uid=ur.request_by) OR (ur.request_by=:id4 and p.uid=ur.request_to))

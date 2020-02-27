@@ -1,0 +1,23 @@
+Time : 14:17:24
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'friend_id' in 'where clause'
+Raw SQL : UPDATE `friends_request` SET fid = :fid WHERE friend_id=:id
+
+Time : 14:16:59
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'friend_id' in 'where clause'
+Raw SQL : UPDATE `friends_request` SET fid = :fid WHERE friend_id=:id
+
+Time : 14:16:59
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'friend_id' in 'where clause'
+Raw SQL : UPDATE `friends_request` SET fid = :fid WHERE friend_id=:id
+
+Time : 14:08:22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'friend_id' in 'where clause'
+Raw SQL : UPDATE `friends_request` SET fid = :fid WHERE friend_id=:id
+
+Time : 13:58:27
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE friend_id=?' at line 1
+Raw SQL : UPDATE `user_friends` SET  WHERE friend_id=:id
+
+Time : 13:54:29
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE friend_id=?' at line 1
+Raw SQL : UPDATE `user_friends` SET  WHERE friend_id=:id

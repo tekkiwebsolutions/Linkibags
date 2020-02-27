@@ -1,0 +1,11 @@
+Time : 12:35:31
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and us.url_cat !='0' ORDER BY us.shared_url_id DESC' at line 1
+Raw SQL :  and us.url_cat !='0' ORDER BY us.shared_url_id DESC
+
+Time : 12:33:35
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and us.url_cat !='0' ORDER BY us.shared_url_id DESC' at line 1
+Raw SQL :  and us.url_cat !='0' ORDER BY us.shared_url_id DESC
+
+Time : 12:33:17
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and us.url_cat !='0' ORDER BY us.shared_url_id DESC' at line 1
+Raw SQL :  and us.url_cat !='0' ORDER BY us.shared_url_id DESC

@@ -1,0 +1,27 @@
+Time : 09:52:16
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'shared_url_id' in 'where clause'
+Raw SQL : DELETE FROM `user_urls` WHERE shared_url_id=:id and shared_to=:uid
+
+Time : 09:46:32
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'shared_url_id' in 'where clause'
+Raw SQL : DELETE FROM `user_urls` WHERE shared_url_id=:id and shared_to=:uid
+
+Time : 09:44:03
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'shared_url_id' in 'where clause'
+Raw SQL : DELETE FROM `user_urls` WHERE shared_url_id=:id and shared_to=:uid
+
+Time : 09:43:32
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'shared_url_id' in 'where clause'
+Raw SQL : DELETE FROM `user_urls` WHERE shared_url_id=:id and shared_to=:uid
+
+Time : 09:41:55
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'shared_url_id' in 'where clause'
+Raw SQL : DELETE FROM `user_urls` WHERE shared_url_id=:id and shared_to=:uid
+
+Time : 09:41:41
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'shared_url_id' in 'where clause'
+Raw SQL : DELETE FROM `user_urls` WHERE shared_url_id=:id and shared_to=:uid
+
+Time : 09:41:32
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'shared_url_id' in 'where clause'
+Raw SQL : DELETE FROM `user_urls` WHERE shared_url_id=:id and shared_to=:uid

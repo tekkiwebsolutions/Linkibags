@@ -1,0 +1,11 @@
+Time : 23:10:26
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'page_id' in 'where clause'
+Raw SQL : SELECT * FROM page_imgs WHERE page_id=:id ORDER BY RAND()
+
+Time : 22:44:25
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bag55_linkibag.page_imgs' doesn't exist
+Raw SQL : INSERT INTO `page_imgs`(entity_id,entity_field,img_name,img_original,img_delta,img_thumbnails) VALUES(:entity_id,:entity_field,:img_name,:img_original,:img_delta,:img_thumbnails)
+
+Time : 22:43:28
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bag55_linkibag.Array' doesn't exist
+Raw SQL : INSERT INTO `Array`(entity_id,entity_field,img_name,img_original,img_delta,img_thumbnails) VALUES(:entity_id,:entity_field,:img_name,:img_original,:img_delta,:img_thumbnails)

@@ -1,0 +1,7 @@
+Time : 14:14:21
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bag55_linkibag.groups' doesn't exist
+Raw SQL : SELECT * FROM `groups` WHERE uid=:id ORDER BY group_id DESC
+
+Time : 14:00:05
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bag55_linkibag.admin_ads' doesn't exist
+Raw SQL : INSERT INTO `admin_ads`(uid,photo_path,status,created,updated) VALUES(:uid,:photo_path,:status,:created,:updated)

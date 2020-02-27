@@ -1,0 +1,11 @@
+Time : 13:40:02
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY g.group_id DESC' at line 1
+Raw SQL : SELECT * FROM `user_shared_urls` us, `user_urls` uu WHERE us.url_id=uu.url_id and us.shared_to=:share_to and us.share_number=:share_no ORDER BY us.shared_url_id ORDER BY g.group_id DESC
+
+Time : 13:40:00
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY g.group_id DESC' at line 1
+Raw SQL : SELECT * FROM `user_shared_urls` us, `user_urls` uu WHERE us.url_id=uu.url_id and us.shared_to=:share_to and us.share_number=:share_no ORDER BY us.shared_url_id ORDER BY g.group_id DESC
+
+Time : 13:39:57
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'ORDER BY g.group_id DESC' at line 1
+Raw SQL : SELECT * FROM `user_shared_urls` us, `user_urls` uu WHERE us.url_id=uu.url_id and us.shared_to=:share_to and us.share_number=:share_no ORDER BY us.shared_url_id ORDER BY g.group_id DESC

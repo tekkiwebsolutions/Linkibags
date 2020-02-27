@@ -1,0 +1,19 @@
+Time : 13:53:26
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'verify' in 'where clause'
+Raw SQL : SELECT * FROM `users` WHERE uid=:user and `email_unique_path`=:code and verify='1' and status='1' and email_id=:email
+
+Time : 13:43:38
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email_unique_path' in 'where clause'
+Raw SQL : SELECT email_id,uid FROM `users` WHERE email_unique_path=:path and `uid`=:uid and status=1
+
+Time : 09:53:10
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and us.url_cat !='0' ORDER BY us.shared_url_id DESC' at line 1
+Raw SQL : and us.url_cat !='0' ORDER BY us.shared_url_id DESC
+
+Time : 09:45:21
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and us.url_cat !='0' ORDER BY us.shared_url_id DESC' at line 1
+Raw SQL : and us.url_cat !='0' ORDER BY us.shared_url_id DESC
+
+Time : 09:45:17
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'and us.url_cat !='0' ORDER BY us.shared_url_id DESC' at line 1
+Raw SQL : and us.url_cat !='0' ORDER BY us.shared_url_id DESC
