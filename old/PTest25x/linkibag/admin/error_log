@@ -1,0 +1,189 @@
+[06-Aug-2016 09:41:52 Europe/Amsterdam] PHP Warning:  Missing argument 2 for DB::query_first(), called in /home/bag55/public_html/linkibag/admin/page_management/edit.php on line 10 and defined in /home/bag55/public_html/linkibag/config/DB.class.php on line 259
+[06-Aug-2016 10:05:47 Europe/Amsterdam] PHP Warning:  Missing argument 2 for DB::query_first(), called in /home/bag55/public_html/linkibag/admin/page_management/edit.php on line 10 and defined in /home/bag55/public_html/linkibag/config/DB.class.php on line 259
+[06-Aug-2016 13:01:33 Europe/Amsterdam] PHP Warning:  Missing argument 2 for DB::query_first(), called in /home/bag55/public_html/linkibag/admin/page_management/edit.php on line 10 and defined in /home/bag55/public_html/linkibag/config/DB.class.php on line 259
+[03-Dec-2016 08:33:07 Europe/Amsterdam] PHP Warning:  Illegal string offset 'url_id' in /home/link25test1/public_html/PTest25x/linkibag/admin/url_management/manage_video_links.php on line 85
+[03-Dec-2016 08:33:07 Europe/Amsterdam] PHP Warning:  Illegal string offset 'url_id' in /home/link25test1/public_html/PTest25x/linkibag/admin/url_management/manage_video_links.php on line 85
+[03-Dec-2016 08:33:07 Europe/Amsterdam] PHP Warning:  Illegal string offset 'url_id' in /home/link25test1/public_html/PTest25x/linkibag/admin/url_management/manage_video_links.php on line 85
+[03-Dec-2016 08:33:07 Europe/Amsterdam] PHP Warning:  Illegal string offset 'url_id' in /home/link25test1/public_html/PTest25x/linkibag/admin/url_management/manage_video_links.php on line 85
+[21-Apr-2017 13:36:18 Europe/Amsterdam] PHP Parse error:  syntax error, unexpected '?>', expecting ']' in /home/link25test1/public_html/PTest25x/linkibag/admin/discount/manage.php on line 47
+[21-Apr-2017 13:36:20 Europe/Amsterdam] PHP Parse error:  syntax error, unexpected '?>', expecting ']' in /home/link25test1/public_html/PTest25x/linkibag/admin/discount/manage.php on line 47
+[21-Apr-2017 13:36:22 Europe/Amsterdam] PHP Parse error:  syntax error, unexpected '?>', expecting ']' in /home/link25test1/public_html/PTest25x/linkibag/admin/discount/manage.php on line 47
+[21-Apr-2017 13:39:02 Europe/Amsterdam] PHP Parse error:  syntax error, unexpected '{' in /home/link25test1/public_html/PTest25x/linkibag/admin/discount/add.php on line 91
+[21-Apr-2017 13:39:05 Europe/Amsterdam] PHP Parse error:  syntax error, unexpected '{' in /home/link25test1/public_html/PTest25x/linkibag/admin/discount/add.php on line 91
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  move_uploaded_file(../files/default_folder/original/computer.png): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 721
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/php3Xi0WL' to '../files/default_folder/original/computer.png' in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 721
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  imagecreatefrompng(../files/default_folder/original/computer.png): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 462
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  getimagesize(../files/default_folder/original/computer.png): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 467
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  Division by zero in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 475
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  imagecopyresampled() expects parameter 2 to be resource, boolean given in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 495
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  imagecreatefrompng(../files/default_folder/original/computer.png): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 462
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  getimagesize(../files/default_folder/original/computer.png): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 467
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  Division by zero in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 475
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  imagecopyresampled() expects parameter 2 to be resource, boolean given in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 495
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  imagecreatefrompng(../files/default_folder/original/computer.png): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 462
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  getimagesize(../files/default_folder/original/computer.png): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 467
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  Division by zero in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 475
+[29-Mar-2018 09:48:10 Europe/Amsterdam] PHP Warning:  imagecopyresampled() expects parameter 2 to be resource, boolean given in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 495
+[29-Mar-2018 10:05:42 Europe/Amsterdam] PHP Warning:  unserialize() expects parameter 1 to be string, array given in /home/link25test1/public_html/PTest25x/linkibag/admin/folder/edit_default_folder.php on line 36
+[29-Mar-2018 10:05:51 Europe/Amsterdam] PHP Warning:  unserialize() expects parameter 1 to be string, array given in /home/link25test1/public_html/PTest25x/linkibag/admin/folder/edit_default_folder.php on line 36
+[07-Sep-2018 05:36:06 EST] PHP Warning:  include(notfound.php): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/main.php on line 46
+[07-Sep-2018 05:36:06 EST] PHP Warning:  include(notfound.php): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/main.php on line 46
+[07-Sep-2018 05:36:06 EST] PHP Warning:  include(): Failed opening 'notfound.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/link25test1/public_html/PTest25x/linkibag/admin/main.php on line 46
+[07-Sep-2018 05:36:06 EST] PHP Warning:  include(notfound.php): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/main.php on line 86
+[07-Sep-2018 05:36:06 EST] PHP Warning:  include(notfound.php): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/main.php on line 86
+[07-Sep-2018 05:36:06 EST] PHP Warning:  include(): Failed opening 'notfound.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/link25test1/public_html/PTest25x/linkibag/admin/main.php on line 86
+[24-Mar-2020 20:32:40 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 20:32:58 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 20:33:02 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 20:33:06 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 20:33:08 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 20:33:09 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:16:46 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:21:43 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:21:47 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:21:51 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:21:57 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:22:03 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:26:23 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefrompng() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:462
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/add.php(38): commonClass->uploadimage(Array, '.././files/comm...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 462
+[24-Mar-2020 21:28:00 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:28:13 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:29:55 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:29:57 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:30:01 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:30:02 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:32:08 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefrompng() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:462
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/add.php(38): commonClass->uploadimage(Array, '.././files/comm...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 462
+[24-Mar-2020 21:33:43 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[24-Mar-2020 21:37:49 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefrompng() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:462
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/add.php(38): commonClass->uploadimage(Array, '.././files/comm...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 462
+[25-Mar-2020 21:11:59 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[26-Mar-2020 12:09:09 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[26-Mar-2020 12:09:20 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[26-Mar-2020 13:06:34 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefromjpeg() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:456
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/information_security_links/add.php(84): commonClass->uploadimage(Array, '.././files/info...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 456
+[26-Mar-2020 13:07:23 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefromjpeg() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:456
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/information_security_links/add.php(84): commonClass->uploadimage(Array, '.././files/info...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 456
+[26-Mar-2020 14:09:29 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[26-Mar-2020 14:34:17 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefromjpeg() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:456
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/defaul...', '../files/defaul...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/folder/edit_default_folder.php(35): commonClass->uploadimage(Array, 'default_folder', 'yes', 800, 600)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 456
+[27-Mar-2020 01:27:38 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefrompng() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:462
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/add.php(39): commonClass->uploadimage(Array, '.././files/comm...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 462
+[27-Mar-2020 01:27:58 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefrompng() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:462
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/add.php(39): commonClass->uploadimage(Array, '.././files/comm...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 462
+[27-Mar-2020 01:32:11 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefrompng() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:462
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/edit.php(31): commonClass->uploadimage(Array, '.././files/comm...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 462
+[27-Mar-2020 01:35:31 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefrompng() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:462
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/add.php(39): commonClass->uploadimage(Array, '.././files/comm...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 462
+[27-Mar-2020 01:47:43 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatetruecolor() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:489
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(750): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/edit.php(31): commonClass->uploadimage(Array, '.././files/comm...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 489
+[27-Mar-2020 01:47:55 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatetruecolor() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:489
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(750): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/edit.php(31): commonClass->uploadimage(Array, '.././files/comm...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 489
+[27-Mar-2020 01:53:50 EST] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function commonClass::uploadimage(), 3 passed in /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/add.php on line 39 and exactly 5 expected in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:638
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/add.php(39): commonClass->uploadimage(Array, '.././files/comm...', 'no')
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#2 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 638
+[27-Mar-2020 01:56:22 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[27-Mar-2020 01:56:28 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[27-Mar-2020 01:56:38 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[27-Mar-2020 01:57:26 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefromjpeg() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:456
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/information_security_links/edit.php(82): commonClass->uploadimage(Array, '.././files/info...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 456
+[27-Mar-2020 01:58:10 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefromjpeg() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:456
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/information_security_links/edit.php(82): commonClass->uploadimage(Array, '.././files/info...', 'no', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 456
+[27-Mar-2020 02:05:08 EST] PHP Fatal error:  Uncaught Error: Call to undefined function imagecreatefromjpeg() in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php:456
+Stack trace:
+#0 /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php(753): commonClass->resize_exact_image('../files/.././f...', '../files/.././f...', 187, 122)
+#1 /home/link25test1/public_html/PTest25x/linkibag/admin/ads_management/add.php(39): commonClass->uploadimage(Array, '.././files/comm...', 'yes', 1921, 287)
+#2 /home/link25test1/public_html/PTest25x/linkibag/admin/main.php(46): include('/home/link25tes...')
+#3 {main}
+  thrown in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 456
+[27-Mar-2020 06:39:03 EST] PHP Warning:  mkdir(): No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 756
+[27-Mar-2020 06:39:03 EST] PHP Warning:  mkdir(): No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 760
+[27-Mar-2020 06:39:03 EST] PHP Warning:  move_uploaded_file(../files/files/commercial_ads/original/Guru-Nanak-Dev-Ji.jpg): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 804
+[27-Mar-2020 06:39:03 EST] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpPNYW10' to '../files/files/commercial_ads/original/Guru-Nanak-Dev-Ji.jpg' in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 804
+[27-Mar-2020 06:45:59 EST] PHP Warning:  mkdir(): No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 756
+[27-Mar-2020 06:45:59 EST] PHP Warning:  mkdir(): No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 760
+[27-Mar-2020 06:45:59 EST] PHP Warning:  move_uploaded_file(../files/files/commercial_ads/original/249018-1600x1030-thank-you-notes-funeral-flowers.jpg): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 804
+[27-Mar-2020 06:45:59 EST] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/php67i97O' to '../files/files/commercial_ads/original/249018-1600x1030-thank-you-notes-funeral-flowers.jpg' in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 804
+[27-Mar-2020 06:48:09 EST] PHP Warning:  mkdir(): No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 756
+[27-Mar-2020 06:48:09 EST] PHP Warning:  mkdir(): No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 760
+[27-Mar-2020 06:48:09 EST] PHP Warning:  move_uploaded_file(../files/files/commercial_ads/original/israel_hdv.jpg): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 804
+[27-Mar-2020 06:48:09 EST] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phppEgxwy' to '../files/files/commercial_ads/original/israel_hdv.jpg' in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 804
+[27-Mar-2020 13:11:57 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[27-Mar-2020 13:12:02 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[27-Mar-2020 13:12:05 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[27-Mar-2020 13:12:08 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[27-Mar-2020 13:12:11 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259
+[27-Mar-2020 13:12:15 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/admin/classes/common.class.php on line 259

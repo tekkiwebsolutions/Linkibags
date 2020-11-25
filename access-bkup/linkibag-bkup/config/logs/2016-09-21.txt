@@ -1,0 +1,27 @@
+Time : 15:08:55
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Raw SQL : SELECT * FROM user_friends ur, profile p, users u WHERE (ur.request_by=:id or ur.request_to=:id2) and ur.status='1' and ((ur.request_to=:id3 and p.uid=ur.request_by and p.uid=u.uid) OR (ur.request_by=:id4 and p.uid=ur.request_to and p.uid=u.uid)) LIMIT 0,
+
+Time : 15:07:46
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Raw SQL : SELECT * FROM user_friends ur, profile p, users u WHERE (ur.request_by=:id or ur.request_to=:id2) and ur.status='1' and ((ur.request_to=:id3 and p.uid=ur.request_by and p.uid=u.uid) OR (ur.request_by=:id4 and p.uid=ur.request_to and p.uid=u.uid)) LIMIT 0,
+
+Time : 15:05:32
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Raw SQL : SELECT * FROM user_friends ur, profile p, users u WHERE (ur.request_by=:id or ur.request_to=:id2) and ur.status='1' and ((ur.request_to=:id3 and p.uid=ur.request_by and p.uid=u.uid) OR (ur.request_by=:id4 and p.uid=ur.request_to and p.uid=u.uid)) LIMIT 0,
+
+Time : 15:05:07
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Raw SQL : SELECT * FROM user_friends ur, profile p, users u WHERE (ur.request_by=:id or ur.request_to=:id2) and ur.status='1' and ((ur.request_to=:id3 and p.uid=ur.request_by and p.uid=u.uid) OR (ur.request_by=:id4 and p.uid=ur.request_to and p.uid=u.uid)) LIMIT 0,
+
+Time : 15:04:59
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Raw SQL : SELECT * FROM user_friends ur, profile p, users u WHERE (ur.request_by=:id or ur.request_to=:id2) and ur.status='1' and ((ur.request_to=:id3 and p.uid=ur.request_by and p.uid=u.uid) OR (ur.request_by=:id4 and p.uid=ur.request_to and p.uid=u.uid)) LIMIT 0,
+
+Time : 15:04:52
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Raw SQL : SELECT * FROM user_friends ur, profile p, users u WHERE (ur.request_by=:id or ur.request_to=:id2) and ur.status='1' and ((ur.request_to=:id3 and p.uid=ur.request_by and p.uid=u.uid) OR (ur.request_by=:id4 and p.uid=ur.request_to and p.uid=u.uid)) LIMIT 0,
+
+Time : 15:04:49
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Raw SQL : SELECT * FROM user_friends ur, profile p, users u WHERE (ur.request_by=:id or ur.request_to=:id2) and ur.status='1' and ((ur.request_to=:id3 and p.uid=ur.request_by and p.uid=u.uid) OR (ur.request_by=:id4 and p.uid=ur.request_to and p.uid=u.uid)) LIMIT 0,

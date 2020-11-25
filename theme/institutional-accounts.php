@@ -39,7 +39,7 @@
 						echo '<img class="margin-bottom" src="' . $img['img_original'] . '" border="0" />';
 						?>
 						<?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?>
-						<div class="image-blow-text">Try us risk free. Start with a <span class="orange-color">FREE</span> <span class="orange-blue"><a class="orange-blue" href="index.php?#free_singup">Personal Account</a></span> today.</div>
+						<div class="image-blow-text">Try us risk free. Start with a <span class="orange-color">FREE</span> <span class="orange-blue"><a class="orange-blue" href="index.php?#free_signup">Personal Account</a></span> today.</div>
 						<?php } ?>
 						</div>
 						<div class="col-md-8 about-block page-new" data-wow-delay="0.3s">

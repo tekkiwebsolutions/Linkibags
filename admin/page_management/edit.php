@@ -4,10 +4,17 @@ $title = '<i class="fa fa-table"></i> Edit Page';
 
 if(isset($_POST['save']) && $_POST['save']=="Update"){
 	$success = true;
-	if($success == true){		$up = array();				$up['title'] = strip_tags($_POST['title']);				$up['updated'] = time();				$up['status'] = 1;				$up['page_body'] = $_POST['page_body'];		$co->query_update('pages', $up, array('id'=>$_POST['page_id']), 'page_id=:id');				unset($up);
+	if($success == true){		
+		$up = array();				
+		$up['title'] = strip_tags($_POST['title']);				
+		$up['updated'] = time();				
+		$up['status'] = 1;				
+		$up['page_body'] = $_POST['page_body'];		
+		$co->query_update('pages', $up, array('id'=>$_POST['page_id']), 'page_id=:id');				
+		unset($up);
 		if(isset($_POST['del_img'])){
 			foreach($_POST['del_img'] as $delimg){		
-				$img_de = $co->query_first("SELECT * FROM `page_imgs` WHERE `img_id`='".$delimg."'");
+				$img_de = $co->query_first("SELECT * FROM `page_imgs` WHERE `img_id`='".$delimg."'", array());
 				unlink('../'.$img_de['img_original']);
 				$thumbs = unserialize($img_de['img_thumbnails']);
 				foreach($thumbs as $key=>$thumb){

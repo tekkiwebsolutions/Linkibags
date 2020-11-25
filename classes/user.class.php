@@ -79,9 +79,10 @@ class userClass extends commonClass
 		//check login with username
 		$sql = "SELECT * FROM `users` WHERE `email_id`= :user and `decrypt_pass` = :pass and status=:status and verified=:verified LIMIT 1";				
 		$row= $this->row($sql, array("user"=>$username, "pass"=>$pwd, "status"=>1, "verified"=>1));
+		if($row==""){ return false; die();}
 		//check login with email address
 		if(!(isset($row['uid']) and $row['uid']>0)){
-			$sql = "SELECT * FROM `users` WHERE `email_id`= :user and `decrypt_pass` = :pass and status=:status and verified=:verified LIMIT 1";
+			$sql = "SELECT * FROM `users` WHERE `email_id`= :user and `decrypt_pass` = :pass and status=:status and verified=:ve rified LIMIT 1";
 			$row= $this->row($sql, array("user"=>$username, "pass"=>$pwd, "status"=>1, "verified"=>1));
 		}
 		if(!(isset($row['uid']) and $row['uid']>0)){
@@ -132,7 +133,9 @@ class userClass extends commonClass
 			/*end code */
 			
 			if($remember==1){
-				setcookie('uid', $row['uid'], strtotime('+1 days'));			
+				setcookie('uid', $row['uid'], strtotime('+1 days'));
+				setcookie('uemail', $username, strtotime('+1 days'));
+				
 				setcookie('website', 'Linkibag', strtotime('+1 days'));				
 			}else{
 				$_SESSION['uid'] = $row['uid'];
@@ -149,13 +152,17 @@ class userClass extends commonClass
 		}
 	
 	function user_reset_password($username){
-		$sql = "SELECT * FROM `users` WHERE email_id=:user AND `status`=:status AND `verified`=:verified LIMIT 1";
-		$row= $this->row($sql, array("user"=>$username, "status"=>1, "verified"=>1));
+		$sql = "SELECT * FROM `users` WHERE email_id=:user LIMIT 1";
+		$row= $this->row($sql, array("user"=>$username));
 		if(!(isset($row['uid']) and $row['uid']>0)){			
-			$sql = "SELECT * FROM `users` WHERE mobile=:user AND `status`=:status AND `verified`=:verified LIMIT 1";
-			$row= $this->row($sql, array("user"=>$username, "status"=>1, "verified"=>1));		
-		}						
+			$sql = "SELECT * FROM `users` WHERE mobile=:user LIMIT 1";
+			$row= $this->row($sql, array("user"=>$username));		
+		}				
 		if(isset($row['uid']) and $row['uid']>0){
+			/*if($row['status'] == 0) {
+				return array('status'=>'error', 'error'=>'We found blocked account with that email address. Please try to connect administrator for more detail.');
+			}*/
+
 			$up_user = array();
 			$reset_code = $this->generate_path(35);
 			$up_user['reset_code'] = $reset_code;
@@ -164,74 +171,57 @@ class userClass extends commonClass
 			$this->query_update('users', $up_user, array('uid'=>$row['uid']), 'uid=:uid');
 			unset($up_user);
 			if(isset($row['email_id'])){
-				$to = $row['email_id'];
+				$to = $row['email_id'].',';
 				$subject = 'Password request at Linkibag';
 				$verified_link = WEB_ROOT.'index.php?p=change_pass&user='.$row['uid'].'&pv='.$reset_code;
 				//$verified_link = '<a href="http://linkibag.com/linkibag/index.php?p=login">http://linkibag.com/linkibag/index.php?p=login</a>';
 				//$message = 'Dear<br /><br /><p>We received a request to reset the password associated with this e-mail address. If you made this request, please follow the instructions below.<br /> Click the link below to reset your password: <br/>'.$verified_link.'<br />If you did not request to have your password reset you can safely ignore this email. Rest assured your account is safe.<br/>If clicking the link doesn\'t seem to work, you can copy and paste the link into your browser\'s address window, or retype it there.</p><br />Cheers<br />Team Linkibag';
 				$verified_link = $this->get_bit_ly_link($verified_link);
-				$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Forgot Pass</title>
-		<style type="text/css">
-			body{margin: 0; padding: 0; min-width: 100%!important;}
-			.content{color: #3e3e3e;font-family: arial;max-width: 600px;text-align: center;width: 100%;} 
-			.content p{color: #3e3e3e; font-size: 12px;}
-			.content p a{color: #3e3e3e;text-decoration: none;}
-			h1 {font-size: 25px;margin: 0;}
-			.big {color: #a09d9d;font-size: 22px;margin: 12px 0px 30px;font-weight: normal;}
-			.btn {background: #408080 none repeat scroll 0 0;border-radius: 0px;color: #fff !important;display: inline-block;font-size: 20px;font-weight: bold;
-				margin: 0px 0px 60px;padding: 6px 31px;text-decoration: none;width: 275px;}
-			.top-line {font-size: 14px !important;margin-top: 20px;}			
-			.links {padding: 8px 0px 4px;}
-			.links a {color: #7F7F95 !important;font-size: 14px;}			
-			.bottom-text {font-size: 14px !important;line-height: 25px;color: #000 !important;}
-			.bottom-text a {text-decoration: underline !important;font-weight: 600;}			
-		</style>
-    </head>
-    <body bgcolor="#ffffff">
+				$message = '<div style="margin: 0; padding: 0; min-width: 100%!important;" bgcolor="#ffffff">
         <table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
             <tr>
                 <td>
-                    <table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
+                    <table style="color: #3e3e3e;font-family: arial;max-width: 600px;text-align: center;width: 100%;" align="center" cellpadding="0" cellspacing="0" border="0">
                         <tr>
                             <td style="text-align: left; padding: 30px 0px 40px;">
-                                <img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png"><br><p class="top-line">This message was send to '.$to.'</p>
+                                <img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png"><br><p style="font-size: 14px !important;margin-top: 20px;">This message was sent to '.$to.'</p>
                             </td>
                         </tr>
 						<tr>
                             <td>
-                                <h1>Forgot your Password? Not a problem.</h1>
-								<h2 class="big">Click on the link below to confirm to finish password reset.</h2>
-								<a class="btn" href="'.$verified_link.'">Reset your password</a>
-                            </td>
+                                <h1 style="font-size: 25px;margin: 0;">Forgot your Password? Not a problem.</h1>
+								<h2 style="color: #a09d9d;font-size: 22px;margin: 12px 0px 30px;font-weight: normal;">Click on the link below to reset your password.</h2>
+								<button style="background: #408080 none repeat scroll 0 0;border-radius: 0px;color: #fff !important;display: inline-block;font-size: 20px;font-weight: bold;margin: 19px 0px 58px;padding: 6px 31px;text-decoration: none;width: 275px;" class="orange-btn btn-block" id="send_register"><a href="'.$verified_link.'">Reset your password</a></button>
+								
+							  </td>
                         </tr>
 						<tr>
                             <td>
-                                <p class="links"><a href="'.$this->get_bit_ly_link(WEB_ROOT.'index.php?p=about_us').'">About Linkibag &nbsp; | &nbsp;</a>  <a href="'.$this->get_bit_ly_link(WEB_ROOT.'index.php?p=pages&id=8').'">Terms of Use &nbsp; | &nbsp; </a> <a href="'.$this->get_bit_ly_link(WEB_ROOT.'index.php?p=pages&id=9').'">Privacy Policy</a></p>
+                                <p style="padding: 8px 0px 4px;"><a href="'.$this->get_bit_ly_link(WEB_ROOT.'about-us').'" style="color: #7F7F95 !important;font-size: 14px;">About LinkiBag</a> &nbsp; | &nbsp;  <a href="'.$this->get_bit_ly_link(WEB_ROOT.'page/terms').'" style="color: #7F7F95 !important;font-size: 14px;">Terms of Use</a> &nbsp; | &nbsp;  <a href="'.$this->get_bit_ly_link(WEB_ROOT.'page/policy').'" style="color: #7F7F95 !important;font-size: 14px;">Privacy Policy</a></p>
                             </td>
                         </tr>
                         <tr>
-                            <td><p class="bottom-text"><a href="'.$this->get_bit_ly_link(WEB_ROOT.'index.php?p=unsubscribe&email='.$row['email_id']).'">UNSUBSCRIBE</a> from all messages sent via LinkiBag by any LinkiBag users and from LinkiBag invitations. LinkiBag Inc. 8926 N. Greenwood Ave, #220, Niles, IL 60714</p>
+                            <td><p style="font-size: 14px !important;line-height: 25px;color: #000 !important;">
+                                You are getting this email because this email address is connected to your Linkibag account.<br />Visit your <a href="'.WEB_ROOT.'index.php?p=account_settings">account page</a> to manage your settings.<br />
+
+                                <a style="color: #004080; font-weight: bold;" href="'.WEB_ROOT.'">LinkiBag Inc.</a> 8926 N. Greenwood Ave, #220, Niles, IL 60714
+                                </p>
                             </td>
                         </tr>
                     </table>
                 </td>
             </tr>
         </table>
-    </body>
-</html>';				
+    </div>';				
 
-				$from = 'info@linkibag.com';				
-				$this->send_email($to, $subject, $message, $from);				
-				return true;			
+				$from = 'questions@linkibag.com';				
+				$this->send_email($to, $subject, $message, $from);			
+				return array('status'=>'success');	
 			}else{				
-				return false;			
+				return array('status'=>'error', 'error'=>'No account found with that email address. Please check email address below and try again. To create a new account, visit the Free Signup page.');		
 			}		
 		}else{			
-			return false;		
+			return array('status'=>'error', 'error'=>'No account found with that email address. Please check email address below and try again. To create a new account, visit the Free Signup page.');		
 		}	
 	}
 	
@@ -338,7 +328,7 @@ class userClass extends commonClass
 			$new_val['role'] = '1';
 		}
 		$new_val['created'] = time();	
-		$new_val['status'] = 0;
+		$new_val['status'] = 1;
 		$new_val['verified'] = 0;
 		$user_id = $this->query_insert('users', $new_val);						
 		unset($new_val);
@@ -408,7 +398,7 @@ class userClass extends commonClass
 		}			
 		$postdata['verified_link'] = $this->get_bit_ly_link($email_link);			
 		$mail_content = $this->mail_format('new_register', $postdata);
-		$this->send_email($to, $mail_content['subject'], $mail_content['matter']);			
+		$this->send_email($to, $mail_content['subject'], $mail_content['matter']);
 		/*$this->setmessage("status", "Congratulations! You are almost done. To complete registration please click on the link that we just sent to your email address. Thank you again.");			*/
 		return $user_id;
 		

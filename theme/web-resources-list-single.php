@@ -1,7 +1,8 @@
 <?php
 function page_content(){
 global $co, $msg;
-$co->page_title = "Web Resources Library | LinkiBag";
+$user_login = $co->is_userlogin();  
+$co->page_title = "Link Exchange Library | LinkiBag";
 $current = $co->getcurrentuser_profile();  	
 if(!(isset($_GET['id'])))
    exit();
@@ -35,14 +36,14 @@ else
 <div class="container bread-crumb res-bread-crumb">
    <div class="col-md-12">
    		<div class="col-md-4 col-xs-12 pull-left">
-			<p><a href="index.php">Home</a> &gt; <a href="index.php?p=web-resources-list">Web Resources</a></p>
+			<p><a href="<?=WEB_ROOT?>index.php">Home</a> &gt; <a href="<?=WEB_ROOT?>web-resources-list">Link Exchange</a></p>
 		</div>	
 		<div class="col-md-8 col-xs-12 next-back-btn ">
 			<?php if(isset($nextcategory['cid']) and $nextcategory['cid'] > 0){ ?>
-				<a href="index.php?p=web-resources-list-single&id=<?=$nextcategory['cid']?>" class="nxt-btn">Next Category > </a>
+				<a href="<?=WEB_ROOT?>web-resources-list-single/<?=$nextcategory['cid']?>" class="nxt-btn">Next Category > </a>
 		<?php } ?>
 		<?php if(isset($prevcategory['cid']) and $prevcategory['cid'] > 0){ ?>
-				<a href="index.php?p=web-resources-list-single&id=<?=$prevcategory['cid']?>" class="bck-btn"> < Back </a>
+				<a href="<?=WEB_ROOT?>web-resources-list-single/<?=$prevcategory['cid']?>" class="bck-btn"> < Back </a>
 		<?php } ?>
 			
 			
@@ -73,15 +74,15 @@ else
 					<div class="img-block">
 					<?php 
 					if($category['photo'] != '' and file_exists($category['photo'])){ 
-						echo '<img src="'.$category['photo'].'" alt="'.$category['cname'].'" class="img-responsive">';
+						echo '<img src="'.WEB_ROOT.$category['photo'].'" alt="'.$category['cname'].'" class="img-responsive">';
 					}else{
-						echo '<img src="images/noimage.jpg" alt="'.$category['cname'].'" class="img-responsive">';
+						//echo '<img src="'.WEB_ROOT.'images/noimage.jpg" alt="'.$category['cname'].'" class="img-responsive">';
 					} 
 					?>
 					</div><br>
-					<p><b>Signup and start sharing today.</b></p><br/>
-					<a class="btn orange-bg" href="index.php?#free_singup">Free Signup</a><br>
-					<a class="com-link faq_link" href="index.php?#free_singup">Free individual account signup</a>
+					<p><b>Create your free <br>LinkiBag  account today.</b></p><br/><br/>
+					<a class="btn orange-bg" href="<?=WEB_ROOT?>sign-up">Free Signup</a><br>
+					<a class="com-link faq_link" href="<?=WEB_ROOT?>sign-up">Free individual account signup</a>
 				</div>
 				<div class="col-md-9 col-xs-12">
 	         <div class="web-resources-list">
@@ -149,6 +150,8 @@ else
 					</div>
 					
 					<h3><?=ucfirst($category['cname'])?></h3>
+					<?php if($user_login){ ?>
+					<p><?=ucfirst($category['cdesc'])?></p>
 					<p style="display: none;">To recommend us additional link or category use</p>
 					<?php
 					if(isset($user_public_category_link) and count($user_public_category_link) > 0){
@@ -211,6 +214,12 @@ else
 						 echo '<p class="text-light-gray">There are no links on this public category.</p>';
 						
 					}
+
+				}else{
+					?>
+				To access this page, please <a href="<?=WEB_ROOT?>index.php">log in</a> or get your free LinkiBag account <a href="<?=WEB_ROOT?>sign-up" >here.</a>	
+					<?php 
+				}
 					?>
 					</div>
 	            </div>

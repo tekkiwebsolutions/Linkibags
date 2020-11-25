@@ -10,7 +10,7 @@
    function page_content(){      
    	global $co, $msg;      	
    	$no_record_found='';      	
-   	$co->page_title = "Friends | Linkibag";     
+   	$co->page_title = "Friends | LinkiBag";     
    	$current = $co->getcurrentuser_profile(); 
    
    	if(!(isset($_GET['first_name']) or isset($_GET['last_name']) or isset($_GET['email_id']) or isset($_GET['fgroup']) or isset($_GET['date'])))
@@ -71,10 +71,10 @@
    </div>
    <div class="containt-area" id="dashboard_new">
       <div class="container">
-         <div class="col-md-3">      
+         <div class="col-md-3 my_lnk_left">      
             <?php include('dashboard_sidebar.php'); ?>    
          </div>
-         <div class="containt-area-dash col-md-9" style="margin-top: -5px;">
+         <div id='linki_friend_right_panel' class="containt-area-dash col-md-9 my_lnk_right" style="margin-top: -5px;">
             <!-- Tab panes -->        
             <div class="tab-content">
                <form name="dash_form" method="post" id="share_urls_from_dash" action="index.php?p=dashboard&ajax=ajax_submit">
@@ -112,7 +112,7 @@
 										if(isset($default_group_name['group_name']) and $default_group_name['group_name'] != ''){
 											$default_group_name = $default_group_name['group_name'];
 										}else{
-											$default_group_name = 'Linki Friends';		
+											$default_group_name = 'LinkiFriends';		
 										}
 										
 									}
@@ -122,10 +122,10 @@
 									else if(isset($_GET['fstatus']) and $_GET['fstatus'] == 1)
 										$default_group_name = 'New Connect Requests';	
 									else
-										$default_group_name = 'Linki Friends';	
+										$default_group_name = 'LinkiFriends';	
 								  }	
 								  ?>
-								  <h4 class="pull-left text-green user-name-dash"><span style="position: relative;"><a href="index.php?p=mylinkifriends" style="display: none;"><i class="fa fa-chevron-left text-green"></i></a><?=$default_group_name?> <span style="margin: -4px -5px 0 1px;" class="badge round-red-badge" id="new_linkibag_friends"><?=$total_record?></span></span>
+								  <h4 class="pull-left text-green user-name-dash"><span style="position: relative;"><i class="fa fa-users"></i> <a href="index.php?p=mylinkifriends" style="display: none;"><i class="fa fa-chevron-left text-green"></i></a><?=$default_group_name?> <span style="margin: -4px -5px 0 1px;" class="badge round-red-badge" id="new_linkibag_friends"><?=$total_record?></span></span>
 									 <?php if(!isset($_GET['fstatus'])) { ?>
 									 <!--<a class="btn button-grey pull-right" href="javascript: void(0)" data-toggle="modal" data-target="#addmultipleusers">Add Users</a>-->
 									 <?php } ?>
@@ -146,14 +146,14 @@
 									   </div>
 									</div>
 									<div class="bottom-nav-link top-nav-link">
-									   <?php if(isset($_GET['fstatus']) and $_GET['fstatus']==0){ ?>
+									  
+										 <?php if(isset($_GET['fstatus']) and $_GET['fstatus']==0){ ?>
 										  <a class="btn btn-default dark-gray-bg" href="javascript: void(0);" onclick="move_to_category_multiple('#share_urls_from_dash','group-pendinginvite');">Move to</a>
 									   <?php }else{ ?>
 										  <a class="btn btn-default dark-gray-bg" href="javascript: void(0);" onclick="move_to_category_multiple('#share_urls_from_dash','group');">Move to</a>
-									   <?php } ?>
-														
+									   <?php } ?>				
 									   <div class="dropdown border-bg-btn" style="display: inline;">
-										  <select style="text-align: left;width: 150px;" name="move" class="move_to_cat_w btn btn-default dropdown-toggle" id="move_to_cat">
+										  <select style="text-align: left;width: 70px;margin-top: 0px;" name="move" class="move_to_cat_w btn btn-default dropdown-toggle" id="move_to_cat">
 											 <?php /*
 											 <option value="-2">Spam</option>
 											 <option value="-1">Blocked</option>
@@ -171,6 +171,7 @@
 												?>										
 										  </select>
 									   </div>
+									   
 									</div>
 								</div>
 							</div>
@@ -202,13 +203,22 @@
 								<?php if(!isset($_GET['fstatus'])){ ?>
 								<td class="name">
 									<div class="dropdown dropdown-design">
-									   <div class="btn btn-default dropdown-toggle"><input type="checkbox" name="check" id="checkAll" value=""/> Name <a href="index.php?p=linkifriends&fstatus=<?=$fstatus?>&gid=<?=$fgroup?>&order_by[date_time_created]=<?=$url_by?>"><i class="<?=((isset($_GET['order_by']) and array_key_exists("date_time_created",$_GET['order_by']) and in_array('asc', $_GET['order_by'])) ? 'fa fa-caret-up' : 'fa fa-caret-down')?>"></i></a></div>
+									   <div class="btn btn-default dropdown-toggle">
+									       <input type="checkbox" name="check" id="checkAll" value=""/> Name
+									       <a href="index.php?p=linkifriends&fstatus=<?=$fstatus?>&gid=<?=$fgroup?>&order_by[date_time_created]=<?=$url_by?>">
+									           <i class="<?=((isset($_GET['order_by']) and array_key_exists("date_time_created",$_GET['order_by']) and in_array('asc', $_GET['order_by'])) ? 'fa fa-caret-up' : 'fa fa-caret-down')?>">
+									               
+									           </i></a></div>
 									</div>
 								</td>
 								<?php } ?>
 								<td class="email">
 								   <div class="dropdown dropdown-design">
-									  <div class="btn btn-default dropdown-toggle">Email <a href="index.php?p=linkifriends&fstatus=<?=$fstatus?>&gid=<?=$fgroup?>&order_by[email_id]=<?=$url_by?>"><i class="<?=((isset($_GET['order_by']) and array_key_exists("email_id",$_GET['order_by']) and in_array('asc', $_GET['order_by'])) ? 'fa fa-caret-up' : 'fa fa-caret-down')?>"></i></a></div>
+									  <div class="btn btn-default dropdown-toggle">Email 
+									  <a href="index.php?p=linkifriends&fstatus=<?=$fstatus?>&gid=<?=$fgroup?>&order_by[email_id]=<?=$url_by?>">
+									      <i class="<?=((isset($_GET['order_by']) and array_key_exists("email_id",$_GET['order_by']) and in_array('asc', $_GET['order_by'])) ? 'fa fa-caret-up' : 'fa fa-caret-down')?>">
+									          
+									      </i></a></div>
 								   </div>
 								</td>
 								<td class="group" style="<?=((isset($_GET['fstatus']) and $_GET['fstatus'] == '0') ? ' display: none;' : '')?>"> 
@@ -359,7 +369,25 @@
                                     <?php } ?>
                                     <?php if(!isset($_GET['fstatus'])){ ?>
                                     <td class="name"><span><input type="checkbox" class="urls_shared" name="share_url[]" value="<?=$list['friend_id']?>"></span> &nbsp;
-                                       <span class="name-block"><?=$list['first_name'].' '.$list['last_name']?></span>
+                                       <span class="name-block">
+										<?php 
+											if(($list['request_to']>0)){
+												$emailsss = $list['email_id'];
+											}else{
+												$emailsss = $list['request_email'];
+											}
+											
+											$arr = explode("@", $emailsss, 2);
+											$first = $arr[0];
+											if($list['request_name']!==''){
+												echo $list['request_name']; 
+											}else{
+												echo $first;
+											}
+										?>
+                                          
+                                           
+                                           </span>
                                     </td>
                                     <?php } ?>
                                     <td class="email"><a href="<?=$request_link?>">
@@ -603,7 +631,7 @@
                        
 					    ?>
 						<div class="row">
-							<div class="col-md-11 col-xs-12">
+							<div class="col-md-10 col-xs-12">
 							<?php if($total_page_count >1){ ?>
 								<div class="arrow_icons">
 									<?php 
@@ -621,7 +649,11 @@
 								</div> 
 								<?php } ?>
 							</div>
-							<div class="col-md-1 col-xs-12"><div class="row"><small>Page <?=isset($_GET['page']) ? $_GET['page'] : 1?> of <?=$total_page_count?></small></div></div>
+							<div class="col-md-2 col-xs-12">
+							    <div class="roww">
+							        <small class="pull-right">Page <?=isset($_GET['page']) ? $_GET['page'] : 1?> of <?=$total_page_count?></small>
+							    </div>
+							    </div>
 						</div>
                         <!--<nav class="text-center"><ul class="pagination"><?php //$page_links?></ul></nav>-->
                      </div>
@@ -629,7 +661,7 @@
                   <div class="bottom-nav-link table-design margin-none">
                      <div class="bottom-nav-link-main">
                         <div  style="padding: 0px;" class="col-md-6">
-                           <a class="btn btn-default dark-gray-bg" href="index.php?p=mylinkifriends">Go to</a>                 
+                           <a class="btn btn-default dark-gray-bg g_t" href="index.php?p=mylinkifriends">Go to</a>                 
                            <div class="dropdown border-bg-btn" style="display: inline;">
                               <select style="text-align: left;" name="filter" class="move_to_cat_w btn btn-default dropdown-toggle" onchange="fiter_with_group(this.value)">
                                  
@@ -650,7 +682,8 @@
                               </select>
                            </div>
 
-                        <a class="btn btn-default dark-gray-bg pull-right" href="javascript: void(0);" onclick="#">Delete</a>                 
+                         <a class="btn btn-default dark-gray-bg pull-right" onclick="delete_pending_request('#share_urls_from_dash','group', '0','0','-1');" href="javascript: void(0);" onclick="#">Delete</a>                 
+             
 
 
                         </div>
@@ -665,7 +698,7 @@
                            <?php } ?>
                            <a class="btn btn-default dark-gray-bg" onclick="move_to_category_multiple('#share_urls_from_dash','group','1');" href="javascript: void(0);" style="display: none;">Unfriend</a>
                         </div>
-                        <div style="width: auto; margin: 0px ! important;" class="col-md-3 pull-right">
+                        <div style="width: auto; margin: 0px ! important;" class="col-md-3 pull-right go_to_page">
                            <?=$page_link_new?>                 
                         </div>
                      </div>

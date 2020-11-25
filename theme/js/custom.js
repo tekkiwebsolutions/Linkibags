@@ -6,8 +6,8 @@ function printPageArea(areaID){
     var printContent = document.getElementById(areaID);
     var WinPrint = window.open('', '', 'width=900,height=650');
     WinPrint.document.write('<html><head>');
-	WinPrint.document.write('<link rel="stylesheet" href="http://www.linkibag.net/PTest25x/linkibag/theme/css/bootstrap.min.css">');
-	WinPrint.document.write('<link rel="stylesheet" href="http://www.linkibag.net/PTest25x/linkibag/theme/css/linkibag.css">');
+	WinPrint.document.write('<link rel="stylesheet" href="https://www.linkibag.com/theme/css/bootstrap.min.css">');
+	WinPrint.document.write('<link rel="stylesheet" href="https://www.linkibag.com/theme/css/linkibag.css">');
 	WinPrint.document.write('</head><body onload="print();close();">');
 	WinPrint.document.write('<table>');
 	WinPrint.document.write(printContent.innerHTML);
@@ -80,48 +80,48 @@ $(document).ready(function(){
 		var flag='T';
 
 		if(str.match(upper_text)){
-			$('#d12').html("<i class='fa fa-check' style='color: #AAAAAA'></i>  Include one uppercase letter");
-			$('#d12').css("color", "#AAAAAA");
-		}else{
+			$('#d12').html("<i class='fa fa-check' style='color: #DDDDDD'></i>  Include one uppercase letter");
 			$('#d12').css("color", "#DDDDDD");
-			$('#d12').html("<i class='fa fa-check' style='color: #DDDDDD'></i> Include one uppercase letter");
+		}else{
+			$('#d12').css("color", "#999999");
+			$('#d12').html("<i class='fa fa-check' style='color: #999999'></i> Include one uppercase letter");
 			flag='F';
 		}
 
 		if(str.match(lower_text)){
-			$('#d13').html("<i class='fa fa-check' style='color: #AAAAAA'></i> Include a lowercase letter");
-			$('#d13').css("color", "#AAAAAA");
-		}else{
-			$('#d13').css("color", "#DDDDDD");
 			$('#d13').html("<i class='fa fa-check' style='color: #DDDDDD'></i> Include a lowercase letter");
+			$('#d13').css("color", "#DDDDDD");
+		}else{
+			$('#d13').css("color", "#999999");
+			$('#d13').html("<i class='fa fa-check' style='color: #999999'></i> Include a lowercase letter");
 			flag='F';
 		}
 
 		if(str.match(number_check)){
-			$('#d15').html("<i class='fa fa-check' style='color: #AAAAAA'></i> Include a number");
-			$('#d15').css("color", "#AAAAAA");
-		}else{
-			$('#d15').css("color", "#DDDDDD");
 			$('#d15').html("<i class='fa fa-check' style='color: #DDDDDD'></i> Include a number");
+			$('#d15').css("color", "#DDDDDD");
+		}else{
+			$('#d15').css("color", "#999999");
+			$('#d15').html("<i class='fa fa-check' style='color: #999999'></i> Include a number");
 			flag='F';
 		}
 
 		if(str.length>7){
-			$('#d16').html("<i class='fa fa-check' style='color: #AAAAAA'></i> Include at least 8 characters");
-			$('#d16').css("color", "#AAAAAA");
-		}else{
-			$('#d16').css("color", "#DDDDDD");
 			$('#d16').html("<i class='fa fa-check' style='color: #DDDDDD'></i> Include at least 8 characters");
+			$('#d16').css("color", "#DDDDDD");
+		}else{
+			$('#d16').css("color", "#999999");
+			$('#d16').html("<i class='fa fa-check' style='color: #999999'></i> Include at least 8 characters");
 			flag='F';
 		}
 
 		if(flag=='T'){
 			$("#d1").fadeOut();
-			$('#display_box').css("color","#AAAAAA");
+			$('#display_box').css("color","#DDDDDD");
 			$('#display_box').html("<span class='glyphicon glyphicon-ok' aria-hidden='true'></span> "+str);
 		}else{
 			$("#d1").show();
-			$('#display_box').css("color","#DDDDDD");
+			$('#display_box').css("color","#999999");
 			$('#display_box').html("<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> "+str);
 		}
 	});
@@ -264,7 +264,7 @@ $(document).ready(function(){
 			}
 		
 			
-			$("#dialog_confirm").html('You are about to leave LinkiBag. <br /><br />You will be visiting <p style="margin: 12px 0px;line-height: 22px;color: #ff6d0d;"><a target="_blank" style="color: #ff6d0d;" href='+val+'>'+val+'</a></p> Be advised that not visiting unknown websites is an important safety practice.It is recommended to scan a URL before visiting it. <br/> For more tips on safety please visit <a href="http://linkibag.net/PTest25x/linkibag/index.php" style="color: #004080;">LinkiBag Portal</a> <p style="border-top: 1px solid #c3c3c3;margin: 11px 0 0;padding-bottom: 4px;padding-top: 10px;"><a href='+val+' target="_blank" style="color: #2a2a2a;">Would you like to continue and visit this site?</a></p>');
+			$("#dialog_confirm").html('You are about to leave LinkiBag. <br /><br />You will be visiting <p style="margin: 12px 0px;line-height: 22px;color: #ff6d0d;"><a target="_blank" style="color: #ff6d0d;" href='+val+'>'+val+'</a></p> Be advised that not visiting unknown websites is an important safety practice.It is recommended to scan a URL before visiting it. <br/> For more tips on safety please visit <a href="https://www.linkibag.com/index.php" style="color: #004080;">LinkiBag Portal</a> <p style="border-top: 1px solid #c3c3c3;margin: 11px 0 0;padding-bottom: 4px;padding-top: 10px;"><a href='+val+' target="_blank" style="color: #2a2a2a;">Would you like to continue and visit this site?</a></p>');
 			$("#dialog_confirm" ).dialog({
 			autoOpen: false, 
 			modal: true,
@@ -361,11 +361,15 @@ function submit_register(){
 			processData: false,
 			success: function(res2) {
 				res2 = JSON.parse(res2);
-				//alert(res2);	
+			//	alert(res2);	
 				if(res2.success === true){
 					$("#dialog_success").html(res2.msg);
-					$("#dialog_success" ).dialog( "open" );
-					$(".ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix").addClass( "dialog_success" );
+					$("#registerSubmitd").show();
+					$("#registerSubmitd").html(res2.msg);
+					$("#register_form")[0].reset();
+					grecaptcha.reset();
+					//$("#dialog_success" ).dialog( "open" );
+				//	$(".ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix").addClass( "dialog_success" );
 					if(res2.redirect_to){
 						setTimeout(function(){
 						window.location.href=res2.redirect_to;
@@ -384,7 +388,7 @@ function submit_register(){
 
 				//document.location.href="#messagesout";
 				//$('#messagesout').html(res2);
-				$('#send_register').html('Finished >');
+				$('#send_register').html('Finished >>');
 				$('#send_register').removeAttr('disabled');
 				/*$('html, body').animate({
 					scrollTop: $("#register_form").offset().top
@@ -429,10 +433,89 @@ function add_multiple_users(){
 	return false;
 }
 
-function submit_edit_profile(){	
+function submit_edit_profile(){	 
 	var formdata = new FormData($('#edit_profile_form')[0]);
 	$('#send_register').html('Updating..');
 	$('#send_register').attr('disabled', 'disabled');
+	$(".haserror").hide();
+	$('#messagesout .alert-success').hide();	
+
+	
+	$(".first_name").removeClass("has-error");
+		$(".last_name").removeClass("has-error");
+	$(".country").removeClass("has-error");
+	$(".security_answer").removeClass("has-error");
+	$(".security_answer2").removeClass("has-error");
+	$(".security_answer3").removeClass("has-error");
+	$(".password").removeClass("has-error");
+	$(".reapt_pass").removeClass("has-error");
+	$(".security_question").removeClass("has-error");
+	$(".security_question2").removeClass("has-error");
+	$(".security_question3").removeClass("has-error");
+	
+	var firstName = $(".first_name").val();
+	var last_name = $(".last_name").val();
+	var country = $(".country").val();
+	var security_answer = $(".security_answer").val();
+	var security_answer2 = $(".security_answer2").val();
+	var security_answer3 = $(".security_answer3").val();
+	
+	
+		var security_question = $(".security_question").val();
+	var security_question2 = $(".security_question2").val();
+	var security_question3 = $(".security_question3").val();
+	
+	
+	
+// 	var password = $(".password").val();
+// 	var reapt_pass = $(".reapt_pass").val();
+	if(firstName=='')
+	{
+	    	$(".first_name").addClass("has-error");	$(".haserror").show();
+	}
+	if(last_name=='')
+	{
+	    	$(".last_name").addClass("has-error");	$(".haserror").show();
+	}
+	 if(security_answer=='')
+	{
+	    	$(".security_answer").addClass("has-error");	$(".haserror").show();
+	}
+	if(country=='')
+	{
+	    	$(".country").addClass("has-error");	$(".haserror").show();
+	}
+	
+	if(security_answer2=='')
+	{
+	    	$(".security_answer2").addClass("has-error");	$(".haserror").show();
+	}
+	if(security_answer3=='')
+	{
+	    	$(".security_answer3").addClass("has-error");	$(".haserror").show();
+	}
+// 	if(reapt_pass=='')
+// 	{
+// 	    	$(".reapt_pass").addClass("has-error");	$(".haserror").show();
+// 	}
+// 	if(password=='')
+// 	{
+// 	    	$(".password").addClass("has-error");	$(".haserror").show();
+// 	}
+	if(security_question=='')
+	{
+	    	$(".security_question").addClass("has-error");	$(".haserror").show();
+	}
+	if(security_question2=='')
+	{
+	    	$(".security_question2").addClass("has-error");	$(".haserror").show();
+	}
+	if(security_question3=='')
+	{
+	    	$(".security_question3").addClass("has-error");	$(".haserror").show();
+	}else{
+	    
+	
 	$.ajax({
 		type: "POST",
 		url: $('#edit_profile_form').attr('action'),
@@ -441,26 +524,25 @@ function submit_edit_profile(){
 		contentType: false,
 		processData: false,
 		success: function(res2) {
-			if(res2 === 'success'){
-				window.location.reload();
+			if(res2 === 'success'){ 
+				//window.location.reload(); 
+				$('#messagesout .alert-success').show();				
 			}else{	
-				//$('#messagesout').html(res2);
-				
+				//$('#messagesout').html(res2); 
 				$("#dialog_error").html(res2);
 				$("#dialog_error div").removeAttr( "class" );		
 				$( "#dialog_error" ).dialog( "open" );
-			}	
-			
-			
+			}	 
 			
 			$('#send_register').html('Update');
 			$('#send_register').removeAttr('disabled');
 			/*$('html, body').animate({
 				scrollTop: $("#edit_profile_form").offset().top
 			}, 2000);*/
-			
+			 
 		}
 	});
+	}
 	return false;
 }
 function ajax_login(){
@@ -765,7 +847,7 @@ function multiple_load_share_link_form(type){
 									jQuery('#url_'+value).remove();
 								});
 								//end new code
-								$("#dialog_success").html('Successfully Link(s) deleted');	
+								$("#dialog_success").html('Selected items were Successfully deleted');	
 								$("#dialog_success" ).dialog( "open" );	
 								$(".ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix").addClass( "dialog_success" );
 								$(".new_linkibag_message").html(res2.total_new_row);
@@ -918,7 +1000,7 @@ function multiple_linkibook_share(){
 		$("#dialog_confirm").dialog( "open" );
 
 	}else{
-		$("#dialog_error").html("Please select the linkibook(s) you would like to share");
+		$("#dialog_error").html("First create your LinkiBook. Its easy to share one with your friends when you are done.");
 		$("#dialog_error").dialog("open");
 	}	
 	
@@ -944,19 +1026,27 @@ function share_linkibook(val){
 		processData: false,
 		success: function(res2) {
 			console.log(res2);
+			console.log('testing');
 			res2 = JSON.parse(res2);
 			
 			$('#url-shared-messages-out_'+val).html('');
 			if(res2.success === true){
+			    console.log('testing1');
 				$(".urls_shared").removeAttr( "checked" );
 				$("#dialog_success").html(res2.msg);
 				$("#dialog_success" ).dialog( "open" );
 				$(".ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix").addClass( "dialog_success" );
 				$(".ui-dialog.ui-widget.ui-widget-content.ui-corner-all.ui-front.ui-dialog-buttons.ui-draggable.ui-resizable").addClass( "sharing-links-success-panel-widget-new" );				
 				$(".ui-dialog-buttonpane.ui-widget-content.ui-helper-clearfix").remove();
-				$("#table_serialize_for_print").html(res2.table_serialize_for_print);				
+				$(".ui-dialog-titlebar-close").attr("onclick","window.location.href = "+res2.redirectTo);
+    			if(res2.hasOwnProperty('redirectTo') && res2.redirectTo !== '' && typeof res2.redirectTo !== 'undefined'){
+					$(".ui-dialog-titlebar-close").attr("onclick","window.location.href = '"+res2.redirectTo+"'");
+				} 
+				$("#table_serialize_for_print").html(res2.table_serialize_for_print);	
+				console.log('testing2');
 				//window.location.href = "index.php?p=dashboard";
 			}else if(res2.success === false){
+			    console.log('testing3');
 				 //$('#url-shared-messages-out_'+val).html(res2.msg);
 					$("#dialog_error").html(res2.msg);
 					$("#dialog_error div").removeAttr( "class" );		
@@ -965,7 +1055,7 @@ function share_linkibook(val){
 			}
 			$('#send_share_link_'+val).html('Share');
 			$('#send_share_link_'+val).removeAttr('disabled', 'disabled');	
-			
+			console.log('testing4');
 		}
 	});
 	return false;
@@ -1893,6 +1983,7 @@ function add_new_group(submitform){
 				$("#dialog_success" ).dialog( "open" );
 				$(".ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix").addClass( "dialog_success" );*/	
 				$("#link_new_paging").append(res2.page_link_option);
+				location.reload();
 				
 			}else if(res2.success === false){	
 				$("#dialog_error").html(res2.msg);
@@ -2054,9 +2145,10 @@ function add_url_comment(){
 	return false;
 }
 function contact_us(){
+       console.log(444444444444);
 	if($('#contact_us_form').valid()){
 		var formdata = new FormData($('#contact_us_form')[0]);
-		$('#send_contact_us').html('Submit..');
+		$('#send_contact_us').html('Submitting...');
 		$('#send_contact_us').attr('disabled', 'disabled');
 		$.ajax({
 			type: "POST",
@@ -2066,8 +2158,11 @@ function contact_us(){
 			contentType: false,
 			processData: false,
 			success: function(res2) {
+			    console.log(res2);
+			    $('#messages-out').html(res2);
+			    //alert(res2);
 				document.location.href="#contact_us_form";
-				$('#messages-out').html(res2);
+			
 				$('#send_contact_us').html('Submit');
 				$('#send_contact_us').removeAttr('disabled');
 				
@@ -2332,8 +2427,17 @@ function share_links_new(val){
 	
 	$(".ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix").removeClass( "dialog_success" );
 	$(".ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix").removeClass( "dialog_error" );
-	
+	var gresponse = $("#g-recaptcha-response").val();
+	if(gresponse==''){
+		$("#rc-anchor-container").focus();
+		$("#rc-anchor-container").css("color", "red");
+		alert("Please validate captcha");
+		return false;
+	}
+
 	var formdata = new FormData($('#share_form_'+val)[0]);
+	//formData.append('g-recaptcha-response', gresponse);
+	
 	$('#send_share_link').html('Sharing...');
 	$('#send_share_link').attr('disabled', 'disabled');
 	$.ajax({

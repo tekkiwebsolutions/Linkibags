@@ -7,7 +7,7 @@ $co = new userClass();
 $co->__construct();
 
 if (!empty($_POST) ) {
-	$table_column_name = array('u.uid', 'p.first_name', 'p.last_name', 'u.email_id', 'u.role', 'u.status', 'u.verified', 'u.created', 'u.last_login_time', 'u.uid');
+	$table_column_name = array('u.uid', 'p.first_name', 'p.last_name', 'u.email_id', 's.state_name', 'p.zip_code', 'u.role', 'u.status', 'u.verified', 'u.created', 'u.last_login_time', 'p.sign_me_for_email_filter', 'u.uid');
     /* Useful $_POST Variables coming from the plugin */
     $draw = $_POST["draw"];//counter used by DataTables to ensure that the Ajax returns from server-side processing requests are drawn in sequence by DataTbles
     $orderByColumnIndex  = $_POST['order'][0]['column'];// index of the sorting column (0 index based - i.e. 0 is the first record)
@@ -16,7 +16,9 @@ if (!empty($_POST) ) {
     $start  = $_POST["start"];//Paging first record indicator.
     $length = $_POST['length'];//Number of records that the table can display in the current draw
     /* END of POST variables */
-	$sql = "select COUNT(u.uid) as total_rows from users u, profile p where u.uid=p.uid";
+	$sql = "select COUNT(u.uid) as total_rows from users u, profile p 
+	LEFT JOIN states s ON s.id=p.state
+	where u.uid=p.uid";
 	$data = $co->query_first($sql,array());
     
 	$recordsTotal = $data['total_rows'];
@@ -33,32 +35,69 @@ if (!empty($_POST) ) {
         /* End WHERE */
 
        
-		$sql = "select COUNT(u.uid) as total_rows from users u, profile p where u.uid=p.uid and (".$where.")";
+		$sql = "select COUNT(u.uid) as total_rows from users u, profile p 
+		LEFT JOIN states s ON s.id=p.state
+		where u.uid=p.uid and (".$where.")";
 		$data = $co->query_first($sql,array());
 		$recordsFiltered = $data['total_rows'];//Count of search result
 		
         /* SQL Query for search with limit and orderBy clauses*/
-        $sql = "select * from users u, profile p where u.uid=p.uid and (".$where.") ORDER BY ".$orderBy." ".$orderType." limit ".$start.", ".$length;
+        $sql = "select * from users u, profile p 
+		LEFT JOIN states s ON s.id=p.state
+		where u.uid=p.uid and (".$where.") ORDER BY ".$orderBy." ".$orderType." limit ".$start.", ".$length;
         $data = $co->fetch_all_array($sql,array());
 		
     }
     /* END SEARCH */
     else {
-        $sql = "select u.uid, p.first_name, p.last_name, u.email_id, u.role, u.status, u.verified, u.created, u.last_login_time from users u, profile p where u.uid=p.uid ORDER BY ".$orderBy." ".$orderType." limit ".$start.", ".$length;
+        $sql = "select u.uid, p.first_name, p.last_name, p.zip_code, p.sign_me_for_email_filter, u.email_id, u.role, u.status, u.verified, u.created, u.last_login_time, s.state_name 
+		FROM users u,  profile p
+		LEFT JOIN states s ON s.id=p.state
+		where u.uid=p.uid ORDER BY ".$orderBy." ".$orderType." limit ".$start.", ".$length; 
+		
 		$data = $co->fetch_all_array($sql,array());
 
         $recordsFiltered = $recordsTotal;
     }
-	
+    
 	$acc_type = array('','Personal','Business','Education');
 	$status = array('Blocked','Active');
     $verified_status = array('No','Yes');
-	$data2 = array();
+    $data2 = array();
+   
 	foreach($data as $row){
-		$data2[] = array('uid'=>'<input type="checkbox" class="del_users" onclick="show_del_users();" name="del_users[]" value="'.$row['uid'].'">&nbsp;'.$row['uid'],'first_name'=>$row['first_name'],'last_name'=>$row['last_name'],'email_id'=>$row['email_id'],'role'=>$acc_type[$row['role']],'status'=>$status[$row['status']],'verified'=>$verified_status[$row['verified']],'created'=>date('j F, Y',$row['created']),'last_login_time'=>date('j F, Y',$row['last_login_time']),'edit'=>'<a href="main.php?p=user_management/edit&amp;id='.$row['uid'].'" class="btn btn-xs btn-primary"> <i class="fa fa-fw fa-edit"></i> Edit</a>
-													<a class="btn btn-xs btn-danger del_links" href="main.php?p=user_management/delete_info&amp;delid[]='.$row['uid'].'"><i class="fa fa-fw fa-edit"></i> Delete</a>');
-		
+		if($row['first_name']=='') {
+			$arr = explode("@", $row['email_id'], 2);
+			$name = $arr[0];
+		}else{
+			$name= $row['first_name'];
+		}
+		if($row['last_login_time']=='' || $row['last_login_time']==0) {
+			$row['last_login_time'] = $row['created'];
+		}		
+		if($row['sign_me_for_email_filter']==1){ $subscribe = 'Yes';} else{ $subscribe = 'No'; }
+		if($row['state_name']==''){ $row['state_name'] = '-';}
+		if($row['zip_code']==0){ $row['zip_code'] = '-';}
+		$data2[] = array(
+			'uid'=>'<input type="checkbox" class="del_users" onclick="show_del_users();" name="del_users[]" value="'.$row['uid'].'">&nbsp;'.$row['uid'],
+			'first_name'=>$name,
+			'last_name'=>$row['last_name'],
+			'email_id'=>$row['email_id'],
+			'state_name'=>$row['state_name'],
+			'zip_code'=>$row['zip_code'],
+			'role'=>$acc_type[$row['role']],
+			'status'=>$status[$row['status']],
+			'verified'=>$verified_status[$row['verified']],
+			'created'=>date('m/d/Y',$row['created']),
+			'last_login_time'=>date('m/d/Y', $row['last_login_time']),
+			'subscribe'=>$subscribe,
+			'edit'=>'<a href="main.php?p=user_management/edit&amp;id='.$row['uid'].'" class="btn btn-xs btn-primary delete_row" > <i class="fa fa-fw fa-edit"></i>Edit</a>&nbsp;'
+		);            
 	}
+    
+      
+        
+	
 	$data = $data2;	
 
     /* Response to client before JSON encoding */

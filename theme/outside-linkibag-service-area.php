@@ -7,7 +7,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Dashboard | Linkibag";     
+	$co->page_title = "Dashboard | LinkiBag";     
  		      	
 	$this_page='p=dashboard'; 
 	$email = '';
@@ -20,7 +20,7 @@ function page_content(){
 	}
 	$linkibag_service_countries = $co->query_first("SELECT * from linkibag_service_countries WHERE service_id=:id",array('id'=>1));
 ?>
-		<section id="free_singup" class="light-bg">
+		<section id="free_signup" class="light-bg">
 		<div id="free_singup_main" class="container">
 			<div class="col-md-offset-3 col-md-7">
 			<p></p>
@@ -39,7 +39,7 @@ function page_content(){
 									<div class="form-group row">
 										<label class="mylabel col-md-4">Email: <span class="required-field"> *</span></label>
 										<div class="col-md-8">
-											<input placeholder="Your-email@mail.com" type="email" name="email_id" aria-describedby="basic-addon1" class="form-control error" value="<?=$email?>">
+											<input placeholder="Your-email@mail.com" type="email" name="email_id" aria-describedby="basic-addon1" class="form-control error" id="signup_email_id" value="<?=$email?>">
 										</div>
 									</div>
 									<div class="form-group row">
@@ -48,7 +48,7 @@ function page_content(){
 										<select class="form-control linkibox_select" name="country" onchange="country_change(this.value);">
 											<option value="">Select Country</option>
 											<?php
-											$countries = $co->fetch_all_array("select id,country_name from countries where id>'1' ORDER BY country_name ASC", array());
+											$countries = $co->fetch_all_array("select id,country_name from countries ORDER BY country_name ASC", array());
 											foreach($countries as $country){
 												$sel = '';
 												if($selectedcountry == $country['id'])
@@ -112,6 +112,25 @@ function submit_outside_service_area(){
 }	
 
 </script>								
-		
+<script type="text/javascript">
+		function country_change(countryval){
+			//alert(countryval);
+			if (countryval != "") {
+			<?php
+			$service_countries = unserialize($linkibag_service_countries['allowed_counties']);
+			$country_cond = '';
+			foreach($service_countries as $servicecountry) {
+				if($country_cond != '')
+					$country_cond .= ' || ';
+				$country_cond .= 'countryval == '.$servicecountry;
+			}
+			?>
+				if(<?=$country_cond?>) {
+					var email = $('#signup_email_id').val();
+					window.location.href='index.php?free_signup=1&email='+email+'&country='+countryval;
+				}
+			}
+		}
+	</script>		
 					
 		<?php  }      ?>

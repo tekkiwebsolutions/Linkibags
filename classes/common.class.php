@@ -330,22 +330,66 @@ class commonClass extends DB
 	    }
 	    return $result;
 	}
-	function send_email($to, $subject, $msg)
+	function send_email($to, $subject, $msg, $from1='')
 	{
 		// To send HTML mail, the Content-type header must be set
 		//$from = 'info@linkibag.com';
 		$from = '"LinkiBag" <noreply@linkibag.com>';
-		$headers  = 'MIME-Version: 1.0' . "\r\n";
+		
+		if($from1 != ''){ $from = '"LinkiBag" '.$from1;  } 
+		
+		$headers = 'From: '. $from . "\r\n";
+		$headers .= 'MIME-Version: 1.0' . "\r\n";
 		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-	
-		// Additional headers
-		$headers .= 'From: '. $from . "\r\n";
+	    $headers .= "X-Priority: 3\r\n";
+	    $headers .= "X-Mailer: PHP". phpversion() ."\r\n" ; 
+		
+		$checkuser = $this->query_first("SELECT uid, donot_recieve_email, unsubscribe_mail FROM `users` WHERE `email_id`=:email", array('email'=>$to));
+		$sendemail = true;
+		if(isset($checkuser['uid'])) {
+			$msg .= '<br /><center><a style="color: #004080; font-weight: bold;" href="'.WEB_ROOT.'index.php?p=account_settings">Report</a> as spam &nbsp; &nbsp; | &nbsp; &nbsp; <a style="color: #004080; font-weight: bold;" href="'.WEB_ROOT.'index.php?p=account_settings">Unsubscribe</a></center>';
+			if($checkuser['donot_recieve_email']==1) {
+				$sendemail = false;
+			}
+		}else {
+			$msg .= '<br /><center><a style="color: #004080; font-weight: bold;" href="'.WEB_ROOT.'reportspam.php?email='.urlencode($to).'">Report</a> as spam &nbsp; &nbsp; | &nbsp; &nbsp; <a style="color: #004080; font-weight: bold;" href="'.WEB_ROOT.'reportunsubscribe.php?email='.urlencode($to).'">Unsubscribe</a></center>';
+			$checkemail = $this->query_first("SELECT id, status FROM `donot_recieve_mails` WHERE `email_id`=:email", array('email'=>$to));
+			if(isset($checkemail['id']) and $checkemail['status']==1) {
+				$sendemail = false;
+			}
+			
+			$checkunsubscribe = $this->query_first("SELECT us_id, status FROM `unsubscribe` WHERE `mail_id`=:email", array('email'=>$to));
+			if(isset($checkunsubscribe['us_id']) and $checkunsubscribe['status']==1) {
+				$sendemail = false;
+			}
+		}
+
 		
 		// Mail it
-		mail($to, $subject, $msg, $headers);
+		if($sendemail) {
+			mail($to, $subject, $msg, $headers);
+		}
 		
+		return true;
 	}
-	
+	function validate_gresponse($response){
+		
+		$url = 'https://www.google.com/recaptcha/api/siteverify';
+		$secret = '6LcvQfIUAAAAAAo33oAQYS62Sh8Fx-yUU8HKKK-B';
+		$ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('secret'=> $secret, 'response'=> $response)));
+        
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        $verifyResponse = curl_exec($ch);
+        
+        curl_close ($ch);
+        
+        return json_decode($verifyResponse);
+	}
 	function send_sms($to, $msg){
 		$ch = curl_init();
 		//$url = 'http://e.evinfotech.com/Api.aspx?usr=karanc&pwd=55241191&smstype=TextSMS&to='.$to.'&msg='.urlencode($msg).'&rout=Transactional&from=BEAUTI';
@@ -798,40 +842,283 @@ class commonClass extends DB
 		}
 
 	}
-	function uploadimage($photos_uploaded, $dest_path, $resize='yes', $width, $height)
+		function uploadimage($photos_uploaded, $entity_field, $resize='yes', $width, $height)
+
+
+
 	{
+
+		$images_thumbnails = array();
+
 		// List of our known photo types
+
+
+
     		$known_photo_types = array(
+
+
+
                         		'image/pjpeg' => 'jpg',
+
+
+
                         		'image/jpeg' => 'jpg',
+
+
+
                         		'image/gif' => 'gif',
+
+
+
                         		'image/bmp' => 'bmp',
+
+
+
                         		'image/x-png' => 'png',
+
+
+
 								'image/png' => 'png'
-                    	);
-   
-    		// GD Function List
-    		$gd_function_suffix = array(
-                        		'image/pjpeg' => 'JPEG',
-                        		'image/jpeg' => 'JPEG',
-                        		'image/gif' => 'GIF',
-                        		'image/bmp' => 'WBMP',
-                        		'image/x-png' => 'PNG'
-								
+
+
+
                     	);
 
+
+
+   
+
+
+
+    		// GD Function List
+
+
+
+    		$gd_function_suffix = array(
+
+
+
+                        		'image/pjpeg' => 'JPEG',
+
+
+
+                        		'image/jpeg' => 'JPEG',
+
+
+
+                        		'image/gif' => 'GIF',
+
+
+
+                        		'image/bmp' => 'WBMP',
+
+
+
+                        		'image/x-png' => 'PNG'
+
+
+
+								
+
+
+
+                    	);
+
+
+
+
+
+
+
     		if(!array_key_exists($photos_uploaded['type'], $known_photo_types))
+
+
+
     		{
+
+
+
         			return false;
+
+
+
     		}
+
+
+
     		else
+
+
+
     		{
-				move_uploaded_file($photos_uploaded["tmp_name"], $dest_path);
-				if($resize=='yes'){
-					$this->resize_image($dest_path,$dest_path,$width,$height);
-				}
-				return true;
+
+
+
+    			if(file_exists('../files/')){
+
+    				if(!file_exists('../files/'.$entity_field)){
+
+	    				
+
+    					mkdir('../files/'.$entity_field);
+
+
+
+						mkdir('../files/'.$entity_field.'/original');	
+
+
+
+					}
+
+					$directory_path = '../files/'.$entity_field;
+
+					$substring_required = 'yes';	
+
+    			}else{
+
+					if(!file_exists('files/'.$entity_field)){
+
+
+
+    					mkdir('files/'.$entity_field);
+
+
+
+						mkdir('files/'.$entity_field.'/original');
+
+
+
+    				}
+
+    				$directory_path = 'files/'.$entity_field;	    				
+
+    				$substring_required = 'no';
+
+    			}	
+
+
+
+    			
+
+				$thumb_val = array();
+
+
+
+    			$original_path = $this->chk_filename($directory_path.'/original/', $photos_uploaded['name']);
+
+
+
+				move_uploaded_file($photos_uploaded["tmp_name"], $original_path);
+
+
+
+				if($substring_required == 'no')
+
+					$thumb_val['original'] = $original_path;
+
+				else
+
+					$thumb_val['original'] = substr($original_path, 3);
+
+
+				return $thumb_val['original'];
+
+				
+
+				/*$this->resize_image($dest_path,$dest_path,$width,$height);*/
+
+
+
+					$thumbnails = $this->image_thumbnails();
+
+
+
+					if(count($thumbnails)>0){
+
+
+
+						foreach($thumbnails as $thumbnail){
+
+
+
+							if(!file_exists($directory_path.'/'.$thumbnail['name']))
+
+
+
+								mkdir($directory_path.'/'.$thumbnail['name']);
+
+
+
+								
+
+
+
+							$dest_path = $this->chk_filename($directory_path.'/'.$thumbnail['name'].'/', $photos_uploaded['name']);
+
+
+
+							if($thumbnail['style']=='resize'){
+
+
+
+								$this->resize_image($original_path,$dest_path,$thumbnail['width'],$thumbnail['height']);
+
+
+
+							}elseif($thumbnail['style']=='resize_exact'){
+
+
+
+								$this->resize_exact_image($original_path,$dest_path,$thumbnail['width'],$thumbnail['height']);
+
+
+
+							}elseif($thumbnail['style']=='resize_crop'){
+
+
+
+								$this->resize_crop_image($original_path,$dest_path,$thumbnail['width'],$thumbnail['height']);
+
+
+
+							}
+
+
+
+							if($substring_required == 'no')
+
+								$thumb_val[$thumbnail['name']] = $dest_path;
+
+							else
+
+								$thumb_val[$thumbnail['name']] = substr($dest_path, 3);
+
+
+
+						}
+
+
+
+						$images_thumbnails['img_thumbnails'] = serialize($thumb_val);
+
+
+
+					}
+
+
+
+				
+
+
+
+				return $images_thumbnails;
+
+
+
     		}    
+
+
+
 	}
 	function uploadfile($file_uploaded, $dest_path)
 	{
@@ -1078,7 +1365,7 @@ class commonClass extends DB
 					</div>
 					<p>Dear Sir/Madam,</p>
 					<p  style="text-indent: 61px; text-align: justify; border-bottom: 1px solid rgb(204, 204, 204); padding: 0px 0px 17px;">
-					Thank you for registering with LinkiBag Free Account. To verify your account,
+					Thank you for registering with LinkiBag Free account. To verify your account,
 				all you have to do is click the link below:'.
 					//Please open the link provided to complete your process.
 					'</p>
@@ -1106,56 +1393,46 @@ class commonClass extends DB
 		$mail_content = array();
 		switch($type){
 			case 'new_register':
-				$mail_content['subject'] = 'Account details at Linkibag';
-				$mail_content['matter'] = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml">
-						    <head>
-						        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-						        <title>Confirm your account</title>
-								<style type="text/css">
-								body{margin: 0; padding: 0; min-width: 100%!important;}
-								.content{color: #3e3e3e;font-family: arial;max-width: 600px;text-align: center;width: 100%;}  
-								.top-line {font-size: 14px !important;margin-top: 20px;}
-								h1 {margin: 0;font-size: 25px;}			
-								.btn {background: #408080 none repeat scroll 0 0;border-radius: 0px;color: #fff !important;display: inline-block;font-size: 20px;font-weight: bold;margin: 19px 0px 58px;padding: 6px 31px;text-decoration: none;width: 275px;}
-								.big {font-size: 22px;font-weight: normal;padding: 11px 0px 0px;line-height: 33px;margin-top: 0px;}	
-								.links {padding: 0px 0px 4px;}
-								.links a {color: #7F7F95 !important;font-size: 14px;}			
-								.bottom-text {font-size: 14px !important;line-height: 25px;color: #000 !important;}
-								.bottom-text a {text-decoration: underline !important;font-weight: 600;}			
-								.content p{color: #3e3e3e; font-size: 12px;}
-								.content p a{color: #3e3e3e;text-decoration: none;}
-								</style>
-						    </head>
-						    <body bgcolor="#ffffff">
-						        <table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
-						            <tr><td><table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
-						                        <tr>
-						                            <td style="text-align: left; padding: 30px 0px 40px;">
-						                                <img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png"><br><p class="top-line">This message was send to '.$var['email_id'].'</p>
-						                            </td>
-						                        </tr>
-												<tr>
-						                            <td>
-						                                <h1>Confirm your account.</h1>
-														<h2 class="big">You’re almost done. Click on link below to confirm to finish creating your LinkiBag account.</h2>
-														<a class="btn" href="'.$var['verified_link'].'">Confirm Account</a>
-						                            </td>
-						                        </tr>
-												<tr>
-						                            <td>
-						                                <p class="links"><a href="'.$this->get_bit_ly_link(WEB_ROOT.'index.php?p=about_us').'">About Linkibag &nbsp; | &nbsp;</a>  <a href="'.$this->get_bit_ly_link(WEB_ROOT.'index.php?p=pages&id=8').'">Terms of Use &nbsp; | &nbsp; </a> <a href="'.$this->get_bit_ly_link(WEB_ROOT.'index.php?p=pages&id=9').'">Privacy Policy</a></p>
-						                            </td>
-						                        </tr>
-						                        <tr>
-						                            <td><p class="bottom-text"><a href="'.$this->get_bit_ly_link('index.php?p=unsubscribe&email='.$var['email_id']).'">UNSUBSCRIBE</a> from all messages sent via LinkiBag by any LinkiBag users and from LinkiBag invitations. LinkiBag Inc. 8926 N. Greenwood Ave, #220, Niles, IL 60714</p>
-						                               
-						                            </td>
-						                        </tr>
-						                    </table>
-						            </td></tr>
-						        </table>
-						    </body>
-						</html>';
+				$mail_content['subject'] = 'Login information for LinkiBag.com';
+				$mail_content['matter'] = '<div style="margin: 0; padding: 0; min-width: 100%!important;" bgcolor="#ffffff">
+                    <table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
+                        <tr><td><table style="color: #3e3e3e;font-family: arial;max-width: 600px;text-align: center;width: 100%;" align="center" cellpadding="0" cellspacing="0" border="0">
+                                    <tr>
+                                        <td style="text-align: left; padding: 30px 0px 40px;">
+                                            <img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png"><br><p style="font-size: 14px !important;margin-top: 20px;">This message was sent to '.$var['email_id'].'</p>
+                                        </td>
+                                    </tr>
+            						<tr>
+                                        <td> 
+            								<h2 style="font-size: 22px;font-weight: normal;padding: 11px 0px 0px;line-height: 33px;margin-top: 0px;">You are almost done. Click on the link below to confirm your e-mail address and finish creating your LinkiBag account.</h2>
+            								<a style="background: #408080 none repeat scroll 0 0;border-radius: 0px;color: #fff !important;display: inline-block;font-size: 20px;font-weight: bold;margin: 19px 0px 58px;padding: 6px 31px;text-decoration: none;width: 275px;" href="'.$var['verified_link'].'">Confirm Account</a>
+                                        </td>
+                                    </tr>
+            						<tr>
+                                        <td>
+                                            <p style="padding: 0px 0px 4px;"><a style="color: #7F7F95 !important;font-size: 14px;" href="'.$this->get_bit_ly_link(WEB_ROOT.'about-us').'">About LinkiBag</a> &nbsp; | &nbsp;  <a style="color: #7F7F95 !important;font-size: 14px;" href="'.$this->get_bit_ly_link(WEB_ROOT.'page/terms').'">Terms of Use</a> &nbsp; | &nbsp;  <a style="color: #7F7F95 !important;font-size: 14px;" href="'.$this->get_bit_ly_link(WEB_ROOT.'page/policy').'">Privacy Policy</a></p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+											<p style="font-size: 14px !important;line-height: 25px;color: #000 !important;">
+												You are getting this email because this email address is connected to your LinkiBag account.<br />Visit your <a href="'.WEB_ROOT.'index.php?p=account_settings">account page</a> to manage your settings.<br />
+
+												<a style="color: #004080; font-weight: bold;" href="'.WEB_ROOT.'">LinkiBag Inc.</a> 8926 N. Greenwood Ave, #220, Niles, IL 60714
+											</p>
+                                           
+                                        </td>
+                                    </tr>
+                                </table>
+                        </td></tr>
+                    </table>
+                </div>
+				<center>
+					<a style="color:#7F7F95!important;font-size:14px;" href="https://www.linkibag.com/contact-us" target="_other" rel="nofollow">Contact LinkiBag</a> 
+						&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  | &nbsp; &nbsp; 
+					<a style="color:#7F7F95!important;font-size:14px;" href="'.$var['verified_link'].'&not_requested=1" target="_other" rel="nofollow">I never requested it</a>
+				</center>
+				<br>';
 			return $mail_content;
 			break;
 			
@@ -1851,7 +2128,7 @@ class commonClass extends DB
 				$sql = "SELECT p.first_name,us.shared_time,us.shared_url_id,c.created_time,c.cname,ur.url_id,ur.url_title,ur.url_value,ur.url_desc,u.email_id FROM `user_urls` ur, users u, user_shared_urls us, user_public_category c, profile p WHERE p.uid=u.uid and us.uid=u.uid and ur.url_id=us.url_id and us.url_cat=ur.url_cat and ur.public_cat=c.cid and ur.status='1' and c.status='1' and us.shared_url_id=:id and us.uid=:uid";
 			else if($type == 'web_resource_list_links_notes')
 				$sql = "SELECT p.first_name,us.shared_time,us.shared_url_id,c.created_time,c.cname,ur.url_id,ur.url_title,ur.url_value,ur.url_desc,u.email_id FROM `user_urls` ur, users u, user_shared_urls us, user_public_category c, profile p WHERE p.uid=u.uid and us.uid=u.uid and ur.url_id=us.url_id and us.url_cat=ur.url_cat and ur.public_cat=c.cid and ur.status='1' and c.status='1' and us.shared_url_id=:id and us.uid=:uid";
-			else if($type == 'add_sharing_link_url_msg')/* http://www.linkibag.net/PTest25x/linkibag/index.php?p=shared-links-new from shared links page */
+			else if($type == 'add_sharing_link_url_msg')
 				$sql = "SELECT p.first_name,us.shared_time,us.shared_url_id,us.url_msg,ur.url_id,ur.url_title,ur.url_value,ur.url_desc,u.email_id FROM `user_shared_urls` us INNER JOIN `user_urls` ur ON ur.url_id=us.url_id LEFT JOIN `users` u ON u.uid=us.uid LEFT JOIN `profile` p ON p.uid=us.uid WHERE us.url_cat=ur.url_cat and us.shared_url_id=:id and us.uid IN (:uid,-1) and us.sponsored_link>=0";
 			
 			$result = $this->query_first($sql,array('id'=>$id, 'uid'=>$uid));
@@ -2012,7 +2289,7 @@ class commonClass extends DB
 	function list_all_friends_of_current_user($uid, $status, $item_per_page, $this_page,$fgroup=0, $searchkey=''){	
 		$cond = array();
 		$cond['id'] = $uid;
-		$sql = "SELECT ur.*, fr.request_email, fr.description, fr.request_to, p.first_name, p.last_name, u.email_id, u.created, ur.created as date_time_created, fr.request_time as fr_request_time1, fr.request_time1 as fr_request_time2, fr.request_time2 as fr_request_time3 FROM user_friends ur 
+		$sql = "SELECT ur.*, fr.request_email, fr.request_name, fr.description, fr.request_to, p.first_name, p.last_name, u.email_id, u.created, ur.created as date_time_created, fr.request_time as fr_request_time1, fr.request_time1 as fr_request_time2, fr.request_time2 as fr_request_time3 FROM user_friends ur 
 		JOIN friends_request fr ON ur.request_id=fr.request_id
 		LEFT JOIN profile p ON ur.fid=p.uid 
 		LEFT JOIN users u ON ur.fid=u.uid";
@@ -2656,15 +2933,15 @@ class commonClass extends DB
 		return $friend_id;
     }
 
-    function share_linkibook($shared_with, $shared_by, $shared_to, $books, $share_id, $share_number, $verified_link) {
+    function share_linkibook($shared_with, $shared_by, $shared_to, $books, $share_id, $share_number) {
     	$to = trim($shared_to);
 		$subject = 'New LinkiBook shared by '.$shared_by['first_name'].' '.$shared_by['last_name'].' at Linkibag';
-		$verified_links = WEB_ROOT.'/index.php?p=view-share-linkibook&share_id='.$share_id.'&share_to='.urlencode($shared_to).'&share_no='.$share_number;
+		$verified_links = WEB_ROOT.'/index.php?p=view-share&share_id='.$share_id.'&share_to='.urlencode($shared_to).'&share_no='.$share_number;
 		$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Linkibag Invitation</title>'."\n".'<style type="text/css">@import url("https://fonts.googleapis.com/css?family=Lora");body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn {background: #fff;border-radius: 0;color: gray;display: inline-block;font-size: 20px;font-weight: bold;margin: 0;padding: 6px 31px;text-decoration: none;width: 275px;}.btn-decline{background:#fff none repeat scroll 0 0;border-radius:0;color:gray;display:inline-block;font-size:20px;font-weight:bold;margin:16px 0 0;padding:6px 31px;text-decoration:none;width:275px}h1{font-family:arial;margin:0;font-size:26px;line-height:38px;color:#353e4f}.top-line{font-size:14px;margin-top:20px}.big{serif;color:#3e3e3e;font-size:20px;margin:38px 0 22px;line-height:30px;font-weight:bolder}.links{padding:41px 0 5px}.links a{color:#7F7F95!important;font-size:14px}.bottom-text{font-size:14px;line-height:25px;color:#000!important}.bottom-text a{text-decoration:underline!important;font-weight:600}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}
 </style>
 '."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
-'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png">'."\n".'<br>'."\n".'<p class="top-line">This message was sent by user '.$shared_by['email_id'].' via <a target="_blank" href="http://www.linkibag.com" style="text-decoration: underline;">LinkiBag.com</a><p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Hello '.$to.'<br>'.$shared_by['first_name'].''.$shared_by['last_name'].'<br>shared some links with you using Linkibag.com </h1>'."\n".'<p class="big"><a style="text-decoration: underline;" href="'.$verified_links.'">Click Here</a> to view shared links.<br/><span style="font-size: 11px;font-weight: normal;">* You will be required to enter the code provided by sender to open shared links.</span></p>'."\n".'<a class="btn" href="'.$this->get_bit_ly_link($verified_link.'&accept=yes').'">Sign up for a free Account</a>'."\n".'<a class="btn-decline" href="'.$this->get_bit_ly_link($verified_link.'&accept=no').'">I dont know this person</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p class="links">'."\n".'<a href="http://linkibag.net/PTest25x/linkibag/index.php?p=about_us">About Linkibag &nbsp; | &nbsp;</a>'."\n".'<a href="http://linkibag.net/PTest25x/linkibag/index.php?p=pages&id=8">Terms of Use &nbsp; | &nbsp; </a>'."\n".' <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=pages&id=9">Privacy Policy</a>'."\n".'</p>'."\n".'<p class="bottom-text">'."\n".'<a href="#" style="color: #7F7F95!important;font-weight: normal;text-transform: capitalize !important;margin-right: 8px;text-decoration: none !important;">Unsubscribe</a> from all messages sent via LinkiBag by any LinkiBag users and from LinkiBag Inc. <br> <span style="color: #7F7F95!important;">LinkiBag Inc. 8926 N. Greenwood Ave, #220, Niles, IL 60714<span></p></td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';				
+'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png">'."\n".'<br>'."\n".'<p class="top-line">This message was sent by user '.$shared_by['email_id'].' via <a target="_blank" href="http://www.linkibag.com" style="text-decoration: underline;">LinkiBag.com</a><p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Hello '.$to.'<br>'.$shared_by['first_name'].''.$shared_by['last_name'].'<br>shared some links with you using Linkibag.com </h1>'."\n".'<p class="big"><a style="text-decoration: underline;" href="'.$verified_links.'">Click Here</a> to view shared links.<br/><span style="font-size: 11px;font-weight: normal;">* You will be required to enter the code provided by sender to open shared links.</span></p>'."\n".'<a class="btn" href="'.$this->get_bit_ly_link($verified_links.'&accept=yes').'">Sign up for a free account</a>'."\n".'<a class="btn-decline" href="'.$this->get_bit_ly_link($verified_links.'&accept=no').'">I do not know this person</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p class="links">'."\n".'<a href="https://www.linkibag.com/index.php?p=about_us">About Linkibag &nbsp; | &nbsp;</a>'."\n".'<a href="https://www.linkibag.com/index.php?p=pages&id=8">Terms of Use &nbsp; | &nbsp; </a>'."\n".' <a href="https://www.linkibag.com/index.php?p=pages&id=9">Privacy Policy</a>'."\n".'</p>'."\n".'<p class="bottom-text">'."\n".'<a href="#" style="color: #7F7F95!important;font-weight: normal;text-transform: capitalize !important;margin-right: 8px;text-decoration: none !important;">Unsubscribe</a> from all messages sent via LinkiBag by any LinkiBag users and from LinkiBag Inc. <br> <span style="color: #7F7F95!important;">LinkiBag Inc. 8926 N. Greenwood Ave, #220, Niles, IL 60714<span></p></td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';				
 		$from = 'info@linkibag.com';				
 		$this->send_email($to, $subject, $message, $from);
     }
@@ -2676,20 +2953,86 @@ class commonClass extends DB
 
 
     function addfriend_mail_content($description, $verified_link, $to){
-    	$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n".'<html xmlns="http://www.w3.org/1999/xhtml">'."\n".'<head>'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Confirm your account</title>'."\n".'<style type="text/css">body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn{background:#d76b00 none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}.btn-decline{background:#ccc none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}h1{margin:0}.big{color:#3e3e3e;font-size:22px;margin-top:4px}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png">'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Friend Rquest At LinkiBag.</h1>'."\n".'<p class="big">Click on link below to Accept Or Decline.</p>'."\n".'<p>'.$description.'</p>'."\n".'<a class="btn" href="'.$this->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a> <a class="btn-decline" href="'.$this->get_bit_ly_link($verified_link.'&accept=no').'">Decline</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p>This message was send to '.$to.'. if you have questions or complaints, please <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=contact-us"><b>contact us.</b></a> We’re here to help.</p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p><a href="http://linkibag.net/PTest25x/linkibag/index.php?p=terms-of-use">Terms of Use</a> &nbsp; | &nbsp; <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=terms-of-use">Privacy Policy</a></p>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';
+    	$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n".'<html xmlns="http://www.w3.org/1999/xhtml">'."\n".'<head>'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Confirm your account</title>'."\n".'<style type="text/css">body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn{background:#d76b00 none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}.btn-decline{background:#ccc none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}h1{margin:0}.big{color:#3e3e3e;font-size:22px;margin-top:4px}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png">'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Friend Rquest At LinkiBag.</h1>'."\n".'<p class="big">Click on link below to Accept Or Decline.</p>'."\n".'<p>'.$description.'</p>'."\n".'<a class="btn" href="'.$this->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a> <a class="btn-decline" href="'.$this->get_bit_ly_link($verified_link.'&accept=no').'">Decline</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p>This message was send to '.$to.'. if you have questions or complaints, please <a href="https://www.linkibag.com/index.php?p=contact-us"><b>contact us.</b></a> We’re here to help.</p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p><a href="https://www.linkibag.com/index.php?p=terms-of-use">Terms of Use</a> &nbsp; | &nbsp; <a href="https://www.linkibag.com/index.php?p=terms-of-use">Privacy Policy</a></p>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';
     	return $message;
     }
 
     function invite_mail_content($description, $verified_link, $to){
-		$user = $this->getcurrentuser_profile();
+		$user = $this->getcurrentuser_profile();		
 		$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-		<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Linkibag Invitation</title>'."\n".'<style type="text/css">@import url("https://fonts.googleapis.com/css?family=Lora");body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn {background: #fff;border-radius: 0;color: gray;display: inline-block;font-size: 20px;font-weight: bold;margin: 0;padding: 6px 31px;text-decoration: none;width: 275px;
-}.btn-decline{background:#fff none repeat scroll 0 0;border-radius:0;color:gray;display:inline-block;font-size:20px;font-weight:bold;margin:16px 0 0;padding:6px 31px;text-decoration:none;width:275px}h1{font-family:arial;margin:0;font-size:26px;line-height:38px;color:#353e4f}.top-line{font-size:14px;margin-top:20px}.big{font-family:"Lora",serif;color:#3e3e3e;font-size:20px;margin:38px 0 22px;line-height:30px;font-weight:bolder}.links{padding:41px 0 5px}.links a{color:#7F7F95!important;font-size:14px}.bottom-text{font-size:14px;line-height:25px;color:#000!important}.bottom-text a{text-decoration:underline!important;font-weight:600}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>
-		'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
-		'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png">'."\n".'<br>'."\n".'<p class="top-line">This message was sent by user '.$to.' via <a target="_blank" href="http://www.linkibag.com" style="text-decoration: underline;">LinkiBag.com</a><p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Hello '.$user['email_id'].'<br>'.$user['first_name'].''.$user['last_name'].'<br>invited you to join <span style="
-    color: #9c9696;
-    font-weight: lighter;
-">LinkiBag.com</span> and to connect!</h1>'."\n".'<p class="big">Free. Easy. Why not?</p>'."\n".'<a class="btn" href="'.$this->get_bit_ly_link($verified_link.'&accept=yes').'">Sign up for a free Account</a>'."\n".'<a class="btn-decline" href="'.$this->get_bit_ly_link($verified_link.'&accept=no').'">I dont know this person</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p class="links">'."\n".'<a href="http://linkibag.net/PTest25x/linkibag/index.php?p=about_us">About Linkibag &nbsp; | &nbsp;</a>'."\n".'<a href="http://linkibag.net/PTest25x/linkibag/index.php?p=pages&id=8">Terms of Use &nbsp; | &nbsp; </a>'."\n".' <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=pages&id=9">Privacy Policy</a>'."\n".'</p>'."\n".'<p class="bottom-text">'."\n".'<a href="#" style="color: #7F7F95!important;font-weight: normal;text-transform: capitalize !important;margin-right: 8px;text-decoration: none !important;">Unsubscribe</a> from all messages sent via LinkiBag by any LinkiBag users and from LinkiBag Inc. <br> <span style="color: #7F7F95!important;">LinkiBag Inc. 8926 N. Greenwood Ave, #220, Niles, IL 60714<span></p></td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';	
+		<html xmlns="http://www.w3.org/1999/xhtml">
+		   <head>
+			  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+			  <title>Linkibag Invitation</title> 
+			  <style type="text/css">@import url("https://fonts.googleapis.com/css?family=Lora");body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn {background: #fff;border-radius: 0;color: gray;display: inline-block;font-size: 20px;font-weight: bold;margin: 0;padding: 6px 31px;text-decoration: none;width: 275px;
+				 }.btn-decline{background:#fff none repeat scroll 0 0;border-radius:0;color:gray;display:inline-block;font-size:20px;font-weight:bold;margin:16px 0 0;padding:6px 31px;text-decoration:none;width:275px}h1{font-family:arial;margin:0;font-size:26px;line-height:38px;color:#353e4f}.top-line{font-size:14px;margin-top:20px}.big{font-family:"Lora",serif;color:#3e3e3e;font-size:20px;margin:38px 0 22px;line-height:30px;font-weight:bolder}.links{padding:41px 0 5px}.links a{color:#7F7F95!important;font-size:14px}.bottom-text{font-size:14px;line-height:25px;color:#000!important}.bottom-text a{text-decoration:underline!important;font-weight:600}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}
+			  </style> 
+		   </head> 
+		   <body bgcolor="#ffffff"> 
+			  <table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0"> 
+				 <tr> 
+					<td> 
+					   <table class="content" align="center" cellpadding="0" cellspacing="0" border="0"> 
+						  <tr> 
+							 <td style="text-align:left;padding:30px 0 40px">
+								'."\n".'<img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png">'."\n".'<br>'."\n".'
+								<p class="top-line">This message was sent by user '.$to.' via <a target="_blank" href="http://www.linkibag.com" style="text-decoration: underline;">LinkiBag.com</a>
+								<p> 
+							 </td> 
+						  </tr> 
+						  <tr> 
+							 <td> 
+								<h1>
+									Hello '.$user['email_id'].'<br>'.$user['first_name'].' '.$user['last_name'].'<br>
+									invited you to join <span style="color: #9c9696;font-weight: lighter;">LinkiBag.com</span> and to connect!
+								</h1> 
+								<p class="big" style="color: #FF812A;">What is LinkiBag? &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;  &nbsp;  &nbsp; </p>
+								<div style="width:100%;float: left;margin-bottom: 4px;margin-top: -15px;">
+									<span style="width: 45%;float: left;text-align: right;margin-right: 2%;">
+										<img src="https://linkibag.com/files/commercial_ads/10ReasonsLinkiBag.png" style="height: 50px;">
+									</span>
+									<span style="width:50%;float: left;text-align: left;"> 
+										<span style="width:100%;float: left;margin-top: 5px;"><a href="https://www.youtube.com/watch?v=MlZ1C5YE6Yo">10 Reasons to use LinkiBag - YouTube</a></span>
+										<span style="width:100%;float: left;font-size: 12px;margin-top: 3px;">LinkiBag is the best place to keep your links.</span>
+									</span>
+								</div>
+								<p class="big" style="color: #FF812A;">It\'s free. <a href="'.$this->get_bit_ly_link($verified_link.'&accept=yes').'" style="color: #FF812A;
+    text-decoration: underline;"> Why not to try? </a> &nbsp; </p>
+								
+								<div style="width:100%;float: left;">
+									<span style="width:50%;float: left;text-align: center;">
+										Sign up for a free account
+										<a href="'.$this->get_bit_ly_link($verified_link.'&accept=yes').'" style="float: left;width: 100%; margin-top: 10px;"> 
+											<button style="color: #FF812A;border: 2px solid #FF812A;padding: 5px 20px;background: #fff;">Sign up Free</button>
+										</a>
+									</span>
+									<span style="width:50%;float: left;text-align: center;">
+										I will think about it
+										<a href="'.$this->get_bit_ly_link($verified_link.'&accept=no').'" style="float: left;width: 100%; margin-top: 10px;"> 
+											<button style="color: red;border: 2px solid red;padding: 5px 25px;background: #fff;">May be later</button>
+										</a>
+									</span>
+								</div>						 
+							 </td> 
+						  </tr> 
+						  <tr> 
+							 <td></td> 
+						  </tr>  
+							<tr>  
+							 <td>  
+								<p class="links">'."\n".'<a href="https://www.linkibag.com/index.php?p=about_us">About Linkibag &nbsp; | &nbsp;</a>'."\n".'<a href="https://www.linkibag.com/index.php?p=pages&id=8">Terms of Use &nbsp; | &nbsp; </a>'."\n".' <a href="https://www.linkibag.com/index.php?p=pages&id=9">Privacy Policy</a>'."\n".'</p>
+								'."\n".'
+								<p class="bottom-text">'."\n".'<a href="#" style="color: #7F7F95!important;font-weight: normal;text-transform: capitalize !important;text-decoration: none !important;">Unsubscribe</a> from all messages sent via LinkiBag by any LinkiBag users and from LinkiBag Inc. <br> <span style="color: #7F7F95!important;">LinkiBag Inc. 8926 N. Greenwood Ave, #220, Niles, IL 60714<span></p>
+							 </td>  
+						  </tr>  
+					   </table>  
+					</td>  
+				 </tr>  
+			  </table>   
+		   </body>  
+		</html>';
+		
+		return $message;
     }
 }
 ?>

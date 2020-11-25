@@ -26,7 +26,7 @@ class DB
         private $log;
 
         # @array, The parameters of the SQL query
-        private $parameters;
+        private $parameters = array();
                 
        /**
         *   Default Constructor 
@@ -127,12 +127,8 @@ class DB
         *        @param string $value 
         */        
                 public function bind($para, $value)
-                {      
-                    $newone = 0;
-                    if(is_array($this->parameters) or is_object($this->parameters)){
-                        $newone = sizeof($this->parameters);
-                    }
-                    $this->parameters[$newone] = ":" . $para . "\x7F" . $value;
+                {        
+                        $this->parameters[sizeof($this->parameters)] = ":" . $para . "\x7F" . $value;
                 }
        /**
         *        @void

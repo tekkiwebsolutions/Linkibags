@@ -3,7 +3,7 @@ if(isset($_POST['del_yes']) && $_POST['del_yes']=="yes"){
 	if(isset($_GET['delid'])){
 		$co->query_delete('user_urls', array('id'=>$_GET['delid']),'url_cat=:id');
 		$co->query_delete('category', array('id'=>$_GET['delid']),'cid=:id');
-		$co->setmessage("error", "Folder has been successfully deleted");
+		$co->setmessage("error", "Interest has been successfully deleted");
 		echo '<script type="text/javascript">window.location.href="main.php?p=folder/manage_default_folder"</script>';
 		exit();
 	}
@@ -34,7 +34,7 @@ if(isset($_GET['delid'])){
                                 <i class="fa fa-dashboard"></i>  <a href="index.php?p=dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Folder info
+                                <i class="fa fa-table"></i> Interest info
                             </li>
                         </ol>
                     </div>
@@ -47,9 +47,9 @@ if(isset($_GET['delid'])){
 								<h3 class="panel-title"><i class="fa fa-table"></i> Delete User</h3>
 							</div>
 							<div class="panel-body">
-								<h3> Are you sure you want to delete folder(<?=$row['cname']?>) - ID(<?=$row['cid']?>) ?</h3>
+								<h3> Are you sure you want to delete Interest(<?=$row['cname']?>) - ID(<?=$row['cid']?>) ?</h3>
 								<ul>
-									<li>It will delete (<?=$total_shared_cat['total_cat']?>) URLs shared by this folder.</li>
+									<li>It will delete (<?=$total_shared_cat['total_cat']?>) URLs shared by this Interest.</li>
 									
 								</ul>
 							</div>

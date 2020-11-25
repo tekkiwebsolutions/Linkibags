@@ -1,0 +1,7 @@
+Time : 05:57:08
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.*  FROM `user_urls` ur, users u, user_shared_urls us WHERE us.uid=u.uid and ur.url_id=us.url_id and us.shared_to=:id and us.url_cat !='0' ORDER BY us.shared_url_id DESC
+
+Time : 05:57:04
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT ur.url_id,ur.url_title,ur.url_value,ur.url_desc,us.num_of_visits,u.email_id,us.*  FROM `user_urls` ur, users u, user_shared_urls us WHERE us.uid=u.uid and ur.url_id=us.url_id and us.shared_to=:id and us.url_cat !='0' ORDER BY us.shared_url_id DESC

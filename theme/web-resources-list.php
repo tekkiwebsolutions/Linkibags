@@ -1,9 +1,9 @@
 
-
 <?php
    function page_content(){
    global $co, $msg;
-   $co->page_title = "Web Resources Library | LinkiBag";
+   $user_login = $co->is_userlogin();   
+   $co->page_title = "Link Exchange Library | LinkiBag";
    $user_public_category = $co->fetch_all_array("select * from user_public_category where status='1'",array()); 
    ?>
 <div class="container bread-crumb">
@@ -16,7 +16,7 @@
       <div class="row">
 		<div class="col-md-12">
          <div class="web-resources-list">
-            <h2>Web Resources Library: Use-a-Link, Share-a-Link</h2>
+            <h2>Link Exchange Library: Use a Link, Share a Link</h2>
             <div class="web-resources-list-links">
 				<?php
 				if(isset($user_public_category) and count($user_public_category) > 0){
@@ -28,7 +28,7 @@
                      <?=ucfirst($list['cname'])?>
                      <h3>
                   </div>
-                  <div class="col-md-8"><a href="index.php?p=web-resources-list-single&id=<?=$list['cid']?>">View</a> | <a href="#">Add</a></div>
+               <div class="col-md-8"><?php if($user_login){ ?><a class="btn dark-gray-bg btn-block" style="width:30% !important; color:#fff !important;" target="_blank" href="<?=WEB_ROOT?>web-resources-list-single/<?=$list['cid']?>">View</a>  <?php } ?></div>
                </div>
 				<?php } 
 				}
@@ -38,7 +38,7 @@
             <br>
             <p class="text-light-gray">Recommend new topic and add your link.</p>
             <br>
-            <p class="text-blue">Thanks you for sharing and recommending <br>web resources using LinkiBag</p>
+            <p class="text-blue">Thanks you for sharing and recommending <br>Link Exchange using LinkiBag</p>
             <br>
          </div>
       </div>

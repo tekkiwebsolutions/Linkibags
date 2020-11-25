@@ -24,7 +24,7 @@ function page_content(){
 
 	$no_record_found='';
 
-	$co->page_title = "Dashboard | Linkibag";
+	$co->page_title = "Dashboard | LinkiBag";
 
 	$current = $co->getcurrentuser_profile();
 	$user_profile_info = $co->call_profile($current['uid']);

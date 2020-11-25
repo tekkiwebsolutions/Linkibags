@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Linkibags | Linkibag";     
+	$co->page_title = "LinkiBags | LinkiBag";     
  	$current = $co->getcurrentuser_profile();  	
 	//$user_profile_info = $co->call_profile($current['uid']);  
 	//$list_shared_links_by_admin = $co->list_shared_links_by_admin('0');  	    
@@ -135,10 +135,10 @@ function page_content(){
 			</div>  
 			<div class="containt-area" id="dashboard_new">  
 				<div class="container"> 
-					<div class="col-md-3">      
+					<div class="col-md-3 my_lnk_left">      
 						<?php include('dashboard_sidebar.php'); ?>  
 					</div>	
-					<div class="containt-area-dash col-md-9">      
+					<div class="containt-area-dash col-md-9 my_lnk_right">      
 						<div class="folder-dash-main">        
 							       
 							<!-- Tab panes -->        
@@ -163,7 +163,7 @@ function page_content(){
 										<div class="tab-content-box">
 											<div class="row top-folder-header">
 												<div class="col-xs-12 col-md-4 text-right folder-header-right">
-													<span class="text-orang pull-left">My Folders</span>
+													<span class="text-orang pull-left">My Folder</span>
 											<!--
 											<a class="btn button-grey" href="javascript: void(0);" onclick="load_add_frm('category','0')">Add New Folder</a>-->
 												</div>
@@ -257,7 +257,7 @@ function page_content(){
 			</div>	
 		</section>
 		
-		<a class="btn btn-info orang-bg" href="#" data-toggle="modal" data-target="#add_groups_and_cat" id="add_new_folder" style="display:none;">Add New Folder</a>
+		<a class="btn btn-info orang-bg" href="#" data-toggle="modal" data-target="#add_groups_and_cat" id="add_new_folder" style="display:none;">Add New Group</a>
 		<div class="modal fade" id="add_groups_and_cat" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 
 		  <div class="modal-dialog modal-sm">
@@ -266,7 +266,7 @@ function page_content(){
 
 				<div class="modal-header">
 
-					<h4>Add New Folder </h4>
+					<h4>Add New Group </h4>
 
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 

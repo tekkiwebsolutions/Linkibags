@@ -242,7 +242,7 @@ function page_content(){
                   ?>
                   <tr class="<?=$class_name.$show_friend_class?><?=$urlpost['num_of_visits'] > 0 ? ' read' : ' unread'?>" id="url_<?=$urlpost['shared_url_id']?>">
                      <td class="width32">
-                     <span<?=(($urlpost['sponsored_link'] == 1) ? ' class="sponsored_url"' : '')?>><input type="checkbox" class="<?=(($urlpost['share_type_change'] == 1) ? 'urls_shared2' : 'urls_shared')?>"<?=$url_disabled?> name="share_url[]" value="<?=$urlpost['shared_url_id']?>"></span> &nbsp; <a data-toggle="tooltip" title="<?=$title_msg?>" href="index.php?p=scan_url&id=<?=$urlpost['shared_url_id']?>&url=<?=urlencode($urlpost['url_value'])?>" target="_blank"><?=(strlen($urlpost['url_value']) > 35) ? substr($urlpost['url_value'],0,35) : $urlpost['url_value']?><span style="display: none;"><?=$urlpost['url_value']?></span></a>
+                     <span<?=(($urlpost['sponsored_link'] == 1) ? ' class="sponsored_url"' : '')?>><input type="checkbox" class="<?=(($urlpost['share_type_change'] == 1) ? 'urls_shared2' : 'urls_shared')?>"<?=$url_disabled?> name="share_url[]" value="<?=$urlpost['shared_url_id']?>"></span> &nbsp; <a data-toggle="tooltip" title="<?=$title_msg?>" href="index.php?p=scan_url&id=<?=$urlpost['shared_url_id']?>&url=<?=urlencode($urlpost['url_value'])?>" target="_blank"><?=(strlen($urlpost['url_value']) > 25) ? substr($urlpost['url_value'],0,25) : $urlpost['url_value']?><span style="display: none;"><?=$urlpost['url_value']?></span></a>
                      <?php /*<span class="visit-icon"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>" data-toggle="tooltip" title="<?=(($user_friend_class == ' text-grey') ? 'Not for share' : 'I may share this link with selected users')?>"><i class="fa fa-circle<?=$user_friend_class?>"></i></a></span>*/ ?>
                      <span class="visit-icon"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>" data-toggle="tooltip" title="<?=(($user_friend_class3 == ' text-grey') ? 'Not for share' : 'I may share this link with selected users')?>"><i class="fa fa-circle<?=$user_friend_class3?>"></i></a></span>
                      <!-- Modal -->
@@ -271,7 +271,7 @@ function page_content(){
                      <!-- /.modal -->
                      <!-- Modal -->
                      </td>
-                     <td class="width28"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>"><?=((strlen($urlpost['url_desc']) > 35) ? substr($urlpost['url_desc'],0,35) : $urlpost['url_desc'])?><span style="display: none;"><?=$urlpost['url_desc']?></span></a>
+                     <td class="width28"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>"><?=((strlen($urlpost['url_desc']) > 25) ? substr($urlpost['url_desc'],0,25) : $urlpost['url_desc'])?></a>
                      </td>
                      <td class="width25"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>"><?=($urlpost['email_id'] == '') ? 'Sponsored' : $urlpost['email_id']?></a>
                      </td>

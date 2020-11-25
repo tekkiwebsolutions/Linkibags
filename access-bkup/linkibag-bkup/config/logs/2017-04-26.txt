@@ -1,0 +1,11 @@
+Time : 14:56:41
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT * FROM `user_shared_urls` us, `user_urls` uu WHERE us.url_id=uu.url_id and us.shared_to=:email_id and us.share_number=:share_number
+
+Time : 14:55:31
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email_id' in 'where clause'
+Raw SQL : SELECT * FROM `user_shared_urls` us, `user_urls` uu WHERE us.url_id=uu.url_id and email_id=:email_id and share_number=:share_number
+
+Time : 14:55:28
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'email_id' in 'where clause'
+Raw SQL : SELECT * FROM `user_shared_urls` us, `user_urls` uu WHERE us.url_id=uu.url_id and email_id=:email_id and share_number=:share_number

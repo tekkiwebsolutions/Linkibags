@@ -9,7 +9,7 @@ if(isset($_POST['save'])){
 		$success=true;
 		
 		if(!isset($_POST['recommend_link'])){
-			$co->setmessage("error", "Please select Recommend Link Type");
+			$co->setmessage("error", "Please select  Type");
 			$success=false;
 		}
 

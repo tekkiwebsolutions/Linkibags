@@ -38,7 +38,7 @@
                <button type="button" class="btn">Important Notice</button>
                <p>This page is only Available during a limited period of 
                   time. To save for these future use <a href="#" style="color: #a08f8f; "><u style="font-size: 15px;s">sign up</u></a> for your free 
-                  personal linkibag account and start saving important links in your LInkibag.
+                  personal LinkiBag account and start saving important links in your LinkiBag.
                </p>
                <button type="button" class="btn" style="background-color: #ff7f27;margin-top: 2px;">Free Sign Up</button>
             </div>

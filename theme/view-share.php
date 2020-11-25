@@ -1,4 +1,4 @@
-﻿<?php
+<?php
    function page_access(){
    	global $co, $msg;
 
@@ -6,10 +6,10 @@
    function page_content(){
    	global $co, $msg;
    	$no_record_found='';
-   	$co->page_title = "View Share | Linkibag";
+   	$co->page_title = "View Share | LinkiBag";
    	$current = $co->getcurrentuser_profile();
    	$item_per_page = 10;
-   	//$this_page='p=view-share';
+   	$this_page='p=view-share';
     if(isset($_GET)){
       $val_pos = 0;
       foreach($_GET as $k=>$v){
@@ -47,7 +47,7 @@
 
     $cond['share_no'] = $_GET['share_no'];
 
-		$chk_exp = $co->query_first("$sql",$cond);
+		$chk_exp = $co->query_first($sql,$cond);
 
 
 		//$chk_exp = $co->query_first("SELECT * FROM `user_shared_urls` WHERE shared_to=:email_id and share_number=:share_no ORDER BY shared_url_id DESC",array('email_id'=>$_GET['share_to'],'share_no'=>$_GET['share_no']));
@@ -58,7 +58,7 @@
 
 		$tim = time();
 
-    //echo 'Current time : '.$tim.', Shared expire time'.($chk_exp['shared_time']+1800);
+   // echo 'Current time : '.$tim.', Shared expire time'.($chk_exp['shared_time']+1800);
     if(isset($chk_exp['shared_time']) and $chk_exp['shared_time'] != ''){
       $time_left = $chk_exp['shared_time'] + 1800;
 
@@ -69,7 +69,7 @@
       }else if($time_left < $tim){
         //exit();
         /*$expired_msg = '<div class="alert alert-danger"><p>This page is only Available during a limited period of
-                    time.To save for these future use <a href="index.php#free_singup" style="color: #a08f8f; "><u style="font-size: 15px;s">sign up</u></a> for your free personal linkibag account and start saving important links in your LInkibag.</p></div>';*/
+                    time.To save for these future use <a href="index.php#free_signup" style="color: #a08f8f; "><u style="font-size: 15px;s">sign up</u></a> for your free personal linkibag account and start saving important links in your LInkibag.</p></div>';*/
         /*$expired_msg = '<p>This Share ID is exired now and it was only available for limited period of time.</p>';*/
         $expired_msg = '<p>Your Share ID is invalid. Please try again.</p>';
 
@@ -100,23 +100,23 @@
             <form method="post" id="url_form" action="index.php?p=view-share&ajax=ajax_submit" onsubmit="javascript: return add_url_multiple();">
                 <input type="hidden" name="form_id" value="url_submission_multiple"/>
               <div class="col-md-3 left-side">
-                 <h4>Hello, and Welcome! </h4>
+                <p style="font-size:22px"> Welcome to LinkiBag </p>
                  <?php if(!isset($expired_msg)){ ?>
-                 <button type="button" class="btn">Important Notice</button>
+                 <!--<button type="button" class="btn">Important Notice</button>-->
 
-                 <p>This page is only Available during a limited period of
-                    time.
+                 <span>Free place to store and share links, generate and share instant LinkiBooks. <a style="color: #ff7f27;" class="how-it-works" href="<?=WEB_ROOT.'learn-more'?>">Learn more.</a></span>
+                     <!--This page is only Available during a limited period of time.-->
                     <?php
                     if(!(isset($current['uid']))){
                    ?>
-                    To save for these future use <a href="index.php#free_singup" style="color: #a08f8f; "><u style="font-size: 15px;s">sign up</u></a> for your free
-                    personal linkibag account and start saving important links in your LInkibag.
+                    To save for these future use <a href="index.php#free_signup" style="color: #a08f8f; "><u style="font-size: 15px;s">sign up</u></a> for your free
+                    personal LinkiBag account and start saving important links in your LinkiBag.
                     <?php } ?>
                  </p>
                  <?php
                     if(!(isset($current['uid']))){
                    ?>
-                 <!--<a href="index.php#free_singup" class="btn" style="background-color: #ff7f27;margin-top: 2px;">Free Sign Up</a>-->
+                 <!--<a href="index.php#free_signup" class="btn" style="background-color: #ff7f27;margin-top: 2px;">Free Sign Up</a>-->
                  <button type="submit" style="background-color: #ff7f27;margin-top: 2px;" class="btn" onclick="ShowHideSubmit()" id="send_url">Free Sign Up</button>
                           
                  <?php } 
@@ -134,23 +134,45 @@
                        <div class="tab-content-box">
                           <div class="user-name-dash">
                              <div class="row">
-                                <div class="col-md-4 id">
-                                   <h5> Share ID: <span style="background-color: #c3c3c3;font-size: 20px;
-                                      color: #4d4d4d;padding: 3px 23px 3px 8px;"><?=(isset($_GET['share_no']) ? $_GET['share_no'] : '###')?></span></h5>
+                                 <div class="col-md-12 share">
+                                     <span style="font-weight:bold">User <span style="color:#ff7f27"><?=$shared_user?></span> shared with you the following link(s). This page will expire in 30 mintues.</span>
+                                     <span style="text-decoration:underline;">We recommend not to open any links shared by unknown users or if you didn't expect this communication.</span>
+                                 </div>
+                                 <br><br><br>
+                                  <div class="col-md-6 share">
+                                <span style="color:#ff7f27"> You have <span style="color:#ff7f27;font-weight:bold" id="left_time"> <?=round(abs($to_time - $from_time) / 60,0)?></span>
+                                   min left before this page will expire.</span>
+                                  </div>   
+                                  
+                                <!--<div class="col-md-4 id">-->
+                                <!--   <h5> Share ID: <span style="background-color: #c3c3c3;font-size: 20px;-->
+                                <!--      color: #4d4d4d;padding: 3px 23px 3px 8px;">-->
+                                      <!--<?=(isset($_GET['share_no']) ? $_GET['share_no'] : '###')?>-->
+                                      
+                                <!--      </span></h5>-->
+                                <!--</div>-->
+                                <div class="col-md-6 share pull-right"> 
+                                <div class="col-md-9">
+                                Scan site for viruses before opening 
+                                </br>
+                                (recommended)  
+                                </div> 
+                                
+                                <div class="col-md-3">
+                                    <input class='tgl tgl-skewed' id='cb3' onChange="subscribeChange(this)" onClick="subscribeChange()" type='checkbox' checked="checked" name="subscribe" >
+									<label class='tgl-btn' data-tg-off='OFF' data-tg-on='ON' for='cb3'></label>
+									<label class='tgl-btn' for='cb3'>
+								
+								</label>
                                 </div>
-
-                                <div class="col-md-6 share">
-                                   <p>Share with you by <?=$shared_user?> on <?=$shared_time?>&nbsp;
-                                      This page will expire in <span style="color:#ff7f27" id="left_time"><?=round(abs($to_time - $from_time) / 60,0)?></span> minutes
-                                   </p>
+                              
                                 </div>
-                                <div class="col-md-2 print-btn">
-                                   <div class="bottom-nav-link top-nav-link print">
-
-  									<a class="btn btn-default dark-gray-bg" href="#" onclick="myPrintpage('#view-shared-link-print')">Print</a>
-  							<div class="dropdown border-bg-btn" style="display: inline;"></div>
-                                   </div>
-                                </div>
+                                <!--<div class="col-md-6 share">-->
+                                <!--   <p>Share with you by <?=$shared_user?> on <?=$shared_time?>&nbsp;-->
+                                <!--      This page will expire in <span style="color:#ff7f27" id="left_time"><?=round(abs($to_time - $from_time) / 60,0)?></span> minutes-->
+                                <!--   </p>-->
+                                <!--</div>-->
+                                
 
                              </div>
                           </div>
@@ -285,11 +307,23 @@
                           <?php } ?>
                        </div>
                  </div>
+                 
+                 <div class="text-right">
+                     
+                          <a  class="btn btn-default printp " href="#" onclick="myPrintpage('#view-shared-link-print')">Print</a>
+                     
+  					         <a class="btn button-grey pull-right" href="index.php">Close</a>
+                   </div>
                  <?php } ?>
                  <div class="clearfix"></div>
-                    <div class="text-right">
-  					         <a class="btn button-grey pull-right" href="index.php">Close</a>
-  			           </div>
+                 <div class="col-md-2 print-btn">
+                                   <div class="bottom-nav-link top-nav-link print">
+
+  									
+  							
+                                   </div>
+                                </div>
+                      
                     <div class="clearfix"></div><p><br></p>
               </div>
           </form>   
@@ -318,22 +352,46 @@
                 <div class="input-group">
                     <input class="form-control" style="border: 2px solid #ff7f27 !important;border-radius: 1px;box-shadow: none !important;" maxlength="7" id="share_no" placeholder="Share ID" name="share_no" value="<?=((isset($_GET['share_to']) and isset($_GET['share_no']) and $_GET['share_to'] == 'from_entered_id' and $_GET['share_no'] != '') ? $_GET['share_no'] : '')?>" type="text">
                     <div class="input-group-btn">
-                        <button type="submit" class="orange-btn light-brown-bg">Finished</button>
+                        <button type="submit" class="orange-btn light-brown-bg">Continue</button>
                     </div>
                 </div>
               </br>
                 <label style="font-weight: 500;">Enter Share ID</label>
         </form>
-         </div>
-          </div>
-         <div class="col-md-7"></div>
-         <div class="col-md-12">
+        
+         
             <p style="font-weight: bold; margin: 35px 0 0; font-size: 15px;">Please note:</p>
-            <p style="margin-bottom: 35px;">This page is only available during next 30 minutes and will expire.To save viewed links for <br/> your future use sign up for your <a href="index.php?p=free-personal-accounts">Free Account</a> and start saving links with LinkiBag today.</p>
+            <p style="margin-bottom: 35px;">Shared links pages expire in 30 minutes. Not to lose links get your 
+            <br/> <a href="index.php?p=free-personal-accounts">Free LinkiBag Account</a>
+             and keep your links with you whereever you go.</p>
+          
+            <div class="login-page-links">	
+				    <h4>	<a href="index.php?p=contact-us">Advertise with LinkiBag</a></h4>
+					  <a href="index.php?p=linki-drops-accounts">LinkiDrop Account</a>	
+				    </div>	
+            
+            
+         </div>
+         
           </div>
+         <div class="col-md-7">
+
+        
+               
+
+                 
+				<div> 
+					<iframe style="width: 100%;" width="560" height="315" src="https://www.youtube.com/embed/0GoHJuGUWBI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+				</div> 
+			
+         </div>
+        
+
+         
         <?php } 
       }
         ?>
+
 
       </div>
    </div>
@@ -342,7 +400,15 @@
    </div>
 </section>
 <style>
-  
+    .printp {
+    background: #DBDBDB none repeat scroll 0 0 !important;
+    color: #515151 !important;
+    padding: 3px 25px 3px 23px;
+    margin-right:10px;
+    font-size: 17px;
+    border-radius: 0px;
+    font-weight: 600;
+    }
     
     
    .id h5 {color: #ff7f27;font-size: 18px;font-weight: 600;}
@@ -408,7 +474,7 @@ function myPrintpage(elem){
 function Popup(data){
     var mywindow = window.open('', 'new div', 'height=400,width=600');
     mywindow.document.write('<html><head><title>my div</title>');
-    mywindow.document.write('<link rel="stylesheet" href="http://www.linkibag.net/PTest25x/linkibag/theme/css/bootstrap.min.css" type="text/css" />');
+    mywindow.document.write('<link rel="stylesheet" href="https://www.linkibag.com/theme/css/bootstrap.min.css" type="text/css" />');
     mywindow.document.write('</head><body >');
     mywindow.document.write('<table class="table table-bordered"><thead><tr><th>Link</th><th>Message</th></tr></thead><tbody>'+data+'</tbody></table>');
     mywindow.document.write('</body></html>');

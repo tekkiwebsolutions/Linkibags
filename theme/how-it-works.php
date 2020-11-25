@@ -44,15 +44,15 @@
 			
 </div>
 			<div class="col-md-8 about-block how-it-work-page" data-wow-delay="0.3s">
-			<h2 class="page-title-account">Three Steps to Get Your FREE LinkiBag</h2>
+			<h2 class="page-title-account" style="font-family: Arial">Three Steps to Get Your FREE LinkiBag</h2>
 			<?=$page['page_body']?>
 			<?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?>
-			<div class="page-btns"><a class="btn orange-bg" href="index.php?#free_singup">Free Sign up ></a><br>
-			<!--<small>Free individual account signup</small>-->
-			</div>
+			<!--<div class="page-btns"><a class="btn orange-bg" href="index.php?#free_signup">Free Sign Up ></a><br>
+			<small>Free individual account signup</small>
+			</div>-->
 			<?php } ?>
 			<div class="page-btns">
-				<p><span>Business Solutions:</span> Advertise with <a href="index.php?p=linki-drops-accounts">LinkiDrops</a></p>
+				<p><span>Business Solutions:</span> Advertise with a  <a href="index.php?p=linki-drops-accounts">LinkiDrop account</a>.</p>
 				
 				<!--<p><span>Business Solutions:</span> <a href="index.php?p=business-accounts">Commercial</a> and <a href="index.php?p=institutional-accounts">Institutional</a> Accounts | <a href="index.php?p=linki-drops-accounts">LinkiDrops</a> Account</p>-->
 

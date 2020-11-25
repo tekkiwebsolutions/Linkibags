@@ -1,6 +1,6 @@
 <?php
-$breadcrumb = 'Folder Management';
-$title = '<i class="fa fa-table"></i> Manage Default Folder';
+$breadcrumb = 'Interest Management';
+$title = '<i class="fa fa-table"></i> Manage Interest Folder';
 $item_per_page = 12;
 
 
@@ -21,7 +21,7 @@ if(isset($_GET['page'])){
                                     <table class="table table-hover table-striped">
 										<thead>
 											<tr>
-												<th>Sr no.</th><th>Folder</th><th>Trending Folder</th><th>Show Public</th><th>Created On</th><th>Actions</th>
+												<th>Sr no.</th><th>Interest</th><th>Show Public</th><th>Created On</th><th>Actions</th>
 											</tr>
 										</thead>
 									   <tbody>
@@ -34,7 +34,6 @@ if(isset($_GET['page'])){
 											<tr>
 												<td><?=$i?></td>
 												<td><?=$row['cname']?></td>
-												<td><?=$status[$row['trending_cat']]?></td>
 												<td><?=$status[$row['status']]?></td>
 												<td><?=date('j F, Y',$row['created_time']);?></td>                                      
 												<td> 

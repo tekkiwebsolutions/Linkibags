@@ -12,19 +12,23 @@
 	
 
 ?>	
-
-	<section>
+<style>
+ul#about_video li{
+	width: 40%;
+}
+</style>
+	            <section>
 				<div class="container bread-crumb top-line about-top" style="margin: auto;">
 
 					<div class="col-md-7">
 
-						<p><a href="index.php">Home</a> > <?=$page['title']?></p>
+					<p><a href="<?=WEB_ROOT?>">Home</a> > <?=$page['title']?></p>
 
 					</div>
 
 					<div class="col-md-4">
 
-						<span class="other-acc-type"></span>
+					<span class="other-acc-type"></span>
 
 					</div>
 
@@ -33,29 +37,34 @@
 				<div style="margin-top: 10px;" class="container main-container">
 
 					<div class="row">
-						<div class="col-md-12">
-							<h4 class="text-orange">About Us</h4>
-						</div>
-
-						<div class="col-md-4 text-left wow fadeInUp templatemo-box" data-wow-delay="0.3s">
-
-<?php
-$img = $co->query_first("SELECT * FROM page_imgs WHERE entity_id=:id ORDER BY RAND()", array('id'=>4));
-echo '<img class="margin-bottom" src="' . $img['img_original'] . '" border="0" />';
-?>
+						<div class="col-md-5">
+						<h4 class="text-orange">About Us</h4>
+							<ul class="listing-links" id='about_video'>	
+							<!--<li>LinkiBag.com is the bag to keep your links.</li>-->
+							<!--<li><a href="learn-more">Learn more (Video)</a></li>-->
+							<h2>Video Introduction</h2>
+							<li><a href='https://www.youtube.com/watch?v=lgCR_ConFEo' target=_blank><img src='https://www.linkibag.com/files/page_imgs/original/into_linkibag.png'></a></li>
+							<li><a href='https://www.youtube.com/watch?v=Wnsa5Q-3Xos' target=_blank><img src='https://www.linkibag.com/files/page_imgs/original/linkibag_education.png'></a></li>
+							</ul>
 							
-							<?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?>
-							<div class="image-blow-text">
-							Try us risk free. Signup for your <span class="orange-blue"><a class="orange-blue" href="index.php?#free_singup">Free Account </a></span>today.
+						 <div class="page-btns" style="margin-top: 21px;">
+						<a class="btn orange-bg" href="sign-up">Free Sign up</a>
+						<ul class='listing-links links_about'>
+							<li><a href="index.php?p=free-personal-accounts">Free Personal Accounts </a></li>
+							<li><a href="index.php?p=linki-drops-accounts">LinkiDrops Account (advertise your business)</a></li>
+						</ul>
+					    </div>
+					    
+					    
 						</div>
-							<?php } ?>
-						</div>
-						<div class="col-md-8 about-block page-new" data-wow-delay="0.3s">
-							<?=$page['page_body']?>						<br />							<p>Read more about LinkiBag Services  </p>							<ul class="listing-links">								<li><a href="index.php?p=free-personal-accounts">Free Personal Accounts </a></li>								<li><a href="index.php?p=business-accounts">Free Professional Account </a></li>
-							<li><a href="index.php?p=linki-drops-accounts">LinkiDrops Account (advertise your business)</a></li>							</ul>
-							<div class="page-btns" style="margin-top: 21px;">
-						<a class="btn orange-bg" href="index.php?#free_singup">Free Sign up ></a>
-					</div>
+						
+                       
+							
+					
+						<div class="col-md-7 about-block page-new" data-wow-delay="0.3s">
+							<?=$page['page_body']?>						
+						
+							
 						</div>
 
 					</div>

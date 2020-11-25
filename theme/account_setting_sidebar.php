@@ -1,7 +1,16 @@
 <div class="col-md-3 col-xs-12 col-sm-12 lft">
 	<div class="account_setting_sidebar">
 		<div class="welcome-name">
-			<h2>Hi, <?php echo $current['first_name']?></h2>
+			<h2>Hi, <?php  
+			if($current['first_name']=='')
+	{
+	     $arr = explode("@", $current['email_id'], 2);
+      echo  $arr[0];
+	}else{
+	    echo $current['first_name'];
+	}
+			
+			?></h2>
 		</div>
 		
 		<div class="left-links">

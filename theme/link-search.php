@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
    global $co, $msg;       
    $no_record_found='';       
-   $co->page_title = "Link Search | Linkibag";     
+   $co->page_title = "Link Search | LinkiBag";     
    $current = $co->getcurrentuser_profile();    
    
    $total_urls = $co->users_count_url($current['uid']);     

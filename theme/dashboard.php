@@ -10,16 +10,18 @@
    function page_content(){      
       global $co, $msg;       
       $no_record_found='';       
-      $co->page_title = "Dashboard | Linkibag";     
+      $co->page_title = "Dashboard | LinkiBag";     
       $current = $co->getcurrentuser_profile();    
       $cid = -2;
+
+      
       if(isset($_GET['cid']) and $_GET['cid']!='')          
          $cid = $_GET['cid'];
       
       if(!(isset($_GET['date_by']) or isset($_GET['msg_by']) or isset($_GET['url_by']) or isset($_GET['shared_by'])))
          $_SESSION['list_shared_links_by_admin'] = $co->list_shared_links_by_admin($cid);        
       
-
+      $get_completed_on = $co->query_first('select created from interested_category WHERE uid=:uid', array('uid'=>$current['uid']));
            
       $views=true;                  
       if(isset($_GET['views']) and $_GET['views']!=''){ 
@@ -40,10 +42,10 @@
          $one_nonfriend_exist = $urlposts_retrun['non_friend_url_count'];
    
          $sponsoredposts_retrun = $co->get_all_urlposts($current['uid'],$item_per_page, $this_page, $cid, $only_current, 1);   
-			 if(isset($sponsoredposts_retrun['row']) and count($sponsoredposts_retrun['row'])>0){
-				$sponsoredposts = $sponsoredposts_retrun['row'];
-				$urlposts = array_merge($urlposts, $sponsoredposts);
-			 }     
+          if(isset($sponsoredposts_retrun['row']) and count($sponsoredposts_retrun['row'])>0){
+            $sponsoredposts = $sponsoredposts_retrun['row'];
+            $urlposts = array_merge($urlposts, $sponsoredposts);
+          }     
 
          $data[] = array();
          
@@ -53,7 +55,7 @@
          $page_link_new = $urlposts_retrun['page_link_new'];  
          //$list_shared_links_by_admin = $co->list_shared_links_by_admin('0');   
          if(count($urlposts)<1)              
-            $no_record_found = "No Record Found";
+            //$no_record_found = "No Record Found";
       //}      
          if(isset($_GET['views']) and $_GET['views']!=''){
                $this_page .= '&views='.$_GET['views'];         
@@ -95,31 +97,49 @@
    <div class="container bread-crumb top-line">
       <div class="col-md-12">
          <p><a href="index.php">Home</a></p>
-		 
-		 
+       
+       
       </div>
    </div>
    <div class="containt-area mylinks_page" id="dashboard_new">
       <div class="container">
-         <div class="col-md-3">      
+         <div class="col-md-3 my_lnk_left">      
             <?php include('dashboard_sidebar.php'); ?>    
          </div>
-         <div class="containt-area-dash col-md-9">
+         <div id='dashboard_right_panel' class="containt-area-dash col-md-9 my_lnk_right">
+         <!--<a class="linkexchange" data-toggle="tooltip" title="Link Exchange"  href="<?=WEB_ROOT?>web-resources-list"><img title="Link Exchange" style="color:#fff" src="<?=WEB_ROOT?>images/icon-refresh.png" ></a>-->
 				
-				<?php if(!isset($_SESSION["a_deleted_text"])){ ?>
-					<div class="padding-none">
+            <div class="padding-none">
+            <?php if(!(isset($get_completed_on['created']) and $get_completed_on['created'] != '')){ ?>
+               <div class="clearfix"></div>
+               <div class="alert alert-text dashboard-profile-links">
+                  <button type="button" onclick="automatically_d()" id="donotshowmessage" class="close" data-dismiss="alert">×</button>
+                  <div class="main-profile-user">
+                     <div class="border-text">
+                       <p style="margin-bottom: 0;">Please complete your interest form to continue using your free account. <a style="text-decoration: underline; color: red;" href="index.php?p=categories-list">Complete Now</a>.</p>
+                     </div>
+                  </div>
+               </div>
+            <?php } ?>
+
+            <?php if(!isset($_SESSION["a_deleted_text"])){ ?>
                   <!--<label class="pull-right donotshowmessagebox" onclick="automatically_d()"><input type="checkbox" name="closemsg"> Do not show this message again</label> -->
                   <div class="clearfix"></div>
-						<div class="alert alert-text dashboard-profile-links">
-							<button type="button" onclick="automatically_d()" id="donotshowmessage" class="close" data-dismiss="alert">×</button>
-							<div class="main-profile-user">
-								<div class="border-text">
-								  <p> All messages older than 30 days will be automatically deleted from your Inbag folder. Not to lose your links save them in My Links folder.</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				<?php }?>
+                  <div class="alert alert-text dashboard-profile-links">
+                     <button type="button" onclick="automatically_d()" id="donotshowmessage" class="close" data-dismiss="alert">×</button>
+                     <div class="main-profile-user">
+                        <div class="border-text"> 
+                          <p>All messages older than 30 days will be automatically deleted from your Inbag folder. To avoid losing your links, move them to 'My Links' folder.</p>
+                        </div>
+                     </div>
+                  </div>
+               
+            <?php }?>
+
+            </div>
+
+
+          
             <div>
                <?php /*<ul class="nav nav-tabs" role="tablist">         
                   <li role="presentation" class="active"><a href="index.php?p=dashboard">My Links</a></li>         
@@ -169,11 +189,11 @@
                      }  
                   }
                 ?>
-               <div class="tab-content-box">
+               <div class="tab-content-box" style="margin-bottom:10px;">
                   <div style="display:none;"><?=isset($msg) ? $msg : ''?></div>
-                  <div style="margin-bottom: 11px;" class="user-name-dash">
+                  <div style="margin-bottom: 0px;" class="user-name-dash">
                      <div class="row">
-                        <div class="col-md-6 col-xs-12">
+                        <div class="col-md-2 col-xs-12 btn_area">
                            <span style="display: inline-block; padding-top: 6px;position: relative;" class="text-orang" ><img style="vertical-align: text-top;" src="images/orang-icon.png" alt="bag Icon"> <?=$default_folder_name?> 
                            <?php if($total_friends_url > 0){ ?>
                            <span class="badge<?=($total_friends_url>0 ? ' round-red-badge' : '')?>" id="new_linkibag_message"><?=$total_friends_url?></span>
@@ -190,146 +210,156 @@
                            id="total_recommend_urls"><?=$total_recommend_urls?></span></a></span>
                    
                         </div>
-						
-						 <div class="col-md-6 col-xs-12 text-right">
-						   <a class="share btn button-grey" href="javascript: void(0);" onclick="multiple_load_share_link_form('share');"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
-                           <div class="input-group dashboard-search mylinks-search" style="border-color: rgb(127, 127, 127) !important;">
+                  
+                   <div class="col-md-3 col-xs-12 text-right search_area">
+<a class="share btn button-grey"  href="index.php?p=add_url"> Add Links</a>
+                     <a class="share btn button-grey" href="javascript: void(0);" onclick="multiple_load_share_link_form('share');"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
+                           
+
+
+                        </div>
+                   
+                  <div class="col-md-7 col-xs-12 text-left ful_w">
+                            
+                           <?php /*
+                           <div class="input-group dashboard-search" style="border-color: rgb(127, 127, 127) !important;">
                               <input type="text" class="form-control input-sm" placeholder="Search" onkeypress="handle_not_submit(event);" name="url" id="url" value="<?=isset($_GET['url']) ? $_GET['url'] : ''?>">
                               <div class="input-group-btn">
                                  <button class="btn btn-default btn-sm" type="button" id="url_submit" onclick="search_form();"><i class="fa fa-search"></i></button>
                               </div>
+                           </div> */ ?>
+                           <span class="bottom-nav-link" >
+                              <a class="btn btn-default dark-gray-bg" href="javascript: void(0);" onclick="mylinks_move_to_category_multiple('#share_urls_from_dash');">Move to</a>                 
+                              <div class="dropdown border-bg-btn" style="display: inline;">
+                                 <select style="text-align: left;width:110px;" name="move" class="move_to_cat_w btn btn-default dropdown-toggle filter" id="move_to_cat">
+                                    <option value="-2">My Links</option>
+                                    <option value="0">Trash</option>
+                                    <?php
+                                       foreach($show_all_category_of_current_user as $list){
+                                          $sel = '';
+                                  
+                                          $list['cname'] = ((strlen($list['cname']) > 12) ? substr($list['cname'], 0, 12).' ...' : $list['cname']);
+                                       ?>
+										<option value="<?=$list['cid']?>"<?=$sel?>><?=$list['cname']?></option>
+                                    <?php
+                                       }
+                                    ?>                            
+                                 </select>
+                              </div>
+                              
+                           </span>
+                           <a  class="btn button-grey " href="index.php?p=linkibags">My Folders</a> 
+                           <div style="width:110px; margin-left:10px;border:1px solid #7F7F7F !important;" class="input-group dashboard-search mylinks-search" style="border-color: rgb(127, 127, 127) !important;">
+                             
+                              
+                              <input type="text"  class="form-control input-sm" placeholder="Search" onkeypress="handle_not_submit(event);" name="url" id="url" value="<?=isset($_GET['url']) ? $_GET['url'] : ''?>">
+                              <div class="input-group-btn">
+                                 <button class="btn btn-default btn-sm" type="button" id="url_submit" onclick="search_form();" style="height:26px" ><i class="fa fa-search"></i></button>
+                              </div>
                            </div>
                         </div>
-						
-						
-                     
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-                     </div>
+					</div>
                   </div>
                   <div class="mail-dashboard">
                      <div class="table table-responsive margin-none">
                         <table class="table head_border_block">
-						<tbody>
-						<tr>
-							<td class="width32">
-								<?php
-								   $page = '';
-								   if(isset($_GET['page']))
-									  $page = $_GET['page'];
-								   $url_by = '&url_by=asc';
-								   $arrow_direction = 'fa fa-caret-down';
-								   if(isset($_GET['url_by']) and $_GET['url_by'] == 'asc'){
-									  $url_by = '&url_by=desc';
-									  $arrow_direction = 'fa fa-caret-up';
-								   }elseif(isset($_GET['url_by']) and $_GET['url_by'] == 'desc'){
-									  $url_by = '&url_by=asc';
-									  $arrow_direction = 'fa fa-caret-down';
-								   }
-								   $cname = 'updated';
-								   if(isset($_GET['cid'])){
-									  if($_GET['cid'] == 0 and $_GET['trash'] == 1){
-										 $cname = 'Trash';
-									  }else if($_GET['cid'] > 0){
-										 $cat_info = $co->query_first("SELECT cname FROM `category` WHERE cid=:id",array('id'=>$_GET['cid']));
-										 $cname = $cat_info['cname'];
-									  }  
-								   }  
-								 ?>
-								<div class="dropdown dropdown-design">
-								   <div class="btn btn-default dropdown-toggle"><input type="checkbox" name="check" id="checkAll" value=""/>Link <a href="index.php?p=dashboard<?=$url_by?>"><i class="<?=$arrow_direction?>"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-								</div>
-							</td>
-							<td class="width28">
-								<?php
-								   $shared_by = '&msg_by=asc';
-								   $arrow_direction = 'fa fa-caret-down';
-								   
-								   if(isset($_GET['msg_by']) and $_GET['msg_by'] == 'asc'){
-									  $shared_by = '&msg_by=desc';
-									  $arrow_direction = 'fa fa-caret-up';
-								   }elseif(isset($_GET['msg_by']) and $_GET['msg_by'] == 'desc'){
-									  $shared_by = '&msg_by=asc';
-									  $arrow_direction = 'fa fa-caret-down';
-								   }  
-								   ?>
-								<div class="dropdown dropdown-design">
-								   <div class="btn btn-default dropdown-toggle">Message <a href="index.php?p=dashboard<?=$shared_by?>"><i class="<?=$arrow_direction?>"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-								</div>
-							</td>
-							<td class="width25">
-								<?php
-								   $shared_by = '&shared_by=asc';
-									  $arrow_direction = 'fa fa-caret-down';
-									  if(isset($_GET['shared_by']) and $_GET['shared_by'] == 'asc'){
-										 $shared_by = '&shared_by=desc';
-										 $arrow_direction = 'fa fa-caret-up';
-									  }elseif(isset($_GET['shared_by']) and $_GET['shared_by'] == 'desc'){
-										 $shared_by = '&shared_by=asc';
-										 $arrow_direction = 'fa fa-caret-down';
-									  }
-								?>
-								<div class="dropdown dropdown-design">
-								   <div class="btn btn-default dropdown-toggle">Shared By <a href="index.php?p=dashboard<?=$shared_by?>"><i class="<?=$arrow_direction?>"></i></a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-								</div>
-							</td>
-							<td class="width15"> 
-								<?php
-								   $date_by = '&date_by=asc';
-									  $arrow_direction = 'fa fa-caret-down';
-									  if(isset($_GET['date_by']) and $_GET['date_by'] == 'asc'){
-										 $date_by = '&date_by=desc';
-										 $arrow_direction = 'fa fa-caret-up';
-									  }elseif(isset($_GET['date_by']) and $_GET['date_by'] == 'desc'){
-										 $date_by = '&date_by=asc';
-										 $arrow_direction = 'fa fa-caret-down';
-									  }
-								?>
-								<div class="dropdown dropdown-design">
-								   <div class="btn btn-default dropdown-toggle">Date / Time <a href="index.php?p=dashboard<?=$date_by?>"><i class="<?=$arrow_direction?>"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
-								</div>
-							</td>
-						</tr>
-						</tbody>
-						</table>
-						
-						<table class="border_block table table-design margin-none" id="all_records">
+                  <tbody>
+                  <tr>
+                     <td class="width32">
+                        <?php
+                           $page = '';
+                           if(isset($_GET['page']))
+                             $page = $_GET['page'];
+                           $url_by = '&url_by=asc';
+                           $arrow_direction = 'fa fa-caret-down';
+                           if(isset($_GET['url_by']) and $_GET['url_by'] == 'asc'){
+                             $url_by = '&url_by=desc';
+                             $arrow_direction = 'fa fa-caret-up';
+                           }elseif(isset($_GET['url_by']) and $_GET['url_by'] == 'desc'){
+                             $url_by = '&url_by=asc';
+                             $arrow_direction = 'fa fa-caret-down';
+                           }
+                           $cname = 'updated';
+                           if(isset($_GET['cid'])){
+                             if($_GET['cid'] == 0 and $_GET['trash'] == 1){
+                               $cname = 'Trash';
+                             }else if($_GET['cid'] > 0){
+                               $cat_info = $co->query_first("SELECT cname FROM `category` WHERE cid=:id",array('id'=>$_GET['cid']));
+                               $cname = $cat_info['cname'];
+                             }  
+                           }  
+                         ?>
+                        <div class="dropdown dropdown-design">
+                           <div class="btn btn-default dropdown-toggle"><input type="checkbox" name="check" id="checkAll" value=""/>Link <a href="index.php?p=dashboard<?=$url_by?>"><i class="<?=$arrow_direction?>"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </div>
+                     </td>
+                     <td class="width28">
+                        <?php
+                           $shared_by = '&msg_by=asc';
+                           $arrow_direction = 'fa fa-caret-down';
+                           
+                           if(isset($_GET['msg_by']) and $_GET['msg_by'] == 'asc'){
+                             $shared_by = '&msg_by=desc';
+                             $arrow_direction = 'fa fa-caret-up';
+                           }elseif(isset($_GET['msg_by']) and $_GET['msg_by'] == 'desc'){
+                             $shared_by = '&msg_by=asc';
+                             $arrow_direction = 'fa fa-caret-down';
+                           }  
+                           ?>
+                        <div class="dropdown dropdown-design">
+                           <div class="btn btn-default dropdown-toggle">Message <a href="index.php?p=dashboard<?=$shared_by?>"><i class="<?=$arrow_direction?>"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </div>
+                     </td>
+                     <td class="width25">
+                        <?php
+                           $shared_by = '&shared_by=asc';
+                             $arrow_direction = 'fa fa-caret-down';
+                             if(isset($_GET['shared_by']) and $_GET['shared_by'] == 'asc'){
+                               $shared_by = '&shared_by=desc';
+                               $arrow_direction = 'fa fa-caret-up';
+                             }elseif(isset($_GET['shared_by']) and $_GET['shared_by'] == 'desc'){
+                               $shared_by = '&shared_by=asc';
+                               $arrow_direction = 'fa fa-caret-down';
+                             }
+                        ?>
+                        <div class="dropdown dropdown-design">
+                           <div class="btn btn-default dropdown-toggle">Shared By <a href="index.php?p=dashboard<?=$shared_by?>"><i class="<?=$arrow_direction?>"></i></a>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </div>
+                     </td>
+                     <td class="width15"> 
+                        <?php
+                           $date_by = '&date_by=asc';
+                             $arrow_direction = 'fa fa-caret-down';
+                             if(isset($_GET['date_by']) and $_GET['date_by'] == 'asc'){
+                               $date_by = '&date_by=desc';
+                               $arrow_direction = 'fa fa-caret-up';
+                             }elseif(isset($_GET['date_by']) and $_GET['date_by'] == 'desc'){
+                               $date_by = '&date_by=asc';
+                               $arrow_direction = 'fa fa-caret-down';
+                             }
+                        ?>
+                        <div class="dropdown dropdown-design">
+                           <div class="btn btn-default dropdown-toggle">Date / Time <a href="index.php?p=dashboard<?=$date_by?>"><i class="<?=$arrow_direction?>"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+                        </div>
+                     </td>
+                  </tr>
+                  </tbody>
+                  </table>
+                  
+                  <table class="border_block table table-design margin-none table_dashboard" id="all_records">
                            <tbody>
+                               <!-- Only for New users --> 
+                                <tr class="second_row userself_links unread" >
+                                 <td class="width32">
+									<span><input type="checkbox" class="urls_shared2" disabled="" ></span>  &nbsp; 
+                                    <a data-toggle="tooltip" title="This link is not for share." href="https://www.linkibag.com/links/welcome" target="_blank">https://www.linkibag.com/links/welcome </a>
+                                    
+                                 </td>
+                                 <td class="width28"><a href="https://www.linkibag.com/links/welcome">Welcome to LinkiBag</a></td>
+                                 <td class="width25"><a href="https://www.linkibag.com/links/welcome">CEO of LinkiBag Inc.</a></td>
+                                 <td class="width15"> <?=date('m/d/Y H:i a', $current['created'])?></td>
+                              </tr>
+                               
                               <?php               
                                  $i=1;                                
                                  if(isset($_GET['page'])){         
@@ -415,20 +445,22 @@
                                     
                                     $j = 1;
                                     }
-                                  
-                                    ?>
+								// echo"<pre>";
+								// print_r($urlpost);
+								// echo"</pre>";
+							?> 
                               <tr class="<?=$class_name.$show_friend_class?><?=$urlpost['num_of_visits'] > 0 ? ' read' : ' unread'?>" id="url_<?=$urlpost['shared_url_id']?>">
                                  <td class="width32">
-                                    <span<?=(($urlpost['sponsored_link'] == 1) ? ' class="sponsored_url"' : '')?>><input type="checkbox" class="<?=(($urlpost['share_type_change'] == 1) ? 'urls_shared2' : 'urls_shared')?>"<?=$url_disabled?> name="share_url[]" value="<?=$urlpost['shared_url_id']?>"></span> &nbsp; <a data-toggle="tooltip" title="<?=$title_msg?>" href="index.php?p=scan_url&id=<?=$urlpost['shared_url_id']?>&url=<?=urlencode($urlpost['url_value'])?>" target="_blank"><?=(strlen($urlpost['url_value']) > 35) ? substr($urlpost['url_value'],0,35) : $urlpost['url_value']?><span style="display: none;"><?=$urlpost['url_value']?></span></a>
+                                    <span<?=(($urlpost['sponsored_link'] == 1) ? ' class="sponsored_url"' : '')?>><input type="checkbox" class="<?=(($urlpost['share_type_change'] == 1) ? 'urls_shared2' : 'urls_shared')?>"<?=$url_disabled?> name="share_url[]" value="<?=$urlpost['shared_url_id']?>"></span> &nbsp; <a data-toggle="tooltip" title="<?=$title_msg?>" href="index.php?p=scan_url&id=<?=$urlpost['shared_url_id']?>&url=<?=urlencode($urlpost['url_value'])?>" target="_blank"><?=(strlen($urlpost['url_value']) > 25) ? substr($urlpost['url_value'],0,25) : $urlpost['url_value']?></a>
                                     <?php /*<span class="visit-icon"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>" data-toggle="tooltip" title="<?=(($user_friend_class == ' text-grey') ? 'Not for share' : 'I may share this link with selected users')?>"><i class="fa fa-circle<?=$user_friend_class?>"></i></a></span>*/ ?>
-                                    <span class="visit-icon"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>" data-toggle="tooltip" title="<?=(($user_friend_class3 == ' text-grey') ? 'Not for share' : 'I may share this link with selected users')?>"><i class="fa fa-circle<?=$user_friend_class3?>"></i></a></span>
+                                     <span class=" <?php if($urlpost['like_status']==1){?> visit-icon2<?php }else {?>visit-icon<?php } ?>"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>" data-toggle="tooltip" title="<?=(($user_friend_class3 == ' text-grey') ? 'Not for share' : 'I may share this link with selected users')?>"><i class="fa fa-circle<?=$user_friend_class3?>"></i></a></span>
                                     <!-- Modal -->
                                     <div class="modal fade" id="succ_<?=$urlpost['shared_url_id']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                        <div class="modal-dialog modal-sm">
                                           <div class="modal-content">
                                              <div class="modal-header modal-header-success">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h4>You are about to leave Linkibag</h4>
+                                                <h4>You are about to leave LinkiBag</h4>
                                              </div>
                                              <div class="modal-body">
                                                 <p>You will be visiting:</p>
@@ -448,7 +480,18 @@
                                     <!-- /.modal -->
                                     <!-- Modal -->
                                  </td>
-                                 <td class="width28"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>"><?=((strlen($urlpost['url_desc']) > 35) ? substr($urlpost['url_desc'],0,35) : $urlpost['url_desc'])?><span style="display: none;"><?=$urlpost['url_desc']?></span></a></td>
+                                 <td class="width28">
+									<a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>" style="width:100%;">
+										<?php 
+											if(strlen($urlpost['url_desc']) > 37){
+												$url_desc = substr($urlpost['url_desc'],0,37).'...';
+											} else{
+												$url_desc = $urlpost['url_desc'];
+											}
+											echo $url_desc;
+										?> 
+									</a>
+								</td>
                                  <td class="width25"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>"><?=($urlpost['email_id'] == '') ? 'Sponsored' : $urlpost['email_id']?></a></td>
                                  <td class="width15"><?=date('m/d/Y', $urlpost['shared_time'])?>   <?=date('h:i a', $urlpost['shared_time'])?></td>
                               </tr>
@@ -496,9 +539,9 @@
                            </tbody>
                         </table>
                      </div>
-						<?php if($one_nonfriend_exist>0){ ?>
-							<p><input type="checkbox" id="display_all_messages_from_friends_btn" value="1" onclick="display_all_messages_from_friends('#share_urls_from_dash');"<?=($current['hide_nonfriend_msg']==1 ? ' checked="checked"' : '')?>>&nbsp;<span id="count_only_hidden_messages"><?=($current['hide_nonfriend_msg']==1 ? 'Displaying only messages from friends ('.$one_nonfriend_exist.' hidden messages)' : 'Display only messages from friends')?></span></p>
-						<?php } ?>
+                  <?php if($one_nonfriend_exist>0){ ?>
+                     <p><input type="checkbox" id="display_all_messages_from_friends_btn" value="1" onclick="display_all_messages_from_friends('#share_urls_from_dash');"<?=($current['hide_nonfriend_msg']==1 ? ' checked="checked"' : '')?>>&nbsp;<span id="count_only_hidden_messages"><?=($current['hide_nonfriend_msg']==1 ? 'Displaying only messages from friends ('.$one_nonfriend_exist.' hidden messages)' : 'Display only messages from friends')?></span></p>
+                  <?php } ?>
                      <!--
                         <nav class="text-center">                
                            <ul class="pagination"><?php //$page_links?></ul>              
@@ -541,46 +584,46 @@
                         if($total_page_count == 0)
                            $total_page_count = 1;
                      ?>
-						<div class="row">
-						    <?php 
-								if($total_page_count >0){
-								$prev_link ='';									
-								if(isset($_GET['page']) and $_GET['page'] > 1){
-									if($_GET['p'] =='dashboard'){
-										$prev_link = 'index.php?p=dashboard';
-									}else{
-										$prev_link = $_GET['page'] - 1;
-									}
-								}
-								$next_link ='';
-								if($_GET['p'] =='dashboard'){
-									$next_link = 'index.php?page=2&p=dashboard';
-								}else{
-									$next_link = $_GET['page'] + 1;
-								}
-							?>
-							<div class="col-md-11 col-xs-12">
-								<div class="arrow_icons">
-									<?php if($total_page_count >1){ ?>
-										<?php 
-									    $_GET['page']='';
-										if($_GET['page'] == 1){ ?>
-											<a class="pull-left" title="Previous" href="<?=$prev_link?>"><<</a>
-										<?php } ?>
-										<?php if($total_page_count != $_GET['page']){ ?>
-											 <a class="pull-right" title="Next" href="<?=$next_link?>">>></a>
-										<?php } ?>
-									<?php } ?>
-								</div> 
-							</div>
-							<?php } ?>
-							<div class="col-md-1 col-xs-12">
-								<div class="row">
-									<small>Page <?=isset($_GET['page']) ? $_GET['page'] : 1?> of <?=$total_page_count?></small>
-								</div>
-							</div>
-						</div>
-					 <?php 
+                  <div class="row">
+                      <?php 
+                        if($total_page_count >0){
+                        $prev_link ='';                           
+                        if(isset($_GET['page']) and $_GET['page'] > 1){
+                           if($_GET['p'] =='dashboard'){
+                              $prev_link = 'index.php?p=dashboard';
+                           }else{
+                              $prev_link = $_GET['page'] - 1;
+                           }
+                        }
+                        $next_link ='';
+                        if($_GET['p'] =='dashboard'){
+                           $next_link = 'index.php?page=2&p=dashboard';
+                        }else{
+                           $next_link = $_GET['page'] + 1;
+                        }
+                     ?>
+                     <div class="col-md-11 col-xs-12">
+                        <div class="arrow_icons">
+                           <?php if($total_page_count >1){ ?>
+                              <?php 
+                               $_GET['page']='';
+                              if($_GET['page'] == 1){ ?>
+                                 <a style='display:none' class="pull-left" title="Previous" href="<?=$prev_link?>"><<</a>
+                              <?php } ?>
+                              <?php if($total_page_count != $_GET['page']){ ?>
+                                  <a style='display:none' class="pull-right" title="Next" href="<?=$next_link?>">>></a>
+                              <?php } ?>
+                           <?php } ?>
+                        </div> 
+                     </div>
+                     <?php } ?>
+                     <!--<div class="col-md-1 col-xs-12">-->
+                     <!--   <div class="row">-->
+                     <!--      <small>Page <?=isset($_GET['page']) ? $_GET['page'] : 1?> of <?=$total_page_count?></small>-->
+                     <!--   </div>-->
+                     <!--</div>-->
+                  </div>
+                <?php 
                         //unset($_SESSION['list_shared_links_by_admin']);
                         } 
                         ?>
@@ -591,33 +634,33 @@
                   if($total_page_count == 0)
                      $total_page_count = 1;
                   
-				  
-				  
-				  if(isset($_GET['page']) and $_GET['page'] > 1){
-					
-					if($total_page_count > $_GET['page']){
-						$next_page = $_GET['page']+1;
-					    $next ='index.php?page='.$next_page.'&p=dashboard';
-					}else{
-						$next ='index.php?page='.$_GET['page'].'&p=dashboard';
-					}   
+              
+              
+              if(isset($_GET['page']) and $_GET['page'] > 1){
+               
+               if($total_page_count > $_GET['page']){
+                  $next_page = $_GET['page']+1;
+                   $next ='index.php?page='.$next_page.'&p=dashboard';
+               }else{
+                  $next ='index.php?page='.$_GET['page'].'&p=dashboard';
+               }   
                   ?>
-				  
-				  <div class="row">
-					<div class="col-md-11 col-xs-12">
-						<div class="arrow_icons">
-							   <a class="pull-left" title="Previous" href="index.php?page=<?=$_GET['page']-1?>&p=dashboard"><<</a>
-								<?php if($total_page_count != $_GET['page']){ ?>
-									<a class="pull-right" title="Next" href="<?=$next?>">>></a>
-								<?php }?>
-						</div> 
-					</div>
-					<div class="col-md-1 col-xs-12"><div class="row"><small>Page <?=isset($_GET['page']) ? $_GET['page'] : 1?> of <?=$total_page_count?></small></div></div>
-				</div>
+              
+              <div class="row">
+               <div class="col-md-11 col-xs-12">
+                  <div class="arrow_icons">
+                        <a class="pull-left" title="Previous" href="index.php?page=<?=$_GET['page']-1?>&p=dashboard"><<</a>
+                        <?php if($total_page_count != $_GET['page']){ ?>
+                           <a class="pull-right" title="Next" href="<?=$next?>">>></a>
+                        <?php }?>
+                  </div> 
+               </div>
+               <div class="col-md-1 col-xs-12"><div class="row"><small>Page <?=isset($_GET['page']) ? $_GET['page'] : 1?> of <?=$total_page_count?></small></div></div>
+            </div>
                <?php } ?>
-               <div class="bottom-nav-link table-design margin-none">
+               <div class="bottom-nav-link table-design margin-none" style="top:50px">
                   <div class="bottom-nav-link-main">
-                     <div  style="padding: 0px;" class="col-md-7">
+                     <div  style="padding: 0px;" class="col-md-7 left_go_to">
                        
                         <a class="share-footer btn button-grey" href="javascript: void(0);" onclick="multiple_load_share_link_form('share');"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
                         &nbsp;
@@ -625,7 +668,7 @@
                         <a class="btn btn-default dark-gray-bg" href="javascript: void(0);" onclick="multiple_load_share_link_form('mark_as_del');">Delete</a>                 
                      </div>
                      
-                     <div style="width: auto; margin: 0px ! important;" class="col-md-3 pull-right">                                
+                     <div class="col-md-3 pull-right go_to">                                
                         <?=$page_link_new?>                 
                      </div>
                   </div>
@@ -637,84 +680,11 @@
    </div>
    </div>
 </section>
-<style>
-   .bread-crumb p, .bread-crumb p a {
-	   color: #acacac;
-	   font-size: 12px;
-   }
-   .share-btns .btn-default {
-	   background: #c3c3c3 none repeat scroll 0 0;
-	   color: #3a3a3a;
-   }
-   .share-btns {
-	   display: inline-block;
-	   margin: 11px 0;
-	   width: 100%;
-   }
-   .share-btns .btn-primary {
-	   background: #597794 none repeat scroll 0 0;
-   }
-   .share-btns .btn {
-	   border: medium none;
-	   border-radius: 0;
-   }
-   .text-grey{
-	   color: grey;
-   }
-   .text-success{
-       color: green;
-   }
-   .round-like-badge {
-      background: #ff0000 none repeat scroll 0 0;
-      font-size: 11px;
-      height: 17px;
-      line-height: 16px;
-      min-width: 17px;
-      padding: 0 4px;
-      position: absolute;
-      top: -7px;
-      left: 131px;
-   }
-   .round-unlike-badge {
-      background: #ff0000 none repeat scroll 0 0;
-      font-size: 11px;
-      height: 17px;
-      line-height: 16px;
-      min-width: 17px;
-      padding: 0 4px;
-      position: absolute;
-      top: -17px;
-      right: -2px;
-   }
-   .fa-heart{
-      color: red;
-   }
-   .recommend{
-      color: red;
-   }
-   .round-recommend-badge {
-      background: #ff0000 none repeat scroll 0 0;
-      font-size: 11px;
-      height: 17px;
-      line-height: 16px;
-      min-width: 17px;
-      padding: 0 4px;
-      position: absolute;
-      top: -7px;
-      left: 184px;
-   }
-   .round-unrecommend-badge {
-      background: #ff0000 none repeat scroll 0 0;
-      font-size: 11px;
-      height: 17px;
-      line-height: 16px;
-      min-width: 17px;
-      padding: 0 4px;
-      position: absolute;
-      top: -17px;
-      right: -2px;
-   }
-</style>
+
+
+ <input type="hidden" name="disclaimer" class="disclaimer" value="<?php //echo $current['disclaimer'];?>">
+ <!-- Central Modal Medium Success-->
+
 <script>
    /*
    $("#div2").hover(function () {
@@ -723,6 +693,7 @@
          $('.tst').remove(); 
       }, 1000);
     });*/
+
 
    $('table tr td:first-child, table tr td:second-child').hover(function(){
       var httext = $(this).find('a span').text();

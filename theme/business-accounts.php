@@ -42,7 +42,7 @@ echo '<img class="margin-bottom" src="' . $img['img_original'] . '" border="0" /
 ?>						
 						<?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?>
 						<div class="image-blow-text">
-							Try us risk free. Signup for your <span class="orange-blue"><a class="orange-blue" href="index.php?#free_singup">Free Account </a></span>today.
+							Try us risk free. Signup for your <span class="orange-blue"><a class="orange-blue" href="index.php?#free_signup">Free Account </a></span>today.
 						</div>
 						<?php } ?>
 						</div>

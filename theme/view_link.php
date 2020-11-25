@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "View Link | Linkibag";     
+	$co->page_title = "View Link | LinkiBag";     
  	$current = $co->getcurrentuser_profile();  	
 	$user_profile_info = $co->call_profile($current['uid']);  
 	$list_shared_links_by_admin = $co->list_shared_links_by_admin('0');  	
@@ -161,7 +161,7 @@ function page_content(){
 									  		<label class="col-md-12 control-label">Received:</label>  
 									  </div>		
 									  <div class="col-md-6">
-									  <input name="received" value="<?=date('d/m/Y', $row['shared_time'])?>  <?=date('h:i a', $row['shared_time'])?>" class="form-control input-md" required="" type="text" readonly>
+									  <input name="received" value="<?=date('m/d/Y', $row['shared_time'])?>  <?=date('h:i a', $row['shared_time'])?>" class="form-control input-md" required="" type="text" readonly>
 									  </div>
 									  <div><a href="index.php?p=edit-profile#user_timezone"><i class="fa fa-clock-o"></i></a></div>
 									</div>
@@ -221,7 +221,7 @@ function page_content(){
 												
 											?>
 											<select name="share_type" id="share_type" class="form-control" onchange="share_type_change(this.value);show_public_cat(this.value);";>
-												<option value="1"<?=(($row['share_type_change'] == 1) ? ' selected="selected"' : '')?>>Not for share</option>
+												<option value="1"<?=(($row['share_type_change'] == 1) ? ' selected="selected"' : '')?>>Not for sharing</option>
 												<option value="2"<?=(($row['share_type_change'] == 2) ? ' selected="selected"' : '')?>>I may share this link with selected users</option>
 												<?php /*
 												<option value="1"<?=(($row['share_type_change'] == 1) ? ' selected="selected"' : '')?>><?=(($current['role'] == 3) ? 'Not Shared' : 'This link is not for share')?></option>

@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Find Friends | Linkibag";     
+	$co->page_title = "Find Friends | LinkiBag";     
  	$current = $co->getcurrentuser_profile();  	
 	
 	/*

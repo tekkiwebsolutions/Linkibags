@@ -2,7 +2,7 @@
 function page_access(){	
 	global $co, $msg;      	
 	$user_login = $co->is_userlogin(); 
-	$co->page_title = "Friend Request | Linkibag";     
+	$co->page_title = "Friend Request | LinkiBag";     
  	//$current = $co->getcurrentuser_profile();
 	$up = array();	
 	if(isset($_GET['request_id']) and $_GET['request_id'] > 0 and isset($_GET['request_code']) and isset($_GET['accept'])){
@@ -41,7 +41,7 @@ function page_access(){
 				echo '<script language="javascript">window.location="index.php?p=dashboard";</script>';
 				exit();	
 			}else{  		
-				echo '<script language="javascript">window.location="index.php?request_id='.$_GET['request_id'].'&request_code='.$_GET['request_code'].'&accept='.$_GET['accept'].'#free_singup";</script>';
+				echo '<script language="javascript">window.location="index.php?request_id='.$_GET['request_id'].'&request_code='.$_GET['request_code'].'&accept='.$_GET['accept'].'#free_signup";</script>';
 			}
 					
 		}else{

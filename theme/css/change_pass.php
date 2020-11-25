@@ -1,7 +1,7 @@
 <?php
 function page_content(){
 	global $co, $msg;
-	$co->page_title = "Request New Password | Linkibag";
+	$co->page_title = "Request New Password | LinkiBag";
 	
 	//if(!isset($inc))
 	//	exit();
@@ -32,8 +32,8 @@ function page_content(){
 				<h1>Welcome to LinkiBag</h1>	
 				<p>Trying to keep too many things under <br>control? Drop your links to your LinkiBag<br> and keep them with you wherever you go.</p>	
 				<div class="page-btns">		
-					<a class="btn orange-bg" href="index.php?p=personal-account">Free Signup</a>	
-					<br><small style="color: rgb(255, 127, 39);">Free individual account signup</small>	
+					<a class="btn orange-bg" href="index.php?p=personal-account">Free Sign up</a>	
+					<br><small style="color: rgb(255, 127, 39);">Free individual account sign up</small>	
 				</div>					
 				<h3>Learn more about LinkiBag Services</h3>	
 				<div class="login-page-links">	

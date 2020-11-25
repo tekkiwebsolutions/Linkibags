@@ -1,0 +1,7 @@
+Time : 14:47:50
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : DELETE FROM `user_friends` WHERE request_id=:id
+
+Time : 14:46:32
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : DELETE FROM `user_friends` WHERE request_id=:id

@@ -30,3 +30,175 @@
 [18-Sep-2019 15:57:33 UTC] PHP Warning:  sizeof(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php on line 131
 [18-Sep-2019 11:35:54 America/Cancun] PHP Warning:  sizeof(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php on line 131
 [18-Sep-2019 11:37:30 America/Cancun] PHP Warning:  sizeof(): Parameter must be an array or an object that implements Countable in /home/link25test1/public_html/PTest25x/linkibag/config/DB.class.php on line 131
+[13-Nov-2020 01:16:36 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select id,state...')
+#1 /home/bag55/public_html/config/DB.class.php(161): DB->Init('select id,state...', Array)
+#2 /home/bag55/public_html/config/DB.class.php(255): DB->query('select id,state...', Array)
+#3 /home/bag55/public_html/ajax/ajax-common.php(12): DB->fetch_all_array('select id,state...', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[13-Nov-2020 01:19:01 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select id,state...')
+#1 /home/bag55/public_html/config/DB.class.php(161): DB->Init('select id,state...', Array)
+#2 /home/bag55/public_html/config/DB.class.php(255): DB->query('select id,state...', Array)
+#3 /home/bag55/public_html/ajax/ajax-common.php(12): DB->fetch_all_array('select id,state...', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[13-Nov-2020 01:19:23 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select id,state...')
+#1 /home/bag55/public_html/config/DB.class.php(161): DB->Init('select id,state...', Array)
+#2 /home/bag55/public_html/config/DB.class.php(255): DB->query('select id,state...', Array)
+#3 /home/bag55/public_html/ajax/ajax-common.php(12): DB->fetch_all_array('select id,state...', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[13-Nov-2020 01:20:48 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select id,state...')
+#1 /home/bag55/public_html/config/DB.class.php(161): DB->Init('select id,state...', Array)
+#2 /home/bag55/public_html/config/DB.class.php(255): DB->query('select id,state...', Array)
+#3 /home/bag55/public_html/ajax/ajax-common.php(12): DB->fetch_all_array('select id,state...', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[13-Nov-2020 01:22:50 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select id,state...')
+#1 /home/bag55/public_html/config/DB.class.php(161): DB->Init('select id,state...', Array)
+#2 /home/bag55/public_html/config/DB.class.php(255): DB->query('select id,state...', Array)
+#3 /home/bag55/public_html/ajax/ajax-common.php(12): DB->fetch_all_array('select id,state...', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[13-Nov-2020 01:24:15 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select id,state...')
+#1 /home/bag55/public_html/config/DB.class.php(161): DB->Init('select id,state...', Array)
+#2 /home/bag55/public_html/config/DB.class.php(255): DB->query('select id,state...', Array)
+#3 /home/bag55/public_html/ajax/ajax-common.php(12): DB->fetch_all_array('select id,state...', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[13-Nov-2020 01:29:13 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select id,state...')
+#1 /home/bag55/public_html/config/DB.class.php(161): DB->Init('select id,state...', Array)
+#2 /home/bag55/public_html/config/DB.class.php(255): DB->query('select id,state...', Array)
+#3 /home/bag55/public_html/ajax/ajax-common.php(14): DB->fetch_all_array('select id,state...', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[13-Nov-2020 01:30:21 America/Cancun] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/ajax/ajax-common.php on line 16
+[13-Nov-2020 01:33:13 America/Cancun] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/ajax/ajax-common.php on line 16
+[13-Nov-2020 01:33:22 America/Cancun] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/ajax/ajax-common.php on line 16
+[13-Nov-2020 01:33:24 America/Cancun] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/ajax/ajax-common.php on line 16
+[13-Nov-2020 01:35:52 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select id,state...')
+#1 /home/bag55/public_html/config/DB.class.php(161): DB->Init('select id,state...', Array)
+#2 /home/bag55/public_html/config/DB.class.php(255): DB->query('select id,state...', Array)
+#3 /home/bag55/public_html/ajax/ajax-common.php(14): DB->fetch_all_array('select id,state...', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[17-Nov-2020 17:28:39 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42000]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[17-Nov-2020 17:28:42 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42000]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[17-Nov-2020 17:28:45 America/Cancun] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42000]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[17-Nov-2020 22:21:20 US/Central] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42000]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[17-Nov-2020 22:21:51 US/Central] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42000]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[17-Nov-2020 22:39:08 US/Central] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42000]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[17-Nov-2020 22:39:09 US/Central] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42000]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[17-Nov-2020 22:39:59 US/Central] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42000]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[17-Nov-2020 22:40:03 US/Central] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42000]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[19-Nov-2020 04:05:19 US/Central] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[19-Nov-2020 04:05:20 US/Central] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[19-Nov-2020 04:05:33 US/Central] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247
+[19-Nov-2020 04:05:38 US/Central] PHP Fatal error:  Uncaught Error: Call to a member function write() on null in /home/bag55/public_html/config/DB.class.php:247
+Stack trace:
+#0 /home/bag55/public_html/config/DB.class.php(114): DB->ExceptionLog('SQLSTATE[42S22]...', 'select COUNT(u....')
+#1 /home/bag55/public_html/config/DB.class.php(213): DB->Init('select COUNT(u....', Array)
+#2 /home/bag55/public_html/config/DB.class.php(261): DB->row('select COUNT(u....', Array)
+#3 /home/bag55/public_html/ajax/users_list.php(37): DB->query_first('select COUNT(u....', Array)
+#4 {main}
+  thrown in /home/bag55/public_html/config/DB.class.php on line 247

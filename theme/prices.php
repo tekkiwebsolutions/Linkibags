@@ -95,12 +95,12 @@
 		  <div class="price-footer">
 			  <div class="col-sm-6 col-md-6 text-right">
 			  		<?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?>
-					<a class="btn orange-bg" href="index.php?#free_singup">Free Sign up</a><br>
+					<a class="btn orange-bg" href="index.php?#free_signup">Free Sign up</a><br>
 					<?php } ?>
 			  </div>
 			  <div class="col-sm-6 col-md-6 text-left">
 			  <p>Business and Institutional upgrades will be available upon completion of
-	your registration. <?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?> Select <a href="index.php?#free_singup">Free Sign up</a> to continue. <?php } ?></p>
+	your registration. <?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?> Select <a href="index.php?#free_signup">Free Sign up</a> to continue. <?php } ?></p>
 			  </div>
 		  </div>
 		  
@@ -125,7 +125,7 @@
 					<h2 class="bold-title" style="color: #004080; padding-bottom: 18px ! important; word-spacing: 3px;">PACK YOUR LINKS<span class="tm">TM</span> TO GO</h2>
 					<h3 style="color: rgb(127, 127, 127); padding-bottom: 37px; font-weight: 100;">Get your FREE account now and start saving links instantly.</h3>
 					<?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?>
-					<a class="btn bg-orange" href="index.php?#free_singup">Sign up</a>
+					<a class="btn bg-orange" href="index.php?#free_signup">Sign up</a>
 					<?php } ?>
 					<p style="color: rgb(0, 40, 81); margin-top: 54px; font-weight: 400;">The option to upgrade to a paid plan will be located under ‘My Account’</p>
 					<p class="text-center"><a class="text-orange" href="index.php?p=institutional-accounts"><b><u>View Pricing Information</u></b></a></p>

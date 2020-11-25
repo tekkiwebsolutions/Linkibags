@@ -34,7 +34,7 @@ function page_content(){
 	global $co, $msg;
 
 
-	$co->page_title = "Delete My Account | Linkibag";
+	$co->page_title = "Delete My Account | LinkiBag";
 
 
 	$current = $co->getcurrentuser_profile();
@@ -71,7 +71,7 @@ function page_content(){
                      <div class="personal_account_register" style="background: #eeeeee none repeat">
 						<div class="form-group">
 							<h3 style="margin-bottom: 22px;">Are you sure you would like to delete your LinkiBag account?</h3>
-							<small style="color: #7f7f7f;">Select yes to permanently delete all account. We will not be able to restore your account if confirmed. Select no to go back to your account.</small>
+							<small style="color: #7f7f7f;">Select yes to permanently delete all account. We will not be able to restore your account if confirmed.</small>
 						</div>
 					 </div>
                      <div class="submit_btn row text-center">

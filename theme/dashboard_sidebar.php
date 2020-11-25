@@ -1,15 +1,28 @@
 <?php
 $current_date = date('Y-m-d', time());
-$commercial_ads = $co->query_first("select * from admin_ads WHERE uid='0' and expiration_date>=:date ORDER BY RAND()", array('date'=>$current_date));
+$commercial_ads = $co->query_first("select * from admin_ads WHERE uid='0' and status=1 and expiration_date>=:date ORDER BY RAND()", array('date'=>$current_date));
+
 ?>
 <?php /* <div class="welcome-name"><h2>Hi, <?php echo $current['first_name']?></h2></div> */ ?>
 
 <div class="row">
 <div class="sidebar-user-widget">
-	<img class="img-responsive" alt="logo" src="<?=((isset($current['profile_photo']) and $current['profile_photo']!='') ? $current['profile_photo'] : 'images/user-pic.png')?>">
-	<Strong><?=$current['first_name']?> <?=$current['last_name']?><br/>
+<a href="index.php?p=edit-profile">	<img class="img-responsive" alt="logo" src="<?=((isset($current['profile_photo']) and $current['profile_photo']!='') ? $current['profile_photo'] : 'images/user-pic.png')?>"></a>
+	<Strong><?php
+	if($current['first_name']=='')
+	{
+	     $arr = explode("@", $current['email_id'], 2);
+      $name = $arr[0];
+	}else{
+	    $name= $current['first_name'].' '.$current['last_name'];
+	}
+	
+	 echo $name;
+	
+	
+	?><br/>
 		<a href="#" style="pointer-events: none; text-decoration: none; word-break: break-all;">
-		<?=(!empty($current['company_name']) ? $current['company_name'] : $current['email_id'])?>
+		<?=(!empty($current['company_name']) ? $current['company_name'] : '')?>
 		</a>
 	</strong>
 </div>
@@ -19,9 +32,9 @@ $commercial_ads = $co->query_first("select * from admin_ads WHERE uid='0' and ex
 <div class="profile-nav-links-new dsktop-menu">
 	<a class="btn orang-bg btn-block" href="index.php?p=dashboard"><img style="vertical-align: text-top;" src="images/white-icon.png" alt="bag Icon"> Inbag</a>
 	<a class="btn blue-bg btn-block" href="index.php?p=add_url"><i class="fa fa-check"></i> Add Links</a>
-	<a class="btn green-bg btn-block" href="index.php?p=linkifriends"><i class="fa fa-users"></i> Linki Friends</a>
+	<a class="btn green-bg btn-block" href="index.php?p=linkifriends"><i class="fa fa-users"></i> LinkiFriends</a>
 	<a class="my_links btn light-brown-bg btn-block" href="index.php?p=mylinks"><i class="fa fa-heart"></i> My Links</a>
-	<a class="btn dark-gray-bg btn-block" href="logout.php"><i class="fa fa-sign-out"></i> Sign Out</a>
+	<a class="btn dark-gray-bg btn-block" href="index.php?p=linkibook"><i class="fa fa-pencil"></i> LinkiBooks</a>
 
 	<?php /* ?>
 	<?php if($current['role'] == 2 OR $current['role'] == 3){ ?>
@@ -37,7 +50,7 @@ $commercial_ads = $co->query_first("select * from admin_ads WHERE uid='0' and ex
 			<div class="profile-nav-links-new">
 			<a class="btn orang-bg btn-block" href="index.php?p=dashboard"><img style="vertical-align: text-top;" src="images/white-icon.png" alt="bag Icon"> Inbag</a>
 			<a class="btn blue-bg btn-block" href="index.php?p=add_url"><i class="fa fa-check"></i> Add Links</a>
-			<a class="btn green-bg btn-block" href="index.php?p=linkifriends"><i class="fa fa-users"></i> Linki Friends</a>
+			<a class="btn green-bg btn-block" href="index.php?p=linkifriends"><i class="fa fa-users"></i> LinkiFriends</a>
 			<a class="btn light-brown-bg btn-block" href="index.php?p=search_friends"><i class="fa fa-chain"></i> Invites</a>
 			<a class="btn dark-gray-bg btn-block" href="logout.php"><i class="fa fa-sign-out"></i> Sign Out</a>
 			</div>
@@ -88,22 +101,24 @@ $commercial_ads = $co->query_first("select * from admin_ads WHERE uid='0' and ex
 if(isset($commercial_ads['photo_path']) and $commercial_ads['photo_path'] != '' and $current['role'] == 1){
 ?>
 <div class="mid_block ads-left-sidebar">
-	<span class="pull-right add-link">Sponsored <a href="index.php?p=contact-us&type_of_inquiry=account_upgrades" id="show"><img src="images/cancel.jpg" /></a></span>
-	<img src="<?=$commercial_ads['photo_path']?>" style="float: none; width: 100%;" class="img-responsive"><!-- /.list-group -->
-	<div class="text-center"><a class="add-link" href="index.php?p=contact-us">Place your add here</a></div>
-	<div style="display:none;" class="left-sidebar-ad"><a href="index.php?p=contact-us&type_of_inquiry=account_upgrades"><img src="images/ads-left.jpg" /></a></div>
+	<span class="pull-right add-link">
+		<!-- Sponsored
+		<a href="<?=$commercial_ads['img_url']?>" target="_blank" id="show">
+	<img src="images/cancel.jpg" /></a> -->
+</span>
+	<img src="<?=$commercial_ads['photo_path']?>" style="float: none;" class="img-responsive"><!--/.list-group-->	<div class="text-center"><a class="add-link" href="index.php?p=contact-us">Place your add here</a></div>
 </div>
 <?php
 	}
 ?>
 
-<div class="sidebar-search">
+<!-- <div class="sidebar-search">
 	<form action="index.php" method="get">
 		<input type="hidden" name="p" value="link-search" />
 		<label>Search</label>
 		<input type="text" class="form-control input-sm" name="url" />
 	</form>
-</div>
+</div> -->
 
 
 

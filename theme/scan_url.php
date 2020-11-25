@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Scanning | Linkibag";     
+	$co->page_title = "Scanning | LinkiBag";     
  	$current = $co->getcurrentuser_profile();  	
 	$url_info = $co->query_first("select us.shared_url_id,us.scan_result_show from `user_urls` ur, `user_shared_urls` us where us.url_id=ur.url_id and us.shared_url_id=:urls and (us.shared_to=:uid OR us.sponsored_link='1' OR us.shared_to>'0')",array('uid'=>$current['uid'],'urls'=>$_GET['id']));
 	if(!(isset($url_info['shared_url_id']) and $url_info['shared_url_id'] > 0)){
@@ -111,7 +111,7 @@ function page_content(){
 						                  <div class="row">
 						                  	<h3 style="margin-bottom: 10px; line-height: 25px;font-size: 22px;">You are about to leave LinkiBag. You will be visiting:</h3>
 						                  	<small style="color: #ff8000;font-size: 15px;"><?=$url?></small>
-						                  	<h2 style="margin-bottom: 10px; line-height: 20px; font-size: 15px;">We analyzed URL above for viruses, worms, trojans and other kids of malicious content.</h2>
+						                  	<h2 style="margin-bottom: 10px; line-height: 20px; font-size: 15px;">We analyzed the URL above for viruses, worms, trojans and other kinds of malicious content.</h2>
 						                     <div class="personal_account_register col-sm-4" style="background: #eeeeee none repeat; padding: 4px 30px;">
 												<div class="form-group">
 													<p id="scanning_txt">Scanning URL</p>
@@ -151,7 +151,7 @@ function page_content(){
 										<input type="hidden" name="form_id" value="scan_results"/>
 										<input type="hidden" name="shared_url_id" value="<?=$url_info['shared_url_id']?>">
 									</form>*/ ?>
-									<p><input type="checkbox" name="scan_result_show" id="scan_result_show" onclick="scan_results_shows('#scan_result_forms');" value="1"<?=($current['hide_scan_fulldetail']==1 ? ' checked="checked"' : '')?> />&nbsp; Do not show details below next time I visit this page</p>
+									<p><input type="checkbox" name="scan_result_show" id="scan_result_show" onclick="scan_results_shows('#scan_result_forms');" value="1"<?=($current['hide_scan_fulldetail']==1 ? ' checked="checked"' : '')?> />&nbsp; Do not show the details below the next time I visit this page</p>
 									<div id="scan_result_full"<?=($current['hide_scan_fulldetail']==1 ? ' style="display: none"' : '')?>>
 										<ul style="border-color: #ff7f27;" class="head-design table-design folder-dash-filters">
 											<li style="width:50%">

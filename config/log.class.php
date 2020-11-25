@@ -8,7 +8,7 @@
         class Log {
                         
                     # @string, Log directory name
-                            private $path = '/config/logs/';
+                            private $path = '/logs/';
                         
                     # @void, Default Constructor, Sets the timezone and path of the log files.
                         public function __construct() {

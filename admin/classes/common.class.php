@@ -29,6 +29,24 @@ class commonClass extends DB
 	
 	  	return $str;
 	}
+	function validate_gresponse($response){
+		
+		$url = 'https://www.google.com/recaptcha/api/siteverify';
+		$secret = '6LcvQfIUAAAAAAo33oAQYS62Sh8Fx-yUU8HKKK-B';
+		$ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(array('secret'=> $secret, 'response'=> $response)));
+        
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        
+        $verifyResponse = curl_exec($ch);
+        
+        curl_close ($ch);
+        
+        return json_decode($verifyResponse);
+	}
 	function setmessage($type="status", $message = NULL)
 	{
 		if ($message) {
@@ -107,9 +125,34 @@ class commonClass extends DB
 			}
 			return true;
 		}else{
+			
 			return false;
+		
 		}
 	}
+	
+		function send_admin_email($title,$users,$message){
+		    
+		    foreach($users as $key)
+			{
+				$keys[]=$key;
+			}
+			$emails = implode(",",$keys);
+			
+			
+
+		
+			$to = $emails;
+			$subject = $title;
+		
+			
+			$from = ' Linkibag.com';
+			$this->send_email($to, $subject, $message, $from);
+			return true;
+		
+	}
+	
+	
 	function user_reset_password($username){
 		$sql = "SELECT * FROM `users` WHERE `username`= :user and status=:status and verified=:verified LIMIT 1";
 		$row= $this->row($sql, array("user"=>$username, "status"=>1, "verified"=>1));
@@ -178,6 +221,23 @@ Team '.SITE_NAME;
 			return false;
 		}
 	}
+	
+	function is_advertiserlogin()
+	{
+		if(isset($_COOKIE['advertiser_logged_in']) && $_COOKIE['advertiser_logged_in']=="Yes")
+		{
+			return true;
+		}
+		elseif(isset($_SESSION['advertiser_logged_in']) && $_SESSION['advertiser_logged_in']=="Yes")
+		{			
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	function getcurrent_admin()
 	{
 		if(isset($_COOKIE['admin_uid']) && isset($_COOKIE['admin_website']) && $_COOKIE['admin_website']=="Linkibag admin")
@@ -219,11 +279,28 @@ Team '.SITE_NAME;
 	
 		// Additional headers
 		$headers .= 'From: '. $from . "\r\n";
+		$checkuser = $this->query_first("SELECT uid, donot_recieve_email FROM `users` WHERE `email_id`=:email", array('email'=>$to));
+		$sendemail = true;
+		if(isset($checkuser['uid'])) {
+			$msg .= '<br /><center><a style="color: #004080; font-weight: bold;" href="'.WEB_ROOT.'index.php?p=account_settings">Report</a> as spam</center>';
+			if($checkuser['donot_recieve_email']==1) {
+				$sendemail = false;
+			}
+		}else {
+			$msg .= '<br /><center><a style="color: #004080; font-weight: bold;" href="'.WEB_ROOT.'reportspam.php?email='.urlencode($to).'">Report</a> as spam</center>';
+			$checkemail = $this->query_first("SELECT id, status FROM `donot_recieve_mails` WHERE `email_id`=:email", array('email'=>$to));
+			if(isset($checkemail['id']) and $checkemail['status']==1) {
+				$sendemail = false;
+			}
+		}
+
 		
 		// Mail it
-		mail($to, $subject, $msg, $headers);
-		
-		$this->save_email_alert($to, $subject, $msg);
+		if($sendemail) {
+			mail($to, $subject, $msg, $headers);
+			$this->save_email_alert($to, $subject, $msg);
+		}
+		// Mail it
 	}
 	function save_email_alert($to, $subject, $msg){
 		$chk_user = $this->query_first("SELECT * FROM `users` WHERE `email_id`=:em", array('em'=>$to));
@@ -256,7 +333,7 @@ Team '.SITE_NAME;
 		$result = $this->fetch_all_array($sql, $data);
 		$pagingLink = '';
 		//$totalResults = mysql_num_rows($result);
-		$totalResults = count($this->column($sql,$data));
+		$totalResults = count($result);
 		//echo count($result);
 		//print_r($totalResults);
 		$totalPages = ceil($totalResults / $itemPerPage);
@@ -635,145 +712,282 @@ Team '.SITE_NAME;
 	}
 	*/
 
-	function uploadimage($photos_uploaded, $entity_field, $resize='yes', $width, $height)
+		function uploadimage($photos_uploaded, $entity_field, $resize='yes', $width, $height)
+
+
 
 	{
+
 		$images_thumbnails = array();
+
 		// List of our known photo types
+
+
 
     		$known_photo_types = array(
 
+
+
                         		'image/pjpeg' => 'jpg',
+
+
 
                         		'image/jpeg' => 'jpg',
 
+
+
                         		'image/gif' => 'gif',
+
+
 
                         		'image/bmp' => 'bmp',
 
+
+
                         		'image/x-png' => 'png',
+
+
 
 								'image/png' => 'png'
 
+
+
                     	);
+
+
 
    
 
+
+
     		// GD Function List
+
+
 
     		$gd_function_suffix = array(
 
+
+
                         		'image/pjpeg' => 'JPEG',
+
+
 
                         		'image/jpeg' => 'JPEG',
 
+
+
                         		'image/gif' => 'GIF',
+
+
 
                         		'image/bmp' => 'WBMP',
 
+
+
                         		'image/x-png' => 'PNG'
+
+
 
 								
 
+
+
                     	);
+
+
+
+
 
 
 
     		if(!array_key_exists($photos_uploaded['type'], $known_photo_types))
 
+
+
     		{
+
+
 
         			return false;
 
+
+
     		}
+
+
 
     		else
 
+
+
     		{
 
+
+
     			if(file_exists('../files/')){
+
     				if(!file_exists('../files/'.$entity_field)){
+
 	    				
+
     					mkdir('../files/'.$entity_field);
 
-						mkdir('../files/'.$entity_field.'/original');	
+
+
+						mkdir('../files/'.$entity_field.'');	
+
+
 
 					}
+
 					$directory_path = '../files/'.$entity_field;
+
 					$substring_required = 'yes';	
+
     			}else{
+
 					if(!file_exists('files/'.$entity_field)){
+
+
 
     					mkdir('files/'.$entity_field);
 
-						mkdir('files/'.$entity_field.'/original');
+
+
+						mkdir('files/'.$entity_field.'');
+
+
 
     				}
+
     				$directory_path = 'files/'.$entity_field;	    				
+
     				$substring_required = 'no';
+
     			}	
 
-				
 
-				$thumb_val = array();
-
-    			$original_path = $this->chk_filename($directory_path.'/original/', $photos_uploaded['name']);
 
     			
 
+				$thumb_val = array();
+
+
+
+    			$original_path = $this->chk_filename($directory_path.'/', $photos_uploaded['name']);
+
+
+
 				move_uploaded_file($photos_uploaded["tmp_name"], $original_path);
 
+
+
 				if($substring_required == 'no')
+
 					$thumb_val['original'] = $original_path;
+
 				else
+
 					$thumb_val['original'] = substr($original_path, 3);
+
+
+				return $thumb_val['original'];
+
 				
+
 				/*$this->resize_image($dest_path,$dest_path,$width,$height);*/
+
+
 
 					$thumbnails = $this->image_thumbnails();
 
+
+
 					if(count($thumbnails)>0){
+
+
 
 						foreach($thumbnails as $thumbnail){
 
+
+
 							if(!file_exists($directory_path.'/'.$thumbnail['name']))
+
+
 
 								mkdir($directory_path.'/'.$thumbnail['name']);
 
+
+
 								
+
+
 
 							$dest_path = $this->chk_filename($directory_path.'/'.$thumbnail['name'].'/', $photos_uploaded['name']);
 
+
+
 							if($thumbnail['style']=='resize'){
+
+
 
 								$this->resize_image($original_path,$dest_path,$thumbnail['width'],$thumbnail['height']);
 
+
+
 							}elseif($thumbnail['style']=='resize_exact'){
+
+
 
 								$this->resize_exact_image($original_path,$dest_path,$thumbnail['width'],$thumbnail['height']);
 
+
+
 							}elseif($thumbnail['style']=='resize_crop'){
+
+
 
 								$this->resize_crop_image($original_path,$dest_path,$thumbnail['width'],$thumbnail['height']);
 
+
+
 							}
 
+
+
 							if($substring_required == 'no')
+
 								$thumb_val[$thumbnail['name']] = $dest_path;
+
 							else
+
 								$thumb_val[$thumbnail['name']] = substr($dest_path, 3);
+
+
 
 						}
 
+
+
 						$images_thumbnails['img_thumbnails'] = serialize($thumb_val);
+
+
 
 					}
 
+
+
 				
+
+
 
 				return $images_thumbnails;
 
+
+
     		}    
+
+
 
 	}
 	function uploadfile($file_uploaded, $dest_path)

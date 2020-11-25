@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Add URL | Linkibag";     
+	$co->page_title = "Add URL | LinkiBag";     
  	$current = $co->getcurrentuser_profile();  	
 	$user_profile_info = $co->call_profile($current['uid']);  
 	$list_shared_links_by_admin = $co->list_shared_links_by_admin('0');  	    
@@ -59,12 +59,12 @@ function page_content(){
 			</div>
 			<div class="containt-area" id="dashboard_new">  
 				<div class="container"> 
-					<div class="col-md-3">      
+					<div class="col-md-3 my_lnk_left">      
 						<?php include('dashboard_sidebar.php'); ?>      
 					</div>
-					<div class="containt-area-dash col-md-9"> 
+					<div id='add_url_right_panel' class="containt-area-dash col-md-9 my_lnk_right"> 
 							<div class="user-name-dash row">
-								<div class="col-sm-10" style="padding: 0;">
+								<div class="col-sm-12" style="padding: 0;">
 									<a class="text-blue" href="index.php?p=add_url"><i class="fa fa-check"></i> Add New Links</a>
 									<a class="btn button-grey pull-right" href="index.php?p=linkibags">My Folders</a>
 								</div>
@@ -81,29 +81,36 @@ function page_content(){
 									<input type="hidden" name="this_page" value="<?=$this_page?>"/>
 											
 												<div class="form-group">
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<label class="mylabel">URL:</label>  
 													</div>
-													<div class="col-sm-8">	
+													<div class="col-sm-10 ful_wid">	
 														<input type="text" name="url_value" class="form-control" placeholder="http://www.sample.com" value="" maxlength="255"/>
 													</div>
 												</div>
 												<div class="form-group">
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<label class="mylabel">Description:</label>  
 													</div>
-													<div class="col-sm-8">	
+													<div class="col-sm-8 ful_wid">	
 														<textarea placeholder="Description goes here." name="url_desc" class="form-control url-desc" value="" maxlength="255"></textarea>
 													</div>	
+													
+													<div class="col-sm-2 ful_wid">
+													<button type="submit" onclick="ShowHideSubmit()" style="    padding: 5px 20px;" class="btn btn-default linki-btn" id="send_url"><i class="fa fa-check"></i>Add</button><p></p>
+													<button type="button" onclick="url_clears()" class="btn btn-default linki-btn" id="url_clear">Cancel</button>
+												</div>
+												
+												
 												</div>
 												<div class="form-group">
-													<div class="col-md-4">
+													<div class="col-md-2">
 														<label class="mylabel">Select Folder:</label>  
 													</div>
-													<div class="col-sm-5">	
+													<div class="col-sm-7">	
 														<select name="url_cat" id="move_to_cat" class="form-control">
 															<option value="">Select Folder</option>
-															<option value="-2" selected="selected">Inbag</option>
+															<option value="-2" selected="selected">My Links</option>
 															<?php
 															foreach($categories as $cat){
 															echo '<option value="'.$cat['cid'].'">'.$cat['cname'].'</option>';
@@ -111,7 +118,7 @@ function page_content(){
 															?>
 														</select>
 													</div>	
-													<div class="col-sm-3">
+													<div class="col-sm-3 add_new_f">
 														<a class="text-info" href="javascript: load_add_frm('category', 'view_link');"><small>Add New Folder</small></a>
 													</div>
 												</div>
@@ -124,10 +131,10 @@ function page_content(){
 													for instutional account only 4 options and we changed label
 													for other accounts only 3 option are used													
 													-->
-													<div class="col-sm-6">	
+													<div class="col-sm-8 ful_wid">	
 														<select name="share_type" id="share_type" class="form-control" onchange="show_public_cat(this.value);">
 															<option value="1">Not for share</option>
-															<option value="2">I may share this link with selected users</option>
+															<option value="2" selected="selected">I may share this link with selected users</option>
 															<?php /*
 															<option value="1"><?=(($current['role'] == 3) ? 'Not Shared' : 'Just Me')?></option>
 															<option value="2"><?=(($current['role'] == 3) ? 'I will share this link with selected users' : 'I will decide with whom to share')?> </option>
@@ -165,10 +172,7 @@ function page_content(){
 														<a class="text-info" href="javascript: load_add_frm('public_category', 'view_link');"><small>Recommend Category</small></a>
 													</div>	
 												</div>
-												<div class="col-sm-7 col-sm-offset-4 text-right">
-													<button type="submit" onclick="ShowHideSubmit()" class="btn btn-default linki-btn" id="send_url">Add</button>
-													<button type="button" onclick="url_clears()" class="btn btn-default linki-btn" id="url_clear">Cancel</button>
-												</div>
+												
 										</form>
 									</div>
 								</div>	
@@ -228,7 +232,7 @@ function page_content(){
 		   .theme-modal-header .modal-header h4 {
 		       color: #fff !important;
 		   }
-		   label {
+		   #url_form label {
 		       color: #31496a !important;
 		   }
 		   .linki-btn {

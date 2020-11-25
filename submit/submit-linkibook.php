@@ -65,7 +65,7 @@ if(isset($_POST['form_id']) and $_POST['form_id']=="share_linkibook"){
 			}
 
 			if(!(isset($chk_already_your_friend['friend_id']) and $chk_already_your_friend['friend_id'] > 0)){
-				$already_send_request = $co->query_first("SELECT COUNT(request_id) as total FROM `friends_request` WHERE request_by=:uid and request_to=0 and status=0 and request_email=:uid2",array('uid'=>$current['uid'],'uid2'=>$email_ids)); 
+				$already_send_request = $co->query_first("SELECT COUNT(request_id) as total FROM `friends_request` WHERE request_by=:uid and status=0 and request_email=:uid2",array('uid'=>$current['uid'],'uid2'=>$email_ids)); 
 				if(isset($already_send_request['total']) and $already_send_request['total'] == 5){
 					$errors .= "<li>You can share maximum of 5 links with users who are not on your LinkiBag friends list. Connect with your friends today to continue sharing your links.<br /><br />We will not be able to share your link(s) with<br /><span class=\"text-danger\">".$email_ids."</span></li>";
 					$success=false;
@@ -84,7 +84,7 @@ if(isset($_POST['form_id']) and $_POST['form_id']=="share_linkibook"){
 			$co->share_linkibook('email', $current, $email_ids, $_POST['book'], $share_id, $_SESSION["share_number"]);
 		}
 		$table_serialize_for_print = '';
-		echo json_encode(array('msg'=>'LinkiBook(s) shared successfully','success'=>$success,'table_serialize_for_print'=>$table_serialize_for_print));
+		echo json_encode(array('msg'=>'LinkiBook(s) shared successfully','success'=>$success,'table_serialize_for_print'=>$table_serialize_for_print,'redirectTo'=>'index.php?p=linkibook'));
 			exit();
 	}else{
 		$msg ='<div class="alert alert-danger"><ul>'.$errors.'</ul></div>';

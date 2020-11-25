@@ -1,0 +1,111 @@
+<?php  
+function page_access(){	
+	global $co, $msg;      	
+	$user_login = $co->is_userlogin();      	
+	          
+}      
+function page_content(){      
+	global $co, $msg;      	
+	$no_record_found='';      	
+	$co->page_title = "Dashboard | Linkibag";     
+ 		      	
+	$this_page='p=dashboard';      
+?>
+		<section id="free_singup" class="light-bg">
+		<div id="free_singup_main" class="container">
+			<div class="col-md-offset-3 col-md-7">
+			<p></p>
+				<div class="light-panel">
+					<div class="light-panel-header text-left">
+						<h4 style="font-weight: 500;"><span style="color: #8c8c8c;">You are located outside of our service area. Our website and service provided via this website is exclusively for use by those individuals located in the United States.<br><br><br>
+						We appologize for any inconvenience.Please leave your email address to be informed when LinkiBag is available in your area.</span></h4>
+					</div>
+					<div class="light-panel-body">
+						<form method="post" id="register_outside_linkibag_service_form" action="index.php?p=outside-linkibag-service-area&ajax=ajax_submit" onsubmit="javascript: return submit_outside_service_area();" novalidate="novalidate">
+							<input type="hidden" name="form_id" value="register_other_country"/>
+
+			               <div class="text-left wow fadeInUp templatemo-box">
+			                  <div class="homepage-login-form">
+			                     <div>
+									<div id="messagesout"></div>
+									<div class="form-group row">
+										<label class="mylabel col-md-4">Email: <span class="required-field"> *</span></label>
+										<div class="col-md-8">
+											<input placeholder="Your-email@mail.com" type="email" name="email_id" aria-describedby="basic-addon1" class="form-control error" value="">
+										</div>
+									</div>
+									<div class="form-group row">
+										<label class="mylabel col-md-4">Country: <span class="required-field">*</span></label>
+										<div class="col-md-8">
+										<select class="form-control linkibox_select" name="country" onchange="country_change(this.value);">
+											<option value="">Select Country</option>
+											<?php
+											$countries = $co->fetch_all_array("select id,country_name from countries where id>'1' ORDER BY country_name ASC", array());
+											foreach($countries as $country){
+												$sel = '';
+												if(isset($row['country']) and $row['country'] == $country['id'])
+													$sel = ' selected="selected"';	
+												else if($country['id'] == 1)
+													$sel = ' selected="selected"';	
+
+												echo '<option value="'.$country['id'].'"'.$sel.'>'.$country['country_name'].'</option>';
+											}	
+											?>
+										</select>
+										</div>
+									</div>
+									<div class="form-group col-sm-offset-4 col-sm-4">
+										<button type="submit" class="orange-btn btn-block" id="send_register">Send</button>
+									</div>
+								</div>
+							</div>		
+						</div>			
+					</form>			
+				</div>						
+			</div>
+		</div>
+	</div>
+</section>	
+
+
+<script type="text/javascript">
+	
+function submit_outside_service_area(){	
+	if($('#register_outside_linkibag_service_form').valid()){
+		var formdata = new FormData($('	#register_outside_linkibag_service_form')[0]);
+		$('#send_register').html('Checking');
+		$('#send_register').attr('disabled', 'disabled');
+		$.ajax({
+			type: "POST",
+			url: $('#register_outside_linkibag_service_form').attr('action'),
+			data: formdata,
+			cache: false,
+			contentType: false,
+			processData: false,
+			success: function(res2) {
+				res2 = JSON.parse(res2);
+				//alert(res2);	
+				if(res2.success === true){
+					$("#dialog_success").html(res2.msg);
+					$("#dialog_success" ).dialog( "open" );
+					$(".ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix").addClass( "dialog_success" );
+					
+				}else if(res2.success === false){
+					$("#dialog_error").html(res2.msg);
+					$( "#dialog_error" ).dialog( "open" );					
+					$(".ui-dialog-titlebar.ui-widget-header.ui-corner-all.ui-helper-clearfix").addClass( "dialog_error" );
+				}
+
+				$('#send_register').html('Send');
+				$('#send_register').removeAttr('disabled');
+				
+			}
+		});
+	}
+	return false;
+}	
+
+</script>								
+		
+					
+		<?php  }      ?>

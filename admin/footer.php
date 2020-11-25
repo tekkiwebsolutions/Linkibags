@@ -15,48 +15,67 @@
 	<script  type="text/javascript" src="js/jquery.plugin.js"></script>
 	<script   type="text/javascript" src="js/jquery.datepick.js"></script>
 	<script src="js/jquery-ui.js"></script>
-	<script type="text/javascript" src="js/dataTables.min.js"></script>
+	<script type="text/javascript" src="js/dataTables.min.js"></script>	
 	
+	<script type="text/javascript" language="javascript" src="js/dataTables.buttons.min.js"></script>   
+	<script type="text/javascript" language="javascript" src="js/buttons.html5.min.js"></script> 
+	<style>
+		table.dataTable tbody th:last-child, table.dataTable tbody td:last-child {
+		width:15% !important;
+		} 
+	</style>
     <script type="text/javascript">
-    $(document).ready(function() {			
-$(".multifield").EnableMultiField();
+	$(document).ready(function() {
+		$(".multifield").EnableMultiField();
+		$(".sorted_table").sortable({ 
+			opacity: 0.6, cursor: 'move', update: function() {
+				var order = $(this).sortable("serialize") + '&action=updateRecordsListings';
+				$.post("sort_this_category.php", order, function(theResponse){		
+					alert('Positions Saved');
+				});
+			}
+		});	
 
-$(".sorted_table").sortable({ opacity: 0.6, cursor: 'move', update: function() {
-	var order = $(this).sortable("serialize") + '&action=updateRecordsListings';
-	$.post("sort_this_category.php", order, function(theResponse){		
-		alert('Positions Saved');
-	});
-}
-});	
-
-//$('.datatable').DataTable(); 	
-			
-	var usertable = $('#manage_users').DataTable({
-		"columns": [
-			{"data": "uid"},
-			{"data": "first_name"},
-			{"data": "last_name"},
-			{"data": "email_id"},
-			{"data": "role"},
-			{"data": "status"},
-			{"data": "verified"},
-			{"data": "created"},
-			{"data": "last_login_time"},
-			{"data": "edit"}
-			
-		],
-		"processing": true,
-		"serverSide": true,
-		"ajax": {
-			url: '../ajax/users_list.php',
-			type: 'POST',
-		}	
-	});
+		//$('.datatable').DataTable(); 	
+				
+		var usertable = $('#manage_users').DataTable({
+			"columns": [
+				{"data": "uid"},
+				{"data": "first_name"},
+				{"data": "last_name"},
+				{"data": "email_id"},
+				{"data": "state_name"},
+				{"data": "zip_code"},
+				{"data": "role"},
+				{"data": "status"},
+				{"data": "verified"},
+				{"data": "created"},
+				{"data": "last_login_time"},
+				{"data": "subscribe"},
+				{"data": "edit"}				
+			],			
+			"processing": true,
+			"serverSide": true,
+			"ajax": {
+				url: '../ajax/users_list.php',
+				type: 'POST',
+			},
+			stateSave: true,
+			dom: 'fBrtlip', 
+			buttons: [  {
+				extend : 'csv',
+				text: 'Export Table Data To Excel File',
+				exportOptions : {
+					order : 'current',  
+					page : 'all',  
+					columns: [ 1, 2, 3,4,5,6,7,8,9 ]
+				} ,
+			} ]
+		});  
+	});	 
 	
 	
 
-});	
-		
 	function show_del_users(){
 		var link = '';
 		$( "input:checkbox[class=del_users]:checked" ).each(function() {

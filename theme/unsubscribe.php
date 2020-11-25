@@ -1,7 +1,7 @@
 <?php    
 function page_content(){      
 	global $co, $msg;      	     	
-	$co->page_title = "Unsubscribe | Linkibag";         	
+	$co->page_title = "Unsubscribe | LinkiBag";         	
 	$this_page='p=unsubscribe';  
 
 	if(isset($_GET['email'])){

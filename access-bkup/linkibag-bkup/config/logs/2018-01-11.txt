@@ -1,0 +1,7 @@
+Time : 08:08:10
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cid' in 'where clause'
+Raw SQL : UPDATE `user_shared_urls` SET url_msg = :url_msg,url_msg_time = :url_msg_time WHERE cid=:id and uid=:uid
+
+Time : 08:07:32
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'cid' in 'where clause'
+Raw SQL : UPDATE `user_shared_urls` SET url_msg = :url_msg,url_msg_time = :url_msg_time WHERE cid=:id and uid=:uid

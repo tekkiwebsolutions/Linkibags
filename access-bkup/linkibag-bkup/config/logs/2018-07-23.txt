@@ -1,0 +1,6 @@
+Time : 06:40:48
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+Raw SQL : select COUNT(`uf`.friend_id) as total from `user_friends` uf, `groups_friends` gf where `uf`.uid=:uid and `uf`.status>='0' and `uf`.status<'2' and `uf`.fid!=gf.email_id)
+
+Time : 05:52:52
+SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty

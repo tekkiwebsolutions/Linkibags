@@ -10,7 +10,7 @@
    function page_content(){      
    	global $co, $msg;      	
    	$no_record_found='';      	
-   	$co->page_title = "Account Settings | Linkibag";     
+   	$co->page_title = "Account Settings | LinkiBag";     
     $current = $co->getcurrentuser_profile();  	
    	$this_page='p=account_settings';      
 	/*if($current['role'] == 1)
@@ -39,13 +39,12 @@
 	
    	?>
 
-		
-
 		<section class="sign_up_main_page" id="public-bag">	
 
 		 <div class="container bread-crumb top-line">
       <div class="col-md-12">
-         <p><a href="index.php">Home</a> &gt; Account Settings </p>
+		 <p><a href="index.php">Home</a> &gt; Account Settings </p>
+		
       </div>
    </div>
 		
@@ -55,60 +54,101 @@
 					include('account_setting_sidebar.php');
 					?>		
 
-
-					<div class="col-md-9">
+					<div class="col-md-9 account_setting_btm">
 						<div class="account-setting-header">
 							<h3>Account Settings</h3>
-							<p>You must complete your interest form to continue with use of your free account. <a style="text-decoration: underline; color: red;" href="index.php?p=categories-list">Complete Now</a></p>
+							<p></p>
+							<?php if(!isset($get_completed_on['created'])){?>
+							<p>You must complete your interest form to continue with use of your free account.
+						   <a style="text-decoration: underline; color: red;" href="index.php?p=categories-list">Complete Now</a></p>
+							<?php } ?>
 						</div>
 						<div class="settings">
 							<div class="row">
-								<div class="col-md-5 generate">
-									<p><span><u>Complete or update your interest form </u> </span></p>
+								<div class="col-md-9 generate">
+									<p><span><u>Complete or update your interest form </u></span></p>
 								</div>
-								<div class="col-md-7 linkibag">
+								<div class="col-md-3">
 									<?php if(isset($get_completed_on['created']) and $get_completed_on['created'] != ''){ ?>
-										<p class="completed_on">Completed on <?=date('m/d/Y', $get_completed_on['created'])?></p>
+										<p class="completed_on"><a  href="index.php?p=categories-list">Completed on <?=date('m/d/Y', $get_completed_on['created'])?></a></p>
 									<?php }else{ ?>
 										<p><a style="color:red;float: left;padding-right: 35px; line-height:2" href="index.php?p=categories-list">Complete Now</a></p>
 									<?php } ?>
 									
 								</div>
 							</div>
+						
 							<div class="row">
-								<div class="col-md-5 generate">
-									<p><u><a data-toggle="modal" role="button" href="<?=((isset($current['paid_users_generate_links']) and $current['paid_users_generate_links'] != '') ? 'no_link' : '#myModal_generate_link')?>">Direct Link</a></u></p>
+								<div class="col-md-12 generate">
+									<!-- <u style="float:left;"><a data-toggle="modal" role="button" href="<?=((isset($current['paid_users_generate_links']) and $current['paid_users_generate_links'] != '') ? 'no_link' : '#myModal_generate_link')?>">Direct Link:&nbsp; &nbsp; &nbsp;</a></u>
+									<p style="line-height: 3em; float:left;"><u><?=((isset($current['paid_users_generate_links']) and $current['paid_users_generate_links'] != '') ? $current['paid_users_generate_links'] : 'Not created, yet')?></u></p> -->
 								</div>
-								<div class="col-md-7 linkibag">
-									<p style="line-height: 3em;"><u><?=((isset($current['paid_users_generate_links']) and $current['paid_users_generate_links'] != '') ? $current['paid_users_generate_links'] : 'Not created, yet')?></u></p>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-5 generate">
-									<p><u>Make my profile unsearchable for everyone</u></p>
-								</div>
-								<div class="col-md-7 linkibag">
-									<p><input type="checkbox" id="make_search" name="make_search" value="1" onclick="make_searchable(this.value);"<?=((isset($current['remove_profile']) and strlen($current['remove_profile']) == 10) ? ' checked' : '')?>/></p>
-								</div>
-							</div>
 							
+							</div>
+							<div class="row">
+								<div class="col-md-12">
+								    <!-- <div class="linkibag">
+								    <p><input type="checkbox" id="make_search" name="make_search" value="1" onclick="make_searchable(this.value);"<?=((isset($current['remove_profile']) and strlen($current['remove_profile']) == 10) ? ' checked' : '')?>/></p>
+								    </div>
+								    <div class="generate">
+									<p><u>Make my profile unsearchable for everyone</u></p>
+									</div> -->
+								</div>
+									</div>
+								<div class="row">
+								<div class="col-md-12">
+
+								<div class="col-md-9 pad-sm">
+								<label class="mylabel ">
+									
+								<div class="generate">
+								<p><u><strong>Receiving email notifications from LinkiBag users</strong></u></p>
+								</div>
+								<p class="activee">
+								(If you choose to turn it off, you will no longer receive email notification from
+								<br>	LinkiBag users such as link share and connection requests)
+									</p>
+						
+								</label></div>
+								<div class="col-md-3 update_area">
+								<input class='tgl tgl-skewed' id="donot_recieve_email" onclick="donot_recieve_email(this.value);"  type='checkbox'  name="I want to stop receiving any messages from LinkiBag and it's users."
+								<?php
+								if(isset($current['donot_recieve_email']) and $current['donot_recieve_email'] == "1") {?>
+								 checked="checked" <?php } ?>>
+								<label class='tgl-btn' data-tg-off='OFF' data-tg-on='ON' for='donot_recieve_email'>
+								</label>
+								<span class="activee"><?php echo 'Updated on '.date('d/m/Y',$current['donot_recieve_email_timestamp']);?></span>
+								</div>	
+
+
+								    <!-- <div class="linkibag">
+    									<p><input type="checkbox" id="donot_recieve_email"  name="I want to stop receiving any messages from LinkiBag and it's users." value="1" onclick="donot_recieve_email(this.value);"<?=((isset($current['donot_recieve_email']) and $current['donot_recieve_email'] == 1) ? ' checked' : '')?>/></p>
+    								</div>
+    								<div class="generate">
+    									<span class="activee">I want to stop receiving any messages from LinkiBag and it's users</span>
+									</div>
+									<?php 
+									// if((isset($current['donot_recieve_email']) and $current['donot_recieve_email'] != 1))
+									// {
+									// echo 'Subscribed on '.date('d/m/Y',$current['donot_recieve_email_timestamp']);
+									// }else{
+									// 	echo 'Unsubscribed on '.date('d/m/Y',$current['donot_recieve_email_timestamp']);
+									// }
+									?> -->
+								</div>
+							</div>
+
 							<div class="col-md-5 generate">
 								<div class="row">
-									
-									 
-									 				
+												
 									<?php /*
 									<p><span style="color:#31496a;"><u>My Linkibag search page </u> </span>  (avilable for all paid account)</p> 			
 									<?=((isset($current['paid_users_generate_links']) and $current['paid_users_generate_links'] != '') ? '<p><u>Remove my Linkibag Profie From LInkibag search</u></p>' : '')?>					
 									<p><u><a href="index.php?p=categories-list">Complete your interest form</a></u></p>	*/ ?>				
 								</div>
 							</div>
-
+                           <div class="row">
 							<div class="col-md-7 linkibag">
-								
-								
-								
-
 								
 								<?php /*
 								<p><a style="color:grey;float: left;padding-right: 35px; line-height:2" data-toggle="modal" role="button" href="#myModal_generate_link">Generate Link</a> 
@@ -125,7 +165,7 @@
 									*/ ?>
 								</div>
 							</div>
-							
+							</div>
 						</div>
 					</div>
 				</div>
@@ -160,7 +200,7 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-								<h3 id="myModalLabel3"><?=((isset($current['remove_profile']) and strlen($current['remove_profile']) == 10) ? 'Unremove my Linkibag Profie From LInkibag search' : 'Remove my Linkibag Profie From LInkibag search')?></h3>
+								<h3 id="myModalLabel3"><?=((isset($current['remove_profile']) and strlen($current['remove_profile']) == 10) ? 'Unremove my LinkiBag Profie From LInkibag search' : 'Remove my LinkiBag Profie From LinkiBag search')?></h3>
 							</div>
 							<div class="modal-body">
 								<p>Are you sure!</p>
@@ -190,6 +230,23 @@
 						
 					}
 
+					function donot_recieve_email() {
+						if($('#donot_recieve_email').prop('checked') == true){
+							var formdata = { form_id: 'change_recieve_email', donot_recieve_email: 1 };
+						}else{
+							var formdata = { form_id: 'change_recieve_email', donot_recieve_email: 0 };
+						}
+						$.ajax({
+							type: "POST",
+							url: "index.php?p=account_settings",
+							data: formdata,
+							success: function(dd) {
+								$("#dialog_success").html(dd);	
+								$("#dialog_success" ).dialog( "open" );
+							}
+						});
+					}
+
 				</script>
 
 
@@ -210,6 +267,8 @@
 	.Home .ul .li .strong {display: inline; padding-left: 0px;} 
 	.center .Advertise {color: #fff;background-color: #31496a;border-color: #31496a;border-radius: 0px;
 		font-weight: 600;margin-top: 14px;padding: 5px 5px 5px 5px;margin-left: -10px;}
+		.linkibag { float:left; margin-right:8px; }
+		.linkibag input[type=checkbox] { float:left; }
 		.linkibag a {line-height: 3;}
 		.generate p {color: #465d96;}
 		.linkibag p {color: grey;}
@@ -235,6 +294,8 @@
 		/*	.account-setting {border: 1px solid #FF7F27;}*/
 		.generate a {color: grey;}
 		.Site-links a {color: grey;}
+		 .completed_on { float:right;}
+		
 		@media only screen and (max-width: 500px) {
 			.settings {margin-top: 13px;
 				margin: 36px;}
@@ -274,10 +335,13 @@
 				text-decoration: none;
 			}
 			.completed_on {
-			    margin-left: 32px;
-			    margin-top: 33px;
+			    
 			    color: grey;
 			    text-decoration: underline;
+			}
+			@media(max-width:991px)
+			{
+			    .completed_on { float:left;}
 			}
 			</style>
 

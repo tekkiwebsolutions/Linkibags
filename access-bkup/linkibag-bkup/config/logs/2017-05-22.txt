@@ -1,0 +1,37 @@
+Time : 12:34:14
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT ur.*, fr.request_email, fr.request_to, p.first_name, p.last_name, u.email_id, u.created FROM user_friends ur 
+		JOIN friends_request fr ON ur.request_id=fr.request_id
+		LEFT JOIN profile p ON ur.fid=p.uid 
+		LEFT JOIN users u ON ur.fid=u.uid WHERE (ur.fid=:id2) ORDER BY friend_id DESC
+
+Time : 12:34:12
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT ur.*, fr.request_email, fr.request_to, p.first_name, p.last_name, u.email_id, u.created FROM user_friends ur 
+		JOIN friends_request fr ON ur.request_id=fr.request_id
+		LEFT JOIN profile p ON ur.fid=p.uid 
+		LEFT JOIN users u ON ur.fid=u.uid WHERE (ur.fid=:id2) ORDER BY friend_id DESC
+
+Time : 12:12:10
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : UPDATE `user_friends` SET read_status = :read_status WHERE request_id=:id
+
+Time : 12:11:30
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : UPDATE `user_friends` SET read_status = :read_status WHERE request_id=:id
+
+Time : 12:10:51
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : UPDATE `user_friends` SET read_status = :read_status WHERE request_id=:id
+
+Time : 12:02:28
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'user_friends ur WHERE fr.request_id=? AND fr.request_to=? AND ur.request_id=fr.r' at line 1
+Raw SQL : SELECT fr.*,p.first_name, p.last_name from friends_request fr, profile p user_friends ur WHERE fr.request_id=:id AND fr.request_to=:uid AND ur.request_id=fr.request_id AND p.uid=fr.request_to
+
+Time : 12:02:27
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'user_friends ur WHERE fr.request_id=? AND fr.request_to=? AND ur.request_id=fr.r' at line 1
+Raw SQL : SELECT fr.*,p.first_name, p.last_name from friends_request fr, profile p user_friends ur WHERE fr.request_id=:id AND fr.request_to=:uid AND ur.request_id=fr.request_id AND p.uid=fr.request_to
+
+Time : 11:50:57
+SQLSTATE[42S02]: Base table or view not found: 1051 Unknown table 'fr'
+Raw SQL : SELECT fr.* from friends_request, user_friends ur WHERE fr.request_id=:id AND fr.request_by=:uid AND ur.request_id=fr.request_id

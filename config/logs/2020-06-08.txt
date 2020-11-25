@@ -1,0 +1,11 @@
+Time : 02:17:52
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?' at line 1
+Raw SQL : SELECT * FROM category WHERE cid IN :categories
+
+Time : 01:24:04
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT * from admin_ads WHERE adid=:adid ORDER BY aid desc
+
+Time : 01:23:55
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT * from admin_ads WHERE adid=:adid ORDER BY aid desc

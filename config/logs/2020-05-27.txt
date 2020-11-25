@@ -1,0 +1,14 @@
+Time : 22:37:55
+SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+
+
+Time : 06:24:49
+SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+
+
+Time : 06:24:42
+SQLSTATE[HY000] [2002] No connection could be made because the target machine actively refused it.
+
+
+Time : 02:23:40
+SQLSTATE[HY000] [1045] Access denied for user 'bag55_linkibag'@'localhost' (using password: YES)

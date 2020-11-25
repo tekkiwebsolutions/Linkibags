@@ -38,7 +38,7 @@
 		?>
 		<?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?>
 		<div class="image-blow-text">
-							Try us risk free. Signup for your <span class="orange-blue"><a class="orange-blue" href="index.php?#free_singup">Free Account </a></span>today.
+							Create your <span class="orange-blue"><a class="orange-blue" href="sign-up">Free Account </a></span>today.
 						</div>
 		<?php } ?>
 	</div>
@@ -60,7 +60,7 @@
 		</div>	
 		<div class="page-btns" style="margin-top: 0pc; margin-bottom: 49px;">
 			<?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?>
-			<a class="btn orange-bg" href="index.php?#free_singup">Free Signup</a>
+			<a class="btn orange-bg" href="sign-up">Free Sign Up</a>
 			<?php } ?>
 		</div>
 		<?=$page['page_body']?>	

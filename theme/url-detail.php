@@ -32,7 +32,7 @@
   	global $co, $msg;
   
   
-  	$co->page_title = "URL detail | Linkibag";
+  	$co->page_title = "URL detail | LinkiBag";
   
   
   	$current = $co->getcurrentuser_profile();

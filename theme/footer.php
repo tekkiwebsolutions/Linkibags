@@ -1,61 +1,83 @@
 <!-- start footer -->	
+<?php
+if(($_GET['p']!='contact-us')){
+    ?>
 <div id="dialog_error" title="Error"></div>
 <div id="dialog_confirm" title="Confirmation"></div>
 <div id="dialog_success" title="Success"></div>
- 
-	<div class="copyright-bar">	<a style="float: left; color: rgb(195, 195, 195);" href="index.php?p=pages&id=8">Terms of Use</a> <span style="float: left; margin-left: 7px;">|</span> <a style="float: left; color: rgb(195, 195, 195); margin-left: 7px;" href="index.php?p=pages&id=9">Privacy Policy</a>	LinkiBag Inc. © <?php echo date("Y"); ?></div>
+ <?php } ?>
+ <div id='footer_container' style="bottom:0;width: 100%;" >
+	<div class="copyright-bar">	<a style="float: left; color: rgb(195, 195, 195);" href="<?=WEB_ROOT?>page/terms">Terms of Use</a> <span style="float: left; margin-left: 7px;">|</span> <a style="float: left; color: rgb(195, 195, 195); margin-left: 7px;" href="<?=WEB_ROOT?>page/policy">Privacy Policy</a><a style=" color: rgb(195, 195, 195);" href="<?=WEB_ROOT?>site-map">Site Map</a> |	LinkiBag Inc. © <?php echo date("Y"); ?></div>
 		<section id="footer">
 			<a href="#GoTop" class="gotoplink">
 				<i class="fa fa-angle-up up fa-3x" aria-hidden="true"></i>
 			</a>
 			<div class="container">
 				<div class="row">
-					<div style="padding-right:0px;" class="col-md-6 col-sm-6 wow fadeInUp templatemo-box" data-wow-delay="0.3s">
+					<div style="padding-right:0px;" class="col-md-6 col-sm-12 wow fadeInUp templatemo-box" data-wow-delay="0.3s">
 						<div class="footer-box">
 							<h2>Solutions</h2>
 							<ul>		
-								<li><a href="index.php?p=free-personal-accounts">Free Accounts </a></li>
-								<li><a href="index.php?p=contact-us">Advertise with LinkiBag</a></li>
-							</ul>	
-							<div class="contact-btn-form-footer">
-								<a class="btn btn-default" href="index.php?p=contact-us">Let’s get in touch</a>								
-							</div>
+								<li><a href="<?=WEB_ROOT?>free-personal-accounts">Free Accounts </a></li>
+								<li><a href="<?=WEB_ROOT?>?p=linki-drops-accounts">Advertise with LinkiBag</a></li>
+								<li><a href="<?=WEB_ROOT?>contact-us">Contact Us</a></li>
+									<li><a href="<?=WEB_ROOT?>media">Media</a></li>
+							</ul>
+							<ul class='social_footer'>
+							    <li><a href='https://facebook.com/linkibaglinks' target=_blank><i class="fa fa-facebook-f"></i></a></li>
+							    <li><a href='https://www.instagram.com/linkibag/' target=_blank><i class="fa fa-instagram" ></i></a></li>
+							    <li><a href='https://www.linkedin.com/company/linkibaginc/' target=_blank><i class="fa fa-linkedin"></i></a></li>
+							    <li><a href='https://twitter.com/linkibag' target=_blank><i class="fa fa-twitter"></i></a></li>
+							    <li><a href='https://www.youtube.com/channel/UCp2hsP62INPQ3n4CVOYlvqQ' target=_blank><i class="fa fa-youtube-play"></i></a></li>
+							    <li><a href='https://www.pinterest.com/thelinkibag' target=_blank><i class="fa fa-pinterest"></i></a></li>
+							</ul>
+							<!--<div class="contact-btn-form-footer">-->
+							<!--	<a class="btn btn-default" href="<? //=WEB_ROOT?>contact-us">Let’s get in touch</a>								-->
+							<!--</div>-->
 						</div>
 					</div>
-					<div class="col-md-6 col-sm-6 wow fadeInUp templatemo-box" data-wow-delay="0.3s">
+					<div class="col-md-6 col-sm-12 wow fadeInUp templatemo-box bottom_menu" data-wow-delay="0.3s">
 						<div class="footer-box">
 							<h2>LinkiBag.com</h2>
 							<ul>
-								<li><a href="index.php?p=how-it-works">How it works</a></li>
-								<li><a href="index.php?p=faq">User FAQs</a></li>
-								<li><a href="index.php?p=about_us">About Us</a></li>
+							    <!-- <?=WEB_ROOT?>how-it-works -->
+								<li><a href="">How It Works</a></li>
+								<li><a href="<?=WEB_ROOT?>faq">User FAQs</a></li>
+								<li><a href="<?=WEB_ROOT?>about-us">About Us</a></li>
 								<?php /*<li><a href="index.php?p=terms-of-use">Terms of Use</a></li>
 								<li><a href="javascript: open_popup_pages('8');">Terms of Use</a></li>*/ ?>
-								<li><a href="index.php?p=pages&id=8">Terms of Use</a></li>
-								<li><a href="index.php?p=pages&id=9">Privacy Policy</a></li>
+								<li><a href="<?=WEB_ROOT?>page/terms">Terms of Use</a></li>
+								<li><a href="<?=WEB_ROOT?>page/policy">Privacy Policy</a></li>
 							</ul>
 							<div class="newsletter-form-footer">	
 								<div id="newsletter_messages_out" style="width: 68%;"></div>
-								<form method="post" class="form-horizontal" id="newsletter_form" action="index.php?ajax=ajax_submit" onsubmit="javascript: return add_newletter();">
-									<input type="hidden" name="form_id" value="newsletter_us">
-									<fieldset>
-										<!-- Text input-->
-										<div class="form-group">
-										  <label class="col-md-5 col-xs-12 control-label">JOIN OUR NEWSLETTER</label>  
-										  <div class="col-md-7 col-xs-11">
-										  <input class="form-control input-md" type="email" id="subscribe_email" name="email_id" placeholder="Email Address" onkeyup="subscribe_emails();">
-										  <button type="submit" class="btn btn-default" id="newsletter_submit"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
-										  </div>
-										</div>
-									</fieldset>
-								</form>					
+								<!-- Begin Mailchimp Signup Form -->
+                                <link href="//cdn-images.mailchimp.com/embedcode/slim-10_7.css" rel="stylesheet" type="text/css">
+                                <style type="text/css">
+                                	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; }
+                                	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+                                	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+                                </style>
+                                <div id="mc_embed_signup" style="background: none;">
+                                <form style="padding:0" action="https://linkibag.us4.list-manage.com/subscribe/post?u=96bd06dd25e4e5bf67c2553b4&amp;id=f0ec7fc285" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                                    <div id="mc_embed_signup_scroll" style="display: flex">
+                                	<label style="padding-right: 5px;line-height: 28px;padding-bottom: 0;" for="mce-EMAIL">JOIN OUR NEWSLETTER  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                	<input style="max-width:46%; margin-right: 5px; max-height: 32px;" type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+                                    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+                                    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_9ad1938f9cbc47990b5a66040_360667bca0" tabindex="-1" value=""></div>
+                                    <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+                                    </div>
+                                </form>
+                                </div>
+                                
+                                <!--End mc_embed_signup-->		
 							</div>							
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-
+</div>
 <a data-toggle="modal" data-target="#edit-url-form" id="edit-url-button" style="display:none" href="#">Edit</a>
 
 <div class="modal fade" id="edit-url-form" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -207,102 +229,100 @@ p.wrong.shake {
 }
 </style>
 
-		<!-- end footer -->
-		<script type="text/javascript">
-		$(document).ready(function() {
-			$('#media').each(function(){
-				$(this).carousel({
-					pause: true,
-					interval: false
-				});
+<!-- end footer -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#media').each(function(){
+			$(this).carousel({
+				pause: true,
+				interval: false
 			});
-		});​
-		</script>
-		
-	
-		
-		
-		
-		
-		
-		
+		});
+	});
+	if($(window).height() > $("body").height()){
+	   $("#footer_container").css("position", "fixed");
+	} else {
+	   $("#footer_container").css("position", "static");
+	}
+</script>
 		
 		
-		<input type="hidden" id="WEB_ROOT" name="WEB_ROOT" value="<?=WEB_ROOT?>"/>
-		<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-		
-		<script src="<?=WEB_ROOT?>/theme/js/bootstrap.min.js"></script>
-		<script src="<?=WEB_ROOT?>/theme/js/chosen.jquery.js" type="text/javascript"></script>
-		<script src="<?=WEB_ROOT?>/theme/js/wow.min.js"></script>
-		<script src="<?=WEB_ROOT?>/theme/js/jquery-validation/dist/jquery.validate.js"></script>
-		<script src="<?=WEB_ROOT?>/theme/js/jquery-validation/dist/additional-methods.js"></script>
-		<script src="<?=WEB_ROOT?>/theme/js/jquery.tooltip.js"></script>
-		<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-		
-		<link href="http://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+<input type="hidden" id="WEB_ROOT" name="WEB_ROOT" value="<?=WEB_ROOT?>"/>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<!--<script src="<?=WEB_ROOT?>/theme/js/jquery-1.10.min.js"></script>-->
+<!--<script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>-->
+<script src="<?=WEB_ROOT?>/theme/js/bootstrap.min.js"></script>
+<script src="<?=WEB_ROOT?>/theme/js/chosen.jquery.js" type="text/javascript"></script>
+<script src="<?=WEB_ROOT?>/theme/js/wow.min.js"></script>
+<script src="<?=WEB_ROOT?>/theme/js/jquery-validation/dist/jquery.validate.js"></script>
+<script src="<?=WEB_ROOT?>/theme/js/jquery-validation/dist/additional-methods.js"></script>
+<script src="<?=WEB_ROOT?>/theme/js/jquery.tooltip.js"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 
-		<!-- recaptch code-->
-		<?php /*
-	    <div class="captcha-chat">
-	        <div class="captcha-container media">
-	            <div class="media-body">
-	                <p class="security">Security Check:</p>                
-	            </div>
-	            <div id="captcha">
-	                <div class="controls">
-	                    <input class="user-text btn-common" placeholder="Type here" type="text" />
-	                    <button class="validate btn-common">
-	                        <!-- this image should be converted into inline svg -->
-	                        <img src="images/enter_icon.png" alt="submit icon">
-	                    </button>
-	                    <button class="refresh btn-common">
-	                        <!-- this image should be converted into inline svg -->
-	                        <img src="images/refresh_icon.png" alt="refresh icon">
-	                    </button>
-	                </div>
-	            </div>
-	            <p class="wrong info">Wrong!, please try again.</p>
-	        </div>
-	    </div>*/ ?>
+<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
 
-		
-	    <script src="<?=WEB_ROOT?>/theme/js/client_captcha.js" defer></script>
-	    <script>
-	    document.addEventListener("DOMContentLoaded", function() {
-	        document.body.scrollTop; //force css repaint to ensure cssom is ready
+<!-- recaptch code-->
+<?php /*
+<div class="captcha-chat">
+	<div class="captcha-container media">
+		<div class="media-body">
+			<p class="security">Security Check:</p>                
+		</div>
+		<div id="captcha">
+			<div class="controls">
+				<input class="user-text btn-common" placeholder="Type here" type="text" />
+				<button class="validate btn-common">
+					<!-- this image should be converted into inline svg -->
+					<img src="images/enter_icon.png" alt="submit icon">
+				</button>
+				<button class="refresh btn-common">
+					<!-- this image should be converted into inline svg -->
+					<img src="images/refresh_icon.png" alt="refresh icon">
+				</button>
+			</div>
+		</div>
+		<p class="wrong info">Wrong!, please try again.</p>
+	</div>
+</div>*/ ?>
 
-	        var timeout; //global timout variable that holds reference to timer
 
-	        var captcha = new $.Captcha({
-	            onFailure: function() {
+<script src="<?=WEB_ROOT?>/theme/js/client_captcha.js" defer></script>
+<script>
+	document.addEventListener("DOMContentLoaded", function() {
+		document.body.scrollTop; //force css repaint to ensure cssom is ready
 
-	                $(".captcha-chat-wrong").show({
-	                    duration: 30,
-	                    done: function() {
-	                        var that = this;
-	                        clearTimeout(timeout);
-	                        $(this).removeClass("shake");
-	                        $(this).css("animation");
-	                        //Browser Reflow(repaint?): hacky way to ensure removal of css properties after removeclass
-	                        $(this).addClass("shake");
-	                        var time = parseFloat($(this).css("animation-duration")) * 1000;
-	                        timeout = setTimeout(function() {
-	                            $(that).removeClass("shake");
-	                        }, time);
-	                    }
-	                });
-	                
-	            },
+		var timeout; //global timout variable that holds reference to timer
 
-	            onSuccess: function() {
-	                alert("CORRECT!!!");
-	               
-	            }
-	        });
+		var captcha = new $.Captcha({
+			onFailure: function() {
 
-	        captcha.generate();
-	    });
-	    </script>
+				$(".captcha-chat-wrong").show({
+					duration: 30,
+					done: function() {
+						var that = this;
+						clearTimeout(timeout);
+						$(this).removeClass("shake");
+						$(this).css("animation");
+						//Browser Reflow(repaint?): hacky way to ensure removal of css properties after removeclass
+						$(this).addClass("shake");
+						var time = parseFloat($(this).css("animation-duration")) * 1000;
+						timeout = setTimeout(function() {
+							$(that).removeClass("shake");
+						}, time);
+					}
+				});
+				
+			},
+
+			onSuccess: function() {
+				alert("CORRECT!!!");
+			   
+			}
+		});
+
+		captcha.generate();
+	});
+</script>
 
 
 		<!-- end code -->
@@ -381,6 +401,11 @@ $(document).ready(function(){
         location.href = "index.php";
     };
 </script>
+<?php
+if(($_GET['p']!='contact-us')){
+    ?>
+
+
 
 		<script>
          
@@ -395,11 +420,11 @@ $(document).ready(function(){
 			
 			
 			$( "#dialog_success" ).dialog({
-               autoOpen: false, 
-               modal: true,
-               buttons: {
+              autoOpen: false, 
+              modal: true,
+              buttons: {
                   OK: function() {$(this).dialog("close");}
-               },
+              },
             });
 			
 			$( ".ui-dialog-title" ).html( "LinkiBag" );		
@@ -445,6 +470,11 @@ $(document).ready(function(){
 			});
 		}
 		 */
+		 </script>
+		  <?php 
+}
+?>
+		 <script>
 		 $(".onlynumbers").keydown(function (e) {
 			// Allow: backspace, delete, tab, escape, enter and .
 			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
@@ -548,7 +578,92 @@ input#user_birthday {
     background: #fff;
 }
 </style>
-
+<style>
+   .modal-header {
+    background-color: #ff8000;
+    color:#fff; padding-left: 10px !important;
+    padding-top: 10px !important;
+}
+.modal-body{color: #465d96;      text-align: left;  font-size: 14px;
+    font-weight:300;}
+    .modal-body p{      text-align: left;  }
+   .bread-crumb p, .bread-crumb p a {
+      color: #acacac;
+      font-size: 12px;
+   }
+   .share-btns .btn-default {
+      background: #c3c3c3 none repeat scroll 0 0;
+      color: #3a3a3a;
+   }
+   .share-btns {
+      display: inline-block;
+      margin: 11px 0;
+      width: 100%;
+   }
+   .share-btns .btn-primary {
+      background: #597794 none repeat scroll 0 0;
+   }
+   .share-btns .btn {
+      border: medium none;
+      border-radius: 0;
+   }
+   .text-grey{
+      color: grey;
+   }
+   .text-success{
+       color: green;
+   }
+   .round-like-badge {
+      background: #ff0000 none repeat scroll 0 0;
+      font-size: 11px;
+      height: 17px;
+      line-height: 16px;
+      min-width: 17px;
+      padding: 0 4px;
+      position: absolute;
+      top: -7px;
+      left: 131px;
+   }
+   .round-unlike-badge {
+      background: #ff0000 none repeat scroll 0 0;
+      font-size: 11px;
+      height: 17px;
+      line-height: 16px;
+      min-width: 17px;
+      padding: 0 4px;
+      position: absolute;
+      top: -17px;
+      right: -2px;
+   }
+   .fa-heart{
+      color: red;
+   }
+   .recommend{
+      color: red;
+   }
+   .round-recommend-badge {
+      background: #ff0000 none repeat scroll 0 0;
+      font-size: 11px;
+      height: 17px;
+      line-height: 16px;
+      min-width: 17px;
+      padding: 0 4px;
+      position: absolute;
+      top: -7px;
+      left: 184px;
+   }
+   .round-unrecommend-badge {
+      background: #ff0000 none repeat scroll 0 0;
+      font-size: 11px;
+      height: 17px;
+      line-height: 16px;
+      min-width: 17px;
+      padding: 0 4px;
+      position: absolute;
+      top: -17px;
+      right: -2px;
+   }
+</style>
 <?php
 if(isset($_SESSION['dialog_success'])){
 ?>
@@ -563,7 +678,6 @@ $(document).ready(function(){
 	unset($_SESSION['dialog_success']);
 }
 ?>
-
 
 
 
@@ -724,11 +838,16 @@ function automatically_d() {
 		});*/
 		$("#add_new_groups").bind("chosen:maxselected", function () {  });
 	</script>
-	<script>
-	$(document).ready(function(){
-		$('[data-toggle="tooltip"]').tooltip();
-	});
 	
+   		<script>
+   		
+		</script>
+		
+		<script>
+	
+	
+	
+
 	$("#checkAll").change(function () {
 		$(".urls_shared:checkbox").prop('checked', $(this).prop("checked"));
 		$(".grouping:checkbox").prop('checked', $(this).prop("checked"));
@@ -793,6 +912,70 @@ function automatically_d() {
 		var remaining_char = limitNum - limitField.value.length;
 		$('#textareamaxlimit').html('<span class="text-danger">'+remaining_char+' more '+(remaining_char>1 ? 'characters' : 'character')+'</span>');
 	}
+
+function cancel_agreement()
+{
+	window.location.href="logout.php";
+}
+
+function subscribeChange(e)
+{
+	$('#checkbox3').prop('checked', false);
+	if(e.checked) {
+		$('#checkbox3').click();	
+		$('#checkbox3').attr('checked', true);
+		$('#checkbox3').prop('checked', true);
+    }
+
+}
+	
+
+	function check_signupemail_message() {
+		$('#forget_password_msg').html('')
+		var email = $('#signup_email_id').val();
+		$('#singup_forget_link').hide();
+		if(email!="") {
+			$.ajax({
+				type: "POST",
+				url: "ajax/check_valid_email_exist.php",
+				data: {email_id: email},
+				success: function(dd) {
+					if(dd == 'false') {
+						$('#singup_forget_link').show();
+					}
+				}
+			});
+		}
+	}
+
+	function forget_password_submit(email_field_id, forget_link_id) {
+		var email = $('#'+email_field_id).val();
+		if(email=="") {
+		    $("#dialog_error").html('Email field is required');	
+	        $( "#dialog_error" ).dialog( "open" );
+		}else {
+		    $('#'+forget_link_id).html('Sending request...');
+    		$.ajax({
+    			type: "POST",
+    			url: "index.php",
+    			data: {email_adr: email, form_id: 'forget_password_ajax', ajax: 1},
+    			success: function(res) {
+    				res = JSON.parse(res);
+    				$('#'+forget_link_id).html('Forgot my password');
+    				if(email_field_id != "email") {
+    				    $('#'+forget_link_id).hide();
+    				}
+    				if(res.msg) {
+    					$('#forget_password_msg').html(res.msg);
+    					$('#'+email_field_id).val('');
+    					$('#register_form label.error').remove();
+    				}
+    			}
+    		});
+		}
+		
+	}
+	
 	/*$( "#user_birthday" ).datepicker({
       changeMonth: true,
       changeYear: true,
@@ -833,7 +1016,7 @@ function automatically_d() {
 			email: true,
 			remote: {
 				url: 'ajax/check_valid_email_exist.php',
-				type: "post",
+				type: "post"
 			},
 			
 
@@ -925,7 +1108,7 @@ function automatically_d() {
 		"password": {
 
 			required: "Please create your password",
-			remote: "",
+			remote: "Min 8 characters, must contain at least one lowercase letter, one uppercase letter, one numeric digit and one special character.",
 
 		},
 		reapt_pass: {
@@ -942,7 +1125,7 @@ function automatically_d() {
 		},*/
 		terms_and_conditions: {
 
-			required: "click selection box to indicate that you have read and agree to the terms",
+			required: "You must read and agree to privacy policy and terms of use to continue.",
 			 
 
 		},
@@ -995,16 +1178,13 @@ function automatically_d() {
 	});	
 
 
+
+
 $("#contact_us_form").validate({
 	ignore: ":hidden:not(#hiddenRecaptcha)",
 	rules: {
 
-		phone: {
-
-			required:true,
-
-		},
-
+	
 		first_name: {
 
 			required:true,
@@ -1045,11 +1225,7 @@ $("#contact_us_form").validate({
 
 	messages: {
 
-		phone: {
-
-			required: 'Please enter your phone number',
-
-		},
+	
 
 		first_name: {
 
@@ -1126,7 +1302,18 @@ $("#register_outside_linkibag_service_form").validate({
 function open_popup_pages(id){		
    window.open("CompanyPages.php?id="+id,"mywindow","width=1000,height=800");	
 }
-
+function resendConfirmMail(uid=''){ 
+	$.ajax({
+		type: "POST",
+		url: "ajax/ajax-common.php",
+		data: {uid: uid, action:'resendConfirmMail'},
+		success: function(res) {
+			res = JSON.parse(res);
+			var html ='<div class="alert alert-danger">Please check your inbox or spam folder to find the email from LinkiBag and follow the confirmation instructions.</div>';
+			$('#login_messages_out').html(html);
+		}
+	});
+}
 </script>
 
 

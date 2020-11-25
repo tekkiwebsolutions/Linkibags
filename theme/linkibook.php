@@ -11,7 +11,7 @@ function page_access(){
 function page_content(){      
    global $co, $msg;       
    $no_record_found='';       
-   $co->page_title = "Linkibook | Linkibag";     
+   $co->page_title = "Linkibook | LinkiBag";     
    $current = $co->getcurrentuser_profile();    
    
    $views=true;                  
@@ -50,10 +50,10 @@ function page_content(){
    </div>
    <div class="containt-area " id="dashboard_new">
       <div class="container">
-         <div class="col-md-3">      
+         <div class="col-md-3 my_lnk_left">      
             <?php include('dashboard_sidebar.php'); ?>    
          </div>
-         <div class="containt-area-dash col-md-9">
+         <div id='linkibook_right_panel' class="containt-area-dash col-md-9 my_lnk_right">
          <div>     
          <!-- Tab panes -->        
          <div class="tab-content">
@@ -62,10 +62,13 @@ function page_content(){
                   <div style="margin-bottom: 11px;" class="user-name-dash">
 				  
                      <div class="row">
-                        <div class="col-md-5 col-xs-12">
-                           <span style="display: inline-block; padding-top: 6px;position: relative;" class="text-blue" ><img style="vertical-align: middle;margin-bottom: 4px;" src="images/book_ico.png" alt="bag Icon"> LinkiBook 
+                        <div class="col-md-6 col-xs-12 top_left">
+                           <span style="display: inline-block; padding-top: 6px;position: relative;" class="text-blue" >
+                           <!-- <img style="vertical-align: middle;margin-bottom: 4px;" src="<?=WEB_ROOT?>images/book_ico.png" alt="bag Icon"> -->
+                           <i class="fa fa-pencil"></i>  My LinkiBooks 
                            
-                           </span> &nbsp;&nbsp;&nbsp;&nbsp;
+                           </span> 
+                           <a style="margin: 0px 3px;" class="share btn button-grey pull-right" href="index.php?p=atoz_mylinks" > Create a Book</a>
                            <a class="share btn button-grey pull-right" href="javascript: void(0);" onclick="multiple_linkibook_share();"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
                         </div>
                         <div class="col-md-6 col-xs-12 text-right">
@@ -215,7 +218,7 @@ function page_content(){
 						}	  
 			    ?>
 				<div class="row">
-					<div class="col-md-11 col-xs-12">
+					<div class="col-md-10 col-xs-12">
 					<?php if($total_page_count >1){ ?>
 						<div class="arrow_icons">
 							<?php 
@@ -233,7 +236,7 @@ function page_content(){
 						</div> 
 						<?php } ?>
 					</div>
-					<div class="col-md-1 col-xs-12"><div class="row"><small>Page <?=isset($_GET['page']) ? $_GET['page'] : 1?> of <?=$total_page_count?></small></div></div>
+					<div class="col-md-2 col-xs-12 pagination_txt"><div class="row"><small>Page <?=isset($_GET['page']) ? $_GET['page'] : 1?> of <?=$total_page_count?></small></div></div>
 				</div>	
         </div>
 		

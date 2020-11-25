@@ -1,0 +1,23 @@
+Time : 10:43:51
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group,email_id,created,updated,status) VALUES(?,?,?,?,?,?)' at line 1
+Raw SQL : INSERT INTO `groups_friends`(uid,group,email_id,created,updated,status) VALUES(:uid,:group,:email_id,:created,:updated,:status)
+
+Time : 10:43:24
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group,email_id,created,updated,status) VALUES(?,?,?,?,?,?)' at line 1
+Raw SQL : INSERT INTO `groups_friends`(uid,group,email_id,created,updated,status) VALUES(:uid,:group,:email_id,:created,:updated,:status)
+
+Time : 10:41:26
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group,email_id,created,updated,status) VALUES(?,?,?,?,?,?)' at line 1
+Raw SQL : INSERT INTO `groups_friends`(uid,group,email_id,created,updated,status) VALUES(:uid,:group,:email_id,:created,:updated,:status)
+
+Time : 10:39:23
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group,email_id,created,updated,status) VALUES(?,?,?,?,?,?)' at line 1
+Raw SQL : INSERT INTO `groups_friends`(uid,group,email_id,created,updated,status) VALUES(:uid,:group,:email_id,:created,:updated,:status)
+
+Time : 10:34:47
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group,email_id,created,updated,status) VALUES(?,?,?,?,?,?)' at line 1
+Raw SQL : INSERT INTO `groups_members`(uid,group,email_id,created,updated,status) VALUES(:uid,:group,:email_id,:created,:updated,:status)
+
+Time : 10:30:30
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'group,email_id,created,updated,status) VALUES(?,?,?,?,?,?)' at line 1
+Raw SQL : INSERT INTO `groups_members`(uid,group,email_id,created,updated,status) VALUES(:uid,:group,:email_id,:created,:updated,:status)

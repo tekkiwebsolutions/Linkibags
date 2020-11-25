@@ -7,7 +7,7 @@
    function page_content(){      
 		global $co, $msg;      	
 		$no_record_found='';      	
-		$co->page_title = "Account Settings | Linkibag";     
+		$co->page_title = "Account Settings | LinkiBag";     
 		$current = $co->getcurrentuser_profile();  	
 		$this_page='p=viewprofile';      
 

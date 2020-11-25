@@ -13,7 +13,7 @@
    	exit();
    	     	
    	$no_record_found='';      	
-   	$co->page_title = "My Account | Linkibag";     
+   	$co->page_title = "My Account | LinkiBag";     
     	$current = $co->getcurrentuser_profile();  	
    	$user_profile_info = $co->call_profile($current['uid']);  	    	      	
    	$this_page='p=renew';      
@@ -303,7 +303,7 @@
 			}
 			
 			.paymentwrap .paymentbtngroup .paymentmethod .method.paypal_basic {
-				background-image: url("http://linkibag.net/PTest25x/linkibag/images/image.jpg");
+				background-image: url("https://www.linkibag.com/images/image.jpg");
 			}
 			
 											</style>

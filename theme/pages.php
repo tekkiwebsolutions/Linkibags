@@ -3,8 +3,8 @@ function page_content(){
 global $co, $msg;
 
 
-$page = $co->query_first("SELECT * FROM pages WHERE page_id=:id ", array('id'=>$_GET['id']));
-$img = $co->query_first("SELECT * FROM page_imgs WHERE entity_id=:id ORDER BY RAND()", array('id'=>$_GET['id']));
+$page = $co->query_first("SELECT * FROM pages WHERE slug=:id ", array('id'=>$_GET['slug']));
+$img = $co->query_first("SELECT * FROM page_imgs WHERE entity_id=:id ORDER BY RAND()", array('id'=>$page['page_id']));
 
 $co->page_title = ucfirst($page['title'])." | LinkiBag";
 ?>	
@@ -14,9 +14,8 @@ $co->page_title = ucfirst($page['title'])." | LinkiBag";
 
 					<div class="col-md-7">
 
-						<p><a href="index.php">Home</a> > <?=ucfirst($page['title'])?></p>
+						<p><a href="<?=WEB_ROOT?>">Home</a> > <?=ucfirst($page['title'])?></p>
 						<h4><?=ucfirst($page['title'])?></h4>
-						<h4 style="color: #414141;font-size: 13px;margin: 0;">Last updated: <?=date('M d, Y', $page['updated'])?></h4>
 
 					</div>
 

@@ -1,0 +1,23 @@
+Time : 05:20:44
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ':cat and status=?' at line 1
+Raw SQL : SELECT COUNT(adid) as total FROM admin_advertisement WHERE category REGEXP:cat and status=:status
+
+Time : 05:15:58
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '=? and status=?' at line 1
+Raw SQL : SELECT COUNT(adid) as total FROM admin_advertisement WHERE category REGEXP =:cat and status=:status
+
+Time : 00:49:11
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * from admin_ads WHERE adid=:adid  and status IN (:status)  ORDER BY aid desc
+
+Time : 00:45:14
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * from admin_ads WHERE adid=:adid  and status=:status  ORDER BY aid desc
+
+Time : 00:41:18
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * from admin_ads WHERE adid=:adid  and status=:status  ORDER BY aid desc
+
+Time : 00:33:51
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * from admin_ads WHERE adid=:adid  and status=:status  ORDER BY aid desc

@@ -32,3 +32,122 @@
 [07-Sep-2018 05:36:06 EST] PHP Warning:  include(notfound.php): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/main.php on line 86
 [07-Sep-2018 05:36:06 EST] PHP Warning:  include(notfound.php): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/admin/main.php on line 86
 [07-Sep-2018 05:36:06 EST] PHP Warning:  include(): Failed opening 'notfound.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/link25test1/public_html/PTest25x/linkibag/admin/main.php on line 86
+[06-Apr-2020 01:18:17 EST] PHP Parse error:  syntax error, unexpected '?>' in /home/bag55/public_html/linkibag/admin/ads_management/edit.php on line 75
+[17-Apr-2020 21:27:50 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/bag55/public_html/linkibag/admin/classes/common.class.php on line 259
+[17-Apr-2020 21:27:56 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/bag55/public_html/linkibag/admin/classes/common.class.php on line 259
+[17-Apr-2020 21:27:58 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/bag55/public_html/linkibag/admin/classes/common.class.php on line 259
+[17-Apr-2020 21:28:01 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/bag55/public_html/linkibag/admin/classes/common.class.php on line 259
+[17-Apr-2020 21:28:27 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/bag55/public_html/linkibag/admin/classes/common.class.php on line 259
+[17-Apr-2020 21:29:46 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/bag55/public_html/linkibag/admin/classes/common.class.php on line 259
+[23-Apr-2020 13:03:20 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/bag55/public_html/linkibag/admin/classes/common.class.php on line 259
+[23-Apr-2020 13:03:34 EST] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/bag55/public_html/linkibag/admin/classes/common.class.php on line 259
+[04-May-2020 05:10:02 EST] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DB::query_first(), 1 passed in /home/bag55/public_html/linkibag/admin/page_management/edit.php on line 10 and exactly 2 expected in /home/bag55/public_html/linkibag/config/DB.class.php:259
+Stack trace:
+#0 /home/bag55/public_html/linkibag/admin/page_management/edit.php(10): DB->query_first('SELECT * FROM `...')
+#1 /home/bag55/public_html/linkibag/admin/main.php(46): include('/home/bag55/pub...')
+#2 {main}
+  thrown in /home/bag55/public_html/linkibag/config/DB.class.php on line 259
+[04-May-2020 05:10:14 EST] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DB::query_first(), 1 passed in /home/bag55/public_html/linkibag/admin/page_management/edit.php on line 10 and exactly 2 expected in /home/bag55/public_html/linkibag/config/DB.class.php:259
+Stack trace:
+#0 /home/bag55/public_html/linkibag/admin/page_management/edit.php(10): DB->query_first('SELECT * FROM `...')
+#1 /home/bag55/public_html/linkibag/admin/main.php(46): include('/home/bag55/pub...')
+#2 {main}
+  thrown in /home/bag55/public_html/linkibag/config/DB.class.php on line 259
+[04-May-2020 05:10:18 EST] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function DB::query_first(), 1 passed in /home/bag55/public_html/linkibag/admin/page_management/edit.php on line 10 and exactly 2 expected in /home/bag55/public_html/linkibag/config/DB.class.php:259
+Stack trace:
+#0 /home/bag55/public_html/linkibag/admin/page_management/edit.php(10): DB->query_first('SELECT * FROM `...')
+#1 /home/bag55/public_html/linkibag/admin/main.php(46): include('/home/bag55/pub...')
+#2 {main}
+  thrown in /home/bag55/public_html/linkibag/config/DB.class.php on line 259
+[05-May-2020 10:34:48 EST] PHP Warning:  file_get_contents(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[05-May-2020 10:34:48 EST] PHP Warning:  file_get_contents(https://www.google.com/recaptcha/api/siteverify?secret=6LcvQfIUAAAAAAo33oAQYS62Sh8Fx-yUU8HKKK-B&amp;response=03AGdBq25PkIhGM8Fi3-6gs2jICRzxxiRTRIt52drDUrnQThyzW7kRap6Q7Zu_E3iR-tlkkEPdszEDf-TJUUKLvVXuogVAZcnJTG6mcicYqu7VvRXTnPlWNeFuhZ87LmtzG0ALwwre2mZ-UXsvL_AVDW8zPKY8l-93VsqdbfEjuLsROHQaZEAF3_NspCnNDrjCs_V8RDN34JEJcZZALYLYOl_96VfQZd15MJd49FHTxoli7pGNLBfwK_cmWNdHkTDgGs16852oG2kgcK2YWDqpzpLm6BYx2V1l_QR_VPV00R0DqRKnS5Oit7ZULq1ULXNQ6OQqUjUDWFn0QxTK2eyLFrRkrGm5RQCUgdNA_5Pi6C8m1EIpG9xbuC6cHR0xpSOjIJ_mAladb9b73WKTCwdQK0eLDz17kVE_Ig): failed to open stream: no suitable wrapper could be found in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[05-May-2020 10:35:02 EST] PHP Warning:  file_get_contents(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[05-May-2020 10:35:02 EST] PHP Warning:  file_get_contents(https://www.google.com/recaptcha/api/siteverify?secret=6LcvQfIUAAAAAAo33oAQYS62Sh8Fx-yUU8HKKK-B&amp;response=03AGdBq25RlLAsIjlG7ETKLbP4tMOjz1n8pD469jfmaJr8PFs_AVIdhPeppksq33XBDcFnG7rWNx4P4YQqsLhguppAsNtCBP-OqX-Vuk_-ev2ZSuayT_Al8rmGq3FhVY12JdlfXRbNu1WDnpCMg97l9MKK0vEuhGy9NJL6XNEoJHG-5o6B0_61AjgXgKNSwDiZz_ZvppeGjq5DFfMjNQnLEHaw9bmbB46RcrkNfJBeVLi7_6lG9g_OcYH2CTt_2qTPJnEnz9GItO1q9srEYBCdr61O3Ns8fweTkz0HgiSFCk1LgPlqETWymOaEqQmN1wdkcNUBjOLR2mU4ANDGOVSLxXZs70WCAoR_0idejblp9brDV4wPEB84EENe_oqEDQ9D_zg0HOKMgRVhXt2dyKqi0wP_m5NuGd8N3g): failed to open stream: no suitable wrapper could be found in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[05-May-2020 10:35:20 EST] PHP Warning:  file_get_contents(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[05-May-2020 10:35:20 EST] PHP Warning:  file_get_contents(https://www.google.com/recaptcha/api/siteverify?secret=6LcvQfIUAAAAAAo33oAQYS62Sh8Fx-yUU8HKKK-B&amp;response=03AGdBq25tVYgkoJ_GIPz8AiZANY8QEy1w2SjZab673oz9Rqn6cpJoyb-rkGZcLmmyeHusCMpamKytPKNsP1eJYtv6me0MWW0UZ7XPryuK7XHI_-gEmCXgHLrF01LLTft_lUUQPD9im9rmWLL7hfKY0NyzIyiBBMEdJnN_cDPFngGnUeATns37NSEJcGK9KhHItzzyAbl6B1bTPxLLci96sT_LbDQrUQ89PnPD7GgE6TD2INWkfWF4LR41CEVB5BkI5gM30CHCwhnI1a73jDSouc4ebI5a99tY42-751WW55PcPPTw-I-2VAMz3PyMgmzC6jXOg5PwKqA5XZCHr-M9i058l04zDtkYvobMYHDE8dojT-zkmM0jmgBUiRcAULLkQ9QIRmMeVP1DWhNO5mbnfNIhzYaFX2ainA): failed to open stream: no suitable wrapper could be found in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[05-May-2020 10:36:26 EST] PHP Warning:  file_get_contents(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[05-May-2020 10:36:26 EST] PHP Warning:  file_get_contents(https://www.google.com/recaptcha/api/siteverify?secret=6LcvQfIUAAAAAAo33oAQYS62Sh8Fx-yUU8HKKK-B&amp;response=03AGdBq27gdYMqCXjCp3Std2K2URd8BH_eHST-dRKFvMg5Fy-YVeeHDa38Bl6eEVvzkO51WS9HVVGRmGDqlpDM7kz0JxsagpEgTXiV1mrT3pjZDjmysjQrXvSbzPM1NjoL2g_Zh60-ZhbTiQT5Ga3FSpMjIlcJnu5KKI9h7oOob7XvWRCR2MDQ7Ioak5rY7y9hVTSDI4EFD71I_BLYPtqOE_tWbIBx1eIKEZRj6YYUPEtQGJpTfFhirisaa_jzEmY2i2Is8ALE97Fu6x7KnOWyBUeDu_PfJf-PpyWT5W73-oCjQDMZzfiTIYrMXB9il3P-vj-sgp0LefZVnXvm3Yqm8dfszCtA-MH5Imqd6VwaULmW3A6YHJEPFX-4lWOOY0RjiyrLozFbnRGUecpg7J6Y39oKPUKgetiHiA): failed to open stream: no suitable wrapper could be found in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[05-May-2020 10:38:36 EST] PHP Warning:  file_get_contents(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[05-May-2020 10:38:36 EST] PHP Warning:  file_get_contents(https://www.google.com/recaptcha/api/siteverify?secret=6LcvQfIUAAAAAAo33oAQYS62Sh8Fx-yUU8HKKK-B&amp;response=03AGdBq26fdr_mG7cJZg1N8GW9EysZceNxgQ4XE5tgQ6EUQq9V7i-KHl44PdeYz3nJSTVqgAe6W54ugxseQFVisYBcPw2WwHlcrMKa22HG5C2uaGB_loq7_V5InZLErDiK-sTBFZqgpbP-6QOaWHLBnoh8ieghXP1Yj_uPvBIKBF03LTTpmi9k602lR-jW2WMt7F0Tb_UuKVBZpj9MhderZQCbN36JHOmx3q1y67FirnVsR1ZXg7hbzISoRr2UkxgZm3vxggBBijlOZruHTBad2SQRq_QNR3JdaBVbspvhbMmFuD1LAL5NLQ9egc6AqJ4sxvh9rZDNbeK5i-qRw5v9cdLFn7rd6DO02nv5KK7IXq41zaASVGEZ7IAn83xT6FCGAaH5q5u83VP7LGtZvtkbCpKTDJ9rvVFCQA): failed to open stream: no suitable wrapper could be found in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[07-May-2020 14:55:33 EST] PHP Warning:  file_get_contents(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[07-May-2020 14:55:33 EST] PHP Warning:  file_get_contents(https://www.google.com/recaptcha/api/siteverify?secret=6LcvQfIUAAAAAAo33oAQYS62Sh8Fx-yUU8HKKK-B&amp;response=03AGdBq25vbngwX531gGEPC9dISZ7mm9fkLV33r9EeBaEZryXGnepYIoYn7z-1kepMR00_tYqvs9Xi1o8baRDQijVfuDq_047RgR8HkShku3Is1XCJBWQVwOwS_I67M6RDqg4D8nH1xuTxXmHt44UgzLRWifOQE73uqMF21NqQpfi_dXI6XZtXfJAe4yWTl399qYAanJAWi2NZsFDOKWoA_lDjjNiOjJGZANOW5YEg27OfY2xZop_aIA8ugdJNogs4_4Tx7RvZOKQ5J4IjeUt-G0ZraMTLAoWpUKVrMuWERRkDrhdF8Nf9iEo3J_ukt-vS8qqrou3oZgtDlgdJFTCGx4zgVtvkx4lsEUEyFSIPueSs7ETTQufQnHB5WVBycpQo6zfI62OM1uLx): failed to open stream: no suitable wrapper could be found in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[08-May-2020 20:41:48 EST] PHP Warning:  file_get_contents(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[08-May-2020 20:41:48 EST] PHP Warning:  file_get_contents(https://www.google.com/recaptcha/api/siteverify?secret=6LcvQfIUAAAAAAo33oAQYS62Sh8Fx-yUU8HKKK-B&amp;response=03AGdBq26cvGaNyYdhX0W38T5hle3Q_dPLOwKrtvSjEquNePDfeOjhsY3x6PfBdU6_j1_xZSjL2y4qbauX9a1ajfz17kjCqGVwulbg-x9Cb8Rf422HtdnZi-zeHEx3ebfV6bXdOs94Jf1gCjDrHpz-JYTHyIX3NrX7bPvsiU0nfgKhMgFrGX7fYuEEM4oeS24aO_gUcj7oT6YX-OQhnl6Dl7jzJ284Rv0kg5x11E_2vFcXNDdMqQgsYvAm29E7JPxKPtPPMLqPCVXiuKBFesQJtOIDEXwqbux1qavRFLo1m61St5EVsAMa1B0QMOPQv_e_Z6Bx_RiZwiPwStluDkjVSdtX22X_6cpLquhSmKJH13kO-I2g-3BLHNdiUIoN4VFiPvQIPMxDw6Q9): failed to open stream: no suitable wrapper could be found in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[08-May-2020 20:45:07 EST] PHP Warning:  file_get_contents(): https:// wrapper is disabled in the server configuration by allow_url_fopen=0 in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[08-May-2020 20:45:07 EST] PHP Warning:  file_get_contents(https://www.google.com/recaptcha/api/siteverify?secret=6LcvQfIUAAAAAAo33oAQYS62Sh8Fx-yUU8HKKK-B&amp;response=03AGdBq25Tbi3KG03pjV0PhqrlmYgjfRDiZOcDebuW047wwI3-2gIVmkCaktNDOWLI7Th_4Nx_7yC-uClQK_IRAiQ-yj7WaDIaK5rDZGJ9dLQPQ1keiY-vxWH9rhpQdvdGWK-wST_a6wbh7sGsIDB3wyXGHiHREiFtrbaALNoeF5mkYkvvGzacK28fKnUDJKNC_aa8Tm2_E66UHDbx0zXlH924xitLHYToqE6_P25lk0uqlpUXw-3d2L6XYT30QA5RxaWLysexoLNByy3B-GhLHe55veNyhVb9xO0m-Y0QoFR5svdEQTz4s3SZWndrelbm6ZEwwd1vt-58JubsAj-E3EZ9uwp-qcC-kjtLpDyvPbmIYlCXrY_vojph5Tiq6gQDJqLIciM01ACD): failed to open stream: no suitable wrapper could be found in /home/bag55/public_html/linkibag/admin/login.php on line 38
+[11-May-2020 21:59:44 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/add_default_folder.php on line 29
+[11-May-2020 21:59:44 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/add_default_folder.php on line 30
+[11-May-2020 22:01:25 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/edit_default_folder.php on line 36
+[11-May-2020 22:01:25 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/edit_default_folder.php on line 37
+[11-May-2020 22:01:58 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/edit_default_folder.php on line 36
+[11-May-2020 22:01:58 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/edit_default_folder.php on line 37
+[11-May-2020 22:02:27 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/edit_default_folder.php on line 36
+[11-May-2020 22:02:27 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/edit_default_folder.php on line 37
+[17-May-2020 22:32:08 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/edit_default_folder.php on line 36
+[17-May-2020 22:32:08 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/edit_default_folder.php on line 37
+[21-May-2020 03:55:32 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/add_default_folder.php on line 29
+[21-May-2020 03:55:32 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/add_default_folder.php on line 30
+[21-May-2020 03:55:50 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/add_default_folder.php on line 29
+[21-May-2020 03:55:50 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/add_default_folder.php on line 30
+[21-May-2020 03:56:04 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/add_default_folder.php on line 29
+[21-May-2020 03:56:04 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/add_default_folder.php on line 30
+[21-May-2020 03:56:24 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/add_default_folder.php on line 29
+[21-May-2020 03:56:24 EST] PHP Warning:  Illegal string offset 'img_thumbnails' in /home/bag55/public_html/linkibag/admin/folder/add_default_folder.php on line 30
+[14-Sep-2020 13:30:24 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/category_management/delete_info_user.php on line 52
+[14-Sep-2020 13:30:24 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/category_management/delete_info_user.php on line 52
+[26-Sep-2020 04:22:49 EST] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bag55/public_html/admin/send_mail.php on line 60
+[26-Sep-2020 04:23:08 EST] PHP Parse error:  syntax error, unexpected '}', expecting end of file in /home/bag55/public_html/admin/send_mail.php on line 60
+[26-Sep-2020 05:17:26 EST] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/admin/classes/common.class.php on line 136
+[26-Sep-2020 05:17:26 EST] PHP Warning:  implode(): Invalid arguments passed in /home/bag55/public_html/admin/classes/common.class.php on line 140
+[26-Sep-2020 05:31:32 EST] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/admin/send_mail.php on line 12
+[26-Sep-2020 05:31:32 EST] PHP Warning:  implode(): Invalid arguments passed in /home/bag55/public_html/admin/send_mail.php on line 16
+[26-Sep-2020 05:32:44 EST] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/admin/send_mail.php on line 12
+[26-Sep-2020 05:32:44 EST] PHP Warning:  implode(): Invalid arguments passed in /home/bag55/public_html/admin/send_mail.php on line 16
+[26-Sep-2020 05:34:06 EST] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/admin/send_mail.php on line 12
+[26-Sep-2020 05:34:06 EST] PHP Warning:  implode(): Invalid arguments passed in /home/bag55/public_html/admin/send_mail.php on line 16
+[26-Sep-2020 05:34:13 EST] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/admin/send_mail.php on line 12
+[26-Sep-2020 05:34:13 EST] PHP Warning:  implode(): Invalid arguments passed in /home/bag55/public_html/admin/send_mail.php on line 16
+[26-Sep-2020 05:34:56 EST] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/admin/send_mail.php on line 12
+[26-Sep-2020 05:34:56 EST] PHP Warning:  implode(): Invalid arguments passed in /home/bag55/public_html/admin/send_mail.php on line 16
+[26-Sep-2020 05:36:31 EST] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/admin/send_mail.php on line 12
+[26-Sep-2020 05:36:31 EST] PHP Warning:  implode(): Invalid arguments passed in /home/bag55/public_html/admin/send_mail.php on line 16
+[26-Sep-2020 05:37:15 EST] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/admin/send_mail.php on line 12
+[26-Sep-2020 05:37:15 EST] PHP Warning:  implode(): Invalid arguments passed in /home/bag55/public_html/admin/send_mail.php on line 16
+[26-Sep-2020 05:38:25 EST] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/admin/send_mail.php on line 12
+[26-Sep-2020 05:38:25 EST] PHP Warning:  implode(): Invalid arguments passed in /home/bag55/public_html/admin/send_mail.php on line 16
+[26-Sep-2020 06:10:29 EST] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/bag55/public_html/admin/send_mail.php:38
+Stack trace:
+#0 /home/bag55/public_html/admin/main.php(49): include()
+#1 {main}
+  thrown in /home/bag55/public_html/admin/send_mail.php on line 38
+[26-Sep-2020 06:11:07 EST] PHP Fatal error:  Uncaught Error: Using $this when not in object context in /home/bag55/public_html/admin/send_mail.php:38
+Stack trace:
+#0 /home/bag55/public_html/admin/main.php(49): include()
+#1 {main}
+  thrown in /home/bag55/public_html/admin/send_mail.php on line 38
+[21-Oct-2020 11:55:48 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 11:55:48 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 11:55:48 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 11:55:48 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 12:19:58 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 12:19:58 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 12:19:58 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 12:19:58 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 12:20:07 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 12:20:07 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 12:20:07 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[21-Oct-2020 12:20:07 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[29-Oct-2020 20:39:40 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[29-Oct-2020 20:39:40 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[29-Oct-2020 20:39:40 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[29-Oct-2020 21:50:26 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[29-Oct-2020 21:50:26 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[29-Oct-2020 21:50:26 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[02-Nov-2020 19:39:57 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/category_management/delete_info_user.php on line 52
+[02-Nov-2020 19:39:57 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/category_management/delete_info_user.php on line 52
+[19-Nov-2020 15:42:37 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[19-Nov-2020 15:42:37 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[19-Nov-2020 15:42:37 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[19-Nov-2020 22:50:51 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[19-Nov-2020 22:50:51 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78
+[19-Nov-2020 22:50:51 EST] PHP Warning:  Use of undefined constant php - assumed 'php' (this will throw an Error in a future version of PHP) in /home/bag55/public_html/admin/url_management/manage_video_links.php on line 78

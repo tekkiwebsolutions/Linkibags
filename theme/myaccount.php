@@ -10,7 +10,7 @@
    function page_content(){      
    	global $co, $msg;      	
    	$no_record_found='';      	
-   	$co->page_title = "My Account | Linkibag";     
+   	$co->page_title = "My Account | LinkiBag";     
     	$current = $co->getcurrentuser_profile();  	
    	$user_profile_info = $co->call_profile($current['uid']);  	    	      	
    	$this_page='p=myaccount';      
@@ -39,7 +39,7 @@
          <div class="col-md-9">
 		 <div class="upgrade-main-block-right">
             <div class="account-head">
-               <h4>My Linkibag Account</h4>
+               <h4>My LinkiBag Account</h4>
                <p class="sub-title">Select desired account type from the list below.</p>
             </div>
 			<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" style="display: none;">
@@ -208,7 +208,7 @@
 			}
 			
 			.paymentwrap .paymentbtngroup .paymentmethod .method.paypal_basic {
-				background-image: url("http://linkibag.net/PTest25x/linkibag/images/paypal_basic.png");
+				background-image: url("https://www.linkibag.com/images/paypal_basic.png");
 			}
 			.paymentwrap .paymentbtngroup .paymentmethod .method:hover {
 				border-color: #84b9ff;

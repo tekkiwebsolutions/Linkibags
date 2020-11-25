@@ -8,13 +8,13 @@ if(isset($_POST['save']) && $_POST['save']=="Save"){
 		$co->setmessage("error", "Please enter folder");
 		$success=false;
 	}
-	if(!isset($_POST['trending_cat'])){
+	/*if(!isset($_POST['trending_cat'])){
 
 		$co->setmessage("error", "Please choose trending folder");
 
 		$success=false;
 
-	}
+	}*/
 	//check if no error
 	if($success==true){			
 		$new_val = array();
@@ -22,7 +22,7 @@ if(isset($_POST['save']) && $_POST['save']=="Save"){
 		$new_val['status'] = $_POST['status'];
 		$new_val['in_list'] = 1;
 		$new_val['uid'] = 0;
-		$new_val['trending_cat'] = $_POST['trending_cat'];
+		//$new_val['trending_cat'] = $_POST['trending_cat'];
 		$new_val['created_time'] = time();
 		if(isset($_FILES['image']['name']) and $_FILES['image']['name'] !=''){
 			$imgs_arr = $co->uploadimage($_FILES['image'],'default_folder' , 'yes', 800, 600);
@@ -33,7 +33,7 @@ if(isset($_POST['save']) && $_POST['save']=="Save"){
 		}
 		$user_id = $co->query_insert('category', $new_val);
 		unset($new_val);
-		$co->setmessage("status", "Folder created successfully");
+		$co->setmessage("status", "Interest created successfully");
 		echo '<script type="text/javascript">window.location.href="main.php?p=folder/manage_default_folder"</script>';
 		exit();
 		
@@ -60,7 +60,7 @@ if(isset($msg)){ echo $msg; }
                                 <i class="fa fa-dashboard"></i>  <a href="index.php?p=dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-table"></i> Default Folder
+                                <i class="fa fa-table"></i> Default Interest
                             </li>
                         </ol>
                     </div>
@@ -74,12 +74,12 @@ if(isset($msg)){ echo $msg; }
 
 		<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title"><i class="fa fa-table"></i> Add Default Folder</h3>
+			<h3 class="panel-title"><i class="fa fa-table"></i> Add Default Interest</h3>
 		</div>
 		<div class="panel-body">
         <form class="form-horizontal" method="post" enctype="multipart/form-data">
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Folder Name *</label>                            
+				<label class="col-sm-2 control-label">Interest Name *</label>                            
 				<div class="col-sm-10">
 				<input type="text" class="form-control" name="cname" maxlength="50" value="<?=(isset($_POST['cname']) ? $_POST['cname'] : '')?>"></div>
 			</div>
@@ -91,6 +91,7 @@ if(isset($msg)){ echo $msg; }
 					
 				</div>
 			</div>
+			<!--
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Trending Folder *</label>
 				<div class="col-sm-8">
@@ -98,6 +99,7 @@ if(isset($msg)){ echo $msg; }
 					<input type="radio" name="trending_cat" value="0" checked="checked" /> No
 				</div>				
 			</div>
+			-->
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Upload Photo *</label>					
 				<div class="col-sm-10">					

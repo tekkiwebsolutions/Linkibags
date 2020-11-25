@@ -1,0 +1,6 @@
+Time : 07:18:52
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'groups_sort' in 'order clause'
+Raw SQL : SELECT ur.*, fr.request_email, fr.request_to, p.first_name, p.last_name, u.email_id, u.created, ur.created as date_time_created FROM user_friends ur 
+		JOIN friends_request fr ON ur.request_id=fr.request_id
+		LEFT JOIN profile p ON ur.fid=p.uid 
+		LEFT JOIN users u ON ur.fid=u.uid WHERE ur.friend_id>'0' AND ((ur.uid=:id and fr.request_to=:id2 and ur.status<'1') OR (ur.uid=:id3 and ur.status>'0' and ur.status<'2')) and ur.status=:status ORDER BY groups_sort ASC

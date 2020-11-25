@@ -1,0 +1,3 @@
+Time : 15:07:22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'sign_me_for_email_filter' in 'field list'
+Raw SQL : INSERT INTO `profile`(uid,salutation,first_name,last_name,country,state,zip_code,sign_me_for_email_filter) VALUES(:uid,:salutation,:first_name,:last_name,:country,:state,:zip_code,:sign_me_for_email_filter)

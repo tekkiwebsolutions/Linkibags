@@ -8,10 +8,26 @@ function page_access(){
 			exit();
 		}
 	}
+	if(!isset($_COOKIE['updated_term_popup'])) {
+		$co->showtermpopup = true;
+		setcookie("updated_term_popup", 'loaded', (time()+(60*60*24*30)));
+	}
+
+	// if(!isset($_COOKIE['firstTimeOpen'])) {
+	// 	setcookie("firstTimeOpen", 'reOpened', (time()+(1800)));
+	// }	
+
+
+// $_SESSION['somevariable'] = 'somevalue';
+
+// if(parse_url($_SERVER["HTTP_REFERER"], PHP_URL_HOST) != $_SERVER["SERVER_NAME"]){
+//     session_unset("somevariable");
+// }
+
 }
 function page_content(){
 	global $co, $msg;
-	$co->page_title="Welcome to the linkbag";
+	$co->page_title="Welcome to LinkiBag Home";
 
 	$editor_web_pick = $co->editor_web_pick();
 	$you_tube_links = $co->fetch_all_array("select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1",array());
@@ -24,15 +40,17 @@ function page_content(){
 	//$trending_bag_links = $co->fetch_all_array("select * from user_urls where uid>'0' and public_bag_link='1' ORDER BY RAND() LIMIT 5",array());
 
 	$countries = $co->fetch_all_array("select id,country_name from countries ORDER BY id ASC", array());
-	$states = $co->fetch_all_array("select id,state_name from states ORDER BY id ASC", array());
+	$states = $co->fetch_all_array("select id,state_name,code from states ORDER BY id ASC", array());
 
 	$term_popup = $co->query_first("select * from popup_setting where popup_id='1'",array());
+
+	$service_country = $co->query_first("SELECT * from linkibag_service_countries WHERE service_id=:id",array('id'=>1));
 
 	$user_login = $co->is_userlogin();
 ?>
 <?php if($term_popup['popup_show']==1) {
-	if(!isset($_COOKIE['updated_term_popup'])) {
-		setcookie("updated_term_popup", 'loaded', (time()+(60*60*24*30)));
+
+	if(isset($co->showtermpopup)) {
 ?>
 <a data-toggle="modal" data-target="#updated_term_popup" id="updated_term_popup_btn" style="display:none" href="#">Show Term popup</a>
 
@@ -40,20 +58,38 @@ function page_content(){
   <div class="modal-dialog">
 	<div class="modal-content">
 		<div class="modal-body">
-			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button><?=$term_popup['popup_msg']?>
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+			<?=$term_popup['popup_msg']?>
 		</div>
 	</div>
   </div>
 </div>
 <script type="text/javascript">
 $(window).load(function(){
-	$('#updated_term_popup_btn').trigger('click');
+	var username = document.cookie
+	var n = username.includes("alredy_user");
+	if (n !== true) {
+		$('#updated_term_popup_btn').trigger('click');
+	}
 }); 
 </script>
 <?php 
 	}
 }
 ?>
+<script type="text/javascript">
+<?php
+if(isset($_GET['free_signup'])) {
+	echo "
+$(window).load(function(){	
+	$('html, body').animate({
+        scrollTop: $('#free_signup').offset().top
+    }, 2000);
+});
+	";
+}
+?>
+</script>
 	<!-- end navigation -->
 		<div class="carousel fade-carousel slide carousel_main" data-ride="carousel" data-interval="4000" id="bs-carousel">
   <!-- Overlay -->  <ol class="carousel-indicators linkibag-dot">
@@ -69,7 +105,7 @@ $(window).load(function(){
       <div style="transform: none; left: 0px; right: 0px; top: 30px; text-shadow: none ! important;" class="hero container slider-one">
          <div class="col-md-6">
 		<hgroup>
-			<h1 style="overflow: hidden;"><a class="orange-btn" href="index.php?p=free-personal-accounts"role="button" style="margin: 0px 0px 5px; float: right; text-transform: none; font-weight: 600;">Free Sign up ></a> </h1>
+			<h1 style="overflow: hidden;"><a class="orange-btn" href="<?=WEB_ROOT?>free-personal-accounts"role="button" style="margin: 0px 0px 5px; float: right; text-transform: none; font-weight: 600;">Free Sign up ></a> </h1>
 			<h2>Save your links with LinkiBag and share them with your classmates, friends and family.</h2>
 			<h3 style="font-weight: 200; font-size: 18px; margin-top: 40px; display: none;">* FREE PERSONAL ACCOUNTS</h3>
         </hgroup>
@@ -89,7 +125,7 @@ $(window).load(function(){
 			<h1>Store and share web sources with your class</h1>
 			<h2>Teacher-to-student solutions:<br>
 			Share your web links with your classroom.</h2><br/>
-			<a style="font-weight: 600;" class="orange-btn" role="button" href="index.php?p=free-personal-accounts">Free Sign up ></a>
+			<a style="font-weight: 600;" class="orange-btn" role="button" href="<?=WEB_ROOT?>free-personal-accounts">Free Sign up ></a>
 			<h3 style="font-weight: 200; font-size: 18px; margin-top: 22px; display: none;">* FREE PROFESSIONAL ACCOUNT</h3>
         </hgroup>
 		</div>
@@ -104,7 +140,7 @@ $(window).load(function(){
 		<hgroup style="min-height: 350px;" class="last-slide">
 <h1 class="access_title" style="text-shadow: none; color: rgb(78, 78, 78); font-size: 31px;">Access Where you need it</h1>
 <h2 style="color: rgb(127, 127, 127); text-shadow: none;">Save links for future reference. Share links with associates, business partners and customers.</h2>
-<a style="font-weight: 600; margin-top: 48px;" class="orange-btn access_btn" role="button" href="index.php?p=free-personal-accounts">Free Sign up ></a>
+<a style="font-weight: 600; margin-top: 48px;" class="orange-btn access_btn" role="button" href="<?=WEB_ROOT?>free-personal-accounts">Free Sign up ></a>
 <h3 style="font-weight: 200; color: #737373; font-size: 18px; margin-top: 22px; display: none;">* FREE PROFESSIONAL ACCOUNT</h3>
 </hgroup>
 		</div>
@@ -142,57 +178,119 @@ $(window).load(function(){
 		<!-- end divider -->
 
 		<!-- start divider -->
-		<section style="padding: 100px 0px 120px !important;background: #e9e9e2 none repeat scroll 0 0;" class="pack-your-links-section" id="start-signup">
-			<a href="#GoTop" class="gotoplink">
-			<i class="fa fa-angle-up up fa-3x" aria-hidden="true"></i>
-			</a>
-			 <div class="container text-center">
-				<div class="row">
-					<div class="link-list-trending">
-						<h2 class="bold-title" style="color: rgb(49, 73, 106) ! important; padding-bottom: 18px ! important; word-spacing: 3px;">PACK YOUR LINKS<span class="tm">TM</span> TO GO</h2>
-						<h3 style="color: rgb(127, 127, 127); padding-bottom: 37px; font-weight: 100;">Get your FREE account now and start saving links instantly.</h3>
-						<a class="orange-btn" href="#free_singup">Sign up > </a>
-					</div>
-				</div>
-			</div>
-		</section>
+		<!--<section style="padding: 100px 0px 120px !important;background: #e9e9e2 none repeat scroll 0 0;" class="pack-your-links-section" id="start-signup">-->
+		<!--	<a href="#GoTop" class="gotoplink">-->
+		<!--	<i class="fa fa-angle-up up fa-3x" aria-hidden="true"></i>-->
+		<!--	</a>-->
+		<!--	 <div class="container text-center">-->
+		<!--		<div class="row">-->
+		<!--			<div class="link-list-trending">-->
+		<!--				<h2 class="bold-title" style="color: rgb(49, 73, 106) ! important; padding-bottom: 18px ! important; word-spacing: 3px;">PACK YOUR LINKS<span class="tm">TM</span> TO GO</h2>-->
+		<!--				<h3 style="color: rgb(127, 127, 127); padding-bottom: 37px; font-weight: 100;">Get your FREE account now and start saving links instantly.</h3>-->
+		<!--				<a class="orange-btn" href="#free_signup">Sign up > </a>-->
+		<!--			</div>-->
+		<!--		</div>-->
+		<!--	</div>-->
+		<!--</section>-->
 		<!-- end divider -->
+		
+		<!-- how its works start-->
+		<section id='how_work_start'>
+			<a href="#GoTop" class="gotoplink">
+				<i class="fa fa-angle-up up fa-3x" aria-hidden="true"></i>
+			</a>
+		    <h2>LinkiBag.com: How it works...</h2>
+		    <iframe id= 'myiFrame' width="690" height="388" src="https://www.youtube.com/embed/XK1dS4hMUMA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<div class='video_two'>
+		    <div class='video_left_panel'><p><strong>Video 2 -</strong><a href='https://www.youtube.com/watch?v=0GoHJuGUWBI' target=_blank>Learn more about LinkiBag</a></p></div>
+		    <div class='video_right_panel'><p><a href='https://www.youtube.com/channel/UCp2hsP62INPQ3n4CVOYlvqQ' target=_blank>Click here</a>to subscribe to LinkiBag on YouTube.</p></div>
+		</div>
+		<div class='shot_div'>
+		    <h2>It's Free. Give it a shot.</h2>
+		    <a href='<?=WEB_ROOT?>sign-up'>Free Sign Up</a>
+		    <p>Trying to keep too many things under control? Drop your links into your LinkiBag and keep them with you wherever you go.</p>
+		</div>
+		</section>
+		<!-- how its works end -->
+		
 
 		<!-- Web Resources Library -->
-		<section class="web-resources-library">
+		<section id='customer_testimonial'>
 			<a href="#GoTop" class="gotoplink">
-			<i class="fa fa-angle-up up fa-3x" aria-hidden="true"></i>
+				<i class="fa fa-angle-up up fa-3x" aria-hidden="true"></i>
 			</a>
-			 <div class="container">
-					<div class="text-center">
-					<h1>Web Resources Library: Use-a-Link, Share-a-Link</h1>
-					</div>
-					<div class="web-resources-library-categorys">
-						<div class="col-md-4">
-							<a class="btn btn-lg btn-default btn-block" href="#">Information Security</a>
-						</div>
-						<?php
-						$user_public_category_array = $co->fetch_all_array("select * from user_public_category where status='1' ORDER BY RAND() LIMIT 2",array());
-						if(isset($user_public_category_array) and count($user_public_category_array) > 0){
-							foreach($user_public_category_array as $list){
-
-						?>
-						<div class="col-md-4">
-							<a class="btn btn-lg btn-default btn-block" href="index.php?p=web-resources-list-single&id=<?=$list['cid']?>"><?=ucfirst($list['cname'])?></a>
-						</div>
-						<?php
-							}
-						}
-						?>
-
-					</div>
-					<div class="col-md-12 text-right">
-						<a class="orange-btn" href="index.php?p=web-resources-list">More > </a>
-					</div>
-
-			</div>
+		    <h2>LinkiBag Customer Testimonials</h2>
+		    <ul>
+		        <li>
+		            <img src='https://www.linkibag.com/files/page_imgs/original/testi_1.png'>
+		        <div class='testi_detail'>
+		            <p>I Study English in the USA and  I am using LikinBag to save my Weblinks.</p>
+		            <strong>Ceci</strong>
+		        </div>
+		        </li>
+		        <li>
+		            <img src='https://www.linkibag.com/files/page_imgs/original/testi_4.png'>
+		        <div class='testi_detail'>
+		            <p>I trust LinkiBag to keep my links.</p>
+		            <strong>Tommy</strong>
+		        </div>
+		        </li>
+		        <li>
+		            <img src='https://www.linkibag.com/files/page_imgs/original/testi_2.png'>
+		        <div class='testi_detail'>
+		            <p>As a Teacher an educator working from home during pandemic I enjoy using LinkiBag.</p>
+		            <strong>George E.</strong>
+		        </div>
+		        </li>
+		        <li>
+		            <img src='https://www.linkibag.com/files/page_imgs/original/testi_3.png'>
+		        <div class='testi_detail'>
+		            <p>I use LinkiBag to share my links with my students and fellow professors it's a great tool which I use as a teacher and for my personal needs.</p>
+		            <strong>Matt S.</strong>
+		        </div>
+		        </li>
+		    </ul>
+		    
 		</section>
 		<!-- end Web Resources Library -->
+		
+		<!-- Testimonial section start-->
+		<section >
+			<a href="#GoTop" class="gotoplink">
+				<i class="fa fa-angle-up up fa-3x" aria-hidden="true"></i>
+			</a>
+			<section id='testimonial_home'>				
+				<div class='media_bottom_icons' style="text-align: center;">
+					<h2 style="text-align: center;">As Seen On</h2>
+					<!--<ul>-->
+					<!--    <li><a target=_blank href='https://www.marketwatch.com/press-release/linkibag-is-the-best-place-to-keep-your-links-save-it-and-share-it-on-the-fly-2020-10-15'><img src='https://www.linkibag.com/files/page_imgs/original/market.png'></a></li>-->
+					<!--    <li><a target=_blank href='https://finance.yahoo.com/news/linkibag-best-place-keep-links-162300371.html?guccounter=1'><img src='https://www.linkibag.com/files/page_imgs/original/yahoo.png'></a></li>-->
+					<!--    <li><a target=_blank href='http://www.digitaljournal.com/pr/4837656'><img src='https://www.linkibag.com/files/page_imgs/original/digital_jou.png'></a></li>-->
+					<!--     <li><a target=_blank href='https://www.globenewswire.com/news-release/2020/10/15/2109438/0/en/LinkiBag-Is-The-Best-Place-To-Keep-Your-Links-Save-It-And-Share-It-On-The-Fly.html'><img src='https://www.linkibag.com/files/page_imgs/original/intrado.png'></a></li>-->
+		   <!--             <li><a target=_blank href='https://digitalunicornmag.com/du-digital-tools-review/'><img src='https://www.linkibag.com/files/page_imgs/original/digital.png'></a></li>-->
+		   <!--               <li><a target=_blank href='javascript:void(0)'></a></li>-->
+		   <!--               <li><a target=_blank href='javascript:void(0)'><img src='https://www.linkibag.com/files/page_imgs/original/american.png'></a></li>-->
+		   <!--             <li><a target=_blank href='javascript:void(0)'><img src='https://www.linkibag.com/files/page_imgs/original/one_world.png'></a></li>-->
+		   <!--             <li><a target=_blank href='javascript:void(0)'><img src='https://www.linkibag.com/files/page_imgs/original/seeker.png'></a></li>-->
+		   <!--          </ul>-->
+					 
+					 <ul>
+						<li><a target=_blank href='https://www.marketwatch.com/press-release/linkibag-is-the-best-place-to-keep-your-links-save-it-and-share-it-on-the-fly-2020-10-15'><img src='https://www.linkibag.com/files/page_imgs/original/b.png'></a></li>
+						<li><a target=_blank href='https://finance.yahoo.com/news/linkibag-best-place-keep-links-162300371.html?guccounter=1'><img src='https://www.linkibag.com/files/page_imgs/original/c.png'></a></li>
+						<li><a target=_blank href='http://www.digitaljournal.com/pr/4837656'><img src='https://www.linkibag.com/files/page_imgs/original/a.png'></a></li>
+						 <li><a target=_blank href='https://www.globenewswire.com/news-release/2020/10/15/2109438/0/en/LinkiBag-Is-The-Best-Place-To-Keep-Your-Links-Save-It-And-Share-It-On-The-Fly.html'><img src='https://www.linkibag.com/files/page_imgs/original/g.png'></a></li>
+						<li><a target=_blank href='https://digitalunicornmag.com/du-digital-tools-review/'><img src='https://www.linkibag.com/files/page_imgs/original/i.png'></a></li>
+						<li style="width:10%;"></li>
+						<li><a target=_blank href='https://www.theamericanreporter.com/new-platform-to-save-share-website-links-linkibag-is-now-live/'><img src='https://www.linkibag.com/files/page_imgs/original/f.png'></a></li>
+						<li><a target=_blank href='https://oneworldherald.com/2020/10/19/the-beta-version-of-linkibag-released-for-us-people-to-save-share-weblinks-securely/'><img src='https://www.linkibag.com/files/page_imgs/original/e.png'></a></li>
+						<li><a target=_blank href='https://www.seekerstime.com/the-web-portal-linkibag-allows-people-to-maximize-their-time-by-saving-and-sharing-web-links-anytime-and-anywhere/'><img src='https://www.linkibag.com/files/page_imgs/original/d.png'></a></li>
+						<li><a target=_blank href='https://thelosangelestribune.com/2020/10/27/linkibag-com-saving-and-sharing-links-on-the-fly-goes-live-with-beta-version/'><img src='https://www.linkibag.com/files/page_imgs/original/j.png'></a></li> 
+					 </ul>
+					
+				</div>
+			</section>
+		</section>
+		<!--Testimonial section end-->
 
 		<!-- start divider -->
 		
@@ -362,184 +460,6 @@ $(window).load(function(){
 		
 		
 	
-		
-		
-	<section id="free_singup" class="light-bg">
-		<div id="free_singup_main" class="container">
-			<div class="col-md-offset-3 col-md-6">
-			<p></p>
-				<div class="light-panel">
-					<div class="light-panel-header text-center">
-						<h1>LET’S GET STARTED<br><span class="text-orange">Free Account</span></h1>
-					</div>
-					<div class="light-panel-body">
-						  <form method="post" id="register_form" action="index.php?ajax=ajax_submit" onsubmit="javascript: return submit_register();">
-				<input type="hidden" name="form_id" value="register"/>
-				<input type="hidden" name="role" value="personal"/>				
-				<?php
-				if(isset($_GET['request_id']) and $_GET['request_id'] > 0 and isset($_GET['request_code']) and $_GET['request_code'] != '' and isset($_GET['accept']) and $_GET['accept'] != ''){
-					$chk_request_data = $co->query_first("select fr.* from friends_request fr where fr.request_id=:id and fr.request_code=:code", array('id'=>$_GET['request_id'], 'code'=>$_GET['request_code']));
-						
-					echo '<input type="hidden" name="request_id" value="'.$_GET['request_id'].'"/>
-						<input type="hidden" name="request_code" value="'.$_GET['request_code'].'"/>
-						<input type="hidden" name="accept" value="'.$_GET['accept'].'"/>
-
-						';
-				}
-
-				if(isset($_POST['email_id']) and $_POST['email_id']!=''){
-					$post_email_id = $_POST['email_id'];		
-					$post_email_readonly = '';
-				}else if(isset($chk_request_data['request_email']) and $chk_request_data['request_email']!=''){
-					$post_email_id = $chk_request_data['request_email'];		
-					$post_email_readonly = ' readonly="true"';
-				}else{
-					$post_email_id = '';		
-					$post_email_readonly = '';
-				}	
-			
-			
-				?>
-
-               <div class="text-left wow fadeInUp templatemo-box">
-                  <div class="homepage-login-form">
-                     <div>
-						<?=isset($msg) ? $msg : '' ?>
-						<div id="messagesout"></div>
-						<div class="show_pass">
-							<input id="checkboxshow" type="checkbox" name="show_password" value="1">
-							<label for="checkboxshow" class="question" id="show_password"> Show password</label>
-						</div>
-						<div class="row" style="margin-bottom: 10px;">
-							<label class="mylabel col-md-4">Login: <span class="required-field"> *</span></label>
-							<div class="col-md-8">
-							<input placeholder="Your-email@mail.com" type="email" name="email_id" aria-describedby="basic-addon1" id="signup_email_id" class="form-control" value="<?=$post_email_id?>" <?=$post_email_readonly?> />
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="mylabel col-md-4">Password: <span class="required-field">*</span></label>
-							<div class="col-md-7">
-								<input placeholder="Create" type="password" name="password" id="password" class="form-control" >
-								<ul  id="d1" class="list-group">
-									<li class="list-group-item" id="d12"><i class='fa fa-check' style="color: #ccc"></i> Include one  uppercase letter</li>
-									<li class="list-group-item" id="d13"><i class='fa fa-check' style="color: #ccc"></i> Include a lowercase letter</li>
-									<li class="list-group-item" id="d15"><i class='fa fa-check' style="color: #ccc"></i> Include a number</li>
-									<li class="list-group-item" id="d16"><i class='fa fa-check' style="color: #ccc"></i> Include at least 8 characters</li>
-								</ul>
-							</div>
-							<div class="col-md-1 tooltip-none">
-								<span style="color: #fff !important; position: absolute; right: 0; top: 6px;">
-								<a data-toggle="tooltip" title="Minimum of 8 characters with one number and one uppercase letter." href="javascript: void();" style="#444 ! important;">?</a></span>
-							</div>
-						</div>
-						<div class="form-group row">
-							<label class="mylabel col-md-4">Country: <span class="required-field">*</span></label>
-							<div class="col-md-8">
-							<select class="form-control linkibox_select" name="country" onchange="country_change(this.value);">
-								<option value="">Select Country</option>
-								<?php
-								$countries = $co->fetch_all_array("select id,country_name from countries ORDER BY id ASC", array());
-								foreach($countries as $country){
-									$sel = '';
-									if(isset($row['country']) and $row['country'] == $country['id'])
-										$sel = ' selected="selected"';	
-									else if($country['id'] == 1)
-										$sel = ' selected="selected"';	
-
-									echo '<option value="'.$country['id'].'"'.$sel.'>'.$country['country_name'].'</option>';
-								}	
-								?>
-							</select>
-							</div>
-						</div>
-						<!--<div class="form-group row">
-							<label class="mylabel col-md-4">Date Of Birth: <span class="required-field">*</span></label>
-							<div class="col-md-8">
-								<input type="text" class="form-control" placeholder="Select DOB" name="dob" id="user_birthday" readonly />
-							</div>
-						</div>-->
-										<div class="form-group row">
-											<div class="col-md-8 col-md-offset-4">
-												<div class="g-recaptcha" data-sitekey="6LfW_ScTAAAAAO2MRn6I180IrAb0HJa9cpaN3mI2"></div>
-												<input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha">
-											</div>
-										<!--<div id="captcha">
-											<div class="controls">											                  
-											  <input type="text" name="captcha_val" class="user-text btn-common" id="captcha_val" placeholder="Type here" />
-												<button class="validate btn-common" type="button" id="validate_captcha_btn">
-													<img src="images/enter_icon.png" alt="submit icon">
-												</button>
-												<button class="refresh btn-common" type="button" id="refresh_captch_btn">
-													<img src="images/refresh_icon.png" alt="refresh icon">
-												</button>
-											</div>
-										</div>
-										<label class="error" for="captcha_val"></label>-->	
-										</div>	
-									<div style="padding: 0 0 0 19px;" class="form-group row">
-										<div class="col-md-8 col-md-offset-4">
-										<span style="margin: 0px; padding: 0px;" class="errordiv" style="overflow: hidden;">
-											<div  style="margin-top: 0px;" class="checkbox linki-chckboxbox ">
-												<input id="checkbox1" type="checkbox" name="terms_and_conditions" value="1">
-												<label for="checkbox1" class="question" style="color: #414141 !important">
-													<!--<span class="required-field">*</span>-->
-													I have read, understand and agree to the <a href="index.php?p=pages&id=8" style="font-weight: 600" target="_blank">Terms of Use</a> and the <a href="index.php?p=pages&id=9" style="font-weight: 600" target="_blank">Privacy Policy.</a>
-											</div>
-											<label class="error" for="terms_and_conditions"></label>
-										</span>
-										<div style="margin-top: 0px;" class="checkbox linki-chckboxbox ">
-											<input id="checkbox3" type="checkbox" name="sign_me_for_email_filter" value="1">
-											<label for="checkbox3" style="color: #414141 !important">
-												Sign me up for LinkiBag Newsletter.
-											</label>
-										</div>
-										<label for="sign_me_for_email_filter" class="error"></label>
-										</div>
-									</div>		
-						<div class="form-group col-sm-5 col-sm-offset-4">
-							<button type="submit" class="orange-btn btn-block" id="send_register">Submit</button>
-						</div>										
-						<div class="row">
-							<div class="form-group">
-								<div class="col-md-6">
-									<div id="state_block"<?=((isset($_POST['country']) and $_POST['country']==1) ? '' : ' style="display: none;"')?>>
-										<div class="form-group">
-											<div class="col-md-5 pad-sm"><label class="mylabel">State: <span class="required-field">*</span></label></div>
-											 <div class="col-md-7">
-												<select name="state" class="form-control linkibox_select">
-													<option value="">Select</option>
-													<?php
-													foreach($states as $state){
-														$sel = '';
-														if(isset($_POST['state']) and $_POST['state'] == $state['id'])
-															$sel = ' selected="selected"';
-														echo '<option value="'.$state['id'].'"'.$sel.'>'.$state['state_name'].'</option>';
-													}
-													?>
-												 </select>
-											 </div>
-										</div>
-										<div class="form-group">
-											<div class="col-md-5 pad-sm">
-												<label class="mylabel">Zip Code: <span class="required-field">*</span></label>
-											</div>
-											<div class="col-md-7">
-												<input type="text" name="zip_code" class="form-control onlynumbers" maxlength="50">
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				  </div>
-               </div>
-            </form>	
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
 	<style type="text/css">
 		.checkbox label::before {
 		    width: 12px;
@@ -559,17 +479,35 @@ $(window).load(function(){
 			font-weight: normal;
 		}
 	</style>
+	
 	<script type="text/javascript">
-		function country_change(countryval){
+
+  		function country_change(countryval){
 			//alert(countryval);
+			if(countryval == 1) {
+				$('#state_zipcode_block').show();
+			} else {
+				$('#state_zipcode_block').hide();
+			}
+
 			if (countryval != "") {
-				if (countryval != 1) {
+			<?php
+			$service_countries = unserialize($service_country['allowed_counties']);
+			$country_cond = '';
+			foreach($service_countries as $servicecountry) {
+				if($country_cond != '')
+					$country_cond .= ' && ';
+				$country_cond .= 'countryval != '.$servicecountry;
+			}
+			?>
+				if(<?=$country_cond?>) {
 					var email = $('#signup_email_id').val();
 					window.location.href='index.php?p=outside-linkibag-service-area&email='+email+'&country='+countryval;
-				}	
+				}
 			}
+
 		}
-	</script>		
+	</script>
 	<?php
 	}
 	}

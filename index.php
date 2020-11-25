@@ -12,20 +12,20 @@ if (substr($_SERVER['HTTP_HOST'], 0, 4) != 'www.') {
 }
 
 
-if(!isset($_SESSION['access_use_pass'])){
-	$link_start = '';											
-	$link_end = '';	
-	if(isset($_GET) and count($_GET) > 0){
-		foreach($_GET as $k=>$v){	
-			if($k == 'p')
-				$link_start .= '?'.$k.'='.$v;											
-			else
-				$link_end .= '&'.$k.'='.$v;
-		}	
-	}
-	echo '<script>window.location.href="../'.$link_start.$link_end.'"</script>';
-	exit();
-}
+//  if(!isset($_SESSION['access_use_pass'])){
+//  	$link_start = '';											
+//  	$link_end = '';	
+//  	if(isset($_GET) and count($_GET) > 0){
+//  		foreach($_GET as $k=>$v){	
+//  			if($k == 'p')
+//  				$link_start .= '?'.$k.'='.$v;											
+//  			else
+//  				$link_end .= '&'.$k.'='.$v;
+//  		}	
+//  	}
+//  	echo '<script>window.location.href="../'.$link_start.$link_end.'"</script>';
+//  	exit();
+//  }
 //unset($_SESSION['access_use_pass']);
 
 $include = 'yes';

@@ -25,33 +25,28 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 
 	$pwd = $_POST['pass'];
 
-	if($username=='' && $pwd=='')
-
-	{
-
+	if($username=='' && $pwd=='') {
 		$co->setmessage("error", "Please enter username and password!");
-
-	}
-
-	else if($co->adminlogin($username,$pwd))
-
-	{	?>
-
-		<script language="javascript">window.location="main.php";</script>
-
-		<?php
-
-		exit();
-
-	}		
-
-	else
-
-	{
-
-		$co->setmessage("error", "You have entered invalid login detail, Please try again.");
-
-	}
+	} else if(!isset($_POST['g-recaptcha-response'])) {
+		$co->setmessage("error", "Please validate Captcha unset");
+		$success=false;
+	} elseif(empty($_POST['g-recaptcha-response'])) {
+		$co->setmessage("error", "Please validate Captcha empty");
+		$success=false;
+	} else if(isset($_POST['g-recaptcha-response'])) {
+        $responseData = $co->validate_gresponse($_POST['g-recaptcha-response']);
+        if(!$responseData->success) {
+            $co->setmessage("error", "Please validate Captcha nosuccess");
+			$success=false;
+        }else{
+        	if($co->adminlogin($username,$pwd)) {
+        		echo '<script language="javascript">window.location="main.php";</script>';
+        		exit();
+        	}else{
+        		$co->setmessage("error", "You have entered invalid login detail, Please try again.");
+        	}
+        }
+   	} 
 
 	$msg = $co->theme_messages();
 
@@ -82,6 +77,7 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 	<link href="css/style.css" rel="stylesheet">
 	<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,400italic,300italic,300,600,700,700italic,600italic' rel='stylesheet' type='text/css'>
+	<script src="https://www.google.com/recaptcha/api.js"></script>
 
 </head>
 
@@ -108,6 +104,8 @@ if($_SERVER['REQUEST_METHOD']=='POST')
 				
 				<input id="inputEmail" class="form-control" type="text" placeholder="Username" name="user"/>
 				<input id="inputPassword" class="form-control" type="password" placeholder="Password" name="pass"/>
+				<div style="margin-top: 5px;" class="g-recaptcha" data-sitekey="6LcvQfIUAAAAADmpuC1uXGhW_OPaRyxM_TqKHOVN"></div>
+				<input type="hidden" class="hiddenRecaptcha required" name="hiddenRecaptcha" id="hiddenRecaptcha">
                 <div id="remember" class="checkbox">
                     <label>
                         <input type="checkbox" name="remember" value="1"/> Remember me

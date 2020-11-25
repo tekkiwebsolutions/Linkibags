@@ -1,7 +1,7 @@
 <?php
 function page_content(){
 	global $co, $msg;
-	$co->page_title = "Confirm Email | Linkibag";
+	$co->page_title = "Confirm Email | LinkiBag";
 	
 	//if(!isset($inc))
 	//	exit();

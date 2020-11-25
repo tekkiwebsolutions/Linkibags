@@ -1,6 +1,6 @@
 <?php
-$breadcrumb = 'Folder Management';
-$title = '<i class="fa fa-table"></i> Edit Default Folder Information';
+$breadcrumb = 'Interest Management';
+$title = '<i class="fa fa-table"></i> Edit Default Interest Information';
 if(isset($_POST['save'])){	
 	$_POST['cname'] = trim($_POST['cname']);
 	$_POST['cname'] = strip_tags($_POST['cname']);
@@ -9,39 +9,40 @@ if(isset($_POST['save'])){
 	$success=true;
 
 	if($_POST['cname']==""){
-		$co->setmessage("error", "Please enter folder");
+		$co->setmessage("error", "Please enter Interest");
 		$success=false;
 	}
 	if(!isset($_POST['status'])){
 		$co->setmessage("error", "Please select show public");
 		$success=false;
 	}
-	if(!isset($_POST['trending_cat'])){
+	/*if(!isset($_POST['trending_cat'])){
 
 		$co->setmessage("error", "Please choose trending folder");
 
 		$success=false;
 
-	}
+	}*/
 	 
 	if ($success == true) {
 		$up = array();
 		$up['cname'] = $_POST['cname'];
 		$up['status'] = $_POST['status'];
-		$up['trending_cat'] = $_POST['trending_cat'];
+		//$up['trending_cat'] = $_POST['trending_cat'];
 		$up['updated_time'] = time();
 
 		if(isset($_FILES['image']['name']) and $_FILES['image']['name'] !=''){
-			$imgs_arr = $co->uploadimage($_FILES['image'],'default_folder' , 'yes', 800, 600);
-			$up['image_thumbnails'] = $imgs_arr['img_thumbnails'];			
-			$imgs_arr = unserialize($imgs_arr['img_thumbnails']);					
-			$up['image'] = $imgs_arr['thumbnail'];
+			
+			$img= $co->uploadimage($_FILES['image'], 'default_folder', 'yes', 80, 60);
+    		if($img != false){
+    			$up['image'] = $img;
+    		}
 
 		}
 		
 		$co->query_update('category', $up, array('id'=>$_POST['id']), 'cid=:id');
 		unset($up);
-		$co->setmessage("status", "Folder updated successfully");
+		$co->setmessage("status", "Interest updated successfully");
 		echo '<script type="text/javascript">window.location.href="main.php?p=folder/manage_default_folder"</script>';
 		exit();
 	}
@@ -55,7 +56,7 @@ if(isset($_GET['id'])){
 			<form class="form-horizontal" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="<?=$row['cid']?>" />
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Folder Name *</label>                            
+					<label class="col-sm-2 control-label">Interest Name *</label>                            
 					<div class="col-sm-10">
 					<input type="text" class="form-control" name="cname" maxlength="50" value="<?=(isset($row['cname']) ? $row['cname'] : '')?>"></div>
 				</div>
@@ -67,6 +68,7 @@ if(isset($_GET['id'])){
 						
 					</div>
 				</div>
+				<?php /* ?>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Trending Folder *</label>
 					<div class="col-sm-8">
@@ -74,6 +76,7 @@ if(isset($_GET['id'])){
 						<input type="radio" name="trending_cat" value="0" <?php if (isset($row['trending_cat']) and $row['trending_cat'] == 0) { echo 'checked';} ?> /> No
 					</div>				
 				</div>
+				<?php */ ?>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">Upload Photo</label>					
 					<div class="col-sm-10">

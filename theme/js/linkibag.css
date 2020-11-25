@@ -173,10 +173,10 @@ table tr td span input {
 
 
 
-#free_singup {
+#free_signup {
     background: #7f7f7f none repeat scroll 0 0;
 }
-#free_singup .personal_account_register {
+#free_signup .personal_account_register {
 	background: none;
 	padding: 26px 30px;
 }
@@ -210,7 +210,7 @@ table tr td span input {
     color: #fff !important;
 }
 
-#free_singup .personal_account_register .mylabel {
+#free_signup .personal_account_register .mylabel {
 	color: #fff !important;
 	font-size: 15px;
 	font-weight: 400 !important;
@@ -218,25 +218,25 @@ table tr td span input {
 #free_singup_main .linki-chckboxbox {
 	color: #fff !important;
 }
-#free_singup .linki-chckboxbox {
+#free_signup .linki-chckboxbox {
 	color: #fff !important;
 }
-#free_singup .required-field {
+#free_signup .required-field {
 	color:#fff;
 }
 
-#free_singup #contact-us .form-group {
+#free_signup #contact-us .form-group {
     margin-bottom: 15px;
 }
 #free_singup_main .orange-btn {
 	margin-top: 20px;
 }
-#free_singup .personal_account_register .form-control {
+#free_signup .personal_account_register .form-control {
     box-shadow: none !important;
     border: none;
     border-radius: 0px;
 }
-#free_singup .form-title h2 {
+#free_signup .form-title h2 {
     color: #fff !important;
 }
 .tm {
@@ -254,19 +254,19 @@ table tr td span input {
     padding-left: 0 !important;
 }
 
-#free_singup .bread-crumb {
+#free_signup .bread-crumb {
     color: #fff;
 }
-#free_singup .col-md-7 > p a {
+#free_signup .col-md-7 > p a {
     color: #fff;
 }
-#free_singup #contact-us .col-md-8 {
+#free_signup #contact-us .col-md-8 {
     padding-top: 0;
 }
-#free_singup #contact-us .form-title h2 {
+#free_signup #contact-us .form-title h2 {
     color: #fff !important;
 }
-#free_singup label.error {
+#free_signup label.error {
     color: rgb(150, 0, 0);
     font-size: 11px;
     font-weight: 700 !important;

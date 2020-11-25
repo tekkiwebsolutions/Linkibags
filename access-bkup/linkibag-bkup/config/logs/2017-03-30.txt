@@ -1,0 +1,7 @@
+Time : 14:18:29
+SQLSTATE[42S02]: Base table or view not found: 1146 Table 'bag55_linkibagnet.payments' doesn't exist
+Raw SQL : INSERT INTO `payments`(uid,trans_id,gateway_return,created,amount,paystatus) VALUES(:uid,:trans_id,:gateway_return,:created,:amount,:paystatus)
+
+Time : 12:08:20
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'created' in 'field list'
+Raw SQL : INSERT INTO `interested_category`(cat,uid,created,updated,status) VALUES(:cat,:uid,:created,:updated,:status)

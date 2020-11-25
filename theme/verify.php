@@ -1,21 +1,28 @@
 <?php
 function page_content(){
 	global $co, $msg;
-	$co->page_title = "Confirm Email | Linkibag";
+	$co->page_title = "Confirm Email | LinkiBag";
 	
 	//if(!isset($inc))
 	//	exit();
 	if($co->is_userlogin()){ 
-		$co->setmessage("error", "Sorry! you already login at Linkibag, Please try to verify email to another browser Or logout this account for verify email");
+		$co->setmessage("error", "Sorry! you already login at LinkiBag, Please try to verify email to another browser Or logout this account for verify email");
 		echo '<script language="javascript">window.location="index.php?p=dashboard";</script>';
 		exit();
 	}
-	if(isset($_GET['user']) and isset($_GET['v'])){
-		$chk_verfied = $co->query_first("SELECT email_id,pass,uid FROM `users` WHERE uid=:uid and `verify_code`=:code and verified=0 and status=0", array('uid'=>$_GET['user'], 'code'=>$_GET['v']));	
+	if(isset($_GET['not_requested']) && $_GET['not_requested']==1){
+		$up = array();
+		$up['verified'] = 1;
+		$up['status'] = 0;
+		$up['verified_time'] = time();
+		$co->query_update('users', $up, array('id'=>$_GET['user']), 'uid=:id');
+		unset($up); 				
+		echo '<div class="text-center"><h1>Thank You for Confirmation.</h1><a class="btn btn-primary" href="'.WEB_ROOT.'">OK</a></div>';
+	} else if(isset($_GET['user']) and isset($_GET['v'])){
+		$chk_verfied = $co->query_first("SELECT email_id,pass,uid FROM `users` WHERE uid=:uid and `verify_code`=:code and verified=0", array('uid'=>$_GET['user'], 'code'=>$_GET['v']));	
 		if(isset($chk_verfied['uid']) and $chk_verfied['uid']>0){
 			$up = array();
 			$up['verified'] = 1;
-			$up['status'] = 1;
 			$up['verified_time'] = time();
 			$co->query_update('users', $up, array('id'=>$chk_verfied['uid']), 'uid=:id');
 			unset($up);
@@ -67,17 +74,11 @@ function page_content(){
 								$myHITurl = "https://www.virustotal.com/vtapi/v2/url/report?apikey=e85cac3f3f8fe3d0dc8163c63a89b1ecfa26231aef16ab8d26f2326b62434ead&resource=".$url;
 
 								curl_setopt ($ch, CURLOPT_URL, $myHITurl);
-
 								curl_setopt ($ch, CURLOPT_HEADER, 0);
-
 								curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-
 								curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-
 								$file_contents = curl_exec($ch);
-
 								$curl_error = curl_errno($ch);
-
 								curl_close($ch);
 
 								//dump output of api if you want during test
@@ -157,61 +158,48 @@ function page_content(){
 				exit();
 				
 			}		
-		}else{
-			echo '<script language="javascript">window.location="index.php";</script>';
-			exit();	
+		}else{ 
+			echo '<div class="text-center"><h1>Thank You for Confirmation.</h1><a class="btn btn-primary" href="'.WEB_ROOT.'">OK</a></div>';
 		}
 	}else{
-		echo '<script language="javascript">window.location="index.php";</script>';
-		exit();
+		echo '<div class="text-center"><h1>This page has expired</h1><a class="btn btn-primary" href="'.WEB_ROOT.'">OK</a></div>';
 	}
 	
 ?>
 
+<style type="text/css">
+.btn-primary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+.btn {
+	display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.text-center {
+    text-align: center;
+}
 
+</style>
 
-<div class="container">
-	<div class="row">
-		<div class="login-main">
-			<div class="col-md-5 login-page-left">	
-				<h1>Welcome to LinkiBag</h1>	
-				<p>Trying to keep too many things under <br>control? Drop your links to your LinkiBag<br> and keep them with you wherever you go.</p>	
-				<div class="page-btns">		
-					<a class="btn orange-bg" href="index.php?p=personal-account">Free Signup</a>	
-					<br><small style="color: rgb(255, 127, 39);">Free individual account signup</small>	
-				</div>					
-				<h3>Learn more about LinkiBag Services</h3>	
-				<div class="login-page-links">	
-					<a href="index.php?p=business-accounts">Business Accounts</a> - <a href="index.php?p=institutional-accounts">Institutional Accounts</a> - <a href="index.php?p=linki-drops-accounts">Link Drops Accounts</a>	
-				</div>	
-			</div>
-			<div class="col-md-4 col-md-offset-3 login-page-right">
-				<div class="login-form"> 
-					<form id="login_form" action="" method="post" class="login_frm">
-						<input type="hidden" name="form_id" value="reset_password" />
-						<input type="hidden" name="user_id" value="<?=$_GET['user']?>" />
-						<input type="hidden" name="code" value="<?=$_GET['pv']?>" />
-							<h3 class="text-center">Reset Password</h3>
-						<?php if(isset($msg)) { echo $msg; }?>
-						<span class="forgot-note">Enter the email you used in your LinkiBag profile. A password reset link will be sent to you by email.</span>
-						
-						<div class="form-group text-right">           
-							<input tabindex="1" class="form-control form-control-clean" type="text" required="required" value="<?=(isset($_POST['user_email']) ? $_POST['user_email'] : '')?>" placeholder="Email Address *" name="user_email"/>          
-						</div>
-						<div class="form-group text-right">           
-							<input tabindex="1" class="form-control form-control-clean" type="password" value="" required="required" placeholder="New Password *" name="user_pass"/>          
-						</div>
-						<div class="form-group text-right">           
-							<input tabindex="1" class="form-control form-control-clean" type="password" value="" required="required" placeholder="New Confirm Password *" name="user_cpass"/>          
-						</div>	
-						<div class="text-right">
-							<a href="index.php?p=login" class="btn btn-custom btn-blue-bg">Back to Login</a>
-							<input tabindex="2" class="btn btn-custom btn-blue-bg" type="submit" id="" name="login" value="Submit">
-						</div>       
-					</form>
-				</div> 
-			</div>
-		</div>
-	</div>
-</div>
-<?php } ?>
+<?php 
+	exit();
+} ?>

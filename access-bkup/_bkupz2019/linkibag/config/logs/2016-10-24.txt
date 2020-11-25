@@ -1,0 +1,31 @@
+Time : 09:48:18
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 0, 12' at line 1
+Raw SQL : LIMIT 0, 12
+
+Time : 09:48:15
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 0, 12' at line 1
+Raw SQL : LIMIT 0, 12
+
+Time : 09:47:09
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 0, 12' at line 1
+Raw SQL : LIMIT 0, 12
+
+Time : 09:46:42
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 0, 12' at line 1
+Raw SQL : LIMIT 0, 12
+
+Time : 09:46:30
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 0, 12' at line 1
+Raw SQL : LIMIT 0, 12
+
+Time : 09:46:28
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 0, 12' at line 1
+Raw SQL : LIMIT 0, 12
+
+Time : 09:45:43
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 0, 12' at line 1
+Raw SQL : LIMIT 0, 12
+
+Time : 09:45:37
+SQLSTATE[42000]: Syntax error or access violation: 1064 You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'LIMIT 0, 12' at line 1
+Raw SQL : LIMIT 0, 12

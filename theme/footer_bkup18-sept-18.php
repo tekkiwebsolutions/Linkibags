@@ -889,7 +889,7 @@ input#user_birthday {
 		"password": {
 
 			required: "Please create your password",
-			remote: "Minimum of 8 characters with one number and one uppercase letter.",
+			remote: "Minimum of 8 characters with one number, one lowercase letter and one uppercase letter.",
 
 		},
 		reapt_pass: {

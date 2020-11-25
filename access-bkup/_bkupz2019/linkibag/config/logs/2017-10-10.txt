@@ -1,0 +1,39 @@
+Time : 11:47:52
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_video_link' in 'where clause'
+Raw SQL : select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1
+
+Time : 11:32:57
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_video_link' in 'where clause'
+Raw SQL : select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1
+
+Time : 11:02:43
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_video_link' in 'where clause'
+Raw SQL : select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1
+
+Time : 10:41:15
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_video_link' in 'where clause'
+Raw SQL : select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1
+
+Time : 10:21:17
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_video_link' in 'where clause'
+Raw SQL : select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1
+
+Time : 10:06:26
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_video_link' in 'where clause'
+Raw SQL : select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1
+
+Time : 10:06:24
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_video_link' in 'where clause'
+Raw SQL : select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1
+
+Time : 09:43:00
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_video_link' in 'where clause'
+Raw SQL : select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1
+
+Time : 09:32:32
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_video_link' in 'where clause'
+Raw SQL : select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1
+
+Time : 09:31:11
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'is_video_link' in 'where clause'
+Raw SQL : select * from `user_urls` where `is_video_link`='1' and `video_week`='1' ORDER BY RAND() LIMIT 1

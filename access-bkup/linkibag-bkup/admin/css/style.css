@@ -1,0 +1,91 @@
+body {
+    background-color: #fff;
+	
+	transition: all 0.3s ease 0s;
+}
+a{
+	font-weight:normal !important;
+}.badge-name {    background: #31496a none repeat scroll 0 0;    border-radius: 32px;    color: #ffffff;    float: left;    font-size: 25px;    font-weight: 700;    height: 41px;    line-height: 40px;    margin: 0 9px 0 0;    text-align: center;    width: 41px;}.user-registered .list-group-item {    border: medium none;    border-radius: 35px;    color: #333333;    display: inline-block;    font-size: 14px;    font-weight: bold !important;    padding: 8px 0;    width: 100%;}.user-registered .list-group-item small {    border-left: 1px solid #cccccc;    color: #ef8010;    font-size: 11px;    font-weight: 600;    padding: 0 0 0 3px;}.created-on {    border: medium none !important;    color: #9c9c9c !important;    font-size: 12px !important;    font-weight: 400 !important;    padding: 0 !important;}.user-registered .badge {    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;    color: #333333;    font-size: 15px;    margin: 8px 0 0;}.online {    background: #00b91a none repeat scroll 0 0;    border-radius: 30px;    display: inline-block;    height: 15px;    left: 0;    position: absolute;    top: 4px;    width: 15px;}.purple {    color: #000000 !important;}.panel-title a {    color: #fff;    float: right;    font-size: 13px;    padding: 3px 0 0;    text-decoration: none;}.panel-title {    color: inherit;    font-size: 18px;    font-weight: 400;    margin-bottom: 0;    margin-top: 0;}.navbar-inverse .navbar-nav > li > a {    color: #ffffff;    font-size: 15px;    padding: 13px;}.navbar-nav .fa-caret-down {    float: right;    font-size: 12px;    padding: 8px 0 0;}.navbar-nav > li > a {	border-bottom: 1px solid #525252 !important;}.navbar-nav .fa {    text-align: center;    width: 21px;}.demo > li {    background: #123863 none repeat scroll 0 0;    border-bottom: medium none !important;}.demo li  a{    color: #ffffff !important;}.side-nav {    background-color: #3d464d;    border: 1px solid #3d464d;}
+.navbar-nav > li > a {
+    border-bottom: 1px solid #363636;
+    padding-bottom: 13px;
+    padding-top: 13px;
+	transition: all 0.3s ease 0s;
+}
+.navbar-nav > li > a:hover {
+	padding-left: 22px;
+}
+.demo > li {
+    border-bottom: 1px solid;
+}
+.hr-line-dashed {
+    background-color: #ffffff;
+    border-top: 1px dashed #e7eaec;
+    color: #ffffff;
+    height: 1px;
+    margin: 20px 0;
+}
+.m-b {
+    margin-bottom: 15px;
+}
+div.dataTables_length label {
+    float: left;
+    text-align: left;
+}
+h4::after {
+    border-bottom: 1px solid #ec6147;
+    bottom: -1px;
+    content: " ";
+    left: 0;
+    position: absolute;
+    width: 40%;
+}
+h4 {
+    border-bottom: 1px solid #eee;
+    margin-bottom: 15px;
+    margin-top: 0;
+    padding-bottom: 15px;
+    position: relative;
+	font-size:22px;
+	text-transform:uppercase;
+}
+.profile-img-card {
+    border-radius: 50%;
+    display: block;
+    height: 96px;
+    margin: 0 auto 10px;
+    width: 96px;
+}
+.card-container.card {
+    padding: 40px;
+   
+}
+.card {
+    background-color: #f7f7f7;
+    border-radius: 2px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+   
+   
+}
+.copyright {
+    color: #fff;
+    font-size: 13px;
+    overflow: hidden;
+    padding: 10px;
+    text-align: center;
+    text-shadow: 1px 1px 1px #000;
+    width: 100%;
+}
+#inputEmail {
+    font-size: 16px;
+    height: 45px;
+    margin: 0 0 4px;
+}
+#inputPassword {
+    font-size: 16px;
+    height: 45px;
+}
+.modal-header > h3 {
+    font-weight: unset;
+    margin: 0;
+}

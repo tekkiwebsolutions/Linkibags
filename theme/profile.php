@@ -11,7 +11,7 @@ function page_access(){
 function page_content(){
 	global $co, $msg;
 	$no_record_found='';
-	$co->page_title = "Profile | Linkibag";
+	$co->page_title = "Profile | LinkiBag";
 	$current = $co->getcurrentuser_profile();	
 	if(!isset($_GET['id'])){
 		echo '<script language="javascript">window.location="index.php?p=dashboard";</script>';

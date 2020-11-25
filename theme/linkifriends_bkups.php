@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Friends | Linkibag";     
+	$co->page_title = "Friends | LinkiBag";     
 	$current = $co->getcurrentuser_profile(); 
 
 	if(!(isset($_GET['first_name']) or isset($_GET['last_name']) or isset($_GET['email_id']) or isset($_GET['fgroup']) or isset($_GET['date'])))

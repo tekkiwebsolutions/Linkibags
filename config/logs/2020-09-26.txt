@@ -1,0 +1,11 @@
+Time : 04:28:22
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'field list'
+Raw SQL : select id,email_id from users WHERE status=:id  ORDER BY uid ASC
+
+Time : 04:27:45
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'field list'
+Raw SQL : select id,email_id from users WHERE status=:id  ORDER BY id ASC
+
+Time : 04:20:47
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'id' in 'field list'
+Raw SQL : select id,email_id from users WHERE status=:id ORDER BY id ASC

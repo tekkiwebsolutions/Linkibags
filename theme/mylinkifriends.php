@@ -10,7 +10,7 @@
    function page_content(){      
    	global $co, $msg;      	
    	$no_record_found='';      	
-   	$co->page_title = "LinkiFriends | Linkibag";     
+   	$co->page_title = "LinkiFriends | LinkiBag";     
     	$current = $co->getcurrentuser_profile();  	
    	$user_profile_info = $co->call_profile($current['uid']);  
    	
@@ -141,10 +141,10 @@
    </div>
    <div class="containt-area" id="dashboard_new">
       <div class="container">
-         <div class="col-md-3">      
+         <div class="col-md-3 my_lnk_left">      
             <?php include('dashboard_sidebar.php'); ?>      
          </div>
-         <div class="containt-area-dash col-md-9">
+         <div class="containt-area-dash col-md-9 my_lnk_right">
             <div style="" class="folder-dash-main">
                <div class="row">
                   <div class="col-sm-4">

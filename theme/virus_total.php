@@ -1,7 +1,7 @@
 <?php
 function page_content(){
 global $co, $msg;
-$co->page_title = "Web Resources Library | LinkiBag";
+$co->page_title = "Link Exchange Library | LinkiBag";
 $current = $co->getcurrentuser_profile();  	
 
 $ch = curl_init();

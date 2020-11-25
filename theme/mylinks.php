@@ -10,7 +10,7 @@
    function page_content(){      
       global $co, $msg;       
       $no_record_found='';       
-      $co->page_title = "My Links | Linkibag";     
+      $co->page_title = "My Links | LinkiBag";     
       $current = $co->getcurrentuser_profile();    
       $cid = -2;
       if(isset($_GET['cid']) and $_GET['cid']!='')          
@@ -77,7 +77,7 @@
             $default_folder_name = 'My Links';  
          }
          ?>
-<section class="dashboard-page">
+<section class="dashboard-page" id='my_links_page'>
    <div class="container bread-crumb top-line">
       <div class="col-md-12">
          <p><a href="index.php">Home</a></p> 
@@ -85,10 +85,10 @@
    </div>
    <div class="containt-area " id="dashboard_new">
       <div class="container">
-         <div class="col-md-3">      
+         <div class="col-md-3 my_lnk_left">      
             <?php include('dashboard_sidebar.php'); ?>    
          </div>
-         <div class="containt-area-dash col-md-9">
+         <div id='my_link_right_panel' class="containt-area-dash col-md-9 my_lnk_right">
             
 
          <div>     
@@ -118,8 +118,8 @@
 						<div class="text-right"><a title="A-Z View" href="index.php?p=atoz_mylinks">A-Z View</a></div>
 					 </div>
                      <div class="row">
-                        <div class="col-md-6 col-xs-12">
-                           <span style="display: inline-block; padding-top: 6px;position: relative;" class="text-red" ><i class="fa fa-heart red_ico"></i> <?=$default_folder_name?> 
+                        <div class="col-md-5 col-xs-12 ful_h">
+                           <span style="display: inline-block; padding-top: 6px;position: relative;float:left;margin-right: 20px;" class="text-red" ><i class="fa fa-heart red_ico"></i> <?=$default_folder_name?> 
                            </span> &nbsp;&nbsp;&nbsp;&nbsp;
                            <span style="display: none;"><a href="javascript: void(0);" onclick="multiple_load_share_link_form('Unlike');" data-toggle="tooltip" title="Unlike"><i class="fa fa-heart-o" aria-hidden="true"><span class="badge round-unlike-badge" id="total_unlike_urls"><?=$total_unliked_urls?></span></i></a></span>&nbsp;&nbsp;
 
@@ -131,10 +131,18 @@
                            <span style="display: none;"><a href="javascript: void(0);" onclick="multiple_load_share_link_form('Recommend');" data-toggle="tooltip" title="Recommend"><i class="fa fa-arrow-up recommend" aria-hidden="true"></i><span class="badge round-recommend-badge"
                            id="total_recommend_urls"><?=$total_recommend_urls?></span></a></span>
                            <!-- <a style="margin: 0px 5px;" class="btn button-grey pull-right" href="javascript: void(0);" onclick="multiple_load_share_link_form('print_pdf');"><i class="fa fa-print" aria-hidden="true"></i>Print Pdf</a>-->
-                           <a style="margin: 0px 10px;" class="btn button-grey pull-right" href="index.php?p=linkibags">Link Groups</a>
-                           <a class="share btn button-grey pull-right" href="javascript: void(0);" onclick="multiple_load_share_link_form('share');"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
+                           <a style="margin: 0px 0px;" class="share btn button-grey " href="javascript: void(0);" onclick="multiple_load_share_link_form('share');"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</a>
+                          
+                            <a style="margin: 0px 3px;" class="btn button-grey my_links_add_link" href="index.php?p=add_url">Add Links </a>
+                          
                         </div>
-                        <div class="col-md-6 col-xs-12 text-right">
+                        <div class="col-md-3 col-xs-12 text-right ful_h">
+                             <a style="margin: 0px 3px;" class="btn button-grey " href="index.php?p=linkibook" >LinkiBooks</a>
+                        
+                           <a style="margin: 0px 3px;" class="btn button-grey " href="index.php?p=linkibags">My Folders</a>
+                        </div>
+                        <div class="col-md-4 col-xs-12 text-left ful_w">
+                            
                            <?php /*
                            <div class="input-group dashboard-search" style="border-color: rgb(127, 127, 127) !important;">
                               <input type="text" class="form-control input-sm" placeholder="Search" onkeypress="handle_not_submit(event);" name="url" id="url" value="<?=isset($_GET['url']) ? $_GET['url'] : ''?>">
@@ -142,7 +150,7 @@
                                  <button class="btn btn-default btn-sm" type="button" id="url_submit" onclick="search_form();"><i class="fa fa-search"></i></button>
                               </div>
                            </div> */ ?>
-                           <span class="bottom-nav-link">
+                           <span class="bottom-nav-link" >
                               <a class="btn btn-default dark-gray-bg" href="javascript: void(0);" onclick="mylinks_move_to_category_multiple('#share_urls_from_dash');">Move to</a>                 
                               <div class="dropdown border-bg-btn" style="display: inline;">
                                  <select style="text-align: left;" name="move" class="move_to_cat_w btn btn-default dropdown-toggle filter" id="move_to_cat">
@@ -323,16 +331,16 @@
                                     ?>
                               <tr class="<?=$class_name.$show_friend_class?><?=$urlpost['num_of_visits'] > 0 ? ' read' : ' unread'?>" id="url_<?=$urlpost['shared_url_id']?>">
                                  <td class="width32">
-                                    <span<?=(($urlpost['sponsored_link'] == 1) ? ' class="sponsored_url"' : '')?>><input type="checkbox" class="<?=(($urlpost['share_type_change'] == 1) ? 'urls_shared2' : 'urls_shared')?>"<?=$url_disabled?> name="share_url[]" value="<?=$urlpost['shared_url_id']?>"></span> &nbsp; <a data-toggle="tooltip" title="<?=$title_msg?>" href="index.php?p=scan_url&id=<?=$urlpost['shared_url_id']?>&url=<?=urlencode($urlpost['url_value'])?>" target="_blank"><?=(strlen($urlpost['url_value']) > 35) ? substr($urlpost['url_value'],0,35) : $urlpost['url_value']?><span style="display: none;"><?=$urlpost['url_value']?></span></a>
+                                    <span<?=(($urlpost['sponsored_link'] == 1) ? ' class="sponsored_url"' : '')?>><input type="checkbox" class="<?=(($urlpost['share_type_change'] == 1) ? 'urls_shared2' : 'urls_shared')?>"<?=$url_disabled?> name="share_url[]" value="<?=$urlpost['shared_url_id']?>"></span> &nbsp; <a data-toggle="tooltip" title="<?=$title_msg?>" href="index.php?p=scan_url&id=<?=$urlpost['shared_url_id']?>&url=<?=urlencode($urlpost['url_value'])?>" target="_blank"><?=(strlen($urlpost['url_value']) > 25) ? substr($urlpost['url_value'],0,25) : $urlpost['url_value']?></a>
                                     <?php /*<span class="visit-icon"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>" data-toggle="tooltip" title="<?=(($user_friend_class == ' text-grey') ? 'Not for share' : 'I may share this link with selected users')?>"><i class="fa fa-circle<?=$user_friend_class?>"></i></a></span>*/ ?>
-                                    <span class="visit-icon"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>" data-toggle="tooltip" title="<?=(($user_friend_class3 == ' text-grey') ? 'Not for share' : 'I may share this link with selected users')?>"><i class="fa fa-circle<?=$user_friend_class3?>"></i></a></span>
+                                      <span class=" <?php if($urlpost['like_status']==1){?> visit-icon2<?php }else {?>visit-icon<?php } ?>"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>" data-toggle="tooltip" title="<?=(($user_friend_class3 == ' text-grey') ? 'Not for share' : 'I may share this link with selected users')?>"><i class="fa fa-circle<?=$user_friend_class3?>"></i></a></span>
                                     <!-- Modal -->
                                     <div class="modal fade" id="succ_<?=$urlpost['shared_url_id']?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                        <div class="modal-dialog modal-sm">
                                           <div class="modal-content">
                                              <div class="modal-header modal-header-success">
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                                <h4>You are about to leave Linkibag</h4>
+                                                <h4>You are about to leave LinkiBag</h4>
                                              </div>
                                              <div class="modal-body">
                                                 <p>You will be visiting:</p>
@@ -352,7 +360,18 @@
                                     <!-- /.modal -->
                                     <!-- Modal -->
                                  </td>
-                                 <td class="width28"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>"><?=((strlen($urlpost['url_desc']) > 35) ? substr($urlpost['url_desc'],0,35) : $urlpost['url_desc'])?><span style="display: none;"><?=$urlpost['url_desc']?></span></a></td>
+                                 <td class="width28">
+									<a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>" style="width:100%;">
+										<?php 
+											if(strlen($urlpost['url_desc']) > 37){
+												$url_desc = substr($urlpost['url_desc'],0,37).'...';
+											} else{
+												$url_desc = $urlpost['url_desc'];
+											}
+											echo $url_desc;
+										?>
+									</a>
+								 </td>
                                  <td class="width25"><a href="index.php?p=view_link&id=<?=$urlpost['shared_url_id']?>"><?=($urlpost['email_id'] == '') ? 'Sponsored' : $urlpost['email_id']?></a></td>
                                  <td class="width15"><?=date('m/d/Y', $urlpost['shared_time'])?>   <?=date('h:i a', $urlpost['shared_time'])?></td>
                               </tr>
@@ -425,9 +444,9 @@
         </div>
 		
         </div>
-               <div class="bottom-nav-link table-design margin-none">
+               <div class="bottom-nav-link table-design margin-none" id='share_urls_from_dash_bottom'>
                   <div class="bottom-nav-link-main">
-                     <div  style="padding: 0px;" class="col-md-7">
+                     <div  style="padding: 0px;" class="col-md-7 share_btm">
                         <a class="btn btn-default dark-gray-bg" href="index.php?p=linkibags">Go to</a>                 
                         <div class="dropdown border-bg-btn" style="display: inline;">
                            <select style="text-align: left;" name="filter" class="btn btn-default dropdown-toggle filter"  onchange="fiter_with_folder_dashboard(this.value)">
@@ -456,7 +475,7 @@
                         <a class="btn btn-default dark-gray-bg" href="javascript: void(0);" onclick="multiple_load_share_link_form('mark_as_del');">Delete</a>                 
                      </div>
                      
-                     <div style="width: auto; margin: 0px ! important;" class="col-md-3 pull-right">                                
+                     <div  class="btn btn-default col-md-3 pull-right dark-gray-bg go_to">                                
                         <?=$page_link_new?>                 
                      </div>
                   </div>

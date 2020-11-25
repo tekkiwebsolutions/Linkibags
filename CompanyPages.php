@@ -24,20 +24,20 @@ $img = $co->query_first("SELECT * FROM page_imgs WHERE entity_id=:id ORDER BY RA
 		<link type="image/x-icon" href="images/favicon.png" rel="shortcut icon">
 
 		<!-- animate css -->
-		<link rel="stylesheet" href="http://www.linkibag.net/PTest25x/linkibag//theme/css/animate-stop.min.css">
+		<link rel="stylesheet" href="https://www.linkibag.com/theme/css/animate-stop.min.css">
 		<!-- bootstrap css -->
-		<link rel="stylesheet" href="http://www.linkibag.net/PTest25x/linkibag//theme/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://www.linkibag.com/theme/css/bootstrap.min.css">
 		<!-- font-awesome -->
-		<link rel="stylesheet" href="http://www.linkibag.net/PTest25x/linkibag//theme/css/font-awesome.min.css">
+		<link rel="stylesheet" href="https://www.linkibag.com/theme/css/font-awesome.min.css">
 		<!-- dialogues-->
 
 		<!-- google font -->
 		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700,800' rel='stylesheet' type='text/css'><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 
 		<!-- custom css -->
-		<link rel="stylesheet" href="http://www.linkibag.net/PTest25x/linkibag//theme/css/linkibag.css">
-		<link rel="stylesheet" href="http://www.linkibag.net/PTest25x/linkibag//theme/css/mobile.css">
-		<link rel="stylesheet" href="http://www.linkibag.net/PTest25x/linkibag//theme/css/chosen.css" />
+		<link rel="stylesheet" href="https://www.linkibag.com/theme/css/linkibag.css">
+		<link rel="stylesheet" href="https://www.linkibag.com/theme/css/mobile.css">
+		<link rel="stylesheet" href="https://www.linkibag.com/theme/css/chosen.css" />
 
 
 		<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js?ver=1.3.2'></script>

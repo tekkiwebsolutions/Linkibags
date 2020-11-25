@@ -1,0 +1,14 @@
+Time : 06:44:20
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'folder_total' in 'order clause'
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY folder_total ASC
+
+Time : 06:43:39
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'folder_total' in 'order clause'
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY folder_total ASC
+
+Time : 06:41:00
+SQLSTATE[42S22]: Column not found: 1054 Unknown column 'folder_total' in 'order clause'
+Raw SQL : SELECT * FROM `category` WHERE uid=:id ORDER BY folder_total ASC
+
+Time : 06:10:52
+SQLSTATE[42000]: Syntax error or access violation: 1065 Query was empty

@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Find Friends | Linkibag";     
+	$co->page_title = "Find Friends | LinkiBag";     
  	$current = $co->getcurrentuser_profile();  	
 	$item_per_page = 10;      	
 	      	
@@ -29,10 +29,10 @@ function page_content(){
 			</div>
 			<div class="containt-area" id="dashboard_new">  
 				<div class="container"> 
-					<div class="col-md-3">      
+					<div class="col-md-3 my_lnk_left">      
 						<?php include('dashboard_sidebar.php'); ?>      
 					</div>	
-					<div class="containt-area-dash col-md-9">      
+					<div class="containt-area-dash col-md-9 my_lnk_right">      
 						<div class="folder-dash-main">        
 							       
 							<!-- Tab panes -->        
@@ -71,25 +71,40 @@ function page_content(){
 											<div id="messagesout"></div> 
 											<div class="mail-dashboard folder-dash-data" id="search_friends">
 												<div style="border: 3px solid #ff8000;" id="all_records" class="search_friends_main">
-													<h3 style="color: rgb(128, 64, 64) ! important;" class="light-green-color">Invite more friends to join</h3>
 													<form class="sign_up_page_form" method="post" id="search_form2" action="index.php?p=personal-account&ajax=ajax_submit" onsubmit="javascript: return send_friend_request(this, 'no');">   
+														<div class="row">
+															<div class="col-md-10">
+																<h3 style="color: rgb(128, 64, 64) ! important;" class="light-green-color">Invite more friends to join</h3>
+															</div>
+															<div class="col-md-2 text-right">
+																<button type="submit" class="orange-btn light-brown-bg" id="send_register">Invite</button>		
+															</div>
+														</div>
 													    <input type="hidden" name="form_id" value="send_friend_request"/>           
 														<div class="col-md-12 text-left wow fadeInUp templatemo-box">
 															<div class="row">
 																 <div class="personal_account_register">
 																	<div class="form-group">
 																		<div class="col-md-4 pad-sm"><label class="mylabel">Send email to someone you know</label></div>
-																	    <div style="padding: 0px 7px;" class="col-md-4"><textarea placeholder="Email Address. You can type up to five email addresses separated by commas." type="text" name="email_ids" class="form-control" id="pwd"><?=((isset($_POST['email_id']) and $_POST['email_id']!='') ? $_POST['email_id'] : '')?></textarea>
+																	    <div style="padding: 0px 7px;" class="col-md-6">
+																			<textarea placeholder="Enter up to 5 email addresses separated by comma" type="text" name="email_ids" class="form-control" id="pwd"><?=((isset($_POST['email_id']) and $_POST['email_id']!='') ? $_POST['email_id'] : '')?></textarea>
 																		</div>
-																		<div class="col-md-4">            
-																			<button type="submit" class="orange-btn light-brown-bg" id="send_register">Invite</button>		
-																		</div>
+																			
+																		<div class="col-md-2"></div>
 																		
 																	</div>
 																	<div class="form-group">
+																		<div class="col-md-4 text-right"><label class="mylabel">Subject</label></div>
+																	    <div style="padding: 0px 7px;" class="col-md-6">            
+																			<textarea type="text" class="form-control" id="name" name="names" placeholder="Connect with me on LinkiBag.com"></textarea>
+																		</div>
+																		<div class="col-md-2"></div>
+																	</div>
+																	<div class="form-group">
+																	   
 																		<div class="col-md-4 text-right"><label class="mylabel">Write something </label></div>
-																	 	<div style="padding: 0px 7px;" class="col-md-4">
-																		<textarea placeholder="I would like to invite you to join LinkiBag.com" type="text" name="description" class="form-control"></textarea>
+																	 	<div style="padding: 0px 7px;" class="col-md-6">
+																		<textarea placeholder="I thought you may be interested to join me on LinkiBag. Create your free account today to get connected." type="text" name="description" class="form-control inviteFrienddesc"  ></textarea>
 																		<small>Min 25 characters</small>
 																		</div>
 																		<div class="col-md-4">            
@@ -182,8 +197,13 @@ function page_content(){
 				line-height: 30px;
 				margin: 0;
 			}
-			
-			
+			.sign_up_page_form .form-control { 
+				max-width: 100% !important; 
+			}
+			.sign_up_page_form .inviteFrienddesc{
+				min-height: 60px !important;
+				height: auto !important;
+			}
 		</style>
 		<script>
 		jQuery('#share-link-button').click(function () {

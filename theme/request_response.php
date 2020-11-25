@@ -34,7 +34,7 @@ function page_content(){
 	global $co, $msg;
 
 
-	$co->page_title = "Request Response | Linkibag";
+	$co->page_title = "Request Response | LinkiBag";
 
 
 	$current = $co->getcurrentuser_profile();

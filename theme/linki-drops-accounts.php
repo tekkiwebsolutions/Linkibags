@@ -2,7 +2,7 @@
 function page_content()
 {   
 global $co, $msg; 
-	$co->page_title = "Linki Drops Accounts | LinkiBag";
+	$co->page_title = "LinkiDrops Accounts | LinkiBag";
 	$page = $co->query_first("SELECT * FROM pages WHERE page_id=:id ", array('id'=>6));
 	$img = $co->query_first("SELECT * FROM page_imgs WHERE entity_id=:id ORDER BY RAND()", array('id'=>6));
   $current = $co->getcurrentuser_profile();
@@ -11,7 +11,7 @@ global $co, $msg;
 <section id="public-bag">
   <div class="container bread-crumb top-line about-top" style="margin: auto;">
     <div class="col-md-7">
-      <p><a href="index.php">Home</a> > <?=$page['title']?></p>
+      <p><a href="<?=WEB_ROOT?>">Home</a> > <?=$page['title']?></p>
     </div>
     <div class="col-md-4">         <span class="other-acc-type"></span>      </div>
   </div>
@@ -21,7 +21,7 @@ global $co, $msg;
         <img src="<?=$img['img_original']?>" class="img-responsive margin-bottom">     
         <?php if(!(isset($current['uid']) and $current['uid'] > 0)){ ?>
         <div class="image-blow-text">
-							Try us risk free. Signup for your <span class="orange-blue"><a class="orange-blue" href="index.php?#free_singup">Free Account </a></span>today.
+							Sign up for your <span class="orange-blue"><a class="orange-blue" href="index.php?#free_signup">Free Account </a></span>today.
 						</div>
         <?php } ?>
       </div>
@@ -45,7 +45,6 @@ global $co, $msg;
 		</div>
 		<?=$page['page_body']?>
 		</br></br>
-		<a class="text-orange faq_link" href="index.php?p=contact-us">Leave us a message. We will be right back with you.</a>	
 		
       </div>
     </div>

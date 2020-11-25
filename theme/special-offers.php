@@ -1,7 +1,7 @@
 <?php
 function page_content(){
 	global $co, $msg;
-	$co->page_title = "Special Offers | Linkibag";
+	$co->page_title = "Special Offers | LinkiBag";
 ?>
 <section id="public-bag">
 	<div class="container bread-crumb top-line" style="margin: auto;">

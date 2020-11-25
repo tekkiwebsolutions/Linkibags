@@ -1,0 +1,15 @@
+Time : 10:30:24
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * from admin_ads WHERE adid=:adid  and status IN (:status)  ORDER BY aid desc
+
+Time : 10:30:21
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * from admin_ads WHERE adid=:adid  and status IN (:status)  ORDER BY aid desc
+
+Time : 10:27:51
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * from admin_ads WHERE adid=:adid  and status IN (:status)  ORDER BY aid desc
+
+Time : 10:15:15
+SQLSTATE[HY093]: Invalid parameter number
+Raw SQL : SELECT * from admin_ads WHERE adid=:adid  and status IN (:status)  ORDER BY aid desc

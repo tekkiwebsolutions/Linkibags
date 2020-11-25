@@ -1,12 +1,4 @@
-[11-Jan-2018 06:21:10 Europe/Amsterdam] PHP Warning:  Invalid argument supplied for foreach() in /home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php on line 5
-[31-May-2018 14:01:39 Europe/Amsterdam] PHP Warning:  Invalid argument supplied for foreach() in /home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php on line 5
-[04-Jun-2018 10:25:49 Europe/Amsterdam] PHP Warning:  Invalid argument supplied for foreach() in /home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php on line 10
-[04-Jun-2018 12:00:12 Europe/Amsterdam] PHP Warning:  Invalid argument supplied for foreach() in /home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php on line 10
-[04-Jun-2018 12:01:20 Europe/Amsterdam] PHP Warning:  Invalid argument supplied for foreach() in /home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php on line 10
-[17-Sep-2018 02:27:57 America/Cancun] PHP Warning:  include(/home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/links_print/index.php on line 41
-[17-Sep-2018 02:27:57 America/Cancun] PHP Warning:  include(): Failed opening '/home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/link25test1/public_html/PTest25x/linkibag/links_print/index.php on line 41
-[17-Sep-2018 02:27:59 America/Cancun] PHP Warning:  include(/home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php): failed to open stream: No such file or directory in /home/link25test1/public_html/PTest25x/linkibag/links_print/index.php on line 41
-[17-Sep-2018 02:27:59 America/Cancun] PHP Warning:  include(): Failed opening '/home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php' for inclusion (include_path='.:/usr/lib/php:/usr/local/lib/php') in /home/link25test1/public_html/PTest25x/linkibag/links_print/index.php on line 41
-[17-Sep-2018 02:39:42 America/Cancun] PHP Warning:  Invalid argument supplied for foreach() in /home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php on line 11
-[18-Sep-2018 03:56:33 America/Cancun] PHP Warning:  Invalid argument supplied for foreach() in /home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php on line 11
-[18-Sep-2018 05:52:32 America/Cancun] PHP Warning:  Invalid argument supplied for foreach() in /home/link25test1/public_html/PTest25x/linkibag/links_print/pdf_links_output.php on line 11
+[28-Oct-2020 08:55:00 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/links_print/pdf_linkbook_output.php on line 21
+[28-Oct-2020 09:14:27 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/links_print/pdf_linkbook_output.php on line 21
+[29-Oct-2020 11:38:08 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/links_print/pdf_linkbook_output.php on line 21
+[29-Oct-2020 11:38:16 UTC] PHP Warning:  Invalid argument supplied for foreach() in /home/bag55/public_html/links_print/pdf_linkbook_output.php on line 21

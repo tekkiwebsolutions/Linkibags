@@ -1,0 +1,177 @@
+[04/08/2017 12:00 PM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=97.49, invoice=17, protection_eligibility=Ineligible, address_status=confirmed, payer_id=7QAME7L35CTW2, address_street=Flat no. 507 Wing A Raheja Residency
+Film City Road, Goregaon East, payment_date=02:51:26 Apr 08, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=400097, first_name=jimmy, address_country_code=IN, address_name=jimmy rana's Test Store, notify_version=3.8, custom=, payer_status=verified, address_country=India, address_city=Mumbai, quantity=1, verify_sign=ADmhMw5gqASpvy.X38.nDdwooKz7AOXGFrcGGPoO0T3LwZrGysJexebR, payer_email=jimmyrana786+786@gmail.com, txn_id=3WD04365XW252914G, payment_type=instant, payer_business_name=jimmy rana's Test Store, last_name=rana, address_state=Maharashtra, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Business Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=97.49, ipn_track_id=3293f2822fc39, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[04/08/2017 12:12 PM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=47.99, invoice=18, protection_eligibility=Ineligible, address_status=confirmed, payer_id=7QAME7L35CTW2, address_street=Flat no. 507 Wing A Raheja Residency
+Film City Road, Goregaon East, payment_date=03:03:25 Apr 08, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=400097, first_name=jimmy, address_country_code=IN, address_name=jimmy rana's Test Store, notify_version=3.8, custom=, payer_status=verified, address_country=India, address_city=Mumbai, quantity=1, verify_sign=AxY4PZnLwHn-wCsVYatnHp9kp4-PAj2GAxs1TJNwzQZrNLbLGgedTIyV, payer_email=jimmyrana786+786@gmail.com, txn_id=98N05834AS597863S, payment_type=instant, payer_business_name=jimmy rana's Test Store, last_name=rana, address_state=Maharashtra, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Institutional Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=47.99, ipn_track_id=dc46a10a1f215, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[04/10/2017 7:22 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=97.49, invoice=19, protection_eligibility=Ineligible, address_status=confirmed, payer_id=7QAME7L35CTW2, address_street=Flat no. 507 Wing A Raheja Residency
+Film City Road, Goregaon East, payment_date=22:13:41 Apr 09, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=400097, first_name=jimmy, address_country_code=IN, address_name=jimmy rana's Test Store, notify_version=3.8, custom=, payer_status=verified, address_country=India, address_city=Mumbai, quantity=1, verify_sign=AxYydGgVLhUW5sjJz-68tdpfsYzZA22V2ryB94EKodEwQR-vcSA0BA-., payer_email=jimmyrana786+786@gmail.com, txn_id=0D704414B86981045, payment_type=instant, payer_business_name=jimmy rana's Test Store, last_name=rana, address_state=Maharashtra, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Business Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=97.49, ipn_track_id=87372798ebdb6, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[04/10/2017 7:32 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=47.99, invoice=20, protection_eligibility=Ineligible, address_status=confirmed, payer_id=7QAME7L35CTW2, address_street=Flat no. 507 Wing A Raheja Residency
+Film City Road, Goregaon East, payment_date=22:23:57 Apr 09, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=400097, first_name=jimmy, address_country_code=IN, address_name=jimmy rana's Test Store, notify_version=3.8, custom=, payer_status=verified, address_country=India, address_city=Mumbai, quantity=1, verify_sign=AAZBo41292784GRQg0xxLmq7RGd-Al99PgxN7yYd63LBgs6VMmZBH7jU, payer_email=jimmyrana786+786@gmail.com, txn_id=8WW037235H002144G, payment_type=instant, payer_business_name=jimmy rana's Test Store, last_name=rana, address_state=Maharashtra, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Institutional Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=47.99, ipn_track_id=5c5b9d087e463, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[04/10/2017 7:41 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=47.99, invoice=22, protection_eligibility=Ineligible, address_status=confirmed, payer_id=7QAME7L35CTW2, address_street=Flat no. 507 Wing A Raheja Residency
+Film City Road, Goregaon East, payment_date=22:33:01 Apr 09, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=400097, first_name=jimmy, address_country_code=IN, address_name=jimmy rana's Test Store, notify_version=3.8, custom=, payer_status=verified, address_country=India, address_city=Mumbai, quantity=1, verify_sign=A81HadezQkXhz0ZnmaS333zkG43pAByhs1mRbTwjRIlZoMZ3zHHuf6de, payer_email=jimmyrana786+786@gmail.com, txn_id=19W58261U8327174H, payment_type=instant, payer_business_name=jimmy rana's Test Store, last_name=rana, address_state=Maharashtra, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Institutional Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=47.99, ipn_track_id=e562bf1bf18d8, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[04/10/2017 7:52 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=47.99, invoice=23, protection_eligibility=Ineligible, address_status=confirmed, payer_id=7QAME7L35CTW2, address_street=Flat no. 507 Wing A Raheja Residency
+Film City Road, Goregaon East, payment_date=22:43:36 Apr 09, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=400097, first_name=jimmy, address_country_code=IN, address_name=jimmy rana's Test Store, notify_version=3.8, custom=, payer_status=verified, address_country=India, address_city=Mumbai, quantity=1, verify_sign=AKiJVI-zRf1GGbfcTE2iPRb31l2ZApV30qr35uAJ8MUK5izYspB0ee2F, payer_email=jimmyrana786+786@gmail.com, txn_id=89G584207M838303W, payment_type=instant, payer_business_name=jimmy rana's Test Store, last_name=rana, address_state=Maharashtra, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Institutional Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=47.99, ipn_track_id=52a522398ac82, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[05/19/2017 11:12 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=47.99, invoice=33, protection_eligibility=Ineligible, address_status=confirmed, payer_id=SCULPVEM3F5CY, address_street=Jawaddi kalan, payment_date=00:57:29 May 19, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=141002, first_name=Dalvir, address_country_code=IN, address_name=Dalvir Sandbox Testing, notify_version=3.8, custom=, payer_status=unverified, address_country=India, address_city=Ludhiana, quantity=1, verify_sign=AQEgFLG-gYJRPNwVRAb4gD.Dx6t9AVPFQN5uiK9IiLb.tFjt1osFI.Yr, payer_email=dalvir4u@gmail.com, txn_id=765974425R529970K, payment_type=instant, payer_business_name=Dalvir Sandbox Testing, last_name=Toor, address_state=Punjab, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Institutional Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=47.99, ipn_track_id=26456c531cbdf, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[05/19/2017 11:12 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=47.99, invoice=35, protection_eligibility=Ineligible, address_status=confirmed, payer_id=SCULPVEM3F5CY, address_street=Jawaddi kalan, payment_date=01:09:22 May 19, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=141002, first_name=Dalvir, address_country_code=IN, address_name=Dalvir Sandbox Testing, notify_version=3.8, custom=, payer_status=unverified, address_country=India, address_city=Ludhiana, quantity=1, verify_sign=A9.9SxULx7oIiOPE2Jbs9dLO9vqKAG76bOU-GeH.VWOdi9jwv2aLuOEx, payer_email=dalvir4u@gmail.com, txn_id=4B313737FG4427314, payment_type=instant, payer_business_name=Dalvir Sandbox Testing, last_name=Toor, address_state=Punjab, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Institutional Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=47.99, ipn_track_id=7041f88f28fb4, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[05/19/2017 11:14 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=47.99, invoice=34, protection_eligibility=Ineligible, address_status=confirmed, payer_id=SCULPVEM3F5CY, address_street=Jawaddi kalan, payment_date=01:01:54 May 19, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=141002, first_name=Dalvir, address_country_code=IN, address_name=Dalvir Sandbox Testing, notify_version=3.8, custom=, payer_status=unverified, address_country=India, address_city=Ludhiana, quantity=1, verify_sign=AFFIASYBPB4TY3B2VIHX1thDFvcyAmYTW0WswackpXf9Ef1TdybMU5T0, payer_email=dalvir4u@gmail.com, txn_id=2HM69859KC562044P, payment_type=instant, payer_business_name=Dalvir Sandbox Testing, last_name=Toor, address_state=Punjab, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Institutional Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=47.99, ipn_track_id=2ef52478accf1, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[05/19/2017 11:14 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=97.49, invoice=37, protection_eligibility=Ineligible, address_status=confirmed, payer_id=SCULPVEM3F5CY, address_street=Jawaddi kalan, payment_date=01:14:49 May 19, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=141002, first_name=Dalvir, address_country_code=IN, address_name=Dalvir Sandbox Testing, notify_version=3.8, custom=, payer_status=unverified, address_country=India, address_city=Ludhiana, quantity=1, verify_sign=AdnTXdKpmOs3nB8WH-nT6RoE6qV.AnWpVkMfqb5.4..R-YhaZVKPZz7x, payer_email=dalvir4u@gmail.com, txn_id=6UU60901BU905562W, payment_type=instant, payer_business_name=Dalvir Sandbox Testing, last_name=Toor, address_state=Punjab, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Business Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=97.49, ipn_track_id=e4a0f3238c5a8, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[06/05/2017 8:06 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=47.99, invoice=40, protection_eligibility=Ineligible, address_status=confirmed, payer_id=7QAME7L35CTW2, address_street=Flat no. 507 Wing A Raheja Residency
+Film City Road, Goregaon East, payment_date=22:53:37 Jun 04, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=400097, first_name=jimmy, address_country_code=IN, address_name=jimmy rana's Test Store, notify_version=3.8, custom=, payer_status=verified, address_country=India, address_city=Mumbai, quantity=1, verify_sign=A07xhyyVgBF5FqBZ8JsE1yeuPIyTAIcxU8rKh6PtXfcw.pcFEES3bCv1, payer_email=jimmyrana786+786@gmail.com, txn_id=1K765851Y4117444X, payment_type=instant, payer_business_name=jimmy rana's Test Store, last_name=rana, address_state=Maharashtra, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Institutional Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=47.99, ipn_track_id=a6aee63ec7055, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[06/05/2017 8:10 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=97.49, invoice=41, protection_eligibility=Ineligible, address_status=confirmed, payer_id=7QAME7L35CTW2, address_street=Flat no. 507 Wing A Raheja Residency
+Film City Road, Goregaon East, payment_date=22:57:45 Jun 04, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=400097, first_name=jimmy, address_country_code=IN, address_name=jimmy rana's Test Store, notify_version=3.8, custom=, payer_status=verified, address_country=India, address_city=Mumbai, quantity=1, verify_sign=AB8uKJ-cgis5XVZJfu8yXdO6dhrpAzPB2GhA6cS59KRUBH5bfeY4ZAoJ, payer_email=jimmyrana786+786@gmail.com, txn_id=90D42698PD881223X, payment_type=instant, payer_business_name=jimmy rana's Test Store, last_name=rana, address_state=Maharashtra, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Business Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=97.49, ipn_track_id=8d2b08673cba8, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[06/05/2017 8:11 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=47.99, invoice=42, protection_eligibility=Ineligible, address_status=confirmed, payer_id=7QAME7L35CTW2, address_street=Flat no. 507 Wing A Raheja Residency
+Film City Road, Goregaon East, payment_date=22:58:32 Jun 04, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=400097, first_name=jimmy, address_country_code=IN, address_name=jimmy rana's Test Store, notify_version=3.8, custom=, payer_status=verified, address_country=India, address_city=Mumbai, quantity=1, verify_sign=AXbHfyOhp.g26Kv5HlJEYOBllEYOAFxmPhnxFvJUe6Ho0ByHrFMPCdTd, payer_email=jimmyrana786+786@gmail.com, txn_id=67765510R6941092L, payment_type=instant, payer_business_name=jimmy rana's Test Store, last_name=rana, address_state=Maharashtra, receiver_email=jimmyrana786@yahoo.in, pending_reason=unilateral, txn_type=web_accept, item_name=Institutional Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=47.99, ipn_track_id=3f18e9f045bce, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[08/01/2017 7:15 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=48.00, invoice=43, protection_eligibility=Ineligible, address_status=confirmed, payer_id=SCULPVEM3F5CY, address_street=Jawaddi kalan, payment_date=22:14:33 Jul 31, 2017 PDT, payment_status=Pending, charset=windows-1252, address_zip=141002, first_name=Dalvir, address_country_code=IN, address_name=Dalvir Sandbox Testing, notify_version=3.8, custom=, payer_status=unverified, address_country=India, address_city=Ludhiana, quantity=1, verify_sign=ARyNDMbKwa-zLx7AtfPa-etrhyTVAxtF1gmimG-9QPWwhNX-wV7Z-q14, payer_email=dalvir4u@gmail.com, txn_id=05V10618YD225545P, payment_type=instant, payer_business_name=Dalvir Sandbox Testing, last_name=Toor, address_state=Punjab, receiver_email=info@wishmatcher.com, pending_reason=unilateral, txn_type=web_accept, item_name=Institutional Account, mc_currency=USD, item_number=, residence_country=IN, test_ipn=1, transaction_subject=, payment_gross=48.00, ipn_track_id=4b962af86ad33, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+

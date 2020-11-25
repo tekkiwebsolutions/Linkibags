@@ -331,7 +331,7 @@ function page_content(){
 									<div class="col-md-4 pad-sm"><label class="mylabel">Password:<span class="required-field">*</span></label></div>
 									<div class="col-md-8"> 
 										<div class="">
-										<input placeholder="create" type="password" name="password" id="password" class="form-control" ><span style="color: #fff !important; position: absolute; right: 0; top: 6px;"><a data-toggle="tooltip" title="Minimum of 8 characters with one number and one uppercase letter." href="javascript: void();" style="color: rgb(255, 255, 255) ! important;">?</a></span> 
+										<input placeholder="create" type="password" name="password" id="password" class="form-control" ><span style="color: #fff !important; position: absolute; right: 0; top: 6px;"><a data-toggle="tooltip" title="Minimum of 8 characters with one number, one lowercase letter and one uppercase letter." href="javascript: void();" style="color: rgb(255, 255, 255) ! important;">?</a></span> 
 										</div>
 
 												

@@ -1,7 +1,7 @@
 <?php
 function page_content(){
 	global $co, $msg;
-	$co->page_title = "Personal FAQs | Linkibag";
+	$co->page_title = "Personal FAQs | LinkiBag";
 	$page = $co->query_first("SELECT * FROM pages WHERE page_id=:id ", array('id'=>7));
 	$img = $co->query_first("SELECT * FROM page_imgs WHERE entity_id=:id ORDER BY RAND()", array('id'=>7));
 ?>

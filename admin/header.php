@@ -1,6 +1,6 @@
 <?php
 
-define('WSNAME','Linkibag');
+define('WSNAME','LinkiBag');
 define('WSTAGLINE','');
 
 ?>
@@ -41,6 +41,8 @@ define('WSTAGLINE','');
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
+                	<li><a style="color: rgb(255, 255, 255) ! important; font-size: 16px;" href="main.php?p=send_mail">Send Email</a></li>
+            	<li><a style="color: rgb(255, 255, 255) ! important; font-size: 16px;" href="main.php?p=manage_reportspam">Spam Reports</a></li>
             	<li><a style="color: rgb(255, 255, 255) ! important; font-size: 16px;" href="main.php?p=popup_setting">Home Popup</a></li>
             	<li><a style="color: rgb(255, 255, 255) ! important; font-size: 16px;" href="main.php?p=service_countries_setting">Service Countries</a></li>
                 <li class="dropdown">
@@ -62,6 +64,7 @@ define('WSTAGLINE','');
 				$user_nav_link = 'off';
 				$ad_nav_link = 'off';
 				$farmtalk_tags_nav_link = 'off';
+				$adver_tag_link = 'off';
 				$topic_nav_link = 'off';
 				$banner_nav_link = 'off';
 				$state_nav_link = 'off';
@@ -87,6 +90,10 @@ define('WSTAGLINE','');
 					if(in_array('admin_url_management', $getparr)){
 						$farmtalk_tags_nav_link = 'on';
 					}
+					if(in_array('advertisement_management', $getparr)){
+						$adver_tag_link = 'on';
+					}
+					
 					if(in_array('topic_management', $getparr)){
 						$topic_nav_link = 'on';
 					}
@@ -135,7 +142,10 @@ define('WSTAGLINE','');
 							//$active = 'classs="active"';
 							?>
                             <li>
-                                <a href="main.php?p=user_management/manage" class="active">Manage</a>
+                                <a href="main.php?p=user_management/manage" >Manage</a>
+                            </li>
+                             <li>
+                                <a href="main.php?p=user_management/subscribers" >Email Subscribers</a>
                             </li>
 							
                         </ul>
@@ -168,13 +178,27 @@ define('WSTAGLINE','');
 								<a href="main.php?p=admin_url_management/manage">Manage</a>
 							</li>
                         </ul>
+					</li>
+					
+					<li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#adver_tag_link"><i class="fa fa-link"></i> Advertisement Management<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="adver_tag_link" class="collapse demo<?=($adver_tag_link=='on' ? ' in' : '')?>">        
+							<li>
+								<a href="main.php?p=advertisement_management/add">Add</a>
+							</li>
+							<li>
+								<a href="main.php?p=advertisement_management/manage">Manage</a>
+							</li>
+                        </ul>
                     </li>
 					
 					<li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#banner_manage_link"><i class="fa fa-list"></i> Category management<i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="banner_manage_link" class="collapse demo<?=($banner_nav_link=='on' ? ' in' : '')?>">							
+                        <ul id="banner_manage_link" class="collapse demo<?=($banner_nav_link=='on' ? ' in' : '')?>">			<li>
+								<a href=" main.php?p=category_management/add">Add</a>
+							</li> 			
 							<li>
-								<a href=" main.php?p=category_management/manage_public_category">Manage public category</a>
+								<a href=" main.php?p=category_management/manage_public_category">Manage</a>
 							</li> 
 							
                         </ul>
@@ -218,7 +242,7 @@ define('WSTAGLINE','');
                         </ul>
                     </li>
 					<li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#ads_manage_link"><i class="fa fa-fw fa-picture-o"></i> Advertise management<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#ads_manage_link"><i class="fa fa-fw fa-picture-o"></i> Ad management<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="ads_manage_link" class="collapse demo<?=($banner_nav_link=='on' ? ' in' : '')?>">							
 							<li>
                                 <a href="main.php?p=ads_management/add">Add</a>

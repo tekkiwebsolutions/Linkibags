@@ -4,6 +4,21 @@ if(!isset($include)){
 }
 if($_SERVER['REQUEST_METHOD']=='POST'){
 	include('submit-linkibook.php');
+	if(isset($_POST['form_id']) and $_POST['form_id']=="change_recieve_email"){
+		$current = $co->getcurrentuser_profile();
+		$success = true;
+		$time =time();
+		if(isset($current['uid']) and $current['uid']!=0 and isset($_POST['donot_recieve_email'])) {
+			$co->query_update('users', array('donot_recieve_email'=>$_POST['donot_recieve_email'],'donot_recieve_email_timestamp'=>$time), array('id'=>$current['uid']), 'uid=:id');
+			if($_POST['donot_recieve_email'] == 1) {
+				echo "Your LinkiBag account will continue to remain active, but you will no longer receive any email notifications from LinkiBag or it's users.";
+				exit();
+			}else {
+				echo "Thanks, you will now receive notifications.";
+				exit();
+			}
+		}
+	}
 	if(isset($_POST['form_id']) and $_POST['form_id']=="create_linkibook"){
 		$current = $co->getcurrentuser_profile();
 		$success = true;
@@ -46,7 +61,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		$con1 = curl_exec($ch);
 		curl_close($ch);*/
 
-		$_SESSION['dialog_success'] = 'Linkibook created successfully!';
+		$_SESSION['dialog_success'] = 'You have successfuly created your LinkiBook.';
 		echo json_encode(array('sucess'=>'1', 'weblink'=>$weblink));
 		exit();
 	}
@@ -92,7 +107,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		echo 'success';
 		exit();
 	}
-	if(isset($_POST['form_id']) and $_POST['form_id']=="register"){								
+	if(isset($_POST['form_id']) and $_POST['form_id']=="register"){							
 		//$_POST['salutation'] = trim($_POST['salutation']);
 		//$_POST['salutation'] = strip_tags($_POST['salutation']);
 		
@@ -147,7 +162,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		//check if email_id empty
 		if($_POST['email_id']==""){
 			/*$co->setmessage("error", "Please enter email");*/
-			$msg .= "Please enter email <br/>";
+			$msg .= "Please enter email id <br/>";
 			$success=false;
 		}
 		if(isset($_POST['email_id']) and $_POST['email_id']!=''){
@@ -187,8 +202,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		*/
 		if(isset($_POST['password']) and $_POST['password']!=''){
 			$password =  strlen($_POST['password']);
-			if ($password<9){
-				$msg .= "password is not a valid at least 9 of the characters";
+			if ($password<8){
+				$msg .= "password is not a valid at least 8 of the characters";
 				$success=false;
 			}
 			$containsLetter  = preg_match('/[a-zA-Z]/', $_POST['password']);
@@ -212,9 +227,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		if(!isset($_POST['country']) or (isset($_POST['country']) and $_POST['country'] == '')){
 			$msg .= "Please select country";
 			$success=false;
-		}elseif($_POST['country'] != '1'){
-			$msg .= "You are located outside of our service area. Our website and service provided via this website is exclusively for use by those individuals located in the United States.";
-			$success=false;
+		}
+
+		if(isset($_POST['country']) and $_POST['country'] == 1){
+			if(!isset($_POST['state']) or (isset($_POST['state']) and $_POST['state'] == '')){
+				$co->setmessage("error", "Please choose state");
+				$success=false;
+			}
+			if($_POST['zip_code'] == ''){
+				$co->setmessage("error", "Please enter zip code");
+				$success=false;
+			}
 		}
 		//check if no error
 		if($success==true){			
@@ -227,12 +250,41 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 			}	
 			/*$msg .= "Congratulations! You are almost done. To complete registration please click on the link that we just sent to your email address.";*/
-			$msg .= "Success! In order to complete your registration, please click the confirmation link in the email that we have sent to you.";
+			//$msg .= "Success! In order to complete your registration, please click the confirmation link in the email that we have sent to you.";
+			$msg .= "Success! To complete the registration process, please click on the link in the email we just sent you. If you do not receive it within a few minutes, please check your spam folder. Click Not Spam to allow future messages to get through.";
 		
-			/*$redirect_to = "index.php?#free_singup";*/
+			/*$redirect_to = "index.php?#free_signup";*/
 			/*$redirect_to = "index.php";*/
-			
-			
+// 			$subject= 'Welcome to LinkiBag';
+// 				$from = 'info@linkibag.com';
+// 						$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+// 						<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Linkibag Invitation</title>
+// 						<style type="text/css">@import url("https://fonts.googleapis.com/css?family=Lora");body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn{background:#408080 none repeat scroll 0 0;border-radius:0;color:#fff!important;display:inline-block;font-size:20px;font-weight:bold;margin:0;padding:6px 31px;text-decoration:none;width:275px}.btn-decline{background:#c3c3c3 none repeat scroll 0 0;border-radius:0;color:#7A7A7A!important;display:inline-block;font-size:20px;font-weight:bold;margin:16px 0 0;padding:6px 31px;text-decoration:none;width:275px}h1{font-family:"Lora",serif;margin:0;font-size:26px;line-height:38px;color:#353e4f !important}.top-line{font-size:14px;margin-top:20px}.big{font-family:"Lora",serif;color:#3e3e3e;font-size:16px;margin:8px 0 12px;line-height:30px;font-weight:bolder}.links{padding:41px 0 5px}.links a{color:#7F7F95!important;font-size:14px}.bottom-text{font-size:14px;line-height:25px;color:#000!important}.bottom-text a{text-decoration:underline!important;font-weight:600}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>
+// 						</head>
+// 						<body bgcolor="#ffffff">
+// 						<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
+// 						<tr><td>
+// 						<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
+//                         <tr><td style="text-align:left;padding:30px 0 20px">
+//                         <img src="http://linkibag.com/images/email-logo/linkibag-logo.png"><br>
+//                         <p class="top-line"><h1>Welcome to LinkiBag.</h1>  </p></td></tr>
+// 						<tr><td>
+//                         <p class="big" style="text-align: left;">
+//                         <a class="btn " style="padding:5px; color:red; background-color:gray" href="https://www.linkibag.com/links/welcome">Click here to Proceed furthur</a>
+//                             </p>
+// 						</td></tr>
+// 						<tr><td></td></tr>
+// 						<tr>
+// 						<td>
+// 						<p class="links"><a href="'.$co->get_bit_ly_link(WEB_ROOT.'index.php?p=about_us').'">About Linkibag &nbsp; | &nbsp;</a>  <a href="'.$co->get_bit_ly_link(WEB_ROOT.'index.php?p=pages&id=8').'">Terms of Use &nbsp; | &nbsp; </a> <a href="'.$co->get_bit_ly_link(WEB_ROOT.'index.php?p=pages&id=9').'">Privacy Policy</a></p>
+// 						</td>
+// 						</tr>
+// 						</table>
+// 						</td></tr>
+// 						</table>
+// 						</body>
+// 						</html>';
+// 						$co->send_email($email, $subject, $message, $from);
 			
 		}
 
@@ -240,6 +292,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		exit();					
 	}
 	if(isset($_POST['form_id']) and $_POST['form_id']=="login"){
+
+	
 		$_POST['email_id'] = trim($_POST['email_id']);
 		$_POST['email_id'] = strip_tags($_POST['email_id']);
 		
@@ -259,14 +313,33 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			$success=false;
 		}
 		if($_POST['password']=="" AND $_POST['email_id']==""){
-			$co->setmessage("error", "Email & Password is required");
+			$co->setmessage("error", "Enter your email address and password");
 			$success=false;
+		}
+		if(isset($_SESSION['wrong_login']) and $_SESSION['wrong_login'] >= 3) {
+			if(!isset($_POST['g-recaptcha-response'])) {
+				$co->setmessage("error", "Please verify that you are not a robot.");
+				$success=false;
+			} elseif(empty($_POST['g-recaptcha-response'])) {
+				$co->setmessage("error", " Please verify that you are not a robot.");
+				$success=false;
+			} else {
+		        $responseData = $co->validate_gresponse($_POST['g-recaptcha-response']);
+		        if(!$responseData->success) {
+		            $co->setmessage("error", " Please verify that you are not a robot.");
+					$success=false;
+		        }
+		   	}
 		}
 		//check if no error
 		if($success==true){	
-			if($co->userlogin($_POST['email_id'],$_POST['password'],$remember)){				
+			if($co->userlogin($_POST['email_id'],$_POST['password'],$remember)){	
+					if(isset($_SESSION['wrong_login'])) {
+						unset($_SESSION['wrong_login']);
+					}			
 					if(isset($_POST['request_id']) and $_POST['request_id'] > 0 and $_POST['request_code'] and $_POST['request_code'] != '' and $_POST['accept'] and $_POST['accept'] != ''){
 						$result = $co->query_first("select fr.request_id,u.email_id from friends_request fr, users u where fr.request_to=u.uid and fr.request_id=:id and fr.request_code=:code and fr.status='0' and u.email_id=:email", array('email'=>$_POST['email_id'], 'id'=>$_POST['request_id'], 'code'=>$_POST['request_code']));
+						
 						if((isset($result['request_id']) and $result['request_id'] > 0)){
 							echo '<script language="javascript">window.location="index.php?p=friend_request&request_id='.$_POST['request_id'].'&request_code='.$_POST['request_code'].'&accept='.$_POST['accept'].'";</script>';
 							exit();
@@ -280,19 +353,31 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 			}else{
 				$user_login = $co->query_first("SELECT uid,status,verified FROM `users` WHERE `email_id`= :user and `decrypt_pass` = :pass LIMIT 1",array('user'=>$_POST['email_id'],'pass'=>md5($_POST['password'])));
+		
 				if(isset($user_login['uid']) and $user_login['uid'] > 0){
-					if($user_login['verified'] == '0'){
-						$co->setmessage("error", "If you have an account with us, check your inbox or spam folder to find the email from LinkiBag and follow the confirmation instructions. If you do not have an account you will find our instructions for free account set up. <a href='index.php?p=forget-password'> Click here</a> to receive password reset instructions.");
+					if($user_login['verified'] == '0'){ 						
+						$co->setmessage("error", "Your verification is pending yet. Please check your inbox or spam folder to find the email from LinkiBag and follow the confirmation instructions. If you do not receive any email yet please <span style='cursor:pointer; color:#31496A;' onclick='resendConfirmMail(".$user_login['uid'].")' > Click here </span> to receive.");
+						
 					}else if($user_login['status'] == '0'){
 						$co->setmessage("error", "Your account is blocked by administrator.");
+					}else if($user_login['status'] == '-1'){
+						$co->setmessage("error", "You have closed your account recently. To revert contact administrator.");
 					}else if($user_login['status'] == '1' and $user_login['verified'] == '1'){
+						if(isset($_SESSION['wrong_login'])) {
+							unset($_SESSION['wrong_login']);
+						}	
 						echo '<script language="javascript">window.location="index.php?p=dashboard";</script>';
 						exit();
 					}
 		
 				}else{
-		
-					$co->setmessage("error", "You have entered invalid login detail");
+					if(isset($_SESSION['wrong_login'])) {
+						$_SESSION['wrong_login'] += 1;
+					}else {
+						$_SESSION['wrong_login'] = 1;
+					}
+					
+					$co->setmessage("error", "Your credentials are invalid. Try again or select Forgot Password option below.");
 					
 				}
 
@@ -304,7 +389,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		//$_POST['email_id'] = trim($_POST['email_id']);
 		//$_POST['email_id'] = strip_tags($_POST['email_id']);
 		
-		
+		$_POST['profile_status']=1;
 		$_POST['salutation'] = trim($_POST['salutation']);
 		$_POST['salutation'] = strip_tags($_POST['salutation']);
 		
@@ -313,23 +398,38 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		
 		$_POST['first_name'] = trim($_POST['first_name']);
 		$_POST['first_name'] = strip_tags($_POST['first_name']);
+		if(isset($_POST['subscribe'])){
 		
-		$_POST['last_name'] = trim($_POST['last_name']);
-		$_POST['last_name'] = strip_tags($_POST['last_name']);
-		
+		if($_POST['subscribe']=="on")
+		{
+			$_POST['subscribe']=1;			
+		}else
+		{
+			$_POST['subscribe']=0;
+		}
+			
+		}else
+		{
+			$_POST['subscribe']=0;	
+		}
+		//$_POST['last_name'] = trim($_POST['last_name']);
+		//$_POST['last_name'] = strip_tags($_POST['last_name']);
+		//print_r($_POST);die();
 		$success = true;
-		if($_POST['first_name']=="" or $_POST['last_name']=="" or $_POST['country']=="" or $_POST['security_question']=="" or $_POST['security_answer']=="" or $_POST['subscribe']==""){
-			$co->setmessage("error", "Please include all required information");
+		if($_POST['first_name']==""  or $_POST['country']=="" or $_POST['security_question']=="" or $_POST['security_question2']=="" or $_POST['security_question3']=="" 
+		or $_POST['security_answer']==""  or $_POST['security_answer2']=="" or $_POST['security_answer3']=="" ){
+			$co->setmessage("error", "Please enter all required information.");
 			$success=false;
 		}
-		if(isset($_POST['country']) and $_POST['country'] == 1){
+
+		else if(isset($_POST['country']) and $_POST['country'] == 1){
 			if($_POST['state']=="" or $_POST['zip_code']==""){
-				$co->setmessage("error", "Please include all required information");
+				$co->setmessage("error", "Please enter all required information.");
 				$success=false;
 			}
 		}	
 		
-		if(isset($_POST['email_id']) and $_POST['email_id']!=''){
+	else	if(isset($_POST['email_id']) and $_POST['email_id']!=''){
 			$email =  $_POST['email_id'];
 			if (filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
 				$co->setmessage("error", "Please use user@gmail.com format to update your profile");
@@ -337,7 +437,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			}
 			$eamil_exists = $co->is_userExists_edit($email, $current['uid']);
 			if(isset($eamil_exists) and $eamil_exists!=''){
-				$co->setmessage("error", "$email is already existed");
+				$co->setmessage("error", "$email  is affiliated with another LinkiBag account. Please try again.");
 				$success=false;
 			}
 			
@@ -384,35 +484,36 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			}	
 		}
 		*/
-		if($_POST['password']!=""){
-			if($current['pass'] != $_POST['password'] and $current['decrypt_pass'] != md5($_POST['password'])){
-				$co->setmessage("error", "Please enter your correct password to update anything");
-				$success=false;
-			}else{
-				if($_POST['password']!=$_POST['reapt_pass']){
-					$co->setmessage("error", "Password and Confirm password must be same!");
-					$success=false;
-				}
-			}
-		}else{
-			$co->setmessage("error", "Please enter your correct password to update anything");
-			$success=false;
-		}	
+// 	else	if($_POST['password']!=""){
+// 			if($current['pass'] != $_POST['password'] and $current['decrypt_pass'] != md5($_POST['password'])){
+// 				$co->setmessage("error", "Please enter your  password to update profile");
+// 				$success=false;
+// 			}else{
+// 				if($_POST['password']!=$_POST['reapt_pass']){
+// 					$co->setmessage("error", "Password and Confirm password must be same!");
+// 					$success=false;
+// 				}
+// 			}
+// 		}else{
+// 			$co->setmessage("error", "Please enter your  password to update profile");
+// 			$success=false;
+// 		}	
 			
 		
 		if($success==true){		
 			$up = array();
 			//$up['email_id'] = $email;
-			if(isset($_POST['password']) and $_POST['password']!=''){	
-				$up['pass'] = $_POST['password'];
-				$up['decrypt_pass'] = md5($_POST['password']);
-			}
+// 			if(isset($_POST['password']) and $_POST['password']!=''){	
+// 				$up['pass'] = $_POST['password'];
+// 				$up['decrypt_pass'] = md5($_POST['password']);
+// 			}
 			$up['user_timezone'] = $_POST['user_timezone'];
 			$up['updated'] = time();
 			$co->query_update('users', $up, array('id'=>$current['uid']), 'uid=:id');
 			unset($up);
 			
 			$up = array();
+			$up['subscribe']=0;
 			if(isset($_POST['first_name']) and $_POST['first_name'] != '')
 				$up['first_name'] = $_POST['first_name'];
 			if(isset($_POST['middle_name']) and $_POST['middle_name'] != '')
@@ -427,6 +528,17 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				$up['security_question'] = $_POST['security_question'];
 			if(isset($_POST['security_answer']) and $_POST['security_answer'] != '')
 				$up['security_answer'] = $_POST['security_answer'];	
+
+				if(isset($_POST['security_question2']) and $_POST['security_question2'] != '')
+				$up['security_question2'] = $_POST['security_question2'];
+			if(isset($_POST['security_answer2']) and $_POST['security_answer2'] != '')
+				$up['security_answer2'] = $_POST['security_answer2'];	
+
+				if(isset($_POST['security_question3']) and $_POST['security_question3'] != '')
+				$up['security_question3'] = $_POST['security_question3'];
+			if(isset($_POST['security_answer3']) and $_POST['security_answer3'] != '')
+				$up['security_answer3'] = $_POST['security_answer3'];	
+
 			if(isset($_POST['subscribe']) and $_POST['subscribe'] != '')
 				$up['subscribe'] = $_POST['subscribe'];				
 			if(isset($_POST['country']) and $_POST['country'] > 0)
@@ -451,9 +563,12 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				$dest_path = $co->chk_filename($folder, $_FILES['profile_photo']['name']);
 
 				$co->uploadimage($_FILES['profile_photo'], $dest_path, 'no', 1921, 287);
-
-				$up['profile_photo'] = substr($dest_path, 0);	
-				
+               
+				$up['profile_photo'] = substr($dest_path, 0);
+				 $name     = 	$_FILES['profile_photo']['name'];
+                $tmp_name = $_FILES['profile_photo']['tmp_name'];
+                move_uploaded_file($tmp_name, "files/profile_photo/$name");
+			//die(	$up['profile_photo']);	
 			}
 			
 			
@@ -473,9 +588,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 		$_POST['url_value'] = trim($_POST['url_value']);
 		$_POST['url_value'] = strip_tags($_POST['url_value']);
 		
+		
 		$_POST['url_desc'] = trim($_POST['url_desc']);
 		$_POST['url_desc'] = strip_tags($_POST['url_desc']);
 		
+		if($_POST['url_desc']=='')
+		{
+		    $_POST['url_desc']=$_POST['url_value'];
+		}
 		$success = true;
 		$url=$_POST['url_value'];
 		/*
@@ -521,13 +641,27 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				    $co->setmessage("error", "You are saving an invalid URL. This website ".$url." is not accessible. Would you like to revise it?");
 					$success=false;
 				}*/
-				if(!empty($url2) AND !$co->urlExists($url2)){
+				//	if(!empty($url2) AND !$co->urlExists($url2)){
+				if(!empty($url2) ){
 					$co->setmessage("error", "You are saving an invalid URL. This website ".$url2." is not accessible. Would you like to revise it?");
 					$success=false;
-				}else if(!$co->urlExists($url)){
-					$co->setmessage("error", "You are saving an invalid URL. This website ".$url." is not accessible. Would you like to revise it?");
-					$success=false;
-				}else{
+				}
+				// else if(!$co->urlExists($url)){
+				// 	$co->setmessage("error", "You are saving an invalid URL. This website ".$url." is not accessible. Would you like to revise it?");
+				// 	$success=false;
+				// }
+				else{
+				    
+                    				    function get_domain($url)
+                    {
+                      $pieces = parse_url($url);
+                      $domain = isset($pieces['host']) ? $pieces['host'] : $pieces['path'];
+                      if (preg_match('/(?P<domain>[a-z0-9][a-z0-9\-]{1,63}\.[a-z\.]{2,6})$/i', $domain, $regs)) {
+                        return $regs['domain'];
+                      }
+                      return false;
+                    }
+                    $url= get_domain($url); 
 					//virus total
 					$ch = curl_init();
 
@@ -558,7 +692,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 					$file_contents = (json_decode($file_contents, true));
 					//end code
 					if($file_contents['response_code'] != 1){
-						$co->setmessage("error", "This webpage has virus. Please check it and try again");
+						$co->setmessage("error", "Invalid webpage link. Please check it and try again");
 						$success=false;
 					}	
 				}
@@ -933,10 +1067,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				$success=false;
 			}	
 		}	
-		if($_POST['phone']==""){
-			$co->setmessage("error", "Please enter phone number");
-			$success=false;
-		}
+// 		if($_POST['phone']==""){
+// 			$co->setmessage("error", "Please enter phone number");
+// 			$success=false;
+// 		}
 		/*if($_POST['company_name']==""){
 			$co->setmessage("error", "Please enter company/institutional name");
 			$success=false;
@@ -978,7 +1112,14 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			$last_name = @trim(stripslashes($_POST['last_name'])); 
 			$name = $first_name.' '.$last_name; 
 			$email = @trim(stripslashes($_POST['email_id'])); 
-			$subject = 'Contact at Linkibag'; 
+			if($_POST['type_of_inquiry'] == 'Reported_Bug')
+			{
+			$subject = 'Reported Bug at LinkiBag'; 
+			}else
+			{
+			$subject = 'Contact at LinkiBag'; 
+			  
+			}
 			$message = @trim(stripslashes($_POST['your_msg'])); 
 			$company_name = @trim(stripslashes($_POST['company_name'])); 
 			$phone = @trim(stripslashes($_POST['phone'])); 
@@ -993,6 +1134,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			$up['phone'] = $phone;
 			$up['inquiry_about'] = $type_of_inquiry;
 			
+		
 			if(isset($_POST['type_of_inquiry']) AND $_POST['type_of_inquiry'] == 'General Inquiries')
 				$up['general_inquiry_type'] = $_POST['general_enquiry'];
 			if(isset($_POST['type_of_inquiry']) AND $_POST['type_of_inquiry'] == 'Existing Account'){
@@ -1016,13 +1158,34 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			$others = @trim(stripslashes($_POST['others'])); 
 			*/
 			$email_from = $_POST['email_id'];
+// 				if($_POST['type_of_inquiry'] == 'Reported_Bug')
+// 			{
+// 			    $email_to = 'info@linkibag.com,questions@linkibag.com';
+// 			}else
+// 			{
+                $email_to = '	itsupport@linkibag.com,info@linkibag.com,questions@linkibag.com';
+			    //	$email_to = 'navdeep.tws@gmail.com';
+			    	//	$email_to = 'questions@linkibag.com';
+			    	//replace with your email
+		//	}
 			
-				$email_to = 'info@linkibag.com';//replace with your email
 			//$email_from = 'info@linkibag.com';
 			
 			//	$email_to = $_POST['email_id'];//replace with your email
+			$from_name ='Linkibag | Contact Us';
+			$from_mail='info@linkibag.com';
 			
-			$body = 'Name: ' . $name . "\n\n" . 'Email: ' . $email . "\n\n"  . 'Message: ' . $message . "\n\n" . 'Phone: ' . $phone . "\n\n" . 'Company-Name: ' . $company_name . "\n\n" . 'Enqury Type: ' . $type_of_inquiry . "\n\n" ;
+				$from = '"LinkiBag" <noreply@linkibag.com>';
+        		$headers  = 'MIME-Version: 1.0' . "\r\n";
+        		$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+		        $headers .= 'From: '. $from . "\r\n";
+		
+		//	$headers = "MIME-Version: 1.0\r\n";
+		//	$headers .= "From: ".$from_name." <".$from_mail.">\r\n";
+            $headers .= "Reply-To: ".$from_mail."\r\n";
+            $headers .= "Return-Path: ".$from_mail."\r\n";
+            $date = date("Y-m-d h:i a");
+			$body = 'Name: ' . $name . "\n\n" . 'Email: ' . $email . "\n\n"  . 'Message: ' . $message . "\n\n" . 'Phone: ' . $phone . "\n\n" . 'Company-Name: ' . $company_name . "\n\n" . 'Enquiry Type: ' . $type_of_inquiry . "\n\n" . 'Date: ' . $date . "\n\n" ;
 			if($type_of_inquiry == 'General Inquiries'){
 				$general_enquiry = @trim(stripslashes($_POST['general_enquiry'])); 				
 				$body .= 'General Inquiries: ' . $general_enquiry . "\n\n";				
@@ -1033,10 +1196,26 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				$body .= 'Existing Account#: ' . $exit_acc_no . "\n\n";	
 				
 			}
-			$success = @mail($email_to, $subject, $body, 'From: <'.$email_from.'>');
-			$co->setmessage("status", "Your information submitted successfully. Linkibag team will contact you shortly.");
-			echo '<script type="text/javascript">window.location.href="index.php?p=contact-us"</script>';
-			exit();	
+			//'From: <'.$email_from.'>'
+			$sender = $email."<".$email.">";
+			$success = @mail($email_to, $subject, $body,$headers );
+			
+			//	$success =	mail($email_to, $subject, $body, $headers);
+				
+				
+			$co->setmessage("status", "Thanks you for your contacting LinkiBag. Our representative will get back to you shortly if necessary. We really 
+			appreciate you as a customer and look forward to seeing you again.");
+			
+			?><script>
+			$("#contact_us_form")[0].reset();
+			
+			setTimeout(function () {
+			    
+            window.location.href= 'https://www.linkibag.com/contact-us'; // the redirect goes here
+
+            },7000);</script><?php 
+		//	echo '<script type="text/javascript">window.location.href="contact-us"</script>';
+		//	exit();	
 		}		
 	}
 	
@@ -1050,6 +1229,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			exit();
 		}		
 	}
+	
+	
 	if(isset($_POST['form_id']) and $_POST['form_id']=="reset_password"){
 		$success=true;
 		if($_POST['user_email']==""){
@@ -1066,28 +1247,44 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				}
 			}		
 		}
-		if(isset($_POST['security_ans'])){
-			if(empty($_POST['security_ans'])){
-				$co->setmessage("error", "Please enter security answer");
-				$success=false;
-			}else{
-				if((isset($row['uid']) and $row['uid']>0)){
-					$profile = $co->query_first("SELECT * FROM `profile` WHERE uid=:uid", array('uid'=>$row['uid']));
-					if($_POST['security_ans'] != $profile['security_answer']){
-						$co->setmessage("error", "You entered wrong security answer");
-						$success=false;	
-					}
-				}
+// 		if(isset($_POST['security_ans'])){
+// 			if(empty($_POST['security_ans'])){
+// 				$co->setmessage("error", "Please enter security answer");
+// 				$success=false;
+// 			}else{
+// 				if((isset($row['uid']) and $row['uid']>0)){
+// 					$profile = $co->query_first("SELECT * FROM `profile` WHERE uid=:uid", array('uid'=>$row['uid']));
+					
+// 					if($_POST['security_ques'] == $profile['security_question']){
+// 						if($_POST['security_ans'] != $profile['security_answer']){
+// 							$co->setmessage("error", "You entered wrong security answer");
+// 							$success=false;	
+// 						}
+// 					}
+// 					if($_POST['security_ques'] == $profile['security_question2']){
+// 						if($_POST['security_ans'] != $profile['security_answer2']){
+// 							$co->setmessage("error", "You entered wrong security answer");
+// 							$success=false;	
+// 						}
+// 					}
+// 					if($_POST['security_ques'] == $profile['security_question3']){
+// 						if($_POST['security_ans'] != $profile['security_answer3']){
+// 							$co->setmessage("error", "You entered wrong security answer");
+// 							$success=false;	
+// 						}
+// 					}
+					
+// 				}
 				
-			}
-		}
+// 			}
+// 		}
 		if($_POST['user_pass']==""){
 			$co->setmessage("error", "Please enter password");
 			$success=false;
 		}else{
 			$password =  strlen($_POST['user_pass']);
-			if ($password<9){
-				$co->setmessage("error", "password is not a valid at least 9 of the characters");
+			if ($password<8){
+				$co->setmessage("error", "password is not a valid at least 8 of the characters");
 				$success=false;
 			}
 			$containsLetter  = preg_match('/[a-zA-Z]/', $_POST['user_pass']);
@@ -1143,24 +1340,123 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			}
 		}	
 	}	
+	
+	
+	
+	
 	if(isset($_POST['form_id']) and $_POST['form_id']=="forget_password"){
 		$username = trim($_POST['email_adr']);
 		if($username=='')
 		{
 			$co->setmessage("error", "Please enter email address!");
-		}
-		else if($co->user_reset_password($username))
-		{	
-			//$co->setmessage("status", "Thanks! Your password has been sent to your email address successfully! If you did not receive an email, check your Spam or Junk email folders.");
-			$co->setmessage("status", "Thanks! if you provided a valid email address you will receive a password reset instructions. If you don't receive an email, please check your spam folder.");
-			//echo '<script language="javascript">window.location="index.php";</script>';
-			//$_POST = array();
-		}		
-		else 
-		{
-			$co->setmessage("error", "No account found with that email address. Please check email address below and try again. To create a new account, visit the Free Signup page.");
-		}
+		} elseif(!isset($_POST['g-recaptcha-response'])) {
+	        $co->setmessage("error", " Please verify that you are not a robot.");
+	    } elseif(empty($_POST['g-recaptcha-response'])) {
+	        $co->setmessage("error", " Please verify that you are not a robot.");
+	    } elseif(isset($_POST['g-recaptcha-response']) && !empty($_POST['g-recaptcha-response'])) {
+	        $responseData = $co->validate_gresponse($_POST['g-recaptcha-response']);
+	        if(!$responseData->success) {
+	            $co->setmessage("error", " Please verify that you are not a robot.");
+	        }else{
+		        $ret = $co->user_reset_password($username);
+				if($ret['status']=='success'){
+					if($_POST['ajax'] == 1){
+						echo json_encode(array('msg'=>"<div class='alert alert-success' style='text-align: left !important;'>Thanks! you will receive a password reset instructions. If you don't receive an email, please check your spam folder.</div>"));
+						exit();
+					}
+					$co->setmessage("status", "Thanks! if you provided a valid email address you will receive a password reset instructions. If you don't receive an email, please check your spam folder.");
+				}else{
+					if(isset($_POST['ajax']) and $_POST['ajax'] == 1){
+						echo json_encode(array('msg'=>"<div class='alert alert-danger'>".$ret['error']."</div>"));
+						exit();
+					}
+					$co->setmessage("error", $ret['error']);
+				}
+
+	        }
+	    }
 	}	
+	if(isset($_POST['form_id']) and $_POST['form_id']=="forget_password_ajax"){
+		$username = trim($_POST['email_adr']);
+		if($username=='')
+		{
+			echo json_encode(array('msg'=>"<div class='alert alert-danger'>Please enter email address!</div>"));
+		} else {
+            $ret = $co->user_reset_password($username);
+			if($ret['status']=='success'){
+				if($_POST['ajax'] == 1){
+					echo json_encode(array('msg'=>"<div class='alert alert-success'  style='text-align: left !important;'>Thanks! you will receive a password reset instructions. If you don't receive an email, please check your spam folder.</div>"));
+					exit();
+				}
+			}else{
+				echo json_encode(array('msg'=>"<div class='alert alert-danger'>".$ret['error']."</div>"));
+			}
+	    }
+	    exit();
+	}	
+	
+		if(isset($_POST['form_id']) and $_POST['form_id']=="update_password"){
+		
+		$current = $co->getcurrentuser_profile();
+		$success=true;
+		if($_POST['password']==""){
+			$co->setmessage("error", "Please enter password");
+			$success=false;
+		}else{
+			$password =  strlen($_POST['password']);
+			if ($password<8){
+				$co->setmessage("error", "password is not a valid at least 8 of the characters");
+				$success=false;
+			}
+			$containsLetter  = preg_match('/[a-zA-Z]/', $_POST['password']);
+			$containsDigit   = preg_match('/\d/', $_POST['password']);
+			//$containswhitespace = preg_match('/ /', $_POST['user_pass']);
+
+			if (!$containsLetter or !$containsDigit) {
+				$co->setmessage("error", "Password must contain at least one letter and one number and no spaces");
+				$success=false;
+			}	
+		
+			
+		}
+		if($_POST['confirm_password']==""){
+			$co->setmessage("error", "Please enter confirm password");
+			$success=false;
+		}else{
+			if($_POST['password']!=$_POST['confirm_password']){
+				$co->setmessage("error", "Confirm password must be same with password");
+				$success=false;
+			}	
+		}
+		
+		if($success==true){
+		    $uid = $current['uid'];
+			if(isset($_POST['confirm_password'])  and isset($_POST['password'])){
+				if(isset($uid) and $uid>0){
+					
+						$up_user = array();
+						$up_user['pass'] = $_POST['password'];	
+						$up_user['decrypt_pass'] = md5($_POST['password']);
+						$co->query_update('users', $up_user, array('uid'=>$uid), 'uid=:uid');
+						unset($up_user);
+						$co->setmessage("status", "You have successfully changed your password.");
+						// Now you can login using same values
+						echo '<script language="javascript">window.location="index.php?p=login";</script>';
+						exit();
+					
+				}else{
+					echo '<script language="javascript">window.location="index.php";</script>';
+					exit();
+				}
+			}else{
+				echo '<script language="javascript">window.location="index.php";</script>';
+				exit();
+			}
+		}	
+	}
+	
+	
+	
 	if(isset($_POST['form_id']) and $_POST['form_id']=="reset_email"){
 		$current = $co->getcurrentuser_profile();
 		$success=true;
@@ -1173,11 +1469,18 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				$success=false;
 			}else{
 				$username = trim($_POST['old_user_email']);
+				
+					if( $current['uid']<1){
+					$co->setmessage("error", "Your session has been expired. Please login again.");
+					$success=false;	
+				}
+				else{
 				$sql = "SELECT * FROM `users` WHERE uid=:user and `email_unique_path`=:code and verified='1' and status='1' and email_id=:email";
 				$row= $co->row($sql, array("user"=>$current['uid'], "code"=>$_POST['code'], "email"=>$username));
 				if(!(isset($row['uid']) and $row['uid']>0)){
 					$co->setmessage("error", "You are entered invalid email address, please enter the email you used in your LinkiBag profile.");
 					$success=false;	
+				}
 				}
 			}		
 		}
@@ -1194,7 +1497,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			//$eamil_exists = $co->is_userExists_edit($email, $current['uid']);
 			$eamil_exists = $co->is_userExists($email);
 			if(isset($eamil_exists) and $eamil_exists!=''){
-				$co->setmessage("error", "$email is already existed");
+				$co->setmessage("error", "$email  is affiliated with another LinkiBag account. Please try again.");
 				$success=false;
 			}
 			
@@ -1222,11 +1525,28 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 					$present_time = time();
 					if($present_time < $limit_time){
 						$up_user = array();
-						$up_user['email_id'] = $_POST['new_user_email'];	
+						$up_user['email_id'] = $_POST['old_user_email'];
+						$up_user['reset_old_email'] = $_POST['new_user_email'];		
 						$up_user['reset_email_created'] = time();
+							$up_user['reset_confirm'] = 0;
 						$co->query_update('users', $up_user, array('uid'=>$row['uid']), 'uid=:uid');
+                        $request_id=$row['uid'];
+                        $reset_code= $_POST['code'];
+						/* ----- Send Confirmation Email ------- */
+						$to = trim($_POST['old_user_email']);
+						$subject = 'Confirmation email at Linkibag';
+						$verified_link = WEB_ROOT.'index.php?p=confirm_mail&request_id='.$request_id.'&request_code='.$reset_code;
+						//$verified_link = $co->get_bit_ly_link($verified_link);			
+						//$message = 'Dear<br /><br /><p>Hello, '.$current['first_name'].$current['last_name'].' wants to be your friend on Linkibag. <br /><br/><a style="border:none; padding: 5px; background: green; color:#fff; text-decoration: none;" href="'.$verified_link.'&accept=yes">Accept</a>&nbsp;&nbsp;&nbsp;<a style="border:none; padding: 5px; background: red; color:#fff; text-decoration: none;" href="'.$verified_link.'&accept=no">Declined</a></p> <br /><br />Cheers<br />Team Linkibag';
+						
+						$from = 'info@linkibag.com';
+						$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n".'<html xmlns="http://www.w3.org/1999/xhtml">'."\n".'<head>'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Confirm your changes</title>'."\n".'<style type="text/css">body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn{background:#d76b00 none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}.btn-decline{background:#ccc none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}h1{margin:0}.big{color:#3e3e3e;font-size:22px;margin-top:4px}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png">'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Confirm your changes At LinkiBag.</h1>'."\n".'<p class="big">You requested to change your email address for your LinkiBag account. Please confirm your request by clicking Confirm. If you do not authorize this change click on Cancel.</p><a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Confirm</a> <a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Cancel</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p>This message was send to '.$to.'. if you have questions or complaints, please <a href="https://www.linkibag.com/index.php?p=contact-us"><b>contact us.</b></a> </p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p></p>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';					
+						$co->send_email($to, $subject, $message, $from);
+
+
+
 						unset($up_user);
-						$co->setmessage("status", "You have successfully changed your email id. Now you can login using new email address");
+						$co->setmessage("status", "You have requested for email changes. Please confirm these changes. Message regarding this has sent to your current email address.");
 						echo '<script language="javascript">window.location="logout.php";</script>';
 						exit();
 					}else{
@@ -1244,6 +1564,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			}
 		}	
 	}
+	
+	
 	if(isset($_POST['form_id']) and $_POST['form_id']=="send_friend_request"){		
 		$success = true;
 		$current = $co->getcurrentuser_profile();
@@ -1254,10 +1576,18 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				$success=false;			
 			}else{
 				$emails_ids = explode(',', $_POST['email_ids']);
+				$names = explode(',', $_POST['names']);
 				if(isset($emails_ids) and count($emails_ids) > 5){
 					$co->setmessage("error", "Sorry, you can send only upto 5 request at a time.");
 					$success=false;
-				}else{	
+				}
+				/*if(isset($names) and count($names) != count($emails_ids)){
+					$setMsgErr = "1): More than one name or email should have comma(,) separated. <br>
+					2):Name should have same count as per email accounts above.";
+					$co->setmessage("error", $setMsgErr);
+					$success=false;
+				}*/
+				else{	
 					 foreach($emails_ids as $email_ids){
 						$result['uid'] = 0;
 						$email_ids = trim($email_ids);
@@ -1308,7 +1638,8 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 			}
 			
 		}							
-		if($success==true){				
+		if($success==true){
+		    $kk =0;
 			foreach($emails_ids as $email_ids){
 				$result['uid'] = 0;
 				$result = $co->query_first("SELECT uid,remove_profile FROM `users` WHERE email_id=:id",array('id'=>$email_ids));
@@ -1319,6 +1650,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				$up['request_to'] = (($uid > 0) ? $uid : trim($email_ids));
 				$up['request_code'] = $reset_code;
 				$up['request_email'] = trim($email_ids);
+				$up['request_name'] = $names[$kk];
 				// check user is linkibag
 				if(isset($result['uid']) and $result['uid'] > 0)
 					$_POST['description'] = 'LinkiBag user '.$current['email_id'].' invites you to join LinkiBag. How exciting! You both are members of LinkiBag! Add '.$current['email_id'].' to your friends list today to share your links.';
@@ -1358,18 +1690,18 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 						}	
 					/*}*/
 				}	
-				if(isset($result['uid']) and $result['uid'] > 0){
+				if(isset($result['uid']) and $result['uid'] > 0){					
+					$to = trim($email_ids);
+					$subject = 'Friend request at Linkibag';
+					$verified_link = WEB_ROOT.'/index.php?p=friend_request&request_id='.$request_id.'&request_code='.$reset_code;
+					//$verified_link = $co->get_bit_ly_link($verified_link);			
+					//$message = 'Dear<br /><br /><p>Hello, '.$current['first_name'].$current['last_name'].' wants to be your friend on Linkibag. <br /><br/><a style="border:none; padding: 5px; background: green; color:#fff; text-decoration: none;" href="'.$verified_link.'&accept=yes">Accept</a>&nbsp;&nbsp;&nbsp;<a style="border:none; padding: 5px; background: red; color:#fff; text-decoration: none;" href="'.$verified_link.'&accept=no">Declined</a></p> <br /><br />Cheers<br />Team Linkibag';
 					
-						$to = trim($email_ids);
-						$subject = 'Friend request at Linkibag';
-						$verified_link = WEB_ROOT.'/index.php?p=friend_request&request_id='.$request_id.'&request_code='.$reset_code;
-						//$verified_link = $co->get_bit_ly_link($verified_link);			
-						//$message = 'Dear<br /><br /><p>Hello, '.$current['first_name'].$current['last_name'].' wants to be your friend on Linkibag. <br /><br/><a style="border:none; padding: 5px; background: green; color:#fff; text-decoration: none;" href="'.$verified_link.'&accept=yes">Accept</a>&nbsp;&nbsp;&nbsp;<a style="border:none; padding: 5px; background: red; color:#fff; text-decoration: none;" href="'.$verified_link.'&accept=no">Declined</a></p> <br /><br />Cheers<br />Team Linkibag';
-						
-						$message = 'Dear<br /><br /><p>Hello, '.$current['first_name'].$current['last_name'].' '.$_POST['description'].' <br /><br/><a style="border:none; padding: 5px; background: green; color:#fff; text-decoration: none;" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a>&nbsp;&nbsp;&nbsp;<a style="border:none; padding: 5px; background: red; color:#fff; text-decoration: none;" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Declined</a></p> <br /><br />Cheers<br />Team Linkibag';	
-						$from = 'info@linkibag.com';
-						$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n".'<html xmlns="http://www.w3.org/1999/xhtml">'."\n".'<head>'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Confirm your account</title>'."\n".'<style type="text/css">body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn{background:#d76b00 none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}.btn-decline{background:#ccc none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}h1{margin:0}.big{color:#3e3e3e;font-size:22px;margin-top:4px}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png">'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Friend Rquest At LinkiBag.</h1>'."\n".'<p class="big">Click on link below to Accept Or Decline.</p>'."\n".'<p>'.$_POST['description'].'</p>'."\n".'<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a> <a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Decline</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p>This message was send to '.$to.'. if you have questions or complaints, please <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=contact-us"><b>contact us.</b></a> We’re here to help.</p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p><a href="http://linkibag.net/PTest25x/linkibag/index.php?p=terms-of-use">Terms of Use</a> &nbsp; | &nbsp; <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=terms-of-use">Privacy Policy</a></p>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';					
-						$co->send_email($to, $subject, $message, $from);
+					$message = 'Dear<br /><br /><p>Hello, '.$current['first_name'].' '.$current['last_name'].' '.$_POST['description'].' <br /><br/><a style="border:none; padding: 5px; background: green; color:#fff; text-decoration: none;" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a>&nbsp;&nbsp;&nbsp;<a style="border:none; padding: 5px; background: red; color:#fff; text-decoration: none;" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Declined</a></p> <br /><br />Cheers<br />Team Linkibag';	
+					
+					$from = 'info@linkibag.com';
+					$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n".'<html xmlns="http://www.w3.org/1999/xhtml">'."\n".'<head>'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Confirm your account</title>'."\n".'<style type="text/css">body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn{background:#d76b00 none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}.btn-decline{background:#ccc none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}h1{margin:0}.big{color:#3e3e3e;font-size:22px;margin-top:4px}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png">'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Friend Rquest At LinkiBag.</h1>'."\n".'<p class="big">Click on link below to Accept Or Decline.</p>'."\n".'<p>'.$_POST['description'].'</p>'."\n".'<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a> <a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Decline</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p>This message was send to '.$to.'. if you have questions or complaints, please <a href="https://www.linkibag.com/index.php?p=contact-us"><b>contact us.</b></a> We’re here to help.</p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p><a href="https://www.linkibag.com/index.php?p=terms-of-use">Terms of Use</a> &nbsp; | &nbsp; <a href="https://www.linkibag.com/index.php?p=terms-of-use">Privacy Policy</a></p>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';					
+					$co->send_email($to, $subject, $message, $from);
 						
 				}else if(!(isset($result['uid']) and $result['uid'] > 0)){
 					$user = $co->getcurrentuser_profile();
@@ -1380,22 +1712,23 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 					//$message = 'Dear<br /><br /><p>Hello, '.$current['first_name'].$current['last_name'].' wants to be your friend on Linkibag.Please join LinkiBag. <br /><br/></p> <a style="border:none; padding: 5px; background: green; color:#fff; text-decoration: none;" href="'.$verified_link.'&accept=yes">Accept</a>&nbsp;&nbsp;&nbsp;<a style="border:none; padding: 5px; background: red; color:#fff; text-decoration: none;" href="'.$verified_link.'&accept=no">Declined</a><br /><br />Cheers<br />Team Linkibag';	
 					$message = 'Dear<br /><br /><p>Hello, '.$current['first_name'].$current['last_name'].' '.$_POST['description'] .'Please join LinkiBag. <br /><br/></p> <a style="border:none; padding: 5px; background: green; color:#fff; text-decoration: none;" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a>&nbsp;&nbsp;&nbsp;<a style="border:none; padding: 5px; background: red; color:#fff; text-decoration: none;" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Declined</a><br /><br />Cheers<br />Team Linkibag';		
 					$from = 'info@linkibag.com';
+					
 					$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-		<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Linkibag Invitation</title>'."\n".'<style type="text/css">@import url("https://fonts.googleapis.com/css?family=Lora");body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn {background: #fff;border-radius: 0;color: gray!important;display: inline-block;font-size: 20px;font-weight: bold;margin: 0;padding: 6px;text-decoration: none;width: 275px;
-}.btn-decline{background:#fff none repeat scroll 0 0;border-radius:0;color:gray!important;display:inline-block;font-size:20px;font-weight:bold;margin:16px 0 0;padding:6px;text-decoration:none;width:275px}h1{font-family:arial;margin:0;font-size:26px;line-height:38px;color:#353e4f}.top-line{font-size:14px;margin-top:20px}.big{font-family:"Lora",serif;color:#3e3e3e;font-size:20px;margin:38px 0 22px;line-height:30px;font-weight:bolder}.links{padding:41px 0 5px}.links a{color:#7F7F95!important;font-size:14px}.bottom-text{font-size:14px;line-height:25px;color:#000!important}.bottom-text a{text-decoration:underline!important;font-weight:600}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>
-		'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
-		'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png">'."\n".'<br>'."\n".'
-		<p class="top-line">This message was sent by user '.$current['email_id'].' via <a target="_blank" href="http://www.linkibag.com" style="text-decoration: underline;">LinkiBag.com</a><p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Hello '.$user['email_id'].'<br>'.$user['first_name'].''.$user['last_name'].'<br>invited you to join 
-		<span style="color: #9c9696;font-weight: lighter;">LinkiBag.com</span> and to connect!</h1>'."\n".'
-		<p class="big">Free. Easy. Why not?</p>'."\n".'
-		<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Sign up for a free Account</a>'."\n".
-		'<a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">I dont know this person</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'</td>'."\n".'</tr>'."\n".'
-		<tr>'."\n".'<td>'."\n".'<p class="links">'."\n".'<a href="http://linkibag.net/PTest25x/linkibag/index.php?p=about_us">About Linkibag &nbsp; | &nbsp;</a>'."\n".'<a href="http://linkibag.net/PTest25x/linkibag/index.php?p=pages&id=8">Terms of Use &nbsp; | &nbsp; </a>'."\n".' <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=pages&id=9">Privacy Policy</a>'."\n".'</p>'."\n".'
-		<p class="bottom-text">'."\n".'<a href="#" style="color: #7F7F95!important;font-weight: normal;text-transform: capitalize !important;margin-right: 8px;text-decoration: none !important;">Unsubscribe</a> from all messages sent via LinkiBag by any LinkiBag users and from LinkiBag Inc. <br> <span style="color: #7F7F95!important;">LinkiBag Inc. 8926 N. Greenwood Ave, #220, Niles, IL 60714<span></p></td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';					
-				$co->send_email($to, $subject, $message, $from);
+					<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Linkibag Invitation</title>'."\n".'<style type="text/css">@import url("https://fonts.googleapis.com/css?family=Lora");body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn {background: #fff;border-radius: 0;color: gray!important;display: inline-block;font-size: 20px;font-weight: bold;margin: 0;padding: 6px;text-decoration: none;width: 275px;
+					}.btn-decline{background:#fff none repeat scroll 0 0;border-radius:0;color:gray!important;display:inline-block;font-size:20px;font-weight:bold;margin:16px 0 0;padding:6px;text-decoration:none;width:275px}h1{font-family:arial;margin:0;font-size:26px;line-height:38px;color:#353e4f}.top-line{font-size:14px;margin-top:20px}.big{font-family:"Lora",serif;color:#3e3e3e;font-size:20px;margin:38px 0 22px;line-height:30px;font-weight:bolder}.links{padding:41px 0 5px}.links a{color:#7F7F95!important;font-size:14px}.bottom-text{font-size:14px;line-height:25px;color:#000!important}.bottom-text a{text-decoration:underline!important;font-weight:600}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>
+					'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
+					'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png">'."\n".'<br>'."\n".'
+					<p class="top-line">This message was sent by user '.$current['email_id'].' via <a target="_blank" href="http://www.linkibag.com" style="text-decoration: underline;">LinkiBag.com</a><p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Hello '.$user['email_id'].'<br>'.$user['first_name'].' '.$user['last_name'].'<br>invited you to join 
+					<span style="color: #9c9696;font-weight: lighter;">LinkiBag.com</span> and to connect!</h1>'."\n".'
+					<p class="big">Free. Easy. Why not?</p>'."\n".'
+					<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Sign up for a Free account</a>'."\n".
+					'<a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">No. Thanks.</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'</td>'."\n".'</tr>'."\n".'
+					<tr>'."\n".'<td>'."\n".'<p class="links">'."\n".'<a href="https://www.linkibag.com/index.php?p=about_us">About Linkibag &nbsp; | &nbsp;</a>'."\n".'<a href="https://www.linkibag.com/index.php?p=pages&id=8">Terms of Use &nbsp; | &nbsp; </a>'."\n".' <a href="https://www.linkibag.com/index.php?p=pages&id=9">Privacy Policy</a>'."\n".'</p>'."\n".'
+					<p class="bottom-text">'."\n".'<a href="#" style="color: #7F7F95!important;font-weight: normal;text-transform: capitalize !important;margin-right: 8px;text-decoration: none !important;">Unsubscribe</a> from all messages sent via LinkiBag by any LinkiBag users and from LinkiBag Inc. <br> <span style="color: #7F7F95!important;">LinkiBag Inc. 8926 N. Greenwood Ave, #220, Niles, IL 60714<span></p></td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';					
+					$co->send_email($to, $subject, $message, $from);
 						
 			}
-				
+			 $kk++;
 			}
 			if(isset($_SESSION['already_user']))
 				unset($_SESSION['already_user']);
@@ -1740,11 +2073,34 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 				}
 			}
 		}else{	
+			if(isset($_POST['form_id']) and $_POST['form_id']=="share_links"){
+
+				$success = true;
+
+				// if(!isset($_POST['g-recaptcha-response'])) {
+				// 	$errors .= " Please verify that you are not a robot.";
+				// 	$success=false;
+				// } elseif(empty($_POST['g-recaptcha-response'])) {
+				// 	$errors .= " Please verify that you are not a robot.";
+				// 	$success=false;
+				// } else {
+				// 	$responseData = $co->validate_gresponse($_POST['g-recaptcha-response']);
+				// 	if(!$responseData->success) {
+				// 		$errors .= " Please verify that you are not a robot.";
+				// 		$success=false;
+				// 	}
+				//    }
+
+				   
+			}
+			
 			if(!isset($_POST['shared_user'])){
 				$success = false;
 				$errors .= "<li>Please select one or more friend to share links!</li>";
 				
-			}/* elseif(!is_array($_POST['shared_user'])){
+			}
+			
+			/* elseif(!is_array($_POST['shared_user'])){
 				$success = false;
 			}*/
 			if(isset($_POST['group_name']) and $_POST['group_name'] != '' and isset($_POST['save_as_group']) and $_POST['save_as_group'] == 1){
@@ -2056,7 +2412,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 								$verified_link = WEB_ROOT.'/index.php?p=friend_request&request_id='.$request_id.'&request_code='.$reset_code;
 								$message = 'Dear<br /><br /><p>Hello, '.$current['first_name'].$current['last_name'].' '.$description.' <br /><br/><a style="border:none; padding: 5px; background: green; color:#fff; text-decoration: none;" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a>&nbsp;&nbsp;&nbsp;<a style="border:none; padding: 5px; background: red; color:#fff; text-decoration: none;" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Declined</a></p> <br /><br />Cheers<br />Team Linkibag';	
 								$from = 'info@linkibag.com';
-								$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n".'<html xmlns="http://www.w3.org/1999/xhtml">'."\n".'<head>'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Confirm your account</title>'."\n".'<style type="text/css">body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn{background:#d76b00 none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}.btn-decline{background:#ccc none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}h1{margin:0}.big{color:#3e3e3e;font-size:22px;margin-top:4px}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png">'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Friend Rquest At LinkiBag.</h1>'."\n".'<p class="big">Click on link below to Accept Or Decline.</p>'."\n".'<p>'.$description.'</p>'."\n".'<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a> <a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Decline</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p>This message was send to '.$to.'. if you have questions or complaints, please <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=contact-us"><b>contact us.</b></a> We’re here to help.</p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p><a href="http://linkibag.net/PTest25x/linkibag/index.php?p=terms-of-use">Terms of Use</a> &nbsp; | &nbsp; <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=terms-of-use">Privacy Policy</a></p>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';					
+								$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n".'<html xmlns="http://www.w3.org/1999/xhtml">'."\n".'<head>'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Confirm your account</title>'."\n".'<style type="text/css">body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn{background:#d76b00 none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}.btn-decline{background:#ccc none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}h1{margin:0}.big{color:#3e3e3e;font-size:22px;margin-top:4px}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png">'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Friend Rquest At LinkiBag.</h1>'."\n".'<p class="big">Click on link below to Accept Or Decline.</p>'."\n".'<p>'.$description.'</p>'."\n".'<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a> <a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Decline</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p>This message was send to '.$to.'. if you have questions or complaints, please <a href="https://www.linkibag.com/index.php?p=contact-us"><b>contact us.</b></a> We’re here to help.</p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p><a href="https://www.linkibag.com/index.php?p=terms-of-use">Terms of Use</a> &nbsp; | &nbsp; <a href="https://www.linkibag.com/index.php?p=terms-of-use">Privacy Policy</a></p>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';					
 								$co->send_email($to, $subject, $message, $from);
 								
 						}else if(!(isset($result['uid']) and $result['uid'] > 0)){
@@ -2074,10 +2430,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 						<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
 						<tr><td>
 						<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
-						<tr><td style="text-align:left;padding:30px 0 40px"><img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png"><br><p class="top-line">This message was sent by user '.$current['email_id'].' via Linkibag.com<p></td></tr>
+						<tr><td style="text-align:left;padding:30px 0 40px"><img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png"><br><p class="top-line">This message was sent by user '.$current['email_id'].' via Linkibag.com<p></td></tr>
 						<tr><td><h1> '.$user['first_name'].' '.$user['last_name'].'<br>invited you to join LinkiBag and to connect!</h1>
-						<p class="big">What is LinkiBag? <a href="http://linkibag.net/PTest25x/linkibag/index.php" target="_blank">Click here</a> to learn more.<br>Free. Easy. Why not?</p>
-						<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Sign up for a free Account</a> 
+						<p class="big">What is LinkiBag? <a href="https://www.linkibag.com/index.php" target="_blank">Click here</a> to learn more.<br>Free. Easy. Why not?</p>
+						<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Sign up for a free account</a> 
 						<a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">I do not know this person</a>
 						</td></tr>
 						<tr><td></td></tr>
@@ -2151,7 +2507,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 								$verified_link = WEB_ROOT.'/index.php?p=friend_request&request_id='.$request_id.'&request_code='.$reset_code;
 								$message = 'Dear<br /><br /><p>Hello, '.$current['first_name'].$current['last_name'].' '.$description.' <br /><br/><a style="border:none; padding: 5px; background: green; color:#fff; text-decoration: none;" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a>&nbsp;&nbsp;&nbsp;<a style="border:none; padding: 5px; background: red; color:#fff; text-decoration: none;" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Declined</a></p> <br /><br />Cheers<br />Team Linkibag';	
 								$from = 'info@linkibag.com';
-								$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n".'<html xmlns="http://www.w3.org/1999/xhtml">'."\n".'<head>'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Confirm your account</title>'."\n".'<style type="text/css">body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn{background:#d76b00 none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}.btn-decline{background:#ccc none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}h1{margin:0}.big{color:#3e3e3e;font-size:22px;margin-top:4px}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png">'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Friend Rquest At LinkiBag.</h1>'."\n".'<p class="big">Click on link below to Accept Or Decline.</p>'."\n".'<p>'.$description.'</p>'."\n".'<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a> <a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Decline</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p>This message was send to '.$to.'. if you have questions or complaints, please <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=contact-us"><b>contact us.</b></a> We’re here to help.</p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p><a href="http://linkibag.net/PTest25x/linkibag/index.php?p=terms-of-use">Terms of Use</a> &nbsp; | &nbsp; <a href="http://linkibag.net/PTest25x/linkibag/index.php?p=terms-of-use">Privacy Policy</a></p>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';					
+								$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'."\n".'<html xmlns="http://www.w3.org/1999/xhtml">'."\n".'<head>'."\n".'<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Confirm your account</title>'."\n".'<style type="text/css">body{margin:0;padding:0;min-width:100%!important}.content{color:#3e3e3e;font-family:arial;max-width:600px;text-align:center;width:100%}.btn{background:#d76b00 none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}.btn-decline{background:#ccc none repeat scroll 0 0;border-radius:55px;color:#fff;display:inline-block;font-size:22px;font-weight:bold;margin:32px 0;padding:12px 43px;text-decoration:none}h1{margin:0}.big{color:#3e3e3e;font-size:22px;margin-top:4px}.content p{color:#3e3e3e}.content p a{color:#3e3e3e;text-decoration:none}</style>'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">'."\n".'<tr>'."\n".'<td>'."\n".'<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png">'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1>Friend Rquest At LinkiBag.</h1>'."\n".'<p class="big">Click on link below to Accept Or Decline.</p>'."\n".'<p>'.$description.'</p>'."\n".'<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Accept</a> <a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Decline</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p>This message was send to '.$to.'. if you have questions or complaints, please <a href="https://www.linkibag.com/index.php?p=contact-us"><b>contact us.</b></a> We’re here to help.</p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p><a href="https://www.linkibag.com/index.php?p=terms-of-use">Terms of Use</a> &nbsp; | &nbsp; <a href="https://www.linkibag.com/index.php?p=terms-of-use">Privacy Policy</a></p>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>';					
 								$co->send_email($to, $subject, $message, $from);
 								
 						}else if(!(isset($result['uid']) and $result['uid'] > 0)){
@@ -2169,10 +2525,10 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 						<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
 						<tr><td>
 						<table class="content" align="center" cellpadding="0" cellspacing="0" border="0">
-						<tr><td style="text-align:left;padding:30px 0 40px"><img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png"><br><p class="top-line">This message was sent by user '.$current['email_id'].' via Linkibag.com<p></td></tr>
+						<tr><td style="text-align:left;padding:30px 0 40px"><img src="https://www.linkibag.com/images/email-logo/linkibag-logo.png"><br><p class="top-line">This message was sent by user '.$current['email_id'].' via Linkibag.com<p></td></tr>
 						<tr><td><h1> '.$user['first_name'].' '.$user['last_name'].'<br>invited you to join LinkiBag and to connect!</h1>
-						<p class="big">What is LinkiBag? <a href="http://linkibag.net/PTest25x/linkibag/index.php" target="_blank">Click here</a> to learn more.<br>Free. Easy. Why not?</p>
-						<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Sign up for a free Account</a> 
+						<p class="big">What is LinkiBag? <a href="https://www.linkibag.com/index.php" target="_blank">Click here</a> to learn more.<br>Free. Easy. Why not?</p>
+						<a class="btn" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Sign up for a free account</a> 
 						<a class="btn-decline" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">I do not know this person</a>
 						</td></tr>
 						<tr><td></td></tr>
@@ -2252,23 +2608,132 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 
 						$show_email_list_in_msg .= $to.'<br/>';
 
-						$subject = 'New links shared by '.$current['first_name'].$current['last_name'].' on Linkibag';
+						$subject = 'New links shared by '.$current['first_name'].' '.$current['last_name'].' on LinkiBag';
 						
 						$verified_links = WEB_ROOT.'/index.php?p=view-share&share_to='.urlencode($shared_user['share_to']).'&share_no='.$_SESSION['share_number'];
-
+                        $login_links = WEB_ROOT.'/index.php';
 						$verified_link = WEB_ROOT.'/index.php?p=friend_request&request_id='.$request_id.'&request_code='.$reset_code;
-						
-						$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>Linkibag Invitation</title>'."\n".'
+					
+
+/*	$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>LinkiBag Invitation</title>'."\n".'
 <style type="text/css">
 @import url("https://fonts.googleapis.com/css?family=Lora");body{margin:0;padding:0;min-width:100%!important}
 .content p{color:#3e3e3e}
 .content p a{color:#3e3e3e;text-decoration:none}
 </style>
 '."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
-'."\n".'<tr>'."\n".'<td>'."\n".'<table style="margin: auto !important; color:#3e3e3e; font-family:arial; max-width:600px; text-align:center !important; width:100%" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="http://linkibag.net/PTest25x/linkibag/images/email-logo/linkibag-logo.png">'."\n".'<br>'."\n".'<p style="font-size:14px;margin-top:20px">This message was sent by user '.$current['email_id'].' via <a target="_blank" href="http://www.linkibag.com" style="text-decoration: underline;">LinkiBag.com</a><p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1 style="font-family:arial;margin:0;font-size:26px;line-height:38px;color:#353e4f">Hello '.$to.'<br>'.$current['first_name'].''.$current['last_name'].'<br>shared some links with you using Linkibag.com </h1>'."\n".'<p style="text-align:center !important;color:#3e3e3e;font-size:20px;margin:38px 0 22px;line-height:30px;font-weight:bolder;"><a style="color: #3e3e3e; text-decoration: underline;" href="'.$verified_links.'">Click Here</a> to view shared links.<br/><span style="font-size: 11px;font-weight: normal;">* You will be required to enter the code provided by sender to open shared links.</span></p>'."\n".'<a style="background: #fff;border-radius: 0;color: gray;display: inline-block;font-size: 20px;font-weight: bold;margin: 0;padding: 6px;text-decoration: none;width: 275px;" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Sign up for a free Account</a>'."\n".'<a style="background:#fff none repeat scroll 0 0;border-radius:0;color:gray;display:inline-block;font-size:20px;font-weight:bold;margin:16px 0 0;padding:6px;text-decoration:none;width:275px" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">I dont know this person</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<p style="padding:41px 0 5px;">'."\n".'<a style="color:#7F7F95!important;font-size:14px;text-decoration: none;" href="http://linkibag.net/PTest25x/linkibag/index.php?p=about_us">About Linkibag &nbsp; | &nbsp;</a>'."\n".'<a style="color:#7F7F95!important;font-size:14px;text-decoration: none" href="http://linkibag.net/PTest25x/linkibag/index.php?p=pages&id=8">Terms of Use &nbsp; | &nbsp; </a>'."\n".' <a style="color:#7F7F95!important;font-size:14px;text-decoration: none;" href="http://linkibag.net/PTest25x/linkibag/index.php?p=pages&id=9">Privacy Policy</a>'."\n".'</p>'."\n".'<p style="font-size:14px;line-height:25px;color:#000!important">'."\n".'<a href="#" style="color: #7F7F95!important;font-weight: normal;text-transform: capitalize !important;margin-right: 8px;text-decoration: none !important;">Unsubscribe</a> from all messages sent via LinkiBag by any LinkiBag users and from LinkiBag Inc. <br> <span style="color: #7F7F95!important;">LinkiBag Inc. 8926 N. Greenwood Ave, #220, Niles, IL 60714<span></p></td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>
-';				
+'."\n".'<tr>'."\n".'<td>'."\n".'<table style="margin: auto !important; color:#3e3e3e; font-family:arial; max-width:600px; text-align:center !important; width:100%" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'<tr>'."\n".'<td style="text-align:left;padding:30px 0 40px">'."\n".'<img src="https://linkibag.com/images/email-logo/linkibag-logo.png">'."\n".'<br>'."\n".'<p style="font-size:14px;margin-top:20px">This message was sent by user '.$current['email_id'].' via <a target="_blank" href="http://www.linkibag.com" style="text-decoration: underline;">Linkibag.com</a><p>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'<h1 style="text-align:left;font-family:arial;margin:0;font-size:18px;line-height:30px;color:#353e4f">Hello '.$to.'<br>'.$current['first_name'].' '.$current['last_name'].' ('.$current['email_id'].') shared with you the following link(s) using LinkiBag.com account. </h1> '."\n".'<span style="font-size: 12px;font-weight: normal;"> For your safety we don`t recommend to view any links shared by strangers or you did not expect this user to share any links with you at this time. </span> <p class="big"><button style="background: #ff8000 none repeat scroll 0 0 !important;display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;user-select: none;border: 1px solid transparent;"><a style="text-decoration: none;color:#fff;text-align:left;" href="'.$verified_links.'"> View Shared Links </a></button> <br><br> <span style="font-size: 12px;font-weight: normal;">To login to your LinkiBag account and to add shared links to your inbag, login to your LinkiBag account and use the following Share Id to open shared links. </br> </br> </br> <button style="background: #fff none repeat scroll 0 0 !important;display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;user-select: none;border: 2px solid #ff8000;color:#ff8000;text-align:left;"> Share ID: '.$_SESSION['share_number'].' </button> </span></p>'."\n".'<a style="background: #fff;border-radius: 0;color: gray;display: inline-block;font-size: 12px;margin: 0;padding: 6px;text-decoration: underline;width: 275px;" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'">Sign up for a free account</a>'."\n".'<a style="background:#fff none repeat scroll 0 0;border-radius:0;color:black;display:inline-block;font-size:12px;;margin:16px 0 0;padding:6px;text-decoration:underline;width:275px" href="'.$co->get_bit_ly_link($verified_link.'&accept=no').'">Block this user</a>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'</td>'."\n".'</tr>'."\n".'<tr>'."\n".'<td>'."\n".'
+
+<p style="padding:41px 0 5px;">'."\n".'<a style="color:#7F7F95!important;font-size:14px;text-decoration: none;" href="https://www.linkibag.com/index.php?p=about_us">About LinkiBag &nbsp; | &nbsp;</a>'."\n".'<a style="color:#7F7F95!important;font-size:14px;text-decoration: none" href="https://www.linkibag.com/index.php?p=pages&id=8">Terms of Use &nbsp; | &nbsp; </a>'."\n".' <a style="color:#7F7F95!important;font-size:14px;text-decoration: none;" href="https://www.linkibag.com/index.php?p=pages&id=9">Privacy Policy</a>'."\n".'</p>'."\n".'<p style="font-size:14px;line-height:25px;color:#000!important">'."\n".'<a href="#" style="color: #7F7F95!important;font-weight: normal;text-transform: capitalize !important;margin-right: 8px;text-decoration: none !important;">Unsubscribe</a> from all messages sent via LinkiBag by any LinkiBag users and from LinkiBag Inc. <br> <span style="color: #7F7F95!important;">LinkiBag Inc. 8926 N. Greenwood Ave, #220, Niles, IL 60714<span></p></td>'."\n".'</tr>'."\n".'</table>'."\n".'</td>'."\n".'</tr>'."\n".'</table>'."\n".'</body>'."\n".'</html>
+'; */
+
+
 						
+$message = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" />'."\n".'<title>LinkiBag Invitation</title>'."\n".'
+<style type="text/css">
+@import url("https://fonts.googleapis.com/css?family=Lora");body{margin:0;padding:0;min-width:100%!important}
+.content p{color:#3e3e3e}
+.content p a{color:#3e3e3e;text-decoration:none}
+</style>
+'."\n".'</head>'."\n".'<body bgcolor="#ffffff">'."\n".'
+<table width="100%" bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0">
+'."\n".'
+<tr>'."\n".'
+	<td>'."\n".'
+	<table style="margin: auto !important; color:#3e3e3e; font-family:arial; max-width:650px; width:100%" align="center" cellpadding="0" cellspacing="0" border="0">'."\n".'
+		<tr>'."\n".'
+			<td style="text-align:left;padding:30px 0 20px">'."\n".'<img src="https://linkibag.com/images/email-logo/linkibag-logo.png">'."\n".'<br>'."\n".'
+				<p style="font-size:14px;margin-top:20px">
+					This message was sent by user '.$current['email_id'].',
+				<p>'."\n".'
+			</td>'."\n".'
+		</tr>'."\n".'
+		<tr>'."\n".'
+			<td>'."\n".'
+				<h1 style="text-align:left;font-family:arial;margin:0;font-size:18px;line-height:30px;color:#353e4f">
+					LinkiBag user '.$current['first_name'].' '.$current['last_name'].' ('.$current['email_id'].') would like to share some web links with you using LinkiBag share services: 
+				</h1> '."\n".' 
+				<p style="float: left;">
+					<span style="font-size: 13px;font-weight: normal;color:#F1576E;width: 100%;float:left;border: 1px solid #F1576E;padding: 5px;"> 
+						For your safety we do not recommend to view any links shared by unknown users or if you do not expect this user to share any web links with you at this time. 
+					</span>
+				</p> '."\n".' 
+				<h1 style="text-align:left;font-family:arial;width: 100%;float: left;font-size:18px;color:#009494;">
+					There are two ways to view shared links: 
+				</h1>
+					
+					<p class="big">
+						<div>
+							<h1 style="text-align:left;font-family:arial;width: 100%;float: left;font-size:19px;">
+								1. Click link bellow:
+							</h1>
+							<span style="width:100%;float:left;">
+								<button style="background: #009494 none repeat scroll 0 0 !important;display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;user-select: none;border: 1px solid transparent;">
+									<a style="text-decoration: none;color:#fff;text-align:left;" href="'.$verified_links.'"> View Shared Links </a>
+								</button> 
+							</span>  
+						</div>
+						<br><br> 
+						<span style="font-size: 13px;font-weight: bold;margin-top: 12px;float: left;">
+							<h1 style="text-align:left;font-family:arial;width: 100%;float: left;font-size:19px;">
+								2. Enter Share ID bellow in the Share ID box on <a href="https://www.linkibag.com/" style="color: #3e3e3e;text-decoration: none;">LinkiBag.com</a> webpage.
+							</h1> 
+						</span>
+						<div style="font-size: 12px;font-weight: normal;float: left;"> 							 
+							<input style="background: #fff none repeat scroll 0 0 !important;display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;line-height: 1.42857143;text-align: center;white-space: nowrap;vertical-align: middle;touch-action: manipulation;cursor: pointer;-webkit-user-select: none;user-select: none;border: 2px solid #009494 ;color:#009494 ;text-align:left;text-align: center;width: 120px;" id="copyTarget" value="'.$_SESSION['share_number'].'" readonly > 
+							<a href="https://www.linkibag.com/copy-to-clipboard.php?share-id='.$_SESSION['share_number'].'">	 
+							<span style="color:#009494 ;font-size: 15px;margin-left: 10px;" id="copyButton" >Copy</span>
+							</a>
+						</div> 
+						<div style="font-size: 17px;font-weight: bold;margin-top: 15px;float: left;width: 100%;">
+							Save shared links. Get your free LinkiBag account. Click <a style="color: #009494;" href="'.$co->get_bit_ly_link($verified_link.'&accept=yes').'" >here</a> to register.
+						</div>
+					</p>'."\n".' 
+			</td>'."\n".'
+		</tr>'."\n".'
+		<tr>'."\n".'
+			<td>'."\n".'
+			</td>'."\n".'
+		</tr>'."\n".'
+		
+		<tr style="text-align: center;">'."\n".'
+			<td>'."\n".'
+				<p style="padding:15px 0 5px;">'."\n".'
+					<a style="color:#7F7F95!important;font-size:14px;text-decoration: none;" href="https://www.linkibag.com/index.php?p=about_us">
+						About LinkiBag &nbsp; | &nbsp;
+					</a>'."\n".'
+					<a style="color:#7F7F95!important;font-size:14px;text-decoration: none" href="https://www.linkibag.com/index.php?p=pages&id=8">
+						Terms of Use &nbsp; | &nbsp; 
+					</a>'."\n".' 
+					<a style="color:#7F7F95!important;font-size:14px;text-decoration: none;" href="https://www.linkibag.com/index.php?p=pages&id=9">
+						Privacy Policy
+					</a>'."\n".'
+				</p>'."\n".'
+				<p style="font-size:14px;line-height:15px;color:#000!important">'."\n".'
+					You are getting this email because this email address is connected to your LinkiBag account
+				</p>
+				<p style="font-size:14px;line-height:15px;color:#000!important">'."\n".'
+					Visit your <a href="https://www.linkibag.com/index.php?p=account_settings" style="color:#000;" >account page</a> to manage your setting.
+				</p>
+				<p style="font-size:14px;line-height:15px;color:#000!important">'."\n".'
+					<a href="https://www.linkibag.com" style="color:#000;">LinkiBag Inc.</a> 
+					8926 N. Greenwood Ave, #220, Niles, IL 60714 
+				</p> 
+			</td>'."\n".'
+		</tr>'."\n".'
+	</table>'."\n".'
+</td>'."\n".'
+</tr>'."\n".'
+</table>'."\n".'
+</body>'."\n".'
+
+</html>';
+
+ 
 						$from = 'info@linkibag.com';				
 						$co->send_email($to, $subject, $message, $from);
 						
@@ -2330,6 +2795,7 @@ if($_SERVER['REQUEST_METHOD']=='POST'){
 </div>';
 	*/
 	$msg = '<div id="print_msg"></div><div class="sharing-links-success-panel"><div class="sharing-panel-body">
+	<h4 style="color: green;font-weight: 400;margin-bottom: 8px;">Message sent successfully.</h4>
 	<h4 style="color: red;font-weight: 400;">Link(s) and message below were shared successfully.</h4>
 
 <div style="overflow: hidden; margin: 13px 0px;">
@@ -3616,7 +4082,8 @@ $msg .= '
 					';
 					/*$msg = 'Category was added successfully.';	*/
 					$msg = 'Added successfully!';	
-				}		
+				}	
+					/* 'new_row'=>$new_row, */
 				echo json_encode(array('new_row'=>$new_row,'msg'=>$msg,'id'=>$id, 'public_cat_option'=>$option, 'success'=>$success,'page_link_option'=>$page_link_option));
 			}		
 			exit();	
@@ -3624,6 +4091,7 @@ $msg .= '
 			$msg = $error;
 				
 			$new_row = '';
+			/* 'new_row'=>$new_row, */
 			echo json_encode(array('new_row'=>$new_row,'msg'=>$msg,'success'=>$success));	
 			exit();	
 		}	
@@ -3976,7 +4444,7 @@ $msg .= '
 		$redirect_to = '';
 		
 		if(!(isset($current['uid']) and $current['uid'] > 0)){
-			$redirect_to = "index.php?#free_singup";
+			$redirect_to = "sign-up";
 			$_SESSION['selected_urls_from_view_share_page'] = $urls;
 			if(isset($_SESSION['selected_urls_from_view_share_page']) and count($_SESSION['selected_urls_from_view_share_page']) > 0)
 				$msg .= "We have saved selected URLs, it will added to you inbag after registration process completed. <br/>";

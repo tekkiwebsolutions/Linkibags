@@ -8,7 +8,10 @@ $co->__construct();
 
 if(!$co->is_adminlogin()){ header("location:index.php"); }
 
-include('header.php');
+
+	include('header.php');
+	
+	
 
 if(isset($_GET['p'])){
 	$page = $_GET['p'].'.php';
@@ -54,15 +57,7 @@ if(isset($breadcrumb)){
 		<!-- Page Heading -->
 		<div class="row">
 			<div class="col-lg-12">
-				<h1 class="page-header"><?=WSNAME?></h1>
-				<ol class="breadcrumb">
-					<li>
-						<i class="fa fa-dashboard"></i>  <a href="index.php?p=dashboard">Dashboard</a>
-					</li>
-					<li class="active">
-						<i class="fa fa-table"></i> <?php echo $breadcrumb; ?> 
-					</li>
-				</ol>
+				<h1 class="page-header"><?=$breadcrumb?></h1>
 			</div>
 		</div>
 		<div class="row">

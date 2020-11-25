@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Shared Links | Linkibag";     
+	$co->page_title = "Shared Links | LinkiBag";     
  	$current = $co->getcurrentuser_profile();  	
 	$user_profile_info = $co->call_profile($current['uid']);  
 	if(!(isset($_GET['date_by']) or isset($_GET['msg_by']) or isset($_GET['url_by']) or isset($_GET['shared_by'])))
@@ -277,7 +277,7 @@ function page_content(){
 															<div class="modal-content">
 																<div class="modal-header modal-header-success">
 																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-																	<h4>You are about to leave Linkibag</h4>
+																	<h4>You are about to leave LinkiBag</h4>
 																</div>
 																<div class="modal-body">
 																	<p>You will be visiting:</p>
@@ -313,7 +313,7 @@ function page_content(){
 															<div class="modal-content">
 																<div class="modal-header modal-header-success">
 																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-																	<h4>You are about to leave Linkibag</h4>
+																	<h4>You are about to leave LinkiBag</h4>
 																</div>
 																<div class="modal-body">
 																	<p>You will be visiting:</p>

@@ -17,7 +17,7 @@ if($user_login){
 		$up_val['recommend_category_msg_updated'] = time();
 		$co->query_insert('recommend_user_category_msgs', $up_val);
 		unset($up_val);		
-		echo '<div style="color: #e6bc81;">Success! thank you for your submission.</div>';	
+		echo '<div style="color: #ef2592">THANK YOU</div>';	
 		exit();		
 
 	}	

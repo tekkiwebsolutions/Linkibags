@@ -1,0 +1,11 @@
+Time : 12:13:22
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT url.*,p.first_name,p.last_name,us.like_status,us.recommend_link,us.shared_url_id,u.email_id from user_urls url, profile p, `user_shared_urls` us, `users` u WHERE u.uid=us.uid and us.url_id=url.url_id and url.uid=us.uid and p.uid=url.uid and url.status='1' and us.shared_to>'0' and us.recommend_link=1 and (url.url_title like :name OR url.url_desc like :name2 OR url.url_value like :name3 OR p.first_name like :name5) and us.shared_time>=:date and us.shared_time<=:date2 GROUP BY us.url_id ORDER BY us.shared_url_id DESC LIMIT 0, 12
+
+Time : 12:12:51
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT url.*,p.first_name,p.last_name,us.like_status,us.recommend_link,us.shared_url_id,u.email_id from user_urls url, profile p, `user_shared_urls` us, `users` u WHERE u.uid=us.uid and us.url_id=url.url_id and url.uid=us.uid and p.uid=url.uid and url.status='1' and us.shared_to>'0' and us.recommend_link=1 and (url.url_title like :name OR url.url_desc like :name2 OR url.url_value like :name3 OR p.first_name like :name5) and us.shared_time>=:date and us.shared_time<=:date2 GROUP BY us.url_id ORDER BY us.shared_url_id DESC LIMIT 0, 12
+
+Time : 12:12:11
+SQLSTATE[HY093]: Invalid parameter number: parameter was not defined
+Raw SQL : SELECT url.*,p.first_name,p.last_name,us.like_status,us.recommend_link,us.shared_url_id,u.email_id from user_urls url, profile p, `user_shared_urls` us, `users` u WHERE u.uid=us.uid and us.url_id=url.url_id and url.uid=us.uid and p.uid=url.uid and url.status='1' and us.shared_to>'0' and us.recommend_link=1 and (url.url_title like :name OR url.url_desc like :name2 OR url.url_value like :name3 OR p.first_name like :name5) and us.shared_time>=:date and us.shared_time<=:date2 GROUP BY us.url_id ORDER BY us.shared_url_id DESC LIMIT 0, 12

@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Shared LinkBooks | Linkibag";     
+	$co->page_title = "Shared LinkBooks | LinkiBag";     
  	$current = $co->getcurrentuser_profile();  	  
 
 	$list_shared_links_by_admin = $co->list_shared_links_by_admin('0');  	    
@@ -58,7 +58,7 @@ function page_content(){
 		$table_body .= '
 		<input type="hidden" name="book[]" value="'.$urlpost['id'].'" />
 		<tr class="'.$class_name.' read" id="record_'.$urlpost['id'].'">
-			<td style="width:50%">'.$urlpost['book_title'].'</td>
+			<td style="width:50%"><a target="_blank" href="links_print/index.php?preview_linkibook=1&id='.$urlpost['id'].' " >'.$urlpost['book_title'].'</a></td>
 			<td style="width:50%; text-decoration: underline;">';
 			$table_body .= $urlpost['book_subtitle'].'		
 			</td>
@@ -74,12 +74,12 @@ function page_content(){
 			
 			<div class="containt-area" id="dashboard_new">  
 				<div class="container"> 
-					<div class="col-md-3">      
+					<div class="col-md-3 my_lnk_left">      
 						<?php include('dashboard_sidebar.php'); 
 						?>    
 
 					</div>	
-					<div class="containt-area-dash col-md-9">
+					<div class=" containt-area-dash col-md-9 my_lnk_right">
 						<div class="row">
 							<div class="col-md-8">
 								
@@ -96,7 +96,7 @@ function page_content(){
 									<ul class="head-design table-design">
 										<li style="width:50%">
 											<div class="dropdown dropdown-design">
-												<div class="btn btn-default dropdown-toggle">LinkBook</div>
+												<div class="btn btn-default dropdown-toggle">LinkiBook</div>
 											</div>	
 										</li>
 										<li style="width:50%">
@@ -169,12 +169,12 @@ function page_content(){
 									</div>
 								</div>	
 								
-								<p class="text-theme">You are about to share <?php echo count($_GET['book']);?> linkibook(s)</p>
+								<p class="text-theme">You are about to send this LinkiBook to your own eamil address <?php echo count($_GET['book']);?> LinkiBook(s)</p>
 								 
 								 <!--<a class="text-theme" href="#"><u>Select from my LinkiFriends</u></a>-->
 								 <div class="clearfix"></div>
 								 <div class="shared-links-right-sidebar-btns">
-								    <?php echo $arr; ?>
+								    <?php //echo $arr; ?>
 									<button type="submit" id="send_share_link_1" class="btn orang-bg pull-left"><i class="fa fa-share" aria-hidden="true"></i> Share</button>
 									<a type="button" href="index.php?p=linkibook" class="btn button-grey pull-right">Cancel</a>
 									

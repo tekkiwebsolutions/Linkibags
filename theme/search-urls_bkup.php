@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Find URLs | Linkibag";     
+	$co->page_title = "Find URLs | LinkiBag";     
  	$current = $co->getcurrentuser_profile();  	
 	$item_per_page = 10;      	
 	      	
@@ -236,7 +236,7 @@ function page_content(){
 															<div class="modal-content">
 																<div class="modal-header modal-header-success">
 																	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-																	<h4>You are about to leave Linkibag</h4>
+																	<h4>You are about to leave LinkiBag</h4>
 																</div>
 																<div class="modal-body">
 																	<p>You will be visiting:</p>

@@ -1,108 +1,109 @@
-	<?php
-		function page_access(){	
-			global $co, $msg;      	
-			$user_login = $co->is_userlogin();      	
-			if(!$user_login){   
-				echo '<script language="javascript">window.location="index.php";</script>';      		
-				exit();      
-			}          
-		} 
+  <?php
+    function page_access(){ 
+      global $co, $msg;       
+      $user_login = $co->is_userlogin();        
+      if(!$user_login){   
+        echo '<script language="javascript">window.location="index.php";</script>';         
+        exit();      
+      }          
+    } 
 
 
-		function page_content(){
+    function page_content(){
 
-		global $co, $msg;
+    global $co, $msg;
 
-		$co->page_title = "Categories | LinkiBag";
-		$current = $co->getcurrentuser_profile();  
-		$admin_cats = $co->fetch_all_array("SELECT * from category WHERE uid='0' ORDER BY cid desc", array());
-		$mycats = $co->fetch_all_array("SELECT * from interested_category WHERE uid=:uid ORDER BY cat desc", array('uid'=>$current['uid']));
-		$result = $co->query_first("SELECT * from interested_category WHERE uid=:uid ORDER BY interested_cat desc", array('uid'=>$current['uid']));
-		
-		$i = 0;
-		/*
-		$left_cats = '';
-		$mid_cats = '';
-		$right_cats = '';
-		if(isset($admin_cats) and count($admin_cats) > 0){
-			foreach($admin_cats as $list){
-				$i++;
-				if($i<=4){		
-					$left_cats .= '<div class="checkbox-list">
-						<label>
-						<input type="checkbox" name="cats[]" value="'.$list['cid'].'"> - '.$list['cname'].' 
-						</label>
-					</div>';
-		 
-				}elseif($i > 4 and $i<=8){		
-					$mid_cats .= '<div class="checkbox-list">
-						<label>
-						<input type="checkbox" name="cats[]" value="'.$list['cid'].'"> - '.$list['cname'].' 
-						</label>
-					</div>';
-		 
-				}else{
-					$right_cats .= '<div class="checkbox-list">
-						<label>
-						<input type="checkbox" name="cats[]" value="'.$list['cid'].'"> - '.$list['cname'].' 
-						</label>
-					</div>';
-				}
-				if($i >= 12)
-					$i=0;
-			}
-		}
-		*/		
-			
+    $co->page_title = "Categories | LinkiBag";
+    $current = $co->getcurrentuser_profile();  
+    $admin_cats = $co->fetch_all_array("SELECT * from category WHERE uid='0' ORDER BY cname asc", array());
+    $mycats = $co->fetch_all_array("SELECT * from interested_category WHERE uid=:uid ORDER BY cat desc", array('uid'=>$current['uid']));
+    $result = $co->query_first("SELECT * from interested_category WHERE uid=:uid ORDER BY interested_cat desc", array('uid'=>$current['uid']));
+    
+    $i = 0;
+    /*
+    $left_cats = '';
+    $mid_cats = '';
+    $right_cats = '';
+    if(isset($admin_cats) and count($admin_cats) > 0){
+      foreach($admin_cats as $list){
+        $i++;
+        if($i<=4){    
+          $left_cats .= '<div class="checkbox-list">
+            <label>
+            <input type="checkbox" name="cats[]" value="'.$list['cid'].'"> - '.$list['cname'].' 
+            </label>
+          </div>';
+     
+        }elseif($i > 4 and $i<=8){    
+          $mid_cats .= '<div class="checkbox-list">
+            <label>
+            <input type="checkbox" name="cats[]" value="'.$list['cid'].'"> - '.$list['cname'].' 
+            </label>
+          </div>';
+     
+        }else{
+          $right_cats .= '<div class="checkbox-list">
+            <label>
+            <input type="checkbox" name="cats[]" value="'.$list['cid'].'"> - '.$list['cname'].' 
+            </label>
+          </div>';
+        }
+        if($i >= 12)
+          $i=0;
+      }
+    }
+    */    
+      
 
 
-?>	
+?>  
 
-	<section class="categories-list-page">
-			
+  <section class="categories-list-page">
+      
 
-				<div class="container">
+        <div class="container">
 
-					<div class="row">
+          <div class="row">
 
-						<div class="col-md-10 col-md-offset-1">
-							<form method="post">
-							<?=isset($msg) ? $msg : ''?>								
-							<div id="messagesout"></div>  
-							<?php 
-							if($mycats == null){
-							    echo '<input name="form_id" value="interested_cats" type="hidden"> ';
-							}else{
-								echo '<input name="form_id" value="update_cats" type="hidden"> ';
-							}
-							?>
-							<div class="categories-list-box">
-								<h4>LinkiBag User Interest Form</h4>
-								<p>To continue with Free LinkiBag account select at least three topic categories you are interested in from the list below. To upgrade 
-your account select Upgrade/Renew option under My Account in the top-right corner of your screen.</p>
-							</div>
-							
-							<?php /*
-							<div class="row">
-									<div class="col-md-4">
-									<?=$left_cats?>
-									</div>
-									<div class="col-md-4">
-									<?=$mid_cats?>
-									</div>
-									<div class="col-md-4">
-									<?=$right_cats?>
-									</div>
-									<input type="submit" name="submit" value="x" style="display: none;"> 
-							</div>
-							*/ ?>	
+            <div class="col-md-10 col-md-offset-1">
+              <form method="post">
+              <?=isset($msg) ? $msg : ''?>                
+              <div id="messagesout"></div>  
+              <?php 
+              if($mycats == null){
+                  echo '<input name="form_id" value="interested_cats" type="hidden"> ';
+              }else{
+                echo '<input name="form_id" value="update_cats" type="hidden"> ';
+              }
+              ?>
+              <div class="categories-list-box">
+                <h4>LinkiBag User Interest Form</h4>
+                <p>Let us know what you are interested in.</p>
+                <!--<p>To continue with Free LinkiBag account select at least three topic categories you are interested in from the list below. To upgrade 
+your account select Upgrade/Renew option under My Account in the top-right corner of your screen.</p>-->
+              </div>
+              
+              <?php /*
+              <div class="row">
+                  <div class="col-md-4">
+                  <?=$left_cats?>
+                  </div>
+                  <div class="col-md-4">
+                  <?=$mid_cats?>
+                  </div>
+                  <div class="col-md-4">
+                  <?=$right_cats?>
+                  </div>
+                  <input type="submit" name="submit" value="x" style="display: none;"> 
+              </div>
+              */ ?> 
 
-				<?php                    
+        <?php                    
                     if(isset($admin_cats) and count($admin_cats) > 0){
                       foreach($admin_cats as $list){
-						
-						$catresult = $co->query_first("SELECT * from interested_category WHERE cat=:cat and uid=:uid ORDER BY cat desc", array('cat'=>$list['cid'],'uid'=>$current['uid']));
-	
+            
+            $catresult = $co->query_first("SELECT * from interested_category WHERE cat=:cat and uid=:uid ORDER BY cat desc", array('cat'=>$list['cid'],'uid'=>$current['uid']));
+  
                         $divclose = true;
                         $i++;
                       if($i == 1){
@@ -110,12 +111,18 @@ your account select Upgrade/Renew option under My Account in the top-right corne
                                 <div class="col-md-12"> 
                               ';
                       }  
+                      /*<img style="max-width: 80%;" class="img-responsive img-circle" alt="'.$list['cname'].'" src="'.$list['image'].'" /><br/>*/
                       echo '
-                        <div class="col-md-2">
-                          <img style="max-width: 80%;" class="img-responsive img-circle" alt="'.$list['cname'].'" src="'.$list['image'].'" /><br/>
+                        <div class="col-lg-2 col-md-3">
+                          
                           <div class="text-left">
-						  <input type="checkbox" class="'.$catresult['cat'].'" id="cats_'.$list['cid'].'" name="cats[]" '.($list['cid'] == $catresult['cat'] ? 'checked' : '').' value="'.$list['cid'].'">
-						  &nbsp;&nbsp;&nbsp;&nbsp;<span class="cat-title">'.$list['cname'].'</span></div>                           
+                          <label for="cats_'.$list['cid'].'">
+              <img style="max-width: 80%;" class="img-responsive img-circle" alt="'.$list['cname'].'" src="'.$list['image'].'" />
+              <span class="cat-title">'.$list['cname'].'</span></label>
+              <input type="checkbox" class="'.$catresult['cat'].'" id="cats_'.$list['cid'].'" name="cats[]" '.($list['cid'] == $catresult['cat'] ? 'checked' : '').' value="'.$list['cid'].'">
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              
+              </div>                           
                         </div>
                       ';
                       if($i == 6){
@@ -133,42 +140,53 @@ your account select Upgrade/Renew option under My Account in the top-right corne
                         </div>';
                     }
                   }                         
-                    ?>  			
-   							
-						<div class="categories-list-box-footer">
-						<h4>Thank you for using free vesion of LinkiBag account. Feel free to update your selection at any time. Didn't find what you interested in? <a href="javascript: void(0);" onclick="show_recommend_msg_block('#recommend_msg_block');" data-toggle="tooltip" title="Click on Link below display box for recommend your message."><span style="color: #004080; font-weight: 700;">Let us know</span></a></h4>
+                    ?>        
+                
+            <div class="categories-list-box-footer">
+              <!-- Thank you for using free vesion of LinkiBag account. Feel free to update your selection at any time. Didn't find what you interested in? -->
+            <h4>Didn't find what you interested in? <a href="javascript: void(0);" onclick="show_recommend_msg_block('#recommend_msg_block');" data-toggle="tooltip" title="Click on Link below display box for recommend your message."><span style="color: #004080; font-weight: 700;">Let us know</span></a></h4>
             <div class="col-md-12 row" id="recommend_msg_block" style="display: none;">
               <div class="col-md-6 row">
                   <input type="hidden" name="recommend_click" id="recommend_click" value="1">                
-                  <input placeholder="" style="border-radius:  0px;border-color: #696969;box-shadow: none !important;height: 25px;" id="recommend_category_msg" type="text" name="recommend_category_msg" class="form-control" value=""> 
+                  <input placeholder="TYPE HERE" style="border-radius:  0px;border-color: #696969;box-shadow: none !important;height: 25px;" id="recommend_category_msg" type="text" name="recommend_category_msg" class="form-control" value=""> 
               </div>
               <div class="col-md-6 row"> <a href="javascript: void(0);" onclick="recommend_category_msgs();" style="font-size: 34px; padding:  0; margin: 0 12px; color: #ff7f27;line-height: 0.8; text-decoration: none;"> > </a> </div>
             </div>  <br/>
+            <div class="text-uppercase" id="cat_msg_trigger" style="margin-top: -18px;position: absolute;margin-left: 12px;"></div>
             <div class="col-md-12 row">
-                <div class="text-uppercase" id="cat_msg_trigger"><h4>
-                <?php
-                if(isset($_SESSION['MSG'])){
-                  echo $_SESSION['MSG'];
-                  unset($_SESSION['MSG']);
-                }
-                ?>
+                <div class="text-uppercase"><h4>
+                  <?php
+                  if(isset($_SESSION['MSG'])){
+                    echo $_SESSION['MSG'];
+                    unset($_SESSION['MSG']);
+                  }
+                  ?>
                 </h4></div>
                 
-    						<div><button type="submit" name="submit" class="btn orange-bg">Finished</button></div>
-    						<small>Your Preferences were last updated on <?=date('m/d/Y', $result['created'])?>.</small>
+                <div><button type="submit" name="submit" class="btn orange-bg">Finished</button></div>
+                <?php 
+                if($result['created']>0) {
+                  echo '<small>Your Preferences were last updated on '.date('m/d/Y', $result['created']).'.</small>';
+                }
+                ?>
+                <!-- <p></p>
+                <a  href="index.php?p=account_settings"class="btn orange-bg">Go Back</a> -->
+              <p></p><p></p>
+            
+                
             </div>  
-					</div>
+          </div>
 
-							</form>
-						</div>
-						
-						
+              </form>
+            </div>
+            
+            
 
-					</div>
+          </div>
 
-				</div>
-		<div class="blue-border"></div>
-	</section>
+        </div>
+    <div class="blue-border"></div>
+  </section>
 
 <script src='//production-assets.codepen.io/assets/common/stopExecutionOnTimeout-b2a7b3fe212eaa732349046d8416e00a9dec26eb7fd347590fbced3ab38af52e.js'></script>
 <!--<script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
@@ -193,6 +211,11 @@ your account select Upgrade/Renew option under My Account in the top-right corne
       success: function(res2){                                 
         $('#cat_msg_trigger').html(res2);
         $('#recommend_category_msg').val('');
+        $('#recommend_category_msg').attr('placeholder', '');
+        setTimeout(function(){ 
+          $('#cat_msg_trigger').html('');
+          $('#recommend_category_msg').attr('placeholder', 'TYPE HERE');
+        }, 6000);
       }
    }); 
   }
@@ -232,18 +255,18 @@ function counter() {
 }
 
 function checked_category(catval){
-	if($('#cats_'+catval+':checked').val() > '0'){
-		$('#cats_'+catval).prop('checked', false); 		
-	}else{				
-		$('#cats_'+catval).prop('checked', true); 
-		
-	}	
-	
+  if($('#cats_'+catval+':checked').val() > '0'){
+    $('#cats_'+catval).prop('checked', false);    
+  }else{        
+    $('#cats_'+catval).prop('checked', true); 
+    
+  } 
+  
 }
 //# sourceURL=pen.js
 </script>
 */ ?>
-	
+  
 <style>
 .cat-title{
   font-size: 16px;
@@ -252,7 +275,7 @@ function checked_category(catval){
 }    
 
 .multiple-images span {
-	z-index: 2;
+  z-index: 2;
     color: #fff;
     position: absolute;
     top: 29%;
@@ -503,8 +526,8 @@ ul.multiple-images {
 .multiple-images button.send.selected:after {
   opacity: 1;
 }</style>
-	<?php
+  <?php
 
-	}
+  }
 
-?>	
+?>  

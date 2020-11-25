@@ -1,7 +1,7 @@
 <?php
 function page_content(){
 	global $co, $msg;
-	$co->page_title = "Login | Linkibag";
+	$co->page_title = "Login | LinkiBag";
 ?>
 
 <?php

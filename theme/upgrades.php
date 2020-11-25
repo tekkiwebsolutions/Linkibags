@@ -10,7 +10,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Upgrades | Linkibag";     
+	$co->page_title = "Upgrades | LinkiBag";     
  	$current = $co->getcurrentuser_profile();  	
 	$user_profile_info = $co->call_profile($current['uid']);  
 		      	

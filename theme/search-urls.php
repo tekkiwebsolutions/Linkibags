@@ -11,7 +11,7 @@ function page_access(){
 function page_content(){      
 	global $co, $msg;      	
 	$no_record_found='';      	
-	$co->page_title = "Find Urls | Linkibag";     
+	$co->page_title = "Find Urls | LinkiBag";     
  	$current = $co->getcurrentuser_profile();
 	if(!($current['role'] == 2 OR $current['role'] == 3))
 		exit();
@@ -262,7 +262,7 @@ function page_content(){
 																	<div class="modal-content">
 																		<div class="modal-header modal-header-success">
 																			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-																			<h4>You are about to leave Linkibag</h4>
+																			<h4>You are about to leave LinkiBag</h4>
 																		</div>
 																		<div class="modal-body">
 																			<p>You will be visiting:</p>
@@ -298,7 +298,7 @@ function page_content(){
 																	<div class="modal-content">
 																		<div class="modal-header modal-header-success">
 																			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-																			<h4>You are about to leave Linkibag</h4>
+																			<h4>You are about to leave LinkiBag</h4>
 																		</div>
 																		<div class="modal-body">
 																			<p>You will be visiting:</p>

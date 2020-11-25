@@ -1,6 +1,6 @@
 ;<?php return; ?>
 [SQL]
-host = localhost
-user = root
-password = ""
-dbname = linkibag
+host =localhost
+user = bag55_linkibag
+password = u1Tyyvhzab3+
+dbname = bag55_linkibag

@@ -11,7 +11,7 @@ function page_access(){
 function page_content(){      
    global $co, $msg;       
    $no_record_found='';       
-   $co->page_title = "Linkibook | Linkibag";     
+   $co->page_title = "Linkibook | LinkiBag";     
    $current = $co->getcurrentuser_profile();    
   
    $total_urls = $co->users_count_url($current['uid']);     
@@ -21,9 +21,14 @@ function page_content(){
 	$total_liked_urls = $co->users_count_shared_url($current['uid'],'like');   
 	$total_unrecommend_urls = $co->users_count_shared_url($current['uid'],'unrecommend');  
 	$total_recommend_urls = $co->users_count_shared_url($current['uid'],'recommend');   
-	$default_folder_name = 'Linkibook';  
+	$default_folder_name = 'LinkiBook';  
          
 ?>
+<style>
+#linkbook_form .third_filds p {
+    word-wrap: break-word;
+}
+</style>
 <section class="dashboard-page">
    <div class="container bread-crumb top-line">
       <div class="col-md-12">
@@ -32,10 +37,10 @@ function page_content(){
    </div>
    <div class="containt-area " id="dashboard_new">
       <div class="container">
-         <div class="col-md-3">      
+         <div class="col-md-3 my_lnk_left">      
             <?php include('dashboard_sidebar.php'); ?>    
          </div>
-         <div class="containt-area-dash col-md-9">
+         <div class="containt-area-dash col-md-9 my_lnk_right">
          <div>     
          <!-- Tab panes -->        
          <div class="tab-content">
@@ -43,15 +48,18 @@ function page_content(){
                   <div style="display:none;"><?=isset($msg) ? $msg : ''?></div>
                   <div style="margin-bottom: 11px;" class="user-name-dash">
                      <div class="row">
-                        <div class="col-md-4 col-xs-12">
-                           <span style="display: inline-block; padding-top: 6px;position: relative;" class="text-blue" ><img style="vertical-align: middle;margin-bottom: 4px;" src="images/book_ico.png" alt="bag Icon"> <?=$default_folder_name?> 
+                        <div class="col-md-7 col-xs-12 btns_linkibook">
+                           <span style="display: inline-block; padding-top: 6px;position: relative;" class="text-blue" >
+                           <!-- <img style="vertical-align: middle;margin-bottom: 4px;" src="<?=WEB_ROOT?>images/book_ico.png" alt="bag Icon">  -->
+                           <?=$default_folder_name?> 
                            </span>
                            <a class="btn button-grey pull-right" href="javascript: void(0);" onclick="preview_linkibook()"> Preview</a>
+                            <a class="btn button-grey pull-right finish_btn" href="javascript: void(0);" onclick="preview_linkibook()"> Finish</a>
                         </div>
-						<div class="col-md-8 col-xs-12">
+						<div class="col-md-5 col-xs-12">
 							<div class="pull-right">
 							   <a class="btn button-grey" href="javascript: void(0);" onclick="save_linkibook()"> Save</a>
-							   <a class="btn button-grey" href="index.php?p=linkibook"> My Books</a>
+							   <a class="btn button-grey my_book_save" href="index.php?p=linkibook"> My Books</a>
 							</div>
 						</div>
                      </div>
@@ -65,7 +73,7 @@ function page_content(){
    						   <div class="form-group">
    						      <label class="col-md-2 control-label margin-bm " for="title">Title</label>  
    						      <div class="col-md-10">
-   							     <input id="title" name="book_title" type="text" placeholder="" class="form-control input-md margin-bm" required="required" />
+   							     <input id="title" name="book_title" type="text" placeholder="Title" class="form-control input-md margin-bm" required="required" />
    						      </div>
    						   </div>
    						</div>
@@ -76,7 +84,7 @@ function page_content(){
 						      <div class="form-group">
 							      <label class="col-md-2 control-label" for="sub_title">Sub Title</label>  
 							      <div class="col-md-10">
-								      <input id="sub_title" name="book_subtitle" type="text" placeholder="" class="form-control input-md" required="required" /><br>
+								      <input id="sub_title" name="book_subtitle" type="text" placeholder="Sub Title" class="form-control input-md" required="required" /><br>
 							      </div>
 							   </div>
 						   </div>
@@ -93,9 +101,9 @@ function page_content(){
                            <label class="col-md-2 control-label control-label-cb">Insert</label>
                            <div class="col-md-4">
                               <label class="checkbox-inline" for="url_subtitle_<?=$share_urls?>">
-                                 <input type="checkbox" name="url_subtitle_<?=$share_urls?>" id="url_subtitle_<?=$share_urls?>" onchange="show_subtitle(<?=$share_urls?>)"> SubTitle</label>
+                                 <input type="checkbox" name="url_subtitle_<?=$share_urls?>" id="url_subtitle_<?=$share_urls?>" onchange="show_subtitle(<?=$share_urls?>)"> Sub Title</label>
                               <label class="checkbox-inline" for="url_text_<?=$share_urls?>">
-                                 <input type="checkbox" name="url_text_<?=$share_urls?>" id="url_text_<?=$share_urls?>" onchange="show_text(<?=$share_urls?>)"> Text</label>
+                                 <input type="checkbox" name="url_text_<?=$share_urls?>" id="url_text_<?=$share_urls?>" onchange="show_text(<?=$share_urls?>)"> Messages</label>
                            </div>
                         </div>
                      </div>
@@ -110,7 +118,7 @@ function page_content(){
                            <a href="#"><?=$urlpost['url_value']?></a>
                            <p><?=$urlpost['url_desc']?></p>
                            <div id="subtitle_value_<?=$share_urls?>" style="display: none">
-                              <input name="subtitle_<?=$share_urls?>" type="text" placeholder="Sub title" class="form-control input-md"><br>
+                              <input name="subtitle_<?=$share_urls?>" type="text" placeholder="Sub Title" class="form-control input-md"><br>
                            </div>
                            <div id="text_value_<?=$share_urls?>" style="display: none">
                               <input name="text_<?=$share_urls?>" type="text" placeholder="Text" class="form-control input-md">

@@ -1,7 +1,7 @@
 <?php
 function page_content(){
 global $co, $msg;
-$co->page_title = "Web Resources Library | LinkiBag";
+$co->page_title = "Link Exchange Library | LinkiBag";
 $current = $co->getcurrentuser_profile();  	
 if(!(isset($_GET['id'])))
    exit();
@@ -32,7 +32,7 @@ else
 
 <div class="container bread-crumb">
    <div class="col-md-12">
-		<p><a href="index.php">Home</a> &gt; <a href="index.php?p=web-resources-list">Web Resources</a></p>
+		<p><a href="index.php">Home</a> &gt; <a href="index.php?p=web-resources-list">Link Exchange</a></p>
    </div>
 </div>
 <section>
@@ -56,7 +56,7 @@ else
 	      <div class="row">
 			<div class="col-md-12">
 	         <div class="web-resources-list">
-	            <h2>My LinkiBook &nbsp;&nbsp;&nbsp;
+	            <h2>My Linki Book &nbsp;&nbsp;&nbsp;
 						  <a style="vertical-align: text-top;" class="btn button-grey" onclick="multiple_load_share_link_form('print_pdf');" href="#"><i class="fa fa-print" aria-hidden="true"></i> View and pdf</a></h2>
 	            <div class="web-resources-list-links web-resources-list-links-single">
 					<div class="row">
@@ -150,7 +150,7 @@ else
 	            </div>
 	           <br>	           
 	            <p class="text-light-gray">Recommend new topic and add your link.</p>
-	            <p class="text-blue">Thanks you for sharing and recommending <br>web resources using LinkiBag</p>
+	            <p class="text-blue">Thanks you for sharing and recommending <br>Link Exchange using LinkiBag</p>
 	            <br>
 	         </div>
 	      </div>
@@ -162,7 +162,7 @@ else
 </section>
 
 
-<a class="btn btn-info orang-bg" href="#" data-toggle="modal" data-target="#add_groups_and_cat" id="add_new_folder" style="display:none;">Add My LinkiBook</a>
+<a class="btn btn-info orang-bg" href="#" data-toggle="modal" data-target="#add_groups_and_cat" id="add_new_folder" style="display:none;">Add My Linki Book</a>
 		<div class="modal fade" id="add_groups_and_cat" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 
 		  <div class="modal-dialog modal-sm">
@@ -171,7 +171,7 @@ else
 
 				<div class="modal-header">
 
-					<h4>Add My LinkiBook </h4>
+					<h4>Add My Linki Book </h4>
 
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 
@@ -186,7 +186,7 @@ else
 
 		</div>		
 		
-		<a class="btn btn-info green-bg" href="#" data-toggle="modal" data-target="#edit_groups_and_cat" id="edit_new_folder" style="display:none;">Edit My LinkiBook</a>
+		<a class="btn btn-info green-bg" href="#" data-toggle="modal" data-target="#edit_groups_and_cat" id="edit_new_folder" style="display:none;">Edit My Linki Book</a>
 		<div class="modal fade" id="edit_groups_and_cat" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
 
 		  <div class="modal-dialog modal-sm">
@@ -195,7 +195,7 @@ else
 
 				<div class="modal-header">
 
-					<h4>Edit My LinkiBook </h4>
+					<h4>Edit My Linki Book </h4>
 
 					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
 
